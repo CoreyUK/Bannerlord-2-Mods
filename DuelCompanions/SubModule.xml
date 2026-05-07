@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name value="Duel Companions"/>
+  <Id value="DuelCompanions"/>
+  <Version value="v1.0.0"/>
+  <ModuleCategory value="Singleplayer"/>
+  <ModuleType value="Community"/>
+  <DependedModules>
+    <DependedModule Id="Native" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.3.15" Optional="true"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="DuelCompanions"/>
+      <DLLName value="DuelCompanions.dll"/>
+      <SubModuleClassType value="DuelCompanions.SubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none"/>
+        <Tag key="IsNoRenderModeElement" value="false"/>
+      </Tags>
+    </SubModule>
+  </SubModules>
+  <Xmls>
+    <XmlNode>
+      <XmlName id="NPCCharacters" path="duel_companions_characters"/>
+      <IncludedGameTypes>
+        <GameType value="Campaign"/>
+        <GameType value="CampaignStoryMode"/>
+      </IncludedGameTypes>
+    </XmlNode>
+  </Xmls>
+</Module>

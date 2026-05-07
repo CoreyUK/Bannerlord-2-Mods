@@ -6,8 +6,10 @@ Each folder is a separate Bannerlord module:
 
 - `CompanionDefense` - lets you send companion-led clan parties to defend owned villages, castles, and towns under attack.
 - `CompanionHotswap` - companion swapping and selection UI support.
+- `DuelCompanions` - adds roaming duel rumors, elite duelists, gauntlets, rare weapon rewards, and recruitable duel companions.
 - `LoadoutPresets` - player loadout preset support.
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.
+- `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
 
 ## Layout
 

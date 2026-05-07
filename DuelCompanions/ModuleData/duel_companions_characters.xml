@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NPCCharacters>
+  <NPCCharacter
+    id="dc_kara_the_red"
+    name="{=dc_kara_name}Kara the Red"
+    voice="curt"
+    age="28"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.vlandia"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_vlandia_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_vlandia"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Mercy" value="-1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.vlandia_noble_sword_3_t5"/>
+        <equipment slot="Item1" id="Item.wide_heater_shield"/>
+        <equipment slot="Head" id="Item.empire_guarded_lord_helmet"/>
+        <equipment slot="Cape" id="Item.pauldron_over_scale_armor"/>
+        <equipment slot="Body" id="Item.coat_of_plates_over_mail"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.plated_strip_boots"/>
+      </EquipmentRoster>
+      <EquipmentSet id="npc_companion_equipment_template_vlandia" civilian="true"/>
+      <EquipmentSet id="npc_companion_equipment_template_vlandia"/>
+    </Equipments>
+  </NPCCharacter>
+
+  <NPCCharacter
+    id="dc_ivar_ironhand"
+    name="{=dc_ivar_name}Ivar Ironhand"
+    voice="earnest"
+    age="34"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.sturgia"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_sturgia_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_sturgia"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Honor" value="1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.sturgia_2haxe_2_t5"/>
+        <equipment slot="Item1" id="Item.sturgia_noble_sword_1_t5"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.mail_shoulders"/>
+        <equipment slot="Body" id="Item.nordic_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.northern_plated_gloves"/>
+        <equipment slot="Leg" id="Item.northern_plated_boots"/>
+      </EquipmentRoster>
+      <EquipmentSet id="npc_companion_equipment_template_sturgia" civilian="true"/>
+      <EquipmentSet id="npc_companion_equipment_template_sturgia"/>
+    </Equipments>
+  </NPCCharacter>
+
+  <NPCCharacter
+    id="dc_sarqan_blade"
+    name="{=dc_sarqan_name}Sarqan Blade"
+    voice="softspoken"
+    age="31"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.khuzait"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_khuzait_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_khuzait"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="1"/>
+      <Trait id="Calculating" value="1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.khuzait_noble_sword_1_t5"/>
+        <equipment slot="Item1" id="Item.steppe_guardian_shield"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.a_metal_lamellar_armor_shoulder_a"/>
+        <equipment slot="Body" id="Item.eastern_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.khuzait_curved_boots"/>
+      </EquipmentRoster>
+      <EquipmentSet id="npc_companion_equipment_template_khuzait" civilian="true"/>
+      <EquipmentSet id="npc_companion_equipment_template_khuzait"/>
+    </Equipments>
+  </NPCCharacter>
+  <NPCCharacter
+    id="dc_heavy_vlandia_v2"
+    name="{=dc_heavy_vlandia_name}Duel Champion"
+    voice="curt"
+    age="30"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.vlandia"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_vlandia_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_vlandia"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Honor" value="1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.vlandia_noble_sword_3_t5"/>
+        <equipment slot="Item1" id="Item.wide_heater_shield"/>
+        <equipment slot="Head" id="Item.empire_guarded_lord_helmet"/>
+        <equipment slot="Cape" id="Item.pauldron_over_scale_armor"/>
+        <equipment slot="Body" id="Item.coat_of_plates_over_mail"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.plated_strip_boots"/>
+      </EquipmentRoster>
+      <EquipmentRoster civilian="true">
+        <equipment slot="Item0" id="Item.vlandia_noble_sword_3_t5"/>
+        <equipment slot="Item1" id="Item.wide_heater_shield"/>
+        <equipment slot="Head" id="Item.empire_guarded_lord_helmet"/>
+        <equipment slot="Cape" id="Item.pauldron_over_scale_armor"/>
+        <equipment slot="Body" id="Item.coat_of_plates_over_mail"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.plated_strip_boots"/>
+      </EquipmentRoster>
+    </Equipments>
+  </NPCCharacter>
+
+  <NPCCharacter
+    id="dc_heavy_sturgia_v2"
+    name="{=dc_heavy_sturgia_name}Duel Champion"
+    voice="earnest"
+    age="34"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.sturgia"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_sturgia_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_sturgia"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Calculating" value="1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.sturgia_2haxe_2_t5"/>
+        <equipment slot="Item1" id="Item.sturgia_noble_sword_1_t5"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.mail_shoulders"/>
+        <equipment slot="Body" id="Item.nordic_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.northern_plated_gloves"/>
+        <equipment slot="Leg" id="Item.northern_plated_boots"/>
+      </EquipmentRoster>
+      <EquipmentRoster civilian="true">
+        <equipment slot="Item0" id="Item.sturgia_2haxe_2_t5"/>
+        <equipment slot="Item1" id="Item.sturgia_noble_sword_1_t5"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.mail_shoulders"/>
+        <equipment slot="Body" id="Item.nordic_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.northern_plated_gloves"/>
+        <equipment slot="Leg" id="Item.northern_plated_boots"/>
+      </EquipmentRoster>
+    </Equipments>
+  </NPCCharacter>
+
+  <NPCCharacter
+    id="dc_heavy_khuzait_v2"
+    name="{=dc_heavy_khuzait_name}Duel Champion"
+    voice="softspoken"
+    age="31"
+    default_group="Infantry"
+    is_template="true"
+    is_hero="false"
+    culture="Culture.khuzait"
+    occupation="Wanderer"
+    skill_template="SkillSet.spc_wanderer_khuzait_1_skills">
+    <face>
+      <face_key_template value="BodyProperty.townsman_khuzait"/>
+    </face>
+    <Traits>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Generosity" value="-1"/>
+    </Traits>
+    <Equipments>
+      <EquipmentRoster>
+        <equipment slot="Item0" id="Item.khuzait_noble_sword_1_t5"/>
+        <equipment slot="Item1" id="Item.steppe_guardian_shield"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.a_metal_lamellar_armor_shoulder_a"/>
+        <equipment slot="Body" id="Item.eastern_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.khuzait_curved_boots"/>
+      </EquipmentRoster>
+      <EquipmentRoster civilian="true">
+        <equipment slot="Item0" id="Item.khuzait_noble_sword_1_t5"/>
+        <equipment slot="Item1" id="Item.steppe_guardian_shield"/>
+        <equipment slot="Head" id="Item.northern_warlord_helmet"/>
+        <equipment slot="Cape" id="Item.a_metal_lamellar_armor_shoulder_a"/>
+        <equipment slot="Body" id="Item.eastern_lamellar_armor"/>
+        <equipment slot="Gloves" id="Item.plated_strip_gauntlets"/>
+        <equipment slot="Leg" id="Item.khuzait_curved_boots"/>
+      </EquipmentRoster>
+    </Equipments>
+  </NPCCharacter>
+</NPCCharacters>
