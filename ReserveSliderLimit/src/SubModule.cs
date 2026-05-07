@@ -1,4 +1,5 @@
 using HarmonyLib;
+using System.Reflection;
 using TaleWorlds.MountAndBlade;
 
 namespace ReserveSliderLimit;
@@ -12,7 +13,7 @@ public sealed class SubModule : MBSubModuleBase
         base.OnSubModuleLoad();
 
         _harmony = new Harmony("bannerlord.corey.reserve-slider-limit");
-        _harmony.PatchAll();
+        _harmony.PatchAll(Assembly.GetExecutingAssembly());
     }
 
     protected override void OnSubModuleUnloaded()
