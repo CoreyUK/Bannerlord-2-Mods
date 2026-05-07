@@ -29,7 +29,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
         Agent? mainAgent = Mission.Current?.MainAgent;
         if (IsPlayerControlledHeroOnPlayerTeam(mainAgent))
         {
-            ApplyPlayerCommandAuthority(mainAgent!);
+            ApplyPlayerCommandAuthority(mainAgent!, forceManualControl: false);
         }
     }
 
@@ -39,7 +39,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
 
         if (IsPlayerControlledHeroOnPlayerTeam(agent))
         {
-            ApplyPlayerCommandAuthority(agent);
+            ApplyPlayerCommandAuthority(agent, forceManualControl: false);
         }
     }
 
@@ -59,7 +59,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
 
         mission.SetPlayerCanTakeControlOfAnotherAgentWhenDead();
         agent.Controller = AgentControllerType.Player;
-        ApplyPlayerCommandAuthority(agent);
+        ApplyPlayerCommandAuthority(agent, forceManualControl: true);
     }
 
     public List<Agent> GetCompanionAgents()
@@ -94,7 +94,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
             && agent.Team == mission.PlayerTeam;
     }
 
-    private static void ApplyPlayerCommandAuthority(Agent agent)
+    private static void ApplyPlayerCommandAuthority(Agent agent, bool forceManualControl)
     {
         Team? team = agent.Team;
         if (team == null)
@@ -102,7 +102,11 @@ public sealed class CompanionSwapBehavior : MissionBehavior
             return;
         }
 
-        team.SetPlayerRole(isPlayerGeneral: true, isPlayerSergeant: false);
+        if (!team.IsPlayerGeneral || team.IsPlayerSergeant)
+        {
+            team.SetPlayerRole(isPlayerGeneral: true, isPlayerSergeant: false);
+        }
+
         team.GeneralAgent = agent;
         team.PlayerOrderController.Owner = agent;
 
@@ -113,8 +117,15 @@ public sealed class CompanionSwapBehavior : MissionBehavior
                 continue;
             }
 
-            formation.PlayerOwner = agent;
-            formation.SetControlledByAI(false, false);
+            if (formation.PlayerOwner != agent)
+            {
+                formation.PlayerOwner = agent;
+            }
+
+            if (forceManualControl)
+            {
+                formation.SetControlledByAI(false, false);
+            }
         }
     }
 }
