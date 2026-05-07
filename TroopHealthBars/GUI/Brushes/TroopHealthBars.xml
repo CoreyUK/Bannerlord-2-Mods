@@ -1,0 +1,12 @@
+<Brushes>
+  <Brush Name="TroopHealthBars.HealthBar">
+    <Layers>
+      <BrushLayer Name="EmptyFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#404040FF" />
+      <BrushLayer Name="DefaultFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#9F2D1EFF" />
+      <BrushLayer Name="ChangeFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#C45A45FF" />
+    </Layers>
+    <Styles>
+      <Style Name="Default" />
+    </Styles>
+  </Brush>
+</Brushes>

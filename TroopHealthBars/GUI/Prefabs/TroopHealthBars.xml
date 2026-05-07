@@ -3,58 +3,86 @@
     <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true">
       <Children>
         <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
-                   SuggestedWidth="300"
+                   SuggestedWidth="340"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
-                   MarginLeft="24" MarginTop="72"
+                   MarginLeft="22" MarginTop="72"
                    StackLayout.LayoutMethod="VerticalTopToBottom">
           <Children>
             <ListPanel DataSource="{Bars}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
                        StackLayout.LayoutMethod="VerticalTopToBottom">
               <ItemTemplate>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed"
-                        SuggestedHeight="34" MarginBottom="5"
+                        SuggestedHeight="38" MarginBottom="-2"
                         IsVisible="@IsVisible">
                   <Children>
-                    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
-                            Sprite="BlankWhiteSquare_9" Color="#14100ACC" />
-
+                    <!-- Bar shadow and iron/gold frame -->
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                            SuggestedWidth="30" SuggestedHeight="28"
+                            SuggestedWidth="286" SuggestedHeight="19"
                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                            MarginLeft="4"
-                            Sprite="BlankWhiteSquare_9" Color="#21180ECC" />
-
+                            MarginLeft="32"
+                            Sprite="BlankWhiteSquare_9" Color="#0A0805F0" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                            SuggestedWidth="24" SuggestedHeight="24"
+                            SuggestedWidth="282" SuggestedHeight="15"
                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                            MarginLeft="7"
-                            Sprite="@IconSprite" Color="#FCF5EAFF" />
-
-                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                                SuggestedWidth="112" SuggestedHeight="18"
-                                HorizontalAlignment="Left" VerticalAlignment="Top"
-                                MarginLeft="40" MarginTop="2"
-                                Text="@Label" Brush="LoadoutPresets.Status.Text" Brush.FontSize="13" Brush.TextHorizontalAlignment="Left" />
-
-                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                                SuggestedWidth="64" SuggestedHeight="18"
-                                HorizontalAlignment="Right" VerticalAlignment="Top"
-                                MarginRight="6" MarginTop="2"
-                                Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="13" Brush.TextHorizontalAlignment="Right" />
-
+                            MarginLeft="34"
+                            Sprite="BlankWhiteSquare_9" Color="#6F5A34FF" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                            SuggestedWidth="254" SuggestedHeight="9"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                            MarginLeft="40" MarginBottom="5"
-                            Sprite="BlankWhiteSquare_9" Color="#050403DD" />
+                            SuggestedWidth="276" SuggestedHeight="9"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="37"
+                            Sprite="BlankWhiteSquare_9" Color="#160D08FF" />
+
+                    <!-- Tapered right end frame -->
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="32" SuggestedHeight="24"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="303"
+                            Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#0A0805F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="25" SuggestedHeight="18"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="306"
+                            Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="18" SuggestedHeight="12"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="308"
+                            Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#160D08FF" />
 
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
-                             SuggestedWidth="252" SuggestedHeight="7"
-                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                             MarginLeft="41" MarginBottom="6"
-                             Brush="HealthBarBrush"
+                             SuggestedWidth="270" SuggestedHeight="7"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MarginLeft="40"
+                             Brush="TroopHealthBars.HealthBar"
                              InitialAmountAsFloat="@Percentage"
                              IsVertical="false" MaxAmount="1" />
+
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                SuggestedWidth="54" SuggestedHeight="16"
+                                HorizontalAlignment="Left" VerticalAlignment="Center"
+                                MarginLeft="246"
+                                Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" />
+
+                    <!-- Icon medallion -->
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="42" SuggestedHeight="42"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Sprite="BlankWhiteCircle" Color="#090806F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="36" SuggestedHeight="36"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="3"
+                            Sprite="BlankWhiteCircle" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="30" SuggestedHeight="30"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="6"
+                            Sprite="BlankWhiteCircle" Color="#2A281FFF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="23" SuggestedHeight="23"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="9"
+                            Sprite="@IconSprite" Color="#C9B996FF" />
                   </Children>
                 </Widget>
               </ItemTemplate>
