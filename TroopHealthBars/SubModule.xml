@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name value="Troop Health Bars"/>
+  <Id value="TroopHealthBars"/>
+  <Version value="v1.0.0"/>
+  <ModuleCategory value="Singleplayer"/>
+  <ModuleType value="Community"/>
+  <DependedModules>
+    <DependedModule Id="Native" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.3.15" Optional="true"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="TroopHealthBars"/>
+      <DLLName value="TroopHealthBars.dll"/>
+      <SubModuleClassType value="TroopHealthBars.SubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none"/>
+        <Tag key="IsNoRenderModeElement" value="false"/>
+      </Tags>
+    </SubModule>
+  </SubModules>
+</Module>
