@@ -1,0 +1,46 @@
+<Window>
+  <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" IsVisible="@IsEnabled">
+    <Children>
+
+			<NavigationForcedScopeCollectionTargeter CollectionID="ReserverPopupCollection" CollectionParent="..\PopupParent" />
+			<NavigationScopeTargeter ScopeID="ReservePopupScope" ScopeParent="..\PopupParent" ScopeMovements="Vertical" />
+      <!--Reserve Popup-->
+      <SliderPopupWidget Id="PopupParent" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="450" SuggestedHeight="170" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="435" MarginLeft="1050" Sprite="reserve_popup_9" ClosePopupWidget="ClosePopupButton" ReserveAmountSlider="ReserveAmountSlider" SliderValueTextWidget="SliderValueTextWidget" PopupParentWidget="..\..\TownManagementPopup\InnerPanel\ManagementPlacementList\TopHalf\TopHalfListPanel\ReservePanel\ReserveListPanel\ReserveManagementButton" Command.ClosePopup="ExecuteCancel">
+        <Children>
+
+          <!--<TextWidget WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedWidth="200" SuggestedHeight="50" Text="RESERVE MANAGEMENT" HorizontalAlignment="Center" MarginTop="15" Brush.FontSize="25" IsDisabled="true">
+          </TextWidget>
+
+          <TextWidget WidthSizePolicy = "StretchToParent" HeightSizePolicy = "Fixed" SuggestedHeight="100" Text="Reserve is used to boost production by a factor of two." MarginLeft="30" MarginRight="30" MarginTop="75" IsDisabled="true">
+          </TextWidget>-->
+
+          <!--Slider Value Text-->
+          <!--<TextWidget Id="SliderValueTextWidget" WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="100" MarginLeft="30" MarginRight="30" MarginTop="50" IsDisabled="true" Text="@ReserveRatioText" />-->
+
+          <!--Payment Ratio Slider-->
+          <SliderWidget Id="ReserveAmountSlider" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="370" SuggestedHeight="37" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="25" DoNotUpdateHandleSize="true" Filler="Filler" Handle="SliderHandle" IsDiscrete="true" MaxValueInt="100000" DiscreteIncrementInterval="100" MinValueInt="0" ValueInt="@CurrentGivenAmount">
+            <Children>
+              <Widget DoNotAcceptEvents="true" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" VerticalAlignment="Center" Sprite="BlankWhiteSquare_9" Color="#1C180FFF" />
+              <Widget Id="Filler" DoNotAcceptEvents="true" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" VerticalAlignment="Center" Sprite="BlankWhiteSquare_9" Color="#644A13FF" />
+              <Widget Id="SliderHandle" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="7" SuggestedHeight="37" HorizontalAlignment="Left" VerticalAlignment="Center" Sprite="SPGeneral\TownManagement\reserve_slider_indicator" GamepadNavigationIndex="0" />
+              <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" VerticalAlignment="Center" Sprite="reserve_slider_frame_9" ExtendLeft="4" ExtendTop="4" ExtendRight="4" ExtendBottom="5" IsEnabled="false" />
+            </Children>
+          </SliderWidget>
+
+          <!--Min Reserve Text-->
+          <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" MarginLeft="30" MarginTop="70" IsDisabled="true" Text="0" Brush="TownManagement.Reserve.Amount.Text"/>
+
+          <!--Current Reserve Text-->
+          <TextWidget Id="SliderValueTextWidget" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" MarginTop="70" IsDisabled="true" Brush="TownManagement.Reserve.Amount.Text" Text="@CurrentReserveText" />
+
+          <!--Max Reserve Text-->
+          <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Right" MarginRight="30" MarginTop="70" IntText="100000" Brush="TownManagement.Reserve.Amount.Text" IsDisabled="true" />
+
+          <ButtonWidget Id="ClosePopupButton" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedWidth="48" SuggestedHeight="48" VerticalAlignment="Bottom" MarginBottom="25" HorizontalAlignment="Center" Brush="TownManagement.Reserve.ConfirmButton" Command.Click="ExecuteConfirm" GamepadNavigationIndex="1"/>
+
+        </Children>
+      </SliderPopupWidget>
+
+    </Children>
+  </Widget>
+</Window>

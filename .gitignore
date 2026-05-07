@@ -1,0 +1,17 @@
+# Build intermediates
+**/src/obj/
+**/src/bin/
+**/obj/
+
+# Debug symbols and local IDE files
+*.pdb
+*.user
+*.suo
+.vs/
+
+# NuGet/MSBuild generated files
+project.assets.json
+project.nuget.cache
+*.FileListAbsolute.txt
+*.AssemblyInfo.cs
+*.AssemblyAttributes.cs

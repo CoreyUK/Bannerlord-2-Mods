@@ -1,0 +1,262 @@
+<Prefab>
+  <Constants />
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
+      <Children>
+
+        <!-- Slot 0 -->
+        <Widget IsVisible="@Slot0Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot0PosX" MarginTop="@Slot0PosY">
+          <Children>
+            <!-- Gold ring (shown when currently controlled) -->
+            <Widget IsVisible="@Slot0Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <!-- Dark circle backing -->
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <!-- Portrait -->
+            <ImageIdentifierWidget DataSource="{Slot0Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <!-- Downward arrow -->
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 1 -->
+        <Widget IsVisible="@Slot1Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot1PosX" MarginTop="@Slot1PosY">
+          <Children>
+            <Widget IsVisible="@Slot1Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot1Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 2 -->
+        <Widget IsVisible="@Slot2Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot2PosX" MarginTop="@Slot2PosY">
+          <Children>
+            <Widget IsVisible="@Slot2Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot2Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 3 -->
+        <Widget IsVisible="@Slot3Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot3PosX" MarginTop="@Slot3PosY">
+          <Children>
+            <Widget IsVisible="@Slot3Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot3Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 4 -->
+        <Widget IsVisible="@Slot4Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot4PosX" MarginTop="@Slot4PosY">
+          <Children>
+            <Widget IsVisible="@Slot4Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot4Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 5 -->
+        <Widget IsVisible="@Slot5Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot5PosX" MarginTop="@Slot5PosY">
+          <Children>
+            <Widget IsVisible="@Slot5Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot5Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 6 -->
+        <Widget IsVisible="@Slot6Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot6PosX" MarginTop="@Slot6PosY">
+          <Children>
+            <Widget IsVisible="@Slot6Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot6Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+        <!-- Slot 7 -->
+        <Widget IsVisible="@Slot7Visible"
+                WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                SuggestedWidth="62" SuggestedHeight="72"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                MarginLeft="@Slot7PosX" MarginTop="@Slot7PosY">
+          <Children>
+            <Widget IsVisible="@Slot7Current"
+                    WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="62" SuggestedHeight="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Sprite="BlankWhiteCircle" Color="#C8A84BFF" />
+            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                    SuggestedWidth="56" SuggestedHeight="56"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    MarginTop="3"
+                    Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+            <ImageIdentifierWidget DataSource="{Slot7Portrait}"
+                                   WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                   SuggestedWidth="56" SuggestedHeight="56"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                                   MarginTop="3"
+                                   ImageId="@Id" AdditionalArgs="@AdditionalArgs"
+                                   IsVisible="@IsValid"
+                                   TextureProviderName="@TextureProviderName" />
+            <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Text="▼" Brush="CompanionHotswap.Arrow.Gold" />
+          </Children>
+        </Widget>
+
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

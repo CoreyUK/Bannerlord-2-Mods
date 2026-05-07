@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name value="Loadout Presets"/>
+  <Id value="LoadoutPresets"/>
+  <Version value="v1.0.0"/>
+  <ModuleCategory value="Singleplayer"/>
+  <ModuleType value="Community"/>
+  <DependedModules>
+    <DependedModule Id="Native" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.3.15" Optional="true"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="LoadoutPresets"/>
+      <DLLName value="LoadoutPresets.dll"/>
+      <SubModuleClassType value="LoadoutPresets.SubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none"/>
+        <Tag key="IsNoRenderModeElement" value="false"/>
+      </Tags>
+    </SubModule>
+  </SubModules>
+  <Xmls>
+  </Xmls>
+</Module>

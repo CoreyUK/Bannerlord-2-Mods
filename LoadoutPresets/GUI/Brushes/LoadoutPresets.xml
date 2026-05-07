@@ -1,0 +1,55 @@
+<Brushes>
+  <Brush Name="LoadoutPresets.Header.Text" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFFFFFFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.6" TextHorizontalAlignment="Center" TextVerticalAlignment="Center" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Slot.Text" FontSize="24" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFFFFFFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.6" TextHorizontalAlignment="Center" TextVerticalAlignment="Center" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Save.Text" FontSize="14" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFFFFFFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextHorizontalAlignment="Center" TextVerticalAlignment="Center" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Status.Text" FontSize="13" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#D8D8D8FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextHorizontalAlignment="Center" TextVerticalAlignment="Center" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Toggle.Text" FontSize="22" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFFFFFFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.6" TextHorizontalAlignment="Center" TextVerticalAlignment="Center" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Slot.Button" TransitionDuration="0.12">
+    <Layers>
+      <BrushLayer Name="Default" Sprite="Inventory\ShieldIcon" Color="#FFFFFFFF" />
+      <BrushLayer Name="Hover" Sprite="Inventory\ShieldIcon" Color="#F4D56FFF" />
+      <BrushLayer Name="Pressed" Sprite="Inventory\ShieldIcon" Color="#C8A84BFF" />
+    </Layers>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Save.Button" TransitionDuration="0.12">
+    <Layers>
+      <BrushLayer Name="Default" Sprite="button_canvas_9" OverlayMethod="CoverWithTexture" OverlaySprite="button_marble" Color="#FFFFFFFF" />
+      <BrushLayer Name="Overlay" Sprite="button_frame_9" />
+      <BrushLayer Name="Hover" Sprite="button_canvas_9" OverlayMethod="CoverWithTexture" OverlaySprite="button_marble" Color="#F4D56FFF" />
+    </Layers>
+  </Brush>
+
+  <Brush Name="LoadoutPresets.Toggle.Button" TransitionDuration="0.12">
+    <Layers>
+      <BrushLayer Name="Default" Sprite="button_canvas_9" OverlayMethod="CoverWithTexture" OverlaySprite="button_marble" Color="#FFFFFFFF" />
+      <BrushLayer Name="Overlay" Sprite="button_frame_9" />
+      <BrushLayer Name="Hover" Sprite="button_canvas_9" OverlayMethod="CoverWithTexture" OverlaySprite="button_marble" Color="#F4D56FFF" />
+    </Layers>
+  </Brush>
+</Brushes>

@@ -1,0 +1,64 @@
+<Prefab>
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true">
+      <Children>
+        <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
+                   SuggestedWidth="230"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                   MarginRight="1085" MarginBottom="65"
+                   StackLayout.LayoutMethod="VerticalTopToBottom"
+                   IsHidden="@IsSuppressed"
+                   DoNotAcceptEvents="false">
+          <Children>
+            <ListPanel DataSource="{Presets}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                       StackLayout.LayoutMethod="HorizontalLeftToRight">
+              <ItemTemplate>
+                <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
+                           SuggestedWidth="70" MarginLeft="3" MarginRight="3"
+                           StackLayout.LayoutMethod="VerticalTopToBottom">
+                  <Children>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                  SuggestedWidth="58" SuggestedHeight="58"
+                                  HorizontalAlignment="Center"
+                                  Brush="LoadoutPresets.Slot.Button"
+                                  DoNotPassEventsToChildren="true"
+                                  UpdateChildrenStates="true"
+                                  Command.Click="ExecuteApply">
+                      <Children>
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                                DoNotAcceptEvents="true"
+                                Sprite="Inventory\ShieldIcon" Color="#C8A84B88"
+                                IsVisible="@HasPreset" />
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                                    DoNotAcceptEvents="true"
+                                    Text="@Label" Brush="LoadoutPresets.Slot.Text" />
+                      </Children>
+                    </ButtonWidget>
+
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                  SuggestedWidth="62" SuggestedHeight="32"
+                                  HorizontalAlignment="Center"
+                                  MarginTop="4"
+                                  Brush="LoadoutPresets.Save.Button"
+                                  DoNotPassEventsToChildren="true"
+                                  UpdateChildrenStates="true"
+                                  Command.Click="ExecuteSave">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                                    DoNotAcceptEvents="true"
+                                    Text="SAVE" Brush="LoadoutPresets.Save.Text" />
+                      </Children>
+                    </ButtonWidget>
+                  </Children>
+                </ListPanel>
+              </ItemTemplate>
+            </ListPanel>
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                        MarginTop="2" Text="@StatusText" Brush="LoadoutPresets.Status.Text" />
+          </Children>
+        </ListPanel>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

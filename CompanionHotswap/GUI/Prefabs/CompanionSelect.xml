@@ -1,0 +1,88 @@
+<Prefab>
+  <Constants />
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent">
+      <Children>
+
+        <ListPanel DataSource="{Companions}"
+                   WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="130"
+                   StackLayout.LayoutMethod="HorizontalLeftToRight">
+          <ItemTemplate>
+
+            <!-- Clickable card -->
+            <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                          SuggestedWidth="85" SuggestedHeight="110"
+                          MarginLeft="6" MarginRight="6"
+                          DoNotPassEventsToChildren="true"
+                          UpdateChildrenStates="true"
+                          Command.Click="ExecuteSwap">
+              <Children>
+
+                <!-- Card background -->
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                        Sprite="BlankWhiteSquare_9" Color="#00000099" />
+
+                <!-- Gold tint on active slot -->
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                        Sprite="BlankWhiteSquare_9" Color="#C8A84B66"
+                        IsVisible="@IsCurrentlyControlled" />
+
+                <!-- Circular portrait backing -->
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                        SuggestedWidth="75" SuggestedHeight="75"
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        MarginTop="5"
+                        Sprite="BlankWhiteCircle" Color="#1A1A1AFF" />
+
+                <!-- Portrait -->
+                <ImageIdentifierWidget DataSource="{Portrait}"
+                                       WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                       SuggestedWidth="75" SuggestedHeight="75"
+                                       HorizontalAlignment="Center" VerticalAlignment="Top"
+                                       MarginTop="5"
+                                       ImageId="@Id"
+                                       AdditionalArgs="@AdditionalArgs"
+                                       IsVisible="@IsValid"
+                                       TextureProviderName="@TextureProviderName" />
+
+                <!-- Character name -->
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                            HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                            MarginBottom="18"
+                            Text="@Name" Brush="CompanionHotswap.Name.Text" />
+
+
+                <!-- YOU badge -->
+                <Widget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                        IsVisible="@IsPlayerHero"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        MarginLeft="3" MarginTop="3">
+                  <Children>
+                    <Widget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                            Sprite="BlankWhiteSquare_9" Color="#C8A84BDD"
+                            MarginLeft="-2" MarginRight="-2" MarginTop="-1" MarginBottom="-1" />
+                    <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren"
+                                Text="YOU" Brush="CompanionHotswap.Name.Text" />
+                  </Children>
+                </Widget>
+
+                <!-- FALLEN overlay -->
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent"
+                        Sprite="BlankWhiteSquare_9" Color="#000000CC"
+                        IsVisible="@IsDead" />
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            IsVisible="@IsDead"
+                            Text="FALLEN" Brush="CompanionHotswap.Name.Text" />
+
+              </Children>
+            </ButtonWidget>
+
+          </ItemTemplate>
+        </ListPanel>
+
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

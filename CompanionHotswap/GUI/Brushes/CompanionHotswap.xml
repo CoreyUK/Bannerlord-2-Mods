@@ -1,0 +1,63 @@
+<Brushes>
+
+  <Brush Name="CompanionHotswap.Name.Text" FontSize="16" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFFFFFFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Key.Text" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#FFD700FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Gold" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#C8A84BFF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Red" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#E84040FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Blue" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#4080E8FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Green" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#40C040FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Yellow" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#E8E040FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Purple" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#A040E8FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Orange" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#E88040FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+  <Brush Name="CompanionHotswap.Arrow.Cyan" FontSize="18" Font="FiraSansExtraCondensed-Regular">
+    <Styles>
+      <Style Name="Default" FontColor="#40C8C8FF" TextOutlineColor="#000000FF" TextOutlineAmount="0.5" TextGlowRadius="0" TextBlur="0" />
+    </Styles>
+  </Brush>
+
+</Brushes>

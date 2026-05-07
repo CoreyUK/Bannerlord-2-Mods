@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LoadoutPresets>
+  <Preset index="0">
+    <Slot name="WeaponItemBeginSlot" item="composite_bow" modifier="masterwork_bow" />
+    <Slot name="Weapon1" item="sentinel_2hsword" modifier="" />
+    <Slot name="Weapon2" item="bodkin_arrows_a" modifier="" />
+    <Slot name="Weapon3" item="western_javelin_1_t2" modifier="large_bag_spear_dart_throwing" />
+    <Slot name="NumAllWeaponSlots" item="wolfhead" modifier="" />
+    <Slot name="Body" item="battanian_savage_armor" modifier="" />
+    <Slot name="Leg" item="battania_warlord_boots" modifier="lordly_plate" />
+    <Slot name="Gloves" item="reinforced_leather_vambraces" modifier="lordly_plate" />
+    <Slot name="Cape" item="battania_shoulder_furr" modifier="fine_leather" />
+    <Slot name="ArmorItemEndSlot" item="t3_empire_horse" modifier="" />
+    <Slot name="HorseHarness" item="northern_ring_barding" modifier="" />
+  </Preset>
+  <Preset index="1">
+    <Slot name="WeaponItemBeginSlot" item="composite_bow" modifier="masterwork_bow" />
+    <Slot name="Weapon1" item="sentinel_2hsword" modifier="" />
+    <Slot name="Weapon2" item="bodkin_arrows_a" modifier="" />
+    <Slot name="Weapon3" item="western_javelin_1_t2" modifier="large_bag_spear_dart_throwing" />
+    <Slot name="Leg" item="battania_warlord_boots" modifier="lordly_plate" />
+    <Slot name="Gloves" item="reinforced_leather_vambraces" modifier="lordly_plate" />
+    <Slot name="ArmorItemEndSlot" item="t3_empire_horse" modifier="" />
+    <Slot name="HorseHarness" item="northern_ring_barding" modifier="" />
+  </Preset>
+  <Preset index="2" />
+</LoadoutPresets>
