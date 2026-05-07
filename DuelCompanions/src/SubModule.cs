@@ -15,4 +15,14 @@ public sealed class SubModule : MBSubModuleBase
             campaignStarter.AddBehavior(new DuelCompanionsCampaignBehavior());
         }
     }
+
+    public override void OnMissionBehaviorInitialize(Mission mission)
+    {
+        base.OnMissionBehaviorInitialize(mission);
+
+        if (DuelCompanionsMissionState.TryConsumeNextDuel(out bool isGauntlet))
+        {
+            mission.AddMissionBehavior(new DuelCompanionsCombatBehavior(isGauntlet));
+        }
+    }
 }

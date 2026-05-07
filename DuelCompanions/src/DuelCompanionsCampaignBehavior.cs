@@ -21,13 +21,49 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private const int CashReward = 6000;
     private const int GauntletCashReward = 15000;
     private const int GauntletRounds = 3;
+    private const int DefeatGoldPenalty = 20000;
+    private const float DefeatMoralePenalty = 70f;
+    private const float DefeatWeaponLossChance = 0.35f;
     private const int EventDurationDays = 10;
+    private const int FirstRumorMinDays = 7;
+    private const int FirstRumorMaxDays = 12;
+    private const int FollowupRumorMinDays = 8;
+    private const int FollowupRumorMaxDays = 16;
+    private static readonly bool ForceLagetaTesting = false;
+    private const string TestSettlementId = "town_EW1";
 
     private static readonly DuelTemplate[] DuelTemplates =
     {
         new("dc_heavy_vlandia_v2", "vlandia_noble_sword_3_t5", "{SETTLEMENT}'s old tourney yard"),
+        new("dc_vlandia_longsword", "vlandia_noble_sword_4_t5", "the tiltyard beneath {SETTLEMENT}'s west wall"),
+        new("dc_vlandia_mace", "vlandia_mace_3_t5", "a fenced yard beside {SETTLEMENT}'s old stables"),
+        new("dc_vlandia_axe", "vlandia_axe_2_t4", "the knightly lists outside {SETTLEMENT}"),
+        new("dc_vlandia_falchion", "vlandia_sword_5_t5", "a trampled tourney ring near {SETTLEMENT}"),
         new("dc_heavy_sturgia_v2", "sturgia_2haxe_2_t5", "a marked ring beyond {SETTLEMENT}'s gates"),
+        new("dc_sturgia_sword", "sturgia_noble_sword_4_t5", "a frost-bitten practice ground outside {SETTLEMENT}"),
+        new("dc_sturgia_axe", "sturgia_axe_5_t5", "a timber duelling circle near {SETTLEMENT}"),
+        new("dc_sturgia_mace", "sturgia_mace_2_t4", "the shield-yard behind {SETTLEMENT}'s barracks"),
+        new("dc_sturgia_roundshield", "sturgia_noble_sword_2_t5", "a ring of split logs beyond {SETTLEMENT}"),
         new("dc_heavy_khuzait_v2", "khuzait_noble_sword_1_t5", "the duelling stones outside {SETTLEMENT}")
+        ,new("dc_khuzait_sabre", "khuzait_noble_sword_2_t5", "a wind-scoured ring near {SETTLEMENT}")
+        ,new("dc_khuzait_mace", "khuzait_mace_4_t5", "a steppe camp beyond {SETTLEMENT}'s road")
+        ,new("dc_khuzait_axe", "bamboo_axe_t4", "a horseman's challenge circle outside {SETTLEMENT}")
+        ,new("dc_khuzait_guardian", "khuzait_noble_sword_3_t5", "the guardian stones above {SETTLEMENT}")
+        ,new("dc_empire_spatha", "empire_noble_sword_1_t5", "the imperial drill yard inside {SETTLEMENT}'s walls")
+        ,new("dc_empire_cataphract", "empire_noble_sword_2_t5", "a marble-lined arena court in {SETTLEMENT}")
+        ,new("dc_empire_mace", "empire_mace_5_t5", "the legionary sand pit at {SETTLEMENT}")
+        ,new("dc_empire_axe", "imperial_axe_t3", "an old legion training ring near {SETTLEMENT}")
+        ,new("dc_empire_guard", "empire_noble_sword_3_t5", "the court guard yard of {SETTLEMENT}")
+        ,new("dc_aserai_sabre", "aserai_noble_sword_1_t5", "a sun-baked fighting square in {SETTLEMENT}")
+        ,new("dc_aserai_longblade", "aserai_noble_sword_4_t5", "the merchant guard yard of {SETTLEMENT}")
+        ,new("dc_aserai_axe", "aserai_2haxe_3_t5", "a marked sand ring beyond {SETTLEMENT}")
+        ,new("dc_aserai_mace", "aserai_mace_5_t4", "the red-dust circle outside {SETTLEMENT}")
+        ,new("dc_aserai_shield", "aserai_noble_sword_3_t5", "the emir's old practice court at {SETTLEMENT}")
+        ,new("dc_battania_falx", "battania_noble_sword_1_t5", "a moss-ringed clearing near {SETTLEMENT}")
+        ,new("dc_battania_longsword", "battania_noble_sword_3_t5", "the standing stones beyond {SETTLEMENT}")
+        ,new("dc_battania_axe", "battania_axe_3_t5", "a woodland duelling hollow outside {SETTLEMENT}")
+        ,new("dc_battania_twohand", "battania_2haxe_1_t2", "the old clan circle above {SETTLEMENT}")
+        ,new("dc_battania_targe", "battania_sword_5_t5", "a highland challenge ground near {SETTLEMENT}")
     };
 
     private static readonly string[] FirstNames =
@@ -116,7 +152,6 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         "{DUELIST} beats you back and claims the field. The challenge remains for now.",
         "{DUELIST} wins this bout. You are dragged clear while the crowd roars.",
-        "Your guard breaks, and {DUELIST} ends the fight with clinical precision.",
         "{DUELIST} leaves you sprawled in the dust. You may try again while the rumor lasts.",
         "The duel turns against you. {DUELIST} waits to see if you have the nerve for another attempt."
     };
@@ -150,6 +185,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private bool _isGauntletActive;
     private int _gauntletRound;
+    private string? _gauntletRoundOneTemplateId;
 
     public override void RegisterEvents()
     {
@@ -175,6 +211,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         dataStore.SyncData("dc_pending_reward_rare_item_id_v2", ref _pendingRewardRareItemId);
         dataStore.SyncData("dc_pending_reward_allows_recruit_v2", ref _pendingRewardAllowsRecruit);
         dataStore.SyncData("dc_pending_reward_is_gauntlet_v2", ref _pendingRewardIsGauntlet);
+        dataStore.SyncData("dc_gauntlet_round_one_template_id_v2", ref _gauntletRoundOneTemplateId);
     }
 
     private void OnSessionLaunched(CampaignGameStarter starter)
@@ -182,9 +219,16 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         AddMenus(starter);
         RecoverDetachedDuelCompanions();
 
+        if (ForceLagetaTesting)
+        {
+            ClearActiveEvent();
+            CreateRandomEvent(showMessage: true);
+            return;
+        }
+
         if (string.IsNullOrEmpty(_activeSettlementId) && _nextEventDay <= 0)
         {
-            CreateRandomEvent(showMessage: true);
+            ScheduleNextEvent(FirstRumorMinDays, FirstRumorMaxDays);
         }
     }
 
@@ -195,7 +239,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         if (!string.IsNullOrEmpty(_activeSettlementId) && today > _activeEventExpiresDay)
         {
             ClearActiveEvent();
-            ScheduleNextEvent(3, 7);
+            ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
         }
 
         if (string.IsNullOrEmpty(_activeSettlementId) && today >= _nextEventDay)
@@ -221,7 +265,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             false,
             6);
 
-        starter.AddGameMenuOption(DuelMenuId, "dc_start_duel", "{DUEL_OPTION_TEXT}", DuelChallengeCondition, args => StartDuelMission(GetActiveEvent(), 210f, false), false, 0);
+        starter.AddGameMenuOption(DuelMenuId, "dc_start_duel", "{DUEL_OPTION_TEXT}", DuelChallengeCondition, args => StartDuelMission(GetActiveEvent(), 360f, false), false, 0);
         starter.AddGameMenuOption(DuelMenuId, "dc_start_gauntlet", "{GAUNTLET_OPTION_TEXT}", GauntletStartCondition, GauntletStartConsequence, false, 1);
         starter.AddGameMenuOption(DuelMenuId, "dc_continue_gauntlet", "{=dc_continue_gauntlet}Continue the gauntlet: round {ROUND} of 3 against {DUELIST}", GauntletContinueCondition, args => StartDuelMission(GetGauntletOpponent(), GetGauntletHealth(), true), false, 1);
 
@@ -306,6 +350,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         _isGauntletActive = true;
         _gauntletRound = 0;
+        _gauntletRoundOneTemplateId = GetActiveEvent()?.TemplateId;
+        DuelCompanionsMissionState.ResetGauntletPlayerHealth();
         StartDuelMission(GetGauntletOpponent(), GetGauntletHealth(), true);
     }
 
@@ -337,6 +383,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         }
 
         _isGauntletActive = isGauntlet;
+        DuelCompanionsMissionState.ArmNextDuel(isGauntlet);
         CampaignMission.OpenArenaDuelMission(arena.GetSceneName(0), arena, duelCharacter, false, false, OnDuelEnded, opponentHealth);
     }
 
@@ -354,10 +401,6 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             if (_isGauntletActive && _gauntletRound < GauntletRounds - 1)
             {
                 _gauntletRound++;
-                DuelEvent? nextOpponent = GetGauntletOpponent();
-                MBTextManager.SetTextVariable("ROUND", _gauntletRound);
-                MBTextManager.SetTextVariable("DUELIST", nextOpponent?.DisplayName ?? "The next opponent");
-                InformationManager.DisplayMessage(new InformationMessage(Pick(GauntletProgressTexts)));
                 GameMenu.SwitchToMenu(DuelMenuId);
                 return;
             }
@@ -371,17 +414,86 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             _pendingRewardIsGauntlet = _isGauntletActive;
             _isGauntletActive = false;
             _gauntletRound = 0;
+            _gauntletRoundOneTemplateId = null;
+            DuelCompanionsMissionState.ResetGauntletPlayerHealth();
             ClearActiveEvent();
-            ScheduleNextEvent(3, 8);
+            ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
             GameMenu.SwitchToMenu(RewardMenuId);
             return;
         }
 
-        MBTextManager.SetTextVariable("DUELIST", duel.DisplayName);
-        InformationManager.DisplayMessage(new InformationMessage(Pick(DefeatTexts)));
+        ApplyDuelDefeatConsequences(duel.DisplayName);
         _isGauntletActive = false;
         _gauntletRound = 0;
+        _gauntletRoundOneTemplateId = null;
+        DuelCompanionsMissionState.ResetGauntletPlayerHealth();
         GameMenu.SwitchToMenu("town");
+    }
+
+    private void ApplyDuelDefeatConsequences(string duelistName)
+    {
+        MobileParty.MainParty.RecentEventsMorale -= DefeatMoralePenalty;
+        Hero.MainHero.ChangeHeroGold(-DefeatGoldPenalty);
+
+        string consequence = "Your morale is in tatters after the humiliating defeat.\n\nYou lose 20,000 denars and your party morale collapses.";
+
+        if (MBRandom.RandomFloat < DefeatWeaponLossChance && TryLoseEquippedWeapon(out string weaponName))
+        {
+            consequence += $"\n\nIn disgust, you leave {weaponName} in the ring.";
+        }
+
+        InformationManager.ShowInquiry(
+            new InquiryData(
+                "Duel Defeat",
+                $"{duelistName} claims the field.\n\n{consequence}",
+                true,
+                false,
+                "Continue",
+                string.Empty,
+                null,
+                null,
+                string.Empty,
+                0f,
+                null,
+                null,
+                null),
+            true,
+            false);
+    }
+
+    private static bool TryLoseEquippedWeapon(out string weaponName)
+    {
+        weaponName = string.Empty;
+        Equipment battleEquipment = Hero.MainHero.BattleEquipment;
+        EquipmentIndex[] weaponSlots =
+        {
+            EquipmentIndex.Weapon0,
+            EquipmentIndex.Weapon1,
+            EquipmentIndex.Weapon2,
+            EquipmentIndex.Weapon3
+        };
+
+        foreach (EquipmentIndex slot in weaponSlots)
+        {
+            EquipmentElement element = battleEquipment[slot];
+            ItemObject? item = element.Item;
+            if (item == null || element.IsEmpty || element.IsQuestItem || !item.HasWeaponComponent)
+            {
+                continue;
+            }
+
+            weaponName = item.Name.ToString();
+            battleEquipment[slot] = EquipmentElement.Invalid;
+
+            if (MobileParty.MainParty.ItemRoster.FindIndexOfElement(element) >= 0)
+            {
+                MobileParty.MainParty.ItemRoster.AddToCounts(element, -1);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private void OnRewardMenuInit(MenuCallbackArgs args)
@@ -635,18 +747,80 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return active;
         }
 
-        DuelTemplate template = DuelTemplates[(_eventSerial + _gauntletRound) % DuelTemplates.Length];
+        DuelTemplate template = GetGauntletTemplateForRound(active.TemplateId, _gauntletRound);
         string name = BuildName(_eventSerial + _gauntletRound);
         return new DuelEvent($"dc_gauntlet_{_eventSerial}_{_gauntletRound}", name, template.TemplateId, template.RareItemId, active.GroundDescription);
+    }
+
+    private DuelTemplate GetGauntletTemplateForRound(string activeTemplateId, int round)
+    {
+        List<string> usedStyles = new();
+        string firstTemplateId = _gauntletRoundOneTemplateId ?? activeTemplateId;
+        usedStyles.Add(GetTemplateStyle(firstTemplateId));
+
+        if (round > 1)
+        {
+            DuelTemplate previousTemplate = GetGauntletTemplateForRound(activeTemplateId, round - 1);
+            usedStyles.Add(GetTemplateStyle(previousTemplate.TemplateId));
+        }
+
+        List<DuelTemplate> candidates = DuelTemplates
+            .Where(template =>
+                template.TemplateId != activeTemplateId &&
+                !usedStyles.Contains(GetTemplateStyle(template.TemplateId)))
+            .ToList();
+
+        if (candidates.Count == 0)
+        {
+            candidates = DuelTemplates
+                .Where(template => template.TemplateId != activeTemplateId)
+                .ToList();
+        }
+
+        int index = Math.Abs(_eventSerial + (round * 11)) % candidates.Count;
+        return candidates[index];
+    }
+
+    private static string GetTemplateStyle(string templateId)
+    {
+        if (ContainsIgnoreCase(templateId, "mace"))
+        {
+            return "mace_shield";
+        }
+
+        if (ContainsIgnoreCase(templateId, "roundshield") ||
+            ContainsIgnoreCase(templateId, "guard") ||
+            ContainsIgnoreCase(templateId, "shield") ||
+            ContainsIgnoreCase(templateId, "targe") ||
+            ContainsIgnoreCase(templateId, "heavy_vlandia") ||
+            ContainsIgnoreCase(templateId, "heavy_khuzait"))
+        {
+            return "sword_shield";
+        }
+
+        if (ContainsIgnoreCase(templateId, "axe") ||
+            ContainsIgnoreCase(templateId, "twohand") ||
+            ContainsIgnoreCase(templateId, "heavy_sturgia") ||
+            ContainsIgnoreCase(templateId, "falx"))
+        {
+            return "axe";
+        }
+
+        return "sword";
+    }
+
+    private static bool ContainsIgnoreCase(string value, string pattern)
+    {
+        return value.IndexOf(pattern, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     private float GetGauntletHealth()
     {
         return _gauntletRound switch
         {
-            0 => 190f,
-            1 => 230f,
-            _ => 280f
+            0 => 320f,
+            1 => 380f,
+            _ => 460f
         };
     }
 
@@ -658,12 +832,14 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (towns.Count == 0)
         {
-            ScheduleNextEvent(1, 2);
+            ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
             return;
         }
 
         _eventSerial++;
-        Town town = towns[MBRandom.RandomInt(towns.Count)];
+        Town town = ForceLagetaTesting
+            ? towns.FirstOrDefault(candidate => candidate.Settlement?.StringId == TestSettlementId) ?? towns[MBRandom.RandomInt(towns.Count)]
+            : towns[MBRandom.RandomInt(towns.Count)];
         DuelTemplate template = DuelTemplates[MBRandom.RandomInt(DuelTemplates.Length)];
         string settlementName = town.Settlement.Name.ToString();
 
@@ -712,6 +888,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         _activeEventExpiresDay = 0;
         _isGauntletActive = false;
         _gauntletRound = 0;
+        _gauntletRoundOneTemplateId = null;
     }
 
     private void ClearPendingReward()
