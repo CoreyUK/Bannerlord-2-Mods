@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>TroopHealthBars.MCM</AssemblyName>
+    <RootNamespace>TroopHealthBars.Mcm</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\bin\Win64_Shipping_Client\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BannerlordPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerlordPath>
+    <McmPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\261550\2859238197\bin\Win64_Shipping_Client</McmPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MCMv5">
+      <HintPath>$(McmPath)\MCMv5.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TroopHealthBars">
+      <HintPath>..\bin\Win64_Shipping_Client\TroopHealthBars.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -9,4 +9,44 @@
       <Style Name="Default" />
     </Styles>
   </Brush>
+  <Brush Name="TroopHealthBars.HealthBar.DeepRed">
+    <Layers>
+      <BrushLayer Name="EmptyFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#404040FF" />
+      <BrushLayer Name="DefaultFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#6F1712FF" />
+      <BrushLayer Name="ChangeFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#9C4436FF" />
+    </Layers>
+    <Styles>
+      <Style Name="Default" />
+    </Styles>
+  </Brush>
+  <Brush Name="TroopHealthBars.HealthBar.Gold">
+    <Layers>
+      <BrushLayer Name="EmptyFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#404040FF" />
+      <BrushLayer Name="DefaultFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#B8892DFF" />
+      <BrushLayer Name="ChangeFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#D8B15AFF" />
+    </Layers>
+    <Styles>
+      <Style Name="Default" />
+    </Styles>
+  </Brush>
+  <Brush Name="TroopHealthBars.HealthBar.Green">
+    <Layers>
+      <BrushLayer Name="EmptyFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#404040FF" />
+      <BrushLayer Name="DefaultFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#2F7E35FF" />
+      <BrushLayer Name="ChangeFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#68AD62FF" />
+    </Layers>
+    <Styles>
+      <Style Name="Default" />
+    </Styles>
+  </Brush>
+  <Brush Name="TroopHealthBars.HealthBar.Blue">
+    <Layers>
+      <BrushLayer Name="EmptyFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#404040FF" />
+      <BrushLayer Name="DefaultFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#2D5E9EFF" />
+      <BrushLayer Name="ChangeFill" Sprite="BlankWhiteSquare" ColorFactor="1" Color="#6D93C7FF" />
+    </Layers>
+    <Styles>
+      <Style Name="Default" />
+    </Styles>
+  </Brush>
 </Brushes>

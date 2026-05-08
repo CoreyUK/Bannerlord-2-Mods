@@ -10,7 +10,7 @@ Each folder is a separate Bannerlord module:
 - `LoadoutPresets` - player loadout preset support.
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.
 - `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
-- `TroopHealthBars` - adds compact top-left battle HUD bars showing surviving infantry, archers, and mounted troops as percentages.
+- `TroopHealthBars` - adds compact battle HUD bars showing surviving infantry, archers, and mounted troops as percentages, with optional MCM settings for position, colours, opacity, percentages, and category toggles.
 
 ## Layout
 

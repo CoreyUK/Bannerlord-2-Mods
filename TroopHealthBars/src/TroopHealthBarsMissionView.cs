@@ -66,6 +66,7 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
             if (_refreshTimer >= 0.5f)
             {
                 _refreshTimer = 0f;
+                _dataSource?.RefreshSettings();
                 RefreshCounts();
             }
         }

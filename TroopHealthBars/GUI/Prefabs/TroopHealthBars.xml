@@ -6,7 +6,9 @@
                    SuggestedWidth="340"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
                    MarginLeft="22" MarginTop="72"
-                   StackLayout.LayoutMethod="VerticalTopToBottom">
+                   StackLayout.LayoutMethod="VerticalTopToBottom"
+                   IsVisible="@IsTopLeft"
+                   AlphaFactor="@Opacity">
           <Children>
             <ListPanel DataSource="{Bars}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
                        StackLayout.LayoutMethod="VerticalTopToBottom">
@@ -54,6 +56,39 @@
                              HorizontalAlignment="Left" VerticalAlignment="Center"
                              MarginLeft="40"
                              Brush="TroopHealthBars.HealthBar"
+                             IsVisible="@UseBannerlordRed"
+                             InitialAmountAsFloat="@Percentage"
+                             IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                             SuggestedWidth="270" SuggestedHeight="7"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MarginLeft="40"
+                             Brush="TroopHealthBars.HealthBar.DeepRed"
+                             IsVisible="@UseDeepRed"
+                             InitialAmountAsFloat="@Percentage"
+                             IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                             SuggestedWidth="270" SuggestedHeight="7"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MarginLeft="40"
+                             Brush="TroopHealthBars.HealthBar.Gold"
+                             IsVisible="@UseGold"
+                             InitialAmountAsFloat="@Percentage"
+                             IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                             SuggestedWidth="270" SuggestedHeight="7"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MarginLeft="40"
+                             Brush="TroopHealthBars.HealthBar.Green"
+                             IsVisible="@UseGreen"
+                             InitialAmountAsFloat="@Percentage"
+                             IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                             SuggestedWidth="270" SuggestedHeight="7"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             MarginLeft="40"
+                             Brush="TroopHealthBars.HealthBar.Blue"
+                             IsVisible="@UseBlue"
                              InitialAmountAsFloat="@Percentage"
                              IsVertical="false" MaxAmount="1" />
 
@@ -61,7 +96,8 @@
                                 SuggestedWidth="54" SuggestedHeight="16"
                                 HorizontalAlignment="Left" VerticalAlignment="Center"
                                 MarginLeft="246"
-                                Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" />
+                                Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right"
+                                IsVisible="@ShowPercentages" />
 
                     <!-- Icon medallion -->
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
@@ -83,6 +119,82 @@
                             HorizontalAlignment="Left" VerticalAlignment="Center"
                             MarginLeft="9"
                             Sprite="@IconSprite" Color="#C9B996FF" />
+                  </Children>
+                </Widget>
+              </ItemTemplate>
+            </ListPanel>
+          </Children>
+        </ListPanel>
+
+        <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
+                   SuggestedWidth="340"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                   MarginRight="36" MarginBottom="168"
+                   StackLayout.LayoutMethod="VerticalTopToBottom"
+                   IsVisible="@IsBottomRight"
+                   AlphaFactor="@Opacity">
+          <Children>
+            <ListPanel DataSource="{Bars}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                       StackLayout.LayoutMethod="VerticalTopToBottom">
+              <ItemTemplate>
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed"
+                        SuggestedHeight="38" MarginBottom="-2"
+                        IsVisible="@IsVisible">
+                  <Children>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="286" SuggestedHeight="19" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="32" Sprite="BlankWhiteSquare_9" Color="#0A0805F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="282" SuggestedHeight="15" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="34" Sprite="BlankWhiteSquare_9" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="276" SuggestedHeight="9" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="37" Sprite="BlankWhiteSquare_9" Color="#160D08FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="32" SuggestedHeight="24" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="303" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#0A0805F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="25" SuggestedHeight="18" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="306" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="18" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="308" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#160D08FF" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar" IsVisible="@UseBannerlordRed" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.DeepRed" IsVisible="@UseDeepRed" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Gold" IsVisible="@UseGold" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Green" IsVisible="@UseGreen" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Blue" IsVisible="@UseBlue" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowPercentages" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="42" HorizontalAlignment="Left" VerticalAlignment="Center" Sprite="BlankWhiteCircle" Color="#090806F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="36" SuggestedHeight="36" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="3" Sprite="BlankWhiteCircle" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="30" SuggestedHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" Sprite="BlankWhiteCircle" Color="#2A281FFF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="23" SuggestedHeight="23" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="9" Sprite="@IconSprite" Color="#C9B996FF" />
+                  </Children>
+                </Widget>
+              </ItemTemplate>
+            </ListPanel>
+          </Children>
+        </ListPanel>
+
+        <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
+                   SuggestedWidth="340"
+                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   MarginLeft="22" MarginBottom="168"
+                   StackLayout.LayoutMethod="VerticalTopToBottom"
+                   IsVisible="@IsBottomLeft"
+                   AlphaFactor="@Opacity">
+          <Children>
+            <ListPanel DataSource="{Bars}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren"
+                       StackLayout.LayoutMethod="VerticalTopToBottom">
+              <ItemTemplate>
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed"
+                        SuggestedHeight="38" MarginBottom="-2"
+                        IsVisible="@IsVisible">
+                  <Children>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="286" SuggestedHeight="19" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="32" Sprite="BlankWhiteSquare_9" Color="#0A0805F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="282" SuggestedHeight="15" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="34" Sprite="BlankWhiteSquare_9" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="276" SuggestedHeight="9" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="37" Sprite="BlankWhiteSquare_9" Color="#160D08FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="32" SuggestedHeight="24" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="303" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#0A0805F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="25" SuggestedHeight="18" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="306" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="18" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="308" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#160D08FF" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar" IsVisible="@UseBannerlordRed" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.DeepRed" IsVisible="@UseDeepRed" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Gold" IsVisible="@UseGold" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Green" IsVisible="@UseGreen" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Blue" IsVisible="@UseBlue" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowPercentages" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="42" HorizontalAlignment="Left" VerticalAlignment="Center" Sprite="BlankWhiteCircle" Color="#090806F0" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="36" SuggestedHeight="36" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="3" Sprite="BlankWhiteCircle" Color="#6F5A34FF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="30" SuggestedHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" Sprite="BlankWhiteCircle" Color="#2A281FFF" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="23" SuggestedHeight="23" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="9" Sprite="@IconSprite" Color="#C9B996FF" />
                   </Children>
                 </Widget>
               </ItemTemplate>
