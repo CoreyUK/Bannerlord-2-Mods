@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name value="Moving Dismount"/>
+  <Id value="MovingDismount"/>
+  <Version value="v0.1.0"/>
+  <ModuleCategory value="Singleplayer"/>
+  <ModuleType value="Community"/>
+  <DependedModules>
+    <DependedModule Id="Bannerlord.Harmony" DependentVersion="v2.4.2.0" Optional="false"/>
+    <DependedModule Id="Native" DependentVersion="v1.3.4" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.4" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.3.4" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.3.4" Optional="true"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="MovingDismount"/>
+      <DLLName value="MovingDismount.dll"/>
+      <SubModuleClassType value="MovingDismount.SubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none"/>
+        <Tag key="IsNoRenderModeElement" value="false"/>
+      </Tags>
+    </SubModule>
+  </SubModules>
+</Module>

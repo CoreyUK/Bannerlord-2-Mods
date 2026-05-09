@@ -8,6 +8,7 @@ Each folder is a separate Bannerlord module:
 - `CompanionHotswap` - companion swapping and selection UI support.
 - `DuelCompanions` - adds roaming duel rumors, elite duelists, gauntlets, rare weapon rewards, and recruitable duel companions.
 - `LoadoutPresets` - player loadout preset support.
+- `MovingDismount` - lets the player attempt to dismount from a moving horse, with speed-scaled stumble and hard-fall damage.
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.
 - `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
 - `TroopHealthBars` - adds compact battle HUD bars showing surviving infantry, archers, and mounted troops as percentages, with optional MCM settings for position, colours, opacity, percentages, and category toggles.
