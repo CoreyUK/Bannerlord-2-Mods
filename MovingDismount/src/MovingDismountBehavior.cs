@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using HarmonyLib;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
@@ -15,9 +14,8 @@ public sealed class MovingDismountBehavior : MissionBehavior
     private const float MaxForcedDismountSpeed = 100f;
     private const float DismountSlideDuration = 0.32f;
 
-    private static readonly MethodInfo? SetMountAgentMethod = AccessTools.Method(typeof(Agent), "SetMountAgent");
-    private static readonly MethodInfo? OnDismountMethod = AccessTools.Method(typeof(Agent), "OnDismount");
-    private static readonly MethodInfo? ClearTargetFrameAuxMethod = AccessTools.Method(typeof(Agent), "ClearTargetFrameAux");
+    private static readonly MethodInfo? SetMountAgentMethod = GetPrivateAgentMethod("SetMountAgent");
+    private static readonly MethodInfo? OnDismountMethod = GetPrivateAgentMethod("OnDismount");
 
     private Agent? _pendingDismountAgent;
     private Agent? _pendingMountAgent;
@@ -147,8 +145,13 @@ public sealed class MovingDismountBehavior : MissionBehavior
 
         ClearPendingDismount();
 
-        SetMountAgentMethod?.Invoke(player, new object?[] { null });
-        OnDismountMethod?.Invoke(player, new object[] { mount });
+        if (SetMountAgentMethod == null || OnDismountMethod == null)
+        {
+            return;
+        }
+
+        SetMountAgentMethod.Invoke(player, new object?[] { null });
+        OnDismountMethod.Invoke(player, new object[] { mount });
         StartDismountSlide(player, GetDismountLandingPosition(player, mount), speed);
     }
 
@@ -326,10 +329,15 @@ public sealed class MovingDismountBehavior : MissionBehavior
 
         if (speed >= FallSpeed)
         {
-        return "You stumble after dismounting at speed.";
+            return "You stumble after dismounting at speed.";
         }
 
         return "You stumble after dismounting from the moving horse.";
+    }
+
+    private static MethodInfo? GetPrivateAgentMethod(string name)
+    {
+        return typeof(Agent).GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic);
     }
 
     private void ClearPendingDismount()

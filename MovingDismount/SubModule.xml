@@ -2,15 +2,14 @@
 <Module>
   <Name value="Moving Dismount"/>
   <Id value="MovingDismount"/>
-  <Version value="v0.1.0"/>
+  <Version value="v0.1.1"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>
-    <DependedModule Id="Bannerlord.Harmony" DependentVersion="v2.4.2.0" Optional="false"/>
-    <DependedModule Id="Native" DependentVersion="v1.3.4" Optional="false"/>
-    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.4" Optional="false"/>
-    <DependedModule Id="Sandbox" DependentVersion="v1.3.4" Optional="false"/>
-    <DependedModule Id="StoryMode" DependentVersion="v1.3.4" Optional="true"/>
+    <DependedModule Id="Native" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.3.15" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.3.15" Optional="true"/>
   </DependedModules>
   <SubModules>
     <SubModule>
