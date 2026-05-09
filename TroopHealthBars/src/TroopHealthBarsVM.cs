@@ -108,6 +108,7 @@ public sealed class TroopHealthBarItemVM : ViewModel
 public sealed class TroopHealthBarsVM : ViewModel
 {
     private MBBindingList<TroopHealthBarItemVM> _bars = new();
+    private bool _isHudVisible = true;
     private bool _isTopLeft;
     private bool _isBottomRight;
     private bool _isBottomLeft;
@@ -123,6 +124,9 @@ public sealed class TroopHealthBarsVM : ViewModel
 
     [DataSourceProperty]
     public MBBindingList<TroopHealthBarItemVM> Bars { get => _bars; set => SetField(ref _bars, value, nameof(Bars)); }
+
+    [DataSourceProperty]
+    public bool IsHudVisible { get => _isHudVisible; set => SetField(ref _isHudVisible, value, nameof(IsHudVisible)); }
 
     [DataSourceProperty]
     public bool IsTopLeft { get => _isTopLeft; set => SetField(ref _isTopLeft, value, nameof(IsTopLeft)); }

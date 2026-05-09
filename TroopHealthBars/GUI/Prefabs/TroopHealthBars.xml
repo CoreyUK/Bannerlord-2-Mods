@@ -1,6 +1,6 @@
 <Prefab>
   <Window>
-    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true">
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" IsVisible="@IsHudVisible">
       <Children>
         <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
                    SuggestedWidth="340"

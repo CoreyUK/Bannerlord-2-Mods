@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.MountAndBlade;
@@ -15,6 +16,8 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
     private GauntletMovieIdentifier? _movie;
     private TroopHealthBarsVM? _dataSource;
     private MissionScreen? _missionScreen;
+    private MissionBehavior? _orderUiHandler;
+    private PropertyInfo? _isOrderMenuActiveProperty;
     private float _refreshTimer;
     private float _attachTimer;
     private bool _attachFailed;
@@ -69,6 +72,11 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
                 _dataSource?.RefreshSettings();
                 RefreshCounts();
             }
+
+            if (_dataSource != null)
+            {
+                _dataSource.IsHudVisible = !IsOrderMenuActive();
+            }
         }
         catch
         {
@@ -115,7 +123,7 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
 
         _missionScreen = screen;
         _dataSource = new TroopHealthBarsVM();
-        _layer = new GauntletLayer("TroopHealthBarsLayer", 180, false);
+        _layer = new GauntletLayer("TroopHealthBarsLayer", 20, false);
         _movie = _layer.LoadMovie("TroopHealthBars", _dataSource);
         screen.AddLayer(_layer);
         RefreshCounts();
@@ -143,6 +151,8 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
         _layer = null;
         _dataSource = null;
         _missionScreen = null;
+        _orderUiHandler = null;
+        _isOrderMenuActiveProperty = null;
     }
 
     private MissionScreen? GetMissionScreen()
@@ -161,6 +171,39 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
         }
 
         return null;
+    }
+
+    private bool IsOrderMenuActive()
+    {
+        if (_orderUiHandler != null && _isOrderMenuActiveProperty != null)
+        {
+            return ReadOrderMenuActive(_orderUiHandler, _isOrderMenuActiveProperty);
+        }
+
+        foreach (MissionBehavior behavior in Mission.MissionBehaviors)
+        {
+            PropertyInfo? property = behavior.GetType().GetProperty("IsOrderMenuActive", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (property != null && property.PropertyType == typeof(bool))
+            {
+                _orderUiHandler = behavior;
+                _isOrderMenuActiveProperty = property;
+                return ReadOrderMenuActive(behavior, property);
+            }
+        }
+
+        return false;
+    }
+
+    private static bool ReadOrderMenuActive(object target, PropertyInfo property)
+    {
+        try
+        {
+            return property.GetValue(target) is true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private bool TryGetTrackedCategory(Agent agent, out TroopCategory category)
