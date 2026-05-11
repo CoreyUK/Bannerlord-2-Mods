@@ -11,6 +11,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
+using TaleWorlds.SaveSystem;
 
 namespace DuelCompanions;
 
@@ -29,6 +30,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private const int FirstRumorMaxDays = 12;
     private const int FollowupRumorMinDays = 8;
     private const int FollowupRumorMaxDays = 16;
+    private static readonly bool ImmediateRumorForTesting = false;
     private static readonly bool ForceLagetaTesting = false;
     private const string TestSettlementId = "town_EW1";
 
@@ -171,6 +173,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private string? _activeRareItemId;
     private string? _activeGroundDescription;
     private string? _activeHeroId;
+    private string? _activeQuestId;
+    private bool _pendingRumorNotification;
     private int _activeTextVariant;
     private double _activeEventExpiresDay;
     private double _nextEventDay;
@@ -186,10 +190,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private bool _isGauntletActive;
     private int _gauntletRound;
     private string? _gauntletRoundOneTemplateId;
+    private float _rumorNotificationDelaySeconds;
 
     public override void RegisterEvents()
     {
         CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, OnSessionLaunched);
+        CampaignEvents.TickEvent.AddNonSerializedListener(this, OnCampaignTick);
         CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, OnDailyTick);
     }
 
@@ -201,6 +207,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         dataStore.SyncData("dc_active_rare_item_id_v2", ref _activeRareItemId);
         dataStore.SyncData("dc_active_ground_description_v2", ref _activeGroundDescription);
         dataStore.SyncData("dc_active_hero_id_v2", ref _activeHeroId);
+        dataStore.SyncData("dc_active_quest_id_v2", ref _activeQuestId);
+        dataStore.SyncData("dc_pending_rumor_notification_v2", ref _pendingRumorNotification);
         dataStore.SyncData("dc_active_text_variant_v2", ref _activeTextVariant);
         dataStore.SyncData("dc_active_event_expires_day_v2", ref _activeEventExpiresDay);
         dataStore.SyncData("dc_next_event_day_v2", ref _nextEventDay);
@@ -219,6 +227,14 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         AddMenus(starter);
         RecoverDetachedDuelCompanions();
 
+        if (ImmediateRumorForTesting && string.IsNullOrEmpty(_activeSettlementId))
+        {
+            CreateRandomEvent(showMessage: true);
+            return;
+        }
+
+        EnsureActiveRumorQuestAndPrompt();
+
         if (ForceLagetaTesting)
         {
             ClearActiveEvent();
@@ -232,13 +248,35 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         }
     }
 
+    private void OnCampaignTick(float dt)
+    {
+        if (!_pendingRumorNotification)
+        {
+            return;
+        }
+
+        if (_rumorNotificationDelaySeconds <= 0f)
+        {
+            _rumorNotificationDelaySeconds = 2f;
+            return;
+        }
+
+        _rumorNotificationDelaySeconds -= dt;
+        if (_rumorNotificationDelaySeconds > 0f)
+        {
+            return;
+        }
+
+        ShowPendingRumorNotification();
+    }
+
     private void OnDailyTick()
     {
         double today = CampaignTime.Now.ToDays;
 
         if (!string.IsNullOrEmpty(_activeSettlementId) && today > _activeEventExpiresDay)
         {
-            ClearActiveEvent();
+            ClearActiveEvent(ActiveEventClearReason.Expired);
             ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
         }
 
@@ -416,7 +454,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             _gauntletRound = 0;
             _gauntletRoundOneTemplateId = null;
             DuelCompanionsMissionState.ResetGauntletPlayerHealth();
-            ClearActiveEvent();
+            ClearActiveEvent(ActiveEventClearReason.Succeeded);
             ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
             GameMenu.SwitchToMenu(RewardMenuId);
             return;
@@ -854,7 +892,130 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (showMessage)
         {
-            InformationManager.DisplayMessage(new InformationMessage(Pick(RumorTexts).Replace("{SETTLEMENT}", settlementName)));
+            QueueActiveRumorNotification();
+        }
+    }
+
+    private void ShowDuelRumorInquiry(string settlementName)
+    {
+        InformationManager.ShowInquiry(
+            new InquiryData(
+                "Duel Rumour",
+                $"A duel rumour reaches your party.\n\n{_activeDuelistName} is accepting challengers near {settlementName} at {_activeGroundDescription}.\n\nVisit {settlementName} before the rumour fades.",
+                true,
+                false,
+                "Acknowledge",
+                string.Empty,
+                null,
+                null,
+                string.Empty,
+                0f,
+                null,
+                null,
+                null),
+            true,
+            false);
+    }
+
+    private void EnsureActiveRumorQuestAndPrompt()
+    {
+        if (string.IsNullOrEmpty(_activeSettlementId) ||
+            string.IsNullOrEmpty(_activeDuelistName) ||
+            string.IsNullOrEmpty(_activeGroundDescription))
+        {
+            return;
+        }
+
+        Settlement? settlement = Settlement.Find(_activeSettlementId);
+        if (settlement == null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_activeQuestId))
+        {
+            QueueActiveRumorNotification();
+        }
+    }
+
+    private void QueueActiveRumorNotification()
+    {
+        _pendingRumorNotification = true;
+        _rumorNotificationDelaySeconds = 2f;
+    }
+
+    private void ShowPendingRumorNotification()
+    {
+        if (string.IsNullOrEmpty(_activeSettlementId))
+        {
+            _pendingRumorNotification = false;
+            return;
+        }
+
+        Settlement? settlement = Settlement.Find(_activeSettlementId);
+        if (settlement == null)
+        {
+            _pendingRumorNotification = false;
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_activeQuestId))
+        {
+            StartDuelRumorQuest(settlement);
+        }
+
+        ShowDuelRumorInquiry(settlement.Name.ToString());
+        _pendingRumorNotification = false;
+        _rumorNotificationDelaySeconds = 0f;
+    }
+
+    private void StartDuelRumorQuest(Settlement settlement)
+    {
+        if (string.IsNullOrEmpty(_activeSettlementId) ||
+            string.IsNullOrEmpty(_activeDuelistName) ||
+            string.IsNullOrEmpty(_activeGroundDescription))
+        {
+            return;
+        }
+
+        CompleteActiveDuelQuest(ActiveEventClearReason.Cancelled);
+
+        _activeQuestId = $"dc_duel_rumor_quest_{_eventSerial}";
+        int daysRemaining = Math.Max(1, (int)Math.Ceiling(_activeEventExpiresDay - CampaignTime.Now.ToDays));
+        DuelRumorQuest quest = new(
+            _activeQuestId,
+            settlement,
+            _activeDuelistName!,
+            _activeGroundDescription!,
+            daysRemaining);
+        quest.StartQuest();
+    }
+
+    private void CompleteActiveDuelQuest(ActiveEventClearReason reason)
+    {
+        if (string.IsNullOrEmpty(_activeQuestId) || Campaign.Current?.QuestManager == null)
+        {
+            return;
+        }
+
+        QuestBase? quest = Campaign.Current.QuestManager.Quests.FirstOrDefault(candidate =>
+            candidate.StringId == _activeQuestId && candidate.IsOngoing);
+        if (quest == null)
+        {
+            return;
+        }
+
+        switch (reason)
+        {
+            case ActiveEventClearReason.Succeeded:
+                quest.CompleteQuestWithSuccess();
+                break;
+            case ActiveEventClearReason.Expired:
+                quest.CompleteQuestWithTimeOut();
+                break;
+            default:
+                quest.CompleteQuestWithCancel();
+                break;
         }
     }
 
@@ -876,14 +1037,17 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         _nextEventDay = CampaignTime.Now.ToDays + MBRandom.RandomInt(minDays, maxDays + 1);
     }
 
-    private void ClearActiveEvent()
+    private void ClearActiveEvent(ActiveEventClearReason reason = ActiveEventClearReason.Cancelled)
     {
+        CompleteActiveDuelQuest(reason);
         _activeSettlementId = null;
         _activeDuelistName = null;
         _activeTemplateId = null;
         _activeRareItemId = null;
         _activeGroundDescription = null;
         _activeHeroId = null;
+        _activeQuestId = null;
+        _pendingRumorNotification = false;
         _activeTextVariant = 0;
         _activeEventExpiresDay = 0;
         _isGauntletActive = false;
@@ -906,6 +1070,13 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         Recruit,
         Gold,
         Item
+    }
+
+    private enum ActiveEventClearReason
+    {
+        Cancelled,
+        Expired,
+        Succeeded
     }
 
     private sealed class DuelTemplate
