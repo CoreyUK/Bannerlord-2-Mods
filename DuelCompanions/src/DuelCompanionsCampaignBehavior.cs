@@ -191,6 +191,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private int _gauntletRound;
     private string? _gauntletRoundOneTemplateId;
     private float _rumorNotificationDelaySeconds;
+    private float _nextCompanionRepairTime;
 
     public override void RegisterEvents()
     {
@@ -225,6 +226,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private void OnSessionLaunched(CampaignGameStarter starter)
     {
         AddMenus(starter);
+        RepairDuelCompanionHeroStates();
         RecoverDetachedDuelCompanions();
 
         if (ImmediateRumorForTesting && string.IsNullOrEmpty(_activeSettlementId))
@@ -250,6 +252,13 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void OnCampaignTick(float dt)
     {
+        float now = (float)CampaignTime.Now.ToSeconds;
+        if (now >= _nextCompanionRepairTime)
+        {
+            RepairDuelCompanionHeroStates();
+            _nextCompanionRepairTime = now + 10f;
+        }
+
         if (!_pendingRumorNotification)
         {
             return;
@@ -664,9 +673,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             hero.ChangeState(Hero.CharacterStates.Active);
         }
 
-        hero.SetNewOccupation(Occupation.Wanderer);
-        hero.IsKnownToPlayer = true;
-        hero.SetHasMet();
+        PrepareDuelCompanionHero(hero, Settlement.CurrentSettlement);
 
         if (hero.CompanionOf != Clan.PlayerClan)
         {
@@ -744,7 +751,88 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         HeroCreator.CreateBasicHero(duel.HeroId, template, out Hero hero);
         hero.SetName(new TextObject(duel.DisplayName), new TextObject(duel.DisplayName.Split(' ')[0]));
+        PrepareDuelCompanionHero(hero, ResolveDuelSettlement());
         return hero;
+    }
+
+    private void RepairDuelCompanionHeroStates()
+    {
+        foreach (Hero hero in Hero.FindAll(IsDuelCompanionHero))
+        {
+            PrepareDuelCompanionHero(hero, null);
+        }
+    }
+
+    private static bool IsDuelCompanionHero(Hero hero)
+    {
+        return hero.StringId.StartsWith("dc_event_hero_", StringComparison.Ordinal) ||
+               hero.StringId.StartsWith("dc_gauntlet_", StringComparison.Ordinal);
+    }
+
+    private void PrepareDuelCompanionHero(Hero hero, Settlement? preferredSettlement)
+    {
+        if (!IsDuelCompanionHero(hero))
+        {
+            return;
+        }
+
+        Settlement? settlement = preferredSettlement ?? ResolveDuelSettlement() ?? hero.LastKnownClosestSettlement;
+        if (settlement == null)
+        {
+            return;
+        }
+
+        if (!hero.IsActive)
+        {
+            hero.ChangeState(Hero.CharacterStates.Active);
+        }
+
+        if (hero.Occupation != Occupation.Wanderer)
+        {
+            hero.SetNewOccupation(Occupation.Wanderer);
+        }
+
+        if (hero.BornSettlement == null)
+        {
+            hero.BornSettlement = settlement;
+        }
+
+        hero.UpdateLastKnownClosestSettlement(settlement);
+        if (hero.PartyBelongedTo == null && hero.PartyBelongedToAsPrisoner == null && hero.StayingInSettlement == null)
+        {
+            hero.StayingInSettlement = settlement;
+        }
+
+        hero.IsKnownToPlayer = true;
+        hero.SetHasMet();
+        hero.UpdateHomeSettlement();
+    }
+
+    private Settlement? ResolveDuelSettlement()
+    {
+        if (Settlement.CurrentSettlement != null)
+        {
+            return Settlement.CurrentSettlement;
+        }
+
+        if (!string.IsNullOrEmpty(_activeSettlementId))
+        {
+            Settlement? activeSettlement = Settlement.Find(_activeSettlementId);
+            if (activeSettlement != null)
+            {
+                return activeSettlement;
+            }
+        }
+
+        Settlement? closestTown = MobileParty.MainParty != null
+            ? Town.AllTowns
+                .Where(town => town.Settlement != null)
+                .OrderBy(town => town.Settlement.GetPosition2D.DistanceSquared(MobileParty.MainParty.GetPosition2D))
+                .Select(town => town.Settlement)
+                .FirstOrDefault()
+            : null;
+
+        return closestTown ?? Town.AllTowns.FirstOrDefault()?.Settlement;
     }
 
     private DuelEvent? GetActiveEvent()
