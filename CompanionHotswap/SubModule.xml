@@ -2,7 +2,7 @@
 <Module>
   <Name value="CompanionHotswap"/>
   <Id value="CompanionHotswap"/>
-  <Version value="v1.1.0"/>
+  <Version value="v1.1.1"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>
