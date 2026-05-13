@@ -240,10 +240,10 @@ public sealed class CompanionSelectBehavior : MissionBehavior
                 continue;
             }
 
-            int x = (int)(sx * scaleX - MarkerW * 0.5f);
-            int y = (int)(sy * scaleY - MarkerH);
-            x = Math.Max(0, Math.Min((int)(CanvasW - MarkerW), x));
-            y = Math.Max(0, Math.Min((int)(CanvasH - MarkerH), y));
+            float x = sx * scaleX - MarkerW * 0.5f;
+            float y = sy * scaleY - MarkerH;
+            x = Math.Max(0f, Math.Min(CanvasW - MarkerW, x));
+            y = Math.Max(0f, Math.Min(CanvasH - MarkerH, y));
             _markerVM.SetSlot(i, x, y, agent == mainAgent);
             visibleMask |= 1 << i;
         }

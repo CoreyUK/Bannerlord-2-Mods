@@ -46,7 +46,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
     public void SwapToAgent(Agent agent)
     {
         Mission? mission = Mission.Current;
-        if (mission == null || agent == null || !agent.IsActive() || agent == mission.MainAgent)
+        if (mission == null || !CanBeControlled(agent, mission.PlayerTeam) || agent == mission.MainAgent)
         {
             return;
         }
@@ -72,13 +72,14 @@ public sealed class CompanionSwapBehavior : MissionBehavior
             return agents;
         }
 
-        if (_playerHeroAgent != null && _playerHeroAgent.IsActive())
+        Agent? playerHeroAgent = _playerHeroAgent;
+        if (CanBeControlled(playerHeroAgent, playerTeam))
         {
-            agents.Add(_playerHeroAgent);
+            agents.Add(playerHeroAgent!);
         }
 
         agents.AddRange(playerTeam.ActiveAgents
-            .Where(agent => agent.IsHero && agent != _playerHeroAgent && agent.IsActive())
+            .Where(agent => agent != _playerHeroAgent && CanBeControlled(agent, playerTeam))
             .OrderBy(agent => agent.Name));
 
         return agents;
@@ -87,11 +88,21 @@ public sealed class CompanionSwapBehavior : MissionBehavior
     private static bool IsPlayerControlledHeroOnPlayerTeam(Agent? agent)
     {
         Mission? mission = Mission.Current;
-        return mission?.PlayerTeam != null
+        return CanBeControlled(agent, mission?.PlayerTeam);
+    }
+
+    public static bool CanBeControlled(Agent? agent, Team? playerTeam)
+    {
+        return playerTeam != null
             && agent != null
             && agent.IsHero
+            && agent.IsHuman
+            && !agent.IsMount
             && agent.IsActive()
-            && agent.Team == mission.PlayerTeam;
+            && !agent.IsFadingOut()
+            && agent.State == AgentState.Active
+            && agent.Health > 0f
+            && agent.Team == playerTeam;
     }
 
     private static void ApplyPlayerCommandAuthority(Agent agent, bool forceManualControl)
@@ -107,6 +118,7 @@ public sealed class CompanionSwapBehavior : MissionBehavior
             team.SetPlayerRole(isPlayerGeneral: true, isPlayerSergeant: false);
         }
 
+        agent.SetCanLeadFormationsRemotely(true);
         team.GeneralAgent = agent;
         team.PlayerOrderController.Owner = agent;
 

@@ -26,7 +26,7 @@ public sealed class CompanionItemVM : ViewModel
         _keyLabel = string.Format("[{0}]", index + 1);
         _isCurrentlyControlled = isCurrentlyControlled;
         _isPlayerHero = isPlayerHero;
-        _isDead = !agent.IsActive();
+        _isDead = !CompanionSwapBehavior.CanBeControlled(agent, Mission.Current?.PlayerTeam);
 
         if (agent.Character != null)
         {
@@ -99,7 +99,7 @@ public sealed class CompanionMarkersVM : ViewModel
         }
     }
 
-    public void SetSlot(int index, int x, int y, bool isCurrent)
+    public void SetSlot(int index, float x, float y, bool isCurrent)
     {
         if (!IsValid(index))
         {
@@ -128,64 +128,64 @@ public sealed class CompanionMarkersVM : ViewModel
     private static bool IsValid(int index) => index >= 0 && index < 8;
 
     private bool GetVisible(int index) => _slots[index].Visible;
-    private int GetPosX(int index) => _slots[index].PosX;
-    private int GetPosY(int index) => _slots[index].PosY;
+    private float GetPosX(int index) => _slots[index].PosX;
+    private float GetPosY(int index) => _slots[index].PosY;
     private bool GetCurrent(int index) => _slots[index].Current;
     private CharacterImageIdentifierVM? GetPortrait(int index) => _slots[index].Portrait;
 
     [DataSourceProperty] public bool Slot0Visible { get => GetVisible(0); set => SetVisible(0, value); }
-    [DataSourceProperty] public int Slot0PosX { get => GetPosX(0); set { _slots[0].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot0PosX)); } }
-    [DataSourceProperty] public int Slot0PosY { get => GetPosY(0); set { _slots[0].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot0PosY)); } }
+    [DataSourceProperty] public float Slot0PosX { get => GetPosX(0); set { _slots[0].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot0PosX)); } }
+    [DataSourceProperty] public float Slot0PosY { get => GetPosY(0); set { _slots[0].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot0PosY)); } }
     [DataSourceProperty] public bool Slot0Current { get => GetCurrent(0); set { _slots[0].Current = value; OnPropertyChangedWithValue(value, nameof(Slot0Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot0Portrait { get => GetPortrait(0); set { _slots[0].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot0Portrait)); } }
 
     [DataSourceProperty] public bool Slot1Visible { get => GetVisible(1); set => SetVisible(1, value); }
-    [DataSourceProperty] public int Slot1PosX { get => GetPosX(1); set { _slots[1].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot1PosX)); } }
-    [DataSourceProperty] public int Slot1PosY { get => GetPosY(1); set { _slots[1].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot1PosY)); } }
+    [DataSourceProperty] public float Slot1PosX { get => GetPosX(1); set { _slots[1].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot1PosX)); } }
+    [DataSourceProperty] public float Slot1PosY { get => GetPosY(1); set { _slots[1].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot1PosY)); } }
     [DataSourceProperty] public bool Slot1Current { get => GetCurrent(1); set { _slots[1].Current = value; OnPropertyChangedWithValue(value, nameof(Slot1Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot1Portrait { get => GetPortrait(1); set { _slots[1].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot1Portrait)); } }
 
     [DataSourceProperty] public bool Slot2Visible { get => GetVisible(2); set => SetVisible(2, value); }
-    [DataSourceProperty] public int Slot2PosX { get => GetPosX(2); set { _slots[2].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot2PosX)); } }
-    [DataSourceProperty] public int Slot2PosY { get => GetPosY(2); set { _slots[2].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot2PosY)); } }
+    [DataSourceProperty] public float Slot2PosX { get => GetPosX(2); set { _slots[2].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot2PosX)); } }
+    [DataSourceProperty] public float Slot2PosY { get => GetPosY(2); set { _slots[2].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot2PosY)); } }
     [DataSourceProperty] public bool Slot2Current { get => GetCurrent(2); set { _slots[2].Current = value; OnPropertyChangedWithValue(value, nameof(Slot2Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot2Portrait { get => GetPortrait(2); set { _slots[2].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot2Portrait)); } }
 
     [DataSourceProperty] public bool Slot3Visible { get => GetVisible(3); set => SetVisible(3, value); }
-    [DataSourceProperty] public int Slot3PosX { get => GetPosX(3); set { _slots[3].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot3PosX)); } }
-    [DataSourceProperty] public int Slot3PosY { get => GetPosY(3); set { _slots[3].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot3PosY)); } }
+    [DataSourceProperty] public float Slot3PosX { get => GetPosX(3); set { _slots[3].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot3PosX)); } }
+    [DataSourceProperty] public float Slot3PosY { get => GetPosY(3); set { _slots[3].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot3PosY)); } }
     [DataSourceProperty] public bool Slot3Current { get => GetCurrent(3); set { _slots[3].Current = value; OnPropertyChangedWithValue(value, nameof(Slot3Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot3Portrait { get => GetPortrait(3); set { _slots[3].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot3Portrait)); } }
 
     [DataSourceProperty] public bool Slot4Visible { get => GetVisible(4); set => SetVisible(4, value); }
-    [DataSourceProperty] public int Slot4PosX { get => GetPosX(4); set { _slots[4].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot4PosX)); } }
-    [DataSourceProperty] public int Slot4PosY { get => GetPosY(4); set { _slots[4].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot4PosY)); } }
+    [DataSourceProperty] public float Slot4PosX { get => GetPosX(4); set { _slots[4].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot4PosX)); } }
+    [DataSourceProperty] public float Slot4PosY { get => GetPosY(4); set { _slots[4].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot4PosY)); } }
     [DataSourceProperty] public bool Slot4Current { get => GetCurrent(4); set { _slots[4].Current = value; OnPropertyChangedWithValue(value, nameof(Slot4Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot4Portrait { get => GetPortrait(4); set { _slots[4].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot4Portrait)); } }
 
     [DataSourceProperty] public bool Slot5Visible { get => GetVisible(5); set => SetVisible(5, value); }
-    [DataSourceProperty] public int Slot5PosX { get => GetPosX(5); set { _slots[5].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot5PosX)); } }
-    [DataSourceProperty] public int Slot5PosY { get => GetPosY(5); set { _slots[5].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot5PosY)); } }
+    [DataSourceProperty] public float Slot5PosX { get => GetPosX(5); set { _slots[5].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot5PosX)); } }
+    [DataSourceProperty] public float Slot5PosY { get => GetPosY(5); set { _slots[5].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot5PosY)); } }
     [DataSourceProperty] public bool Slot5Current { get => GetCurrent(5); set { _slots[5].Current = value; OnPropertyChangedWithValue(value, nameof(Slot5Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot5Portrait { get => GetPortrait(5); set { _slots[5].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot5Portrait)); } }
 
     [DataSourceProperty] public bool Slot6Visible { get => GetVisible(6); set => SetVisible(6, value); }
-    [DataSourceProperty] public int Slot6PosX { get => GetPosX(6); set { _slots[6].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot6PosX)); } }
-    [DataSourceProperty] public int Slot6PosY { get => GetPosY(6); set { _slots[6].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot6PosY)); } }
+    [DataSourceProperty] public float Slot6PosX { get => GetPosX(6); set { _slots[6].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot6PosX)); } }
+    [DataSourceProperty] public float Slot6PosY { get => GetPosY(6); set { _slots[6].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot6PosY)); } }
     [DataSourceProperty] public bool Slot6Current { get => GetCurrent(6); set { _slots[6].Current = value; OnPropertyChangedWithValue(value, nameof(Slot6Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot6Portrait { get => GetPortrait(6); set { _slots[6].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot6Portrait)); } }
 
     [DataSourceProperty] public bool Slot7Visible { get => GetVisible(7); set => SetVisible(7, value); }
-    [DataSourceProperty] public int Slot7PosX { get => GetPosX(7); set { _slots[7].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot7PosX)); } }
-    [DataSourceProperty] public int Slot7PosY { get => GetPosY(7); set { _slots[7].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot7PosY)); } }
+    [DataSourceProperty] public float Slot7PosX { get => GetPosX(7); set { _slots[7].PosX = value; OnPropertyChangedWithValue(value, nameof(Slot7PosX)); } }
+    [DataSourceProperty] public float Slot7PosY { get => GetPosY(7); set { _slots[7].PosY = value; OnPropertyChangedWithValue(value, nameof(Slot7PosY)); } }
     [DataSourceProperty] public bool Slot7Current { get => GetCurrent(7); set { _slots[7].Current = value; OnPropertyChangedWithValue(value, nameof(Slot7Current)); } }
     [DataSourceProperty] public CharacterImageIdentifierVM? Slot7Portrait { get => GetPortrait(7); set { _slots[7].Portrait = value; OnPropertyChangedWithValue(value, nameof(Slot7Portrait)); } }
 
     private struct Slot
     {
         public bool Visible;
-        public int PosX;
-        public int PosY;
+        public float PosX;
+        public float PosY;
         public bool Current;
         public CharacterImageIdentifierVM? Portrait;
     }
