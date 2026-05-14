@@ -2,7 +2,7 @@
 <Module>
   <Name value="Moving Dismount"/>
   <Id value="MovingDismount"/>
-  <Version value="v0.1.1"/>
+  <Version value="v0.1.2"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>

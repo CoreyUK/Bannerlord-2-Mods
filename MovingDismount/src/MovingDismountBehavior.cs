@@ -30,6 +30,7 @@ public sealed class MovingDismountBehavior : MissionBehavior
     private float _forceDismountTime;
     private float _unlockTime;
     private float _nextDismountRequestTime;
+    private float _suppressDismountUntilTime;
     private float _lastDamageTime = -1f;
 
     public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
@@ -64,7 +65,7 @@ public sealed class MovingDismountBehavior : MissionBehavior
         }
 
         float now = Mission.Current?.CurrentTime ?? 0f;
-        if (now < _nextDismountRequestTime)
+        if (now < _nextDismountRequestTime || now < _suppressDismountUntilTime)
         {
             return;
         }
@@ -100,6 +101,19 @@ public sealed class MovingDismountBehavior : MissionBehavior
         ClearPendingDismount();
     }
 
+    public override void OnAgentMount(Agent agent)
+    {
+        base.OnAgentMount(agent);
+
+        if (agent.IsMainAgent)
+        {
+            float now = Mission.Current?.CurrentTime ?? 0f;
+            _suppressDismountUntilTime = now + 0.45f;
+            _nextDismountRequestTime = now + 0.45f;
+            ClearPendingDismount();
+        }
+    }
+
     private static bool IsValidMountedPlayer(Agent? agent)
     {
         return agent != null &&
@@ -114,8 +128,8 @@ public sealed class MovingDismountBehavior : MissionBehavior
     {
         IInputContext? input = Mission?.InputManager;
         return input != null &&
-               (input.IsGameKeyDown(CombatHotKeyCategory.Action) ||
-                input.IsKeyDown(InputKey.F));
+               (input.IsGameKeyPressed(CombatHotKeyCategory.Action) ||
+                input.IsKeyPressed(InputKey.F));
     }
 
     private static float GetHorizontalSpeed(Agent mount)
