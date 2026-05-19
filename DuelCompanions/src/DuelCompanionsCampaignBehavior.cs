@@ -1020,8 +1020,9 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return;
         }
 
-        if (string.IsNullOrEmpty(_activeQuestId))
+        if (!IsActiveRumorQuestOngoing())
         {
+            _activeQuestId = null;
             QueueActiveRumorNotification();
         }
     }
@@ -1068,7 +1069,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         CompleteActiveDuelQuest(ActiveEventClearReason.Cancelled);
 
-        _activeQuestId = $"dc_duel_rumor_quest_{_eventSerial}";
+        _activeQuestId = $"dc_duel_rumor_quest_{_eventSerial}_{MBRandom.RandomInt(1000000)}";
         int daysRemaining = Math.Max(1, (int)Math.Ceiling(_activeEventExpiresDay - CampaignTime.Now.ToDays));
         DuelRumorQuest quest = new(
             _activeQuestId,
@@ -1105,6 +1106,17 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
                 quest.CompleteQuestWithCancel();
                 break;
         }
+    }
+
+    private bool IsActiveRumorQuestOngoing()
+    {
+        if (string.IsNullOrEmpty(_activeQuestId) || Campaign.Current?.QuestManager == null)
+        {
+            return false;
+        }
+
+        return Campaign.Current.QuestManager.Quests.Any(candidate =>
+            candidate.StringId == _activeQuestId && candidate.IsOngoing);
     }
 
     private static string BuildName(int seed)

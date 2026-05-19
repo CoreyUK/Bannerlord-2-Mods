@@ -22,7 +22,7 @@ internal sealed class DuelRumorQuest : QuestBase
         string duelistName,
         string groundDescription,
         int daysRemaining)
-        : base(questId, Hero.MainHero, CampaignTime.DaysFromNow(daysRemaining), 0)
+        : base(questId, Hero.MainHero, CampaignTime.Never, 0)
     {
         _settlement = settlement;
         _duelistName = duelistName;
@@ -31,7 +31,7 @@ internal sealed class DuelRumorQuest : QuestBase
 
     public override TextObject Title => new($"Duel Rumour: {_settlement.Name}");
 
-    public override bool IsRemainingTimeHidden => false;
+    public override bool IsRemainingTimeHidden => true;
 
     protected override void OnStartQuest()
     {
