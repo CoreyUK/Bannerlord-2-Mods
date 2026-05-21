@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="English" />
+  </tags>
+  <strings>
+    <string id="dc_visit_duel_ground" text="Follow the duel rumor" />
+    <string id="dc_continue_gauntlet" text="Continue the gauntlet: round {ROUND} of 3 against {DUELIST}" />
+    <string id="dc_leave_duel_ground" text="Leave" />
+    <string id="dc_fight_unavailable" text="This fight cannot be started because the arena or opponent is unavailable." />
+    <string id="dc_companion_limit_reached" text="Your clan is already at its companion limit." />
+    <string id="dc_companion_not_found" text="The companion could not be found, so recruitment failed." />
+    <string id="dc_companion_limit_choose_reward" text="Your clan is already at its companion limit. Choose gold or the item instead." />
+    <string id="dc_joined_party" text="{DUELIST} has joined your party." />
+    <string id="dc_joined_clan_not_party" text="{DUELIST} joined your clan, but could not be moved into the main party." />
+    <string id="dc_rare_weapon_unavailable" text="The rare weapon was unavailable, so you received denars instead." />
+    <string id="dc_received_denars" text="You received {CASH_REWARD} denars." />
+    <string id="dc_received_item" text="You received {ITEM}." />
+    <string id="dc_the_gauntlet" text="The gauntlet" />
+    <string id="dc_the_duelist" text="The duelist" />
+    <string id="dc_duel_rumour_title" text="Duel Rumour" />
+    <string id="dc_duel_rumour_body" text="A duel rumour reaches your party.&#10;&#10;{DUELIST} is accepting challengers near {SETTLEMENT} at {DUEL_GROUND}.&#10;&#10;Visit {SETTLEMENT} before the rumour fades." />
+    <string id="dc_acknowledge" text="Acknowledge" />
+    <string id="dc_continue" text="Continue" />
+    <string id="dc_duel_defeat_title" text="Duel Defeat" />
+    <string id="dc_defeat_consequence" text="Your morale is in tatters after the humiliating defeat.&#10;&#10;You lose {GOLD_PENALTY} denars and your party morale collapses." />
+    <string id="dc_defeat_consequence_weapon" text="{CONSEQUENCE}&#10;&#10;In disgust, you leave {WEAPON} in the ring." />
+    <string id="dc_duel_defeat_body" text="{DUELIST} claims the field.&#10;&#10;{CONSEQUENCE}" />
+    <string id="dc_rumor_quest_title" text="Duel Rumour: {SETTLEMENT}" />
+    <string id="dc_rumor_quest_start" text="A dangerous champion named {DUELIST} is accepting challengers at {DUEL_GROUND}. Travel to {SETTLEMENT} before the rumour fades." />
+    <string id="dc_rumor_quest_success" text="{DUELIST} has been defeated. The duel rumour is settled." />
+    <string id="dc_rumor_quest_timeout" text="The rumour at {SETTLEMENT} has faded. {DUELIST} has moved on." />
+    <string id="dc_rumor_quest_cancelled" text="The duel rumour at {SETTLEMENT} is no longer active." />
+
+    <string id="dc_duel_ground_text_1" text="You arrive at {DUEL_GROUND}. {DUELIST} studies you in silence, their war gear already buckled tight. This challenge will not wait forever." />
+    <string id="dc_duel_ground_text_2" text="At {DUEL_GROUND}, a small crowd has gathered. {DUELIST} rolls their shoulders and gives you a curt nod. The rumor will move on if ignored." />
+    <string id="dc_duel_ground_text_3" text="{DUEL_GROUND} is quiet except for steel scraping leather. {DUELIST} is ready, armed like a veteran of many campaigns." />
+    <string id="dc_duel_ground_text_4" text="You find {DUELIST} at {DUEL_GROUND}, surrounded by spectators taking wagers. Their equipment is polished, expensive, and well used." />
+    <string id="dc_duel_ground_text_5" text="The path leads to {DUEL_GROUND}. {DUELIST} waits there with a champion's patience, offering glory, coin, or a sharp lesson." />
+    <string id="dc_duel_option_1" text="Challenge {DUELIST} to a formal duel" />
+    <string id="dc_duel_option_2" text="Call {DUELIST} into the ring" />
+    <string id="dc_duel_option_3" text="Test your blade against {DUELIST}" />
+    <string id="dc_duel_option_4" text="Demand satisfaction from {DUELIST}" />
+    <string id="dc_duel_option_5" text="Face {DUELIST} before the crowd" />
+    <string id="dc_gauntlet_option_1" text="Enter the gauntlet" />
+    <string id="dc_gauntlet_option_2" text="Take the champion's gauntlet" />
+    <string id="dc_gauntlet_option_3" text="Fight through the whole challenge" />
+    <string id="dc_gauntlet_option_4" text="Accept the three-round trial" />
+    <string id="dc_gauntlet_option_5" text="Step into the gauntlet ring" />
+    <string id="dc_reward_text_1" text="{DUELIST} lowers their weapon. The crowd waits to see what price you will claim." />
+    <string id="dc_reward_text_2" text="{DUELIST} yields the field. By custom, you may choose service, silver, or steel." />
+    <string id="dc_reward_text_3" text="The fight is yours. {DUELIST} stands bloodied but composed, ready to honor the terms." />
+    <string id="dc_reward_text_4" text="{DUELIST} gives a short bow. Victory grants you the right to name your reward." />
+    <string id="dc_reward_text_5" text="The last blow settles the matter. {DUELIST} accepts defeat and awaits your decision." />
+    <string id="dc_recruit_option_1" text="Ask {DUELIST} to ride with your clan" />
+    <string id="dc_recruit_option_2" text="Offer {DUELIST} a place in your company" />
+    <string id="dc_recruit_option_3" text="Recruit {DUELIST} as a companion" />
+    <string id="dc_recruit_option_4" text="Invite {DUELIST} to join your retinue" />
+    <string id="dc_recruit_option_5" text="Claim {DUELIST}'s service" />
+    <string id="dc_gold_option_1" text="Take {CASH_REWARD} denars" />
+    <string id="dc_gold_option_2" text="Demand {CASH_REWARD} denars in blood-price" />
+    <string id="dc_gold_option_3" text="Claim the purse of {CASH_REWARD} denars" />
+    <string id="dc_gold_option_4" text="Accept {CASH_REWARD} denars and walk away" />
+    <string id="dc_gold_option_5" text="Choose coin: {CASH_REWARD} denars" />
+    <string id="dc_item_option_1" text="Take the rare weapon" />
+    <string id="dc_item_option_2" text="Claim the champion's weapon" />
+    <string id="dc_item_option_3" text="Choose the prize blade" />
+    <string id="dc_item_option_4" text="Demand the weapon as your trophy" />
+    <string id="dc_item_option_5" text="Take steel instead of silver" />
+    <string id="dc_rumor_text_1" text="A duel rumor has appeared in {SETTLEMENT}." />
+    <string id="dc_rumor_text_2" text="Travelers speak of a dangerous champion waiting in {SETTLEMENT}." />
+    <string id="dc_rumor_text_3" text="Word spreads that a duelist is taking challengers in {SETTLEMENT}." />
+    <string id="dc_rumor_text_4" text="A prize fight is being whispered about in {SETTLEMENT}." />
+    <string id="dc_rumor_text_5" text="Mercenaries say a hardened fighter has set terms for a duel in {SETTLEMENT}." />
+    <string id="dc_defeat_text_1" text="{DUELIST} beats you back and claims the field. The challenge remains for now." />
+    <string id="dc_defeat_text_2" text="{DUELIST} wins this bout. You are dragged clear while the crowd roars." />
+    <string id="dc_defeat_text_3" text="{DUELIST} leaves you sprawled in the dust. You may try again while the rumor lasts." />
+    <string id="dc_defeat_text_4" text="The duel turns against you. {DUELIST} waits to see if you have the nerve for another attempt." />
+    <string id="dc_gauntlet_progress_1" text="Round {ROUND} is complete. {DUELIST} steps forward without ceremony." />
+    <string id="dc_gauntlet_progress_2" text="You survive the round. Now {DUELIST} enters the ring." />
+    <string id="dc_gauntlet_progress_3" text="The crowd barely settles before {DUELIST} takes up position." />
+    <string id="dc_gauntlet_progress_4" text="Another opponent falls. {DUELIST} is already waiting." />
+    <string id="dc_gauntlet_progress_5" text="There is no time to breathe. {DUELIST} advances for the next round." />
+
+    <string id="dc_ground_vlandia_old_tourney" text="{SETTLEMENT}'s old tourney yard" />
+    <string id="dc_ground_vlandia_tiltyard" text="the tiltyard beneath {SETTLEMENT}'s west wall" />
+    <string id="dc_ground_vlandia_stables" text="a fenced yard beside {SETTLEMENT}'s old stables" />
+    <string id="dc_ground_vlandia_lists" text="the knightly lists outside {SETTLEMENT}" />
+    <string id="dc_ground_vlandia_ring" text="a trampled tourney ring near {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_marked" text="a marked ring beyond {SETTLEMENT}'s gates" />
+    <string id="dc_ground_sturgia_frost" text="a frost-bitten practice ground outside {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_timber" text="a timber duelling circle near {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_shieldyard" text="the shield-yard behind {SETTLEMENT}'s barracks" />
+    <string id="dc_ground_sturgia_logs" text="a ring of split logs beyond {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_stones" text="the duelling stones outside {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_wind" text="a wind-scoured ring near {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_camp" text="a steppe camp beyond {SETTLEMENT}'s road" />
+    <string id="dc_ground_khuzait_circle" text="a horseman's challenge circle outside {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_guardian" text="the guardian stones above {SETTLEMENT}" />
+    <string id="dc_ground_empire_drill" text="the imperial drill yard inside {SETTLEMENT}'s walls" />
+    <string id="dc_ground_empire_marble" text="a marble-lined arena court in {SETTLEMENT}" />
+    <string id="dc_ground_empire_sand" text="the legionary sand pit at {SETTLEMENT}" />
+    <string id="dc_ground_empire_old_legion" text="an old legion training ring near {SETTLEMENT}" />
+    <string id="dc_ground_empire_guard" text="the court guard yard of {SETTLEMENT}" />
+    <string id="dc_ground_aserai_square" text="a sun-baked fighting square in {SETTLEMENT}" />
+    <string id="dc_ground_aserai_merchant" text="the merchant guard yard of {SETTLEMENT}" />
+    <string id="dc_ground_aserai_marked" text="a marked sand ring beyond {SETTLEMENT}" />
+    <string id="dc_ground_aserai_dust" text="the red-dust circle outside {SETTLEMENT}" />
+    <string id="dc_ground_aserai_emir" text="the emir's old practice court at {SETTLEMENT}" />
+    <string id="dc_ground_battania_moss" text="a moss-ringed clearing near {SETTLEMENT}" />
+    <string id="dc_ground_battania_stones" text="the standing stones beyond {SETTLEMENT}" />
+    <string id="dc_ground_battania_woodland" text="a woodland duelling hollow outside {SETTLEMENT}" />
+    <string id="dc_ground_battania_clan" text="the old clan circle above {SETTLEMENT}" />
+    <string id="dc_ground_battania_highland" text="a highland challenge ground near {SETTLEMENT}" />
+  </strings>
+</base>

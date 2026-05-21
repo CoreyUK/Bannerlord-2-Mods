@@ -29,7 +29,7 @@ internal sealed class DuelRumorQuest : QuestBase
         _groundDescription = groundDescription;
     }
 
-    public override TextObject Title => new($"Duel Rumour: {_settlement.Name}");
+    public override TextObject Title => Localize("{=dc_rumor_quest_title}Duel Rumour: {SETTLEMENT}", ("SETTLEMENT", _settlement.Name));
 
     public override bool IsRemainingTimeHidden => true;
 
@@ -37,24 +37,32 @@ internal sealed class DuelRumorQuest : QuestBase
     {
         AddTrackedObject(_settlement);
         AddLog(
-            new TextObject(
-                $"A dangerous champion named {_duelistName} is accepting challengers at {_groundDescription}. Travel to {_settlement.Name} before the rumour fades."),
+            Localize(
+                "{=dc_rumor_quest_start}A dangerous champion named {DUELIST} is accepting challengers at {DUEL_GROUND}. Travel to {SETTLEMENT} before the rumour fades.",
+                ("DUELIST", _duelistName),
+                ("DUEL_GROUND", _groundDescription),
+                ("SETTLEMENT", _settlement.Name)),
             false);
     }
 
     protected override void OnCompleteWithSuccess()
     {
-        AddLog(new TextObject($"{_duelistName} has been defeated. The duel rumour is settled."), false);
+        AddLog(Localize("{=dc_rumor_quest_success}{DUELIST} has been defeated. The duel rumour is settled.", ("DUELIST", _duelistName)), false);
     }
 
     protected override void OnTimedOut()
     {
-        AddLog(new TextObject($"The rumour at {_settlement.Name} has faded. {_duelistName} has moved on."), false);
+        AddLog(
+            Localize(
+                "{=dc_rumor_quest_timeout}The rumour at {SETTLEMENT} has faded. {DUELIST} has moved on.",
+                ("SETTLEMENT", _settlement.Name),
+                ("DUELIST", _duelistName)),
+            false);
     }
 
     public override void OnCanceled()
     {
-        AddLog(new TextObject($"The duel rumour at {_settlement.Name} is no longer active."), false);
+        AddLog(Localize("{=dc_rumor_quest_cancelled}The duel rumour at {SETTLEMENT} is no longer active.", ("SETTLEMENT", _settlement.Name)), false);
     }
 
     protected override void SetDialogs()
@@ -63,6 +71,17 @@ internal sealed class DuelRumorQuest : QuestBase
 
     protected override void InitializeQuestOnGameLoad()
     {
+    }
+
+    private static TextObject Localize(string text, params (string Key, object Value)[] variables)
+    {
+        TextObject textObject = new(text);
+        foreach ((string key, object value) in variables)
+        {
+            textObject.SetTextVariable(key, value as TextObject ?? new TextObject(value.ToString() ?? string.Empty));
+        }
+
+        return textObject;
     }
 }
 

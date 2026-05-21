@@ -36,36 +36,36 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private static readonly DuelTemplate[] DuelTemplates =
     {
-        new("dc_heavy_vlandia_v2", "vlandia_noble_sword_3_t5", "{SETTLEMENT}'s old tourney yard"),
-        new("dc_vlandia_longsword", "vlandia_noble_sword_4_t5", "the tiltyard beneath {SETTLEMENT}'s west wall"),
-        new("dc_vlandia_mace", "vlandia_mace_3_t5", "a fenced yard beside {SETTLEMENT}'s old stables"),
-        new("dc_vlandia_axe", "vlandia_axe_2_t4", "the knightly lists outside {SETTLEMENT}"),
-        new("dc_vlandia_falchion", "vlandia_sword_5_t5", "a trampled tourney ring near {SETTLEMENT}"),
-        new("dc_heavy_sturgia_v2", "sturgia_2haxe_2_t5", "a marked ring beyond {SETTLEMENT}'s gates"),
-        new("dc_sturgia_sword", "sturgia_noble_sword_4_t5", "a frost-bitten practice ground outside {SETTLEMENT}"),
-        new("dc_sturgia_axe", "sturgia_axe_5_t5", "a timber duelling circle near {SETTLEMENT}"),
-        new("dc_sturgia_mace", "sturgia_mace_2_t4", "the shield-yard behind {SETTLEMENT}'s barracks"),
-        new("dc_sturgia_roundshield", "sturgia_noble_sword_2_t5", "a ring of split logs beyond {SETTLEMENT}"),
-        new("dc_heavy_khuzait_v2", "khuzait_noble_sword_1_t5", "the duelling stones outside {SETTLEMENT}")
-        ,new("dc_khuzait_sabre", "khuzait_noble_sword_2_t5", "a wind-scoured ring near {SETTLEMENT}")
-        ,new("dc_khuzait_mace", "khuzait_mace_4_t5", "a steppe camp beyond {SETTLEMENT}'s road")
-        ,new("dc_khuzait_axe", "bamboo_axe_t4", "a horseman's challenge circle outside {SETTLEMENT}")
-        ,new("dc_khuzait_guardian", "khuzait_noble_sword_3_t5", "the guardian stones above {SETTLEMENT}")
-        ,new("dc_empire_spatha", "empire_noble_sword_1_t5", "the imperial drill yard inside {SETTLEMENT}'s walls")
-        ,new("dc_empire_cataphract", "empire_noble_sword_2_t5", "a marble-lined arena court in {SETTLEMENT}")
-        ,new("dc_empire_mace", "empire_mace_5_t5", "the legionary sand pit at {SETTLEMENT}")
-        ,new("dc_empire_axe", "imperial_axe_t3", "an old legion training ring near {SETTLEMENT}")
-        ,new("dc_empire_guard", "empire_noble_sword_3_t5", "the court guard yard of {SETTLEMENT}")
-        ,new("dc_aserai_sabre", "aserai_noble_sword_1_t5", "a sun-baked fighting square in {SETTLEMENT}")
-        ,new("dc_aserai_longblade", "aserai_noble_sword_4_t5", "the merchant guard yard of {SETTLEMENT}")
-        ,new("dc_aserai_axe", "aserai_2haxe_3_t5", "a marked sand ring beyond {SETTLEMENT}")
-        ,new("dc_aserai_mace", "aserai_mace_5_t4", "the red-dust circle outside {SETTLEMENT}")
-        ,new("dc_aserai_shield", "aserai_noble_sword_3_t5", "the emir's old practice court at {SETTLEMENT}")
-        ,new("dc_battania_falx", "battania_noble_sword_1_t5", "a moss-ringed clearing near {SETTLEMENT}")
-        ,new("dc_battania_longsword", "battania_noble_sword_3_t5", "the standing stones beyond {SETTLEMENT}")
-        ,new("dc_battania_axe", "battania_axe_3_t5", "a woodland duelling hollow outside {SETTLEMENT}")
-        ,new("dc_battania_twohand", "battania_2haxe_1_t2", "the old clan circle above {SETTLEMENT}")
-        ,new("dc_battania_targe", "battania_sword_5_t5", "a highland challenge ground near {SETTLEMENT}")
+        new("dc_heavy_vlandia_v2", "vlandia_noble_sword_3_t5", "{=dc_ground_vlandia_old_tourney}{SETTLEMENT}'s old tourney yard"),
+        new("dc_vlandia_longsword", "vlandia_noble_sword_4_t5", "{=dc_ground_vlandia_tiltyard}the tiltyard beneath {SETTLEMENT}'s west wall"),
+        new("dc_vlandia_mace", "vlandia_mace_3_t5", "{=dc_ground_vlandia_stables}a fenced yard beside {SETTLEMENT}'s old stables"),
+        new("dc_vlandia_axe", "vlandia_axe_2_t4", "{=dc_ground_vlandia_lists}the knightly lists outside {SETTLEMENT}"),
+        new("dc_vlandia_falchion", "vlandia_sword_5_t5", "{=dc_ground_vlandia_ring}a trampled tourney ring near {SETTLEMENT}"),
+        new("dc_heavy_sturgia_v2", "sturgia_2haxe_2_t5", "{=dc_ground_sturgia_marked}a marked ring beyond {SETTLEMENT}'s gates"),
+        new("dc_sturgia_sword", "sturgia_noble_sword_4_t5", "{=dc_ground_sturgia_frost}a frost-bitten practice ground outside {SETTLEMENT}"),
+        new("dc_sturgia_axe", "sturgia_axe_5_t5", "{=dc_ground_sturgia_timber}a timber duelling circle near {SETTLEMENT}"),
+        new("dc_sturgia_mace", "sturgia_mace_2_t4", "{=dc_ground_sturgia_shieldyard}the shield-yard behind {SETTLEMENT}'s barracks"),
+        new("dc_sturgia_roundshield", "sturgia_noble_sword_2_t5", "{=dc_ground_sturgia_logs}a ring of split logs beyond {SETTLEMENT}"),
+        new("dc_heavy_khuzait_v2", "khuzait_noble_sword_1_t5", "{=dc_ground_khuzait_stones}the duelling stones outside {SETTLEMENT}"),
+        new("dc_khuzait_sabre", "khuzait_noble_sword_2_t5", "{=dc_ground_khuzait_wind}a wind-scoured ring near {SETTLEMENT}"),
+        new("dc_khuzait_mace", "khuzait_mace_4_t5", "{=dc_ground_khuzait_camp}a steppe camp beyond {SETTLEMENT}'s road"),
+        new("dc_khuzait_axe", "bamboo_axe_t4", "{=dc_ground_khuzait_circle}a horseman's challenge circle outside {SETTLEMENT}"),
+        new("dc_khuzait_guardian", "khuzait_noble_sword_3_t5", "{=dc_ground_khuzait_guardian}the guardian stones above {SETTLEMENT}"),
+        new("dc_empire_spatha", "empire_noble_sword_1_t5", "{=dc_ground_empire_drill}the imperial drill yard inside {SETTLEMENT}'s walls"),
+        new("dc_empire_cataphract", "empire_noble_sword_2_t5", "{=dc_ground_empire_marble}a marble-lined arena court in {SETTLEMENT}"),
+        new("dc_empire_mace", "empire_mace_5_t5", "{=dc_ground_empire_sand}the legionary sand pit at {SETTLEMENT}"),
+        new("dc_empire_axe", "imperial_axe_t3", "{=dc_ground_empire_old_legion}an old legion training ring near {SETTLEMENT}"),
+        new("dc_empire_guard", "empire_noble_sword_3_t5", "{=dc_ground_empire_guard}the court guard yard of {SETTLEMENT}"),
+        new("dc_aserai_sabre", "aserai_noble_sword_1_t5", "{=dc_ground_aserai_square}a sun-baked fighting square in {SETTLEMENT}"),
+        new("dc_aserai_longblade", "aserai_noble_sword_4_t5", "{=dc_ground_aserai_merchant}the merchant guard yard of {SETTLEMENT}"),
+        new("dc_aserai_axe", "aserai_2haxe_3_t5", "{=dc_ground_aserai_marked}a marked sand ring beyond {SETTLEMENT}"),
+        new("dc_aserai_mace", "aserai_mace_5_t4", "{=dc_ground_aserai_dust}the red-dust circle outside {SETTLEMENT}"),
+        new("dc_aserai_shield", "aserai_noble_sword_3_t5", "{=dc_ground_aserai_emir}the emir's old practice court at {SETTLEMENT}"),
+        new("dc_battania_falx", "battania_noble_sword_1_t5", "{=dc_ground_battania_moss}a moss-ringed clearing near {SETTLEMENT}"),
+        new("dc_battania_longsword", "battania_noble_sword_3_t5", "{=dc_ground_battania_stones}the standing stones beyond {SETTLEMENT}"),
+        new("dc_battania_axe", "battania_axe_3_t5", "{=dc_ground_battania_woodland}a woodland duelling hollow outside {SETTLEMENT}"),
+        new("dc_battania_twohand", "battania_2haxe_1_t2", "{=dc_ground_battania_clan}the old clan circle above {SETTLEMENT}"),
+        new("dc_battania_targe", "battania_sword_5_t5", "{=dc_ground_battania_highland}a highland challenge ground near {SETTLEMENT}")
     };
 
     private static readonly string[] FirstNames =
@@ -80,91 +80,91 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private static readonly string[] DuelGroundTexts =
     {
-        "You arrive at {DUEL_GROUND}. {DUELIST} studies you in silence, their war gear already buckled tight. This challenge will not wait forever.",
-        "At {DUEL_GROUND}, a small crowd has gathered. {DUELIST} rolls their shoulders and gives you a curt nod. The rumor will move on if ignored.",
-        "{DUEL_GROUND} is quiet except for steel scraping leather. {DUELIST} is ready, armed like a veteran of many campaigns.",
-        "You find {DUELIST} at {DUEL_GROUND}, surrounded by spectators taking wagers. Their equipment is polished, expensive, and well used.",
-        "The path leads to {DUEL_GROUND}. {DUELIST} waits there with a champion's patience, offering glory, coin, or a sharp lesson."
+        "{=dc_duel_ground_text_1}You arrive at {DUEL_GROUND}. {DUELIST} studies you in silence, their war gear already buckled tight. This challenge will not wait forever.",
+        "{=dc_duel_ground_text_2}At {DUEL_GROUND}, a small crowd has gathered. {DUELIST} rolls their shoulders and gives you a curt nod. The rumor will move on if ignored.",
+        "{=dc_duel_ground_text_3}{DUEL_GROUND} is quiet except for steel scraping leather. {DUELIST} is ready, armed like a veteran of many campaigns.",
+        "{=dc_duel_ground_text_4}You find {DUELIST} at {DUEL_GROUND}, surrounded by spectators taking wagers. Their equipment is polished, expensive, and well used.",
+        "{=dc_duel_ground_text_5}The path leads to {DUEL_GROUND}. {DUELIST} waits there with a champion's patience, offering glory, coin, or a sharp lesson."
     };
 
     private static readonly string[] DuelOptionTexts =
     {
-        "Challenge {DUELIST} to a formal duel",
-        "Call {DUELIST} into the ring",
-        "Test your blade against {DUELIST}",
-        "Demand satisfaction from {DUELIST}",
-        "Face {DUELIST} before the crowd"
+        "{=dc_duel_option_1}Challenge {DUELIST} to a formal duel",
+        "{=dc_duel_option_2}Call {DUELIST} into the ring",
+        "{=dc_duel_option_3}Test your blade against {DUELIST}",
+        "{=dc_duel_option_4}Demand satisfaction from {DUELIST}",
+        "{=dc_duel_option_5}Face {DUELIST} before the crowd"
     };
 
     private static readonly string[] GauntletOptionTexts =
     {
-        "Enter the gauntlet",
-        "Take the champion's gauntlet",
-        "Fight through the whole challenge",
-        "Accept the three-round trial",
-        "Step into the gauntlet ring"
+        "{=dc_gauntlet_option_1}Enter the gauntlet",
+        "{=dc_gauntlet_option_2}Take the champion's gauntlet",
+        "{=dc_gauntlet_option_3}Fight through the whole challenge",
+        "{=dc_gauntlet_option_4}Accept the three-round trial",
+        "{=dc_gauntlet_option_5}Step into the gauntlet ring"
     };
 
     private static readonly string[] RewardTexts =
     {
-        "{DUELIST} lowers their weapon. The crowd waits to see what price you will claim.",
-        "{DUELIST} yields the field. By custom, you may choose service, silver, or steel.",
-        "The fight is yours. {DUELIST} stands bloodied but composed, ready to honor the terms.",
-        "{DUELIST} gives a short bow. Victory grants you the right to name your reward.",
-        "The last blow settles the matter. {DUELIST} accepts defeat and awaits your decision."
+        "{=dc_reward_text_1}{DUELIST} lowers their weapon. The crowd waits to see what price you will claim.",
+        "{=dc_reward_text_2}{DUELIST} yields the field. By custom, you may choose service, silver, or steel.",
+        "{=dc_reward_text_3}The fight is yours. {DUELIST} stands bloodied but composed, ready to honor the terms.",
+        "{=dc_reward_text_4}{DUELIST} gives a short bow. Victory grants you the right to name your reward.",
+        "{=dc_reward_text_5}The last blow settles the matter. {DUELIST} accepts defeat and awaits your decision."
     };
 
     private static readonly string[] RecruitOptionTexts =
     {
-        "Ask {DUELIST} to ride with your clan",
-        "Offer {DUELIST} a place in your company",
-        "Recruit {DUELIST} as a companion",
-        "Invite {DUELIST} to join your retinue",
-        "Claim {DUELIST}'s service"
+        "{=dc_recruit_option_1}Ask {DUELIST} to ride with your clan",
+        "{=dc_recruit_option_2}Offer {DUELIST} a place in your company",
+        "{=dc_recruit_option_3}Recruit {DUELIST} as a companion",
+        "{=dc_recruit_option_4}Invite {DUELIST} to join your retinue",
+        "{=dc_recruit_option_5}Claim {DUELIST}'s service"
     };
 
     private static readonly string[] GoldOptionTexts =
     {
-        "Take {CASH_REWARD} denars",
-        "Demand {CASH_REWARD} denars in blood-price",
-        "Claim the purse of {CASH_REWARD} denars",
-        "Accept {CASH_REWARD} denars and walk away",
-        "Choose coin: {CASH_REWARD} denars"
+        "{=dc_gold_option_1}Take {CASH_REWARD} denars",
+        "{=dc_gold_option_2}Demand {CASH_REWARD} denars in blood-price",
+        "{=dc_gold_option_3}Claim the purse of {CASH_REWARD} denars",
+        "{=dc_gold_option_4}Accept {CASH_REWARD} denars and walk away",
+        "{=dc_gold_option_5}Choose coin: {CASH_REWARD} denars"
     };
 
     private static readonly string[] ItemOptionTexts =
     {
-        "Take the rare weapon",
-        "Claim the champion's weapon",
-        "Choose the prize blade",
-        "Demand the weapon as your trophy",
-        "Take steel instead of silver"
+        "{=dc_item_option_1}Take the rare weapon",
+        "{=dc_item_option_2}Claim the champion's weapon",
+        "{=dc_item_option_3}Choose the prize blade",
+        "{=dc_item_option_4}Demand the weapon as your trophy",
+        "{=dc_item_option_5}Take steel instead of silver"
     };
 
     private static readonly string[] RumorTexts =
     {
-        "A duel rumor has appeared in {SETTLEMENT}.",
-        "Travelers speak of a dangerous champion waiting in {SETTLEMENT}.",
-        "Word spreads that a duelist is taking challengers in {SETTLEMENT}.",
-        "A prize fight is being whispered about in {SETTLEMENT}.",
-        "Mercenaries say a hardened fighter has set terms for a duel in {SETTLEMENT}."
+        "{=dc_rumor_text_1}A duel rumor has appeared in {SETTLEMENT}.",
+        "{=dc_rumor_text_2}Travelers speak of a dangerous champion waiting in {SETTLEMENT}.",
+        "{=dc_rumor_text_3}Word spreads that a duelist is taking challengers in {SETTLEMENT}.",
+        "{=dc_rumor_text_4}A prize fight is being whispered about in {SETTLEMENT}.",
+        "{=dc_rumor_text_5}Mercenaries say a hardened fighter has set terms for a duel in {SETTLEMENT}."
     };
 
     private static readonly string[] DefeatTexts =
     {
-        "{DUELIST} beats you back and claims the field. The challenge remains for now.",
-        "{DUELIST} wins this bout. You are dragged clear while the crowd roars.",
-        "{DUELIST} leaves you sprawled in the dust. You may try again while the rumor lasts.",
-        "The duel turns against you. {DUELIST} waits to see if you have the nerve for another attempt."
+        "{=dc_defeat_text_1}{DUELIST} beats you back and claims the field. The challenge remains for now.",
+        "{=dc_defeat_text_2}{DUELIST} wins this bout. You are dragged clear while the crowd roars.",
+        "{=dc_defeat_text_3}{DUELIST} leaves you sprawled in the dust. You may try again while the rumor lasts.",
+        "{=dc_defeat_text_4}The duel turns against you. {DUELIST} waits to see if you have the nerve for another attempt."
     };
 
     private static readonly string[] GauntletProgressTexts =
     {
-        "Round {ROUND} is complete. {DUELIST} steps forward without ceremony.",
-        "You survive the round. Now {DUELIST} enters the ring.",
-        "The crowd barely settles before {DUELIST} takes up position.",
-        "Another opponent falls. {DUELIST} is already waiting.",
-        "There is no time to breathe. {DUELIST} advances for the next round."
+        "{=dc_gauntlet_progress_1}Round {ROUND} is complete. {DUELIST} steps forward without ceremony.",
+        "{=dc_gauntlet_progress_2}You survive the round. Now {DUELIST} enters the ring.",
+        "{=dc_gauntlet_progress_3}The crowd barely settles before {DUELIST} takes up position.",
+        "{=dc_gauntlet_progress_4}Another opponent falls. {DUELIST} is already waiting.",
+        "{=dc_gauntlet_progress_5}There is no time to breathe. {DUELIST} advances for the next round."
     };
 
     private string? _activeSettlementId;
@@ -424,7 +424,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (duel == null || arena == null || duelCharacter == null)
         {
-            InformationManager.DisplayMessage(new InformationMessage("This fight cannot be started because the arena or opponent is unavailable."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_fight_unavailable}This fight cannot be started because the arena or opponent is unavailable.").ToString()));
             GameMenu.SwitchToMenu("town");
             return;
         }
@@ -482,20 +482,28 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         MobileParty.MainParty.RecentEventsMorale -= DefeatMoralePenalty;
         Hero.MainHero.ChangeHeroGold(-DefeatGoldPenalty);
 
-        string consequence = "Your morale is in tatters after the humiliating defeat.\n\nYou lose 20,000 denars and your party morale collapses.";
+        TextObject consequence = Localize(
+            "{=dc_defeat_consequence}Your morale is in tatters after the humiliating defeat.\n\nYou lose {GOLD_PENALTY} denars and your party morale collapses.",
+            ("GOLD_PENALTY", DefeatGoldPenalty));
 
         if (MBRandom.RandomFloat < DefeatWeaponLossChance && TryLoseEquippedWeapon(out string weaponName))
         {
-            consequence += $"\n\nIn disgust, you leave {weaponName} in the ring.";
+            consequence = Localize(
+                "{=dc_defeat_consequence_weapon}{CONSEQUENCE}\n\nIn disgust, you leave {WEAPON} in the ring.",
+                ("CONSEQUENCE", consequence),
+                ("WEAPON", weaponName));
         }
 
         InformationManager.ShowInquiry(
             new InquiryData(
-                "Duel Defeat",
-                $"{duelistName} claims the field.\n\n{consequence}",
+                Localize("{=dc_duel_defeat_title}Duel Defeat").ToString(),
+                Localize(
+                    "{=dc_duel_defeat_body}{DUELIST} claims the field.\n\n{CONSEQUENCE}",
+                    ("DUELIST", duelistName),
+                    ("CONSEQUENCE", consequence)).ToString(),
                 true,
                 false,
-                "Continue",
+                Localize("{=dc_continue}Continue").ToString(),
                 string.Empty,
                 null,
                 null,
@@ -545,7 +553,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void OnRewardMenuInit(MenuCallbackArgs args)
     {
-        MBTextManager.SetTextVariable("DUELIST", _pendingRewardIsGauntlet ? "The gauntlet" : _pendingRewardDuelistName ?? "The duelist");
+        MBTextManager.SetTextVariable("DUELIST", GetRewardDisplayName());
         MBTextManager.SetTextVariable("CASH_REWARD", _pendingRewardIsGauntlet ? GauntletCashReward : CashReward);
         MBTextManager.SetTextVariable("REWARD_TEXT", Pick(RewardTexts));
         MBTextManager.SetTextVariable("RECRUIT_OPTION_TEXT", Pick(RecruitOptionTexts));
@@ -562,7 +570,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (IsCompanionLimitReached())
         {
-            args.Tooltip = new TextObject("{=dc_companion_limit_reached}Your clan is already at its companion limit.");
+            args.Tooltip = Localize("{=dc_companion_limit_reached}Your clan is already at its companion limit.");
             return false;
         }
 
@@ -576,7 +584,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return false;
         }
 
-        MBTextManager.SetTextVariable("DUELIST", _pendingRewardIsGauntlet ? "The gauntlet" : _pendingRewardDuelistName ?? "The duelist");
+        MBTextManager.SetTextVariable("DUELIST", GetRewardDisplayName());
         MBTextManager.SetTextVariable("CASH_REWARD", _pendingRewardIsGauntlet ? GauntletCashReward : CashReward);
         MBTextManager.SetTextVariable("RECRUIT_OPTION_TEXT", Pick(RecruitOptionTexts));
         MBTextManager.SetTextVariable("GOLD_OPTION_TEXT", Pick(GoldOptionTexts));
@@ -591,12 +599,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             case RewardType.Recruit:
                 Hero? hero = GetOrCreatePendingRewardHero();
-                RecruitHeroToMainParty(hero, _pendingRewardDuelistName ?? "The duelist");
+                RecruitHeroToMainParty(hero, _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString());
                 break;
             case RewardType.Gold:
                 int cashReward = _pendingRewardIsGauntlet ? GauntletCashReward : CashReward;
                 Hero.MainHero.ChangeHeroGold(cashReward);
-                InformationManager.DisplayMessage(new InformationMessage($"You received {cashReward} denars."));
+                InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_received_denars}You received {CASH_REWARD} denars.", ("CASH_REWARD", cashReward)).ToString()));
                 break;
             case RewardType.Item:
                 GiveRareItem(_pendingRewardRareItemId);
@@ -658,13 +666,13 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         if (hero == null)
         {
-            InformationManager.DisplayMessage(new InformationMessage("The companion could not be found, so recruitment failed."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_companion_not_found}The companion could not be found, so recruitment failed.").ToString()));
             return;
         }
 
         if (hero.CompanionOf != Clan.PlayerClan && IsCompanionLimitReached())
         {
-            InformationManager.DisplayMessage(new InformationMessage("Your clan is already at its companion limit. Choose gold or the item instead."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_companion_limit_choose_reward}Your clan is already at its companion limit. Choose gold or the item instead.").ToString()));
             return;
         }
 
@@ -692,11 +700,11 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (hero.PartyBelongedTo == MobileParty.MainParty || MobileParty.MainParty.MemberRoster.Contains(hero.CharacterObject))
         {
-            InformationManager.DisplayMessage(new InformationMessage($"{displayName} has joined your party."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_joined_party}{DUELIST} has joined your party.", ("DUELIST", displayName)).ToString()));
         }
         else
         {
-            InformationManager.DisplayMessage(new InformationMessage($"{displayName} joined your clan, but could not be moved into the main party."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_joined_clan_not_party}{DUELIST} joined your clan, but could not be moved into the main party.", ("DUELIST", displayName)).ToString()));
         }
     }
 
@@ -722,12 +730,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         if (item == null)
         {
             Hero.MainHero.ChangeHeroGold(CashReward);
-            InformationManager.DisplayMessage(new InformationMessage("The rare weapon was unavailable, so you received denars instead."));
+            InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_rare_weapon_unavailable}The rare weapon was unavailable, so you received denars instead.").ToString()));
             return;
         }
 
         MobileParty.MainParty.ItemRoster.AddToCounts(item, 1);
-        InformationManager.DisplayMessage(new InformationMessage($"You received {item.Name}."));
+        InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_received_item}You received {ITEM}.", ("ITEM", item.Name)).ToString()));
     }
 
     private Hero? GetOrCreateDuelHero(DuelEvent? duel)
@@ -973,7 +981,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         _activeDuelistName = BuildName(_eventSerial);
         _activeTemplateId = template.TemplateId;
         _activeRareItemId = template.RareItemId;
-        _activeGroundDescription = template.GroundDescription.Replace("{SETTLEMENT}", settlementName);
+        _activeGroundDescription = Localize(template.GroundDescription, ("SETTLEMENT", settlementName)).ToString();
         _activeHeroId = $"dc_event_hero_{_eventSerial}";
         _activeTextVariant = MBRandom.RandomInt(1000);
         _activeEventExpiresDay = CampaignTime.Now.ToDays + EventDurationDays;
@@ -988,11 +996,15 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         InformationManager.ShowInquiry(
             new InquiryData(
-                "Duel Rumour",
-                $"A duel rumour reaches your party.\n\n{_activeDuelistName} is accepting challengers near {settlementName} at {_activeGroundDescription}.\n\nVisit {settlementName} before the rumour fades.",
+                Localize("{=dc_duel_rumour_title}Duel Rumour").ToString(),
+                Localize(
+                    "{=dc_duel_rumour_body}A duel rumour reaches your party.\n\n{DUELIST} is accepting challengers near {SETTLEMENT} at {DUEL_GROUND}.\n\nVisit {SETTLEMENT} before the rumour fades.",
+                    ("DUELIST", _activeDuelistName ?? string.Empty),
+                    ("SETTLEMENT", settlementName),
+                    ("DUEL_GROUND", _activeGroundDescription ?? string.Empty)).ToString(),
                 true,
                 false,
-                "Acknowledge",
+                Localize("{=dc_acknowledge}Acknowledge").ToString(),
                 string.Empty,
                 null,
                 null,
@@ -1022,7 +1034,6 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         if (!IsActiveRumorQuestOngoing())
         {
-            _activeQuestId = null;
             QueueActiveRumorNotification();
         }
     }
@@ -1048,7 +1059,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return;
         }
 
-        if (string.IsNullOrEmpty(_activeQuestId))
+        if (string.IsNullOrEmpty(_activeQuestId) || !IsActiveRumorQuestOngoing())
         {
             StartDuelRumorQuest(settlement);
         }
@@ -1066,8 +1077,6 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             return;
         }
-
-        CompleteActiveDuelQuest(ActiveEventClearReason.Cancelled);
 
         _activeQuestId = $"dc_duel_rumor_quest_{_eventSerial}_{MBRandom.RandomInt(1000000)}";
         int daysRemaining = Math.Max(1, (int)Math.Ceiling(_activeEventExpiresDay - CampaignTime.Now.ToDays));
@@ -1130,6 +1139,27 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         int index = Math.Abs(_activeTextVariant + _eventSerial) % variants.Length;
         return variants[index];
+    }
+
+    private string GetRewardDisplayName()
+    {
+        if (_pendingRewardIsGauntlet)
+        {
+            return Localize("{=dc_the_gauntlet}The gauntlet").ToString();
+        }
+
+        return _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString();
+    }
+
+    private static TextObject Localize(string text, params (string Key, object Value)[] variables)
+    {
+        TextObject textObject = new(text);
+        foreach ((string key, object value) in variables)
+        {
+            textObject.SetTextVariable(key, value as TextObject ?? new TextObject(value.ToString() ?? string.Empty));
+        }
+
+        return textObject;
     }
 
     private void ScheduleNextEvent(int minDays, int maxDays)
