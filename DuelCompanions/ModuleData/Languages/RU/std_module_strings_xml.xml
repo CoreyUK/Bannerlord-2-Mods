@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Русский" />
+  </tags>
+  <strings>
+    <string id="dc_visit_duel_ground" text="Проследовать по слуху о дуэли" />
+    <string id="dc_continue_gauntlet" text="Продолжить испытание: раунд {ROUND} из 3 против {DUELIST}" />
+    <string id="dc_leave_duel_ground" text="Уйти" />
+    <string id="dc_fight_unavailable" text="Этот бой нельзя начать: арена или противник недоступны." />
+    <string id="dc_companion_limit_reached" text="Ваш клан уже достиг предела спутников." />
+    <string id="dc_companion_not_found" text="Спутник не найден, поэтому вербовка не удалась." />
+    <string id="dc_companion_limit_choose_reward" text="Ваш клан уже достиг предела спутников. Вместо этого выберите золото или предмет." />
+    <string id="dc_joined_party" text="{DUELIST} присоединился к вашему отряду." />
+    <string id="dc_joined_clan_not_party" text="{DUELIST} присоединился к вашему клану, но не смог перейти в основной отряд." />
+    <string id="dc_rare_weapon_unavailable" text="Редкое оружие было недоступно, поэтому вы получили денары." />
+    <string id="dc_received_denars" text="Вы получили {CASH_REWARD} денаров." />
+    <string id="dc_received_item" text="Вы получили {ITEM}." />
+    <string id="dc_the_gauntlet" text="Испытание" />
+    <string id="dc_the_duelist" text="Дуэлянт" />
+    <string id="dc_duel_rumour_title" text="Слух о дуэли" />
+    <string id="dc_duel_rumour_body" text="До вашего отряда дошел слух о дуэли.&#10;&#10;{DUELIST} принимает вызовы возле {SETTLEMENT}, у {DUEL_GROUND}.&#10;&#10;Посетите {SETTLEMENT}, пока слух не исчез." />
+    <string id="dc_acknowledge" text="Принять" />
+    <string id="dc_continue" text="Продолжить" />
+    <string id="dc_duel_defeat_title" text="Поражение в дуэли" />
+    <string id="dc_defeat_consequence" text="После унизительного поражения ваш боевой дух разбит.&#10;&#10;Вы теряете {GOLD_PENALTY} денаров, а мораль отряда рушится." />
+    <string id="dc_defeat_consequence_weapon" text="{CONSEQUENCE}&#10;&#10;В отвращении вы оставляете {WEAPON} на арене." />
+    <string id="dc_duel_defeat_body" text="{DUELIST} остается хозяином поля.&#10;&#10;{CONSEQUENCE}" />
+    <string id="dc_rumor_quest_title" text="Слух о дуэли: {SETTLEMENT}" />
+    <string id="dc_rumor_quest_start" text="Опасный чемпион по имени {DUELIST} принимает вызовы у {DUEL_GROUND}. Отправляйтесь в {SETTLEMENT}, пока слух не исчез." />
+    <string id="dc_rumor_quest_success" text="{DUELIST} побежден. Слух о дуэли исчерпан." />
+    <string id="dc_rumor_quest_timeout" text="Слух в {SETTLEMENT} исчез. {DUELIST} двинулся дальше." />
+    <string id="dc_rumor_quest_cancelled" text="Слух о дуэли в {SETTLEMENT} больше не активен." />
+    <string id="dc_duel_ground_text_1" text="Вы прибываете к {DUEL_GROUND}. {DUELIST} молча изучает вас, уже затянув боевое снаряжение. Этот вызов не будет ждать вечно." />
+    <string id="dc_duel_ground_text_2" text="У {DUEL_GROUND} собралась небольшая толпа. {DUELIST} разминает плечи и коротко кивает вам. Если его игнорировать, слух исчезнет." />
+    <string id="dc_duel_ground_text_3" text="{DUEL_GROUND} тихо, слышен лишь скрежет стали о кожу. {DUELIST} готов и вооружен как ветеран многих походов." />
+    <string id="dc_duel_ground_text_4" text="Вы находите {DUELIST} у {DUEL_GROUND}, среди зрителей, делающих ставки. Его снаряжение дорогое, отполированное и много повидавшее." />
+    <string id="dc_duel_ground_text_5" text="Путь ведет к {DUEL_GROUND}. {DUELIST} ждет там с терпением чемпиона, предлагая славу, монету или жесткий урок." />
+    <string id="dc_duel_option_1" text="Вызвать {DUELIST} на формальную дуэль" />
+    <string id="dc_duel_option_2" text="Позвать {DUELIST} на арену" />
+    <string id="dc_duel_option_3" text="Испытать свой клинок против {DUELIST}" />
+    <string id="dc_duel_option_4" text="Потребовать удовлетворения от {DUELIST}" />
+    <string id="dc_duel_option_5" text="Сразиться с {DUELIST} перед толпой" />
+    <string id="dc_gauntlet_option_1" text="Войти в испытание" />
+    <string id="dc_gauntlet_option_2" text="Принять испытание чемпиона" />
+    <string id="dc_gauntlet_option_3" text="Пройти весь вызов боем" />
+    <string id="dc_gauntlet_option_4" text="Принять трехраундовое испытание" />
+    <string id="dc_gauntlet_option_5" text="Войти в круг испытания" />
+    <string id="dc_reward_text_1" text="{DUELIST} опускает оружие. Толпа ждет, какую цену вы потребуете." />
+    <string id="dc_reward_text_2" text="{DUELIST} уступает поле. По обычаю вы можете выбрать службу, серебро или сталь." />
+    <string id="dc_reward_text_3" text="Победа за вами. {DUELIST} стоит окровавленный, но спокойный, готовый выполнить условия." />
+    <string id="dc_reward_text_4" text="{DUELIST} коротко кланяется. Победа дает вам право назвать награду." />
+    <string id="dc_reward_text_5" text="Последний удар решает дело. {DUELIST} принимает поражение и ждет вашего решения." />
+    <string id="dc_recruit_option_1" text="Попросить {DUELIST} ехать с вашим кланом" />
+    <string id="dc_recruit_option_2" text="Предложить {DUELIST} место в вашей компании" />
+    <string id="dc_recruit_option_3" text="Завербовать {DUELIST} как спутника" />
+    <string id="dc_recruit_option_4" text="Пригласить {DUELIST} в вашу свиту" />
+    <string id="dc_recruit_option_5" text="Потребовать службу {DUELIST}" />
+    <string id="dc_gold_option_1" text="Взять {CASH_REWARD} денаров" />
+    <string id="dc_gold_option_2" text="Потребовать {CASH_REWARD} денаров как выкуп кровью" />
+    <string id="dc_gold_option_3" text="Забрать кошель с {CASH_REWARD} денарами" />
+    <string id="dc_gold_option_4" text="Принять {CASH_REWARD} денаров и уйти" />
+    <string id="dc_gold_option_5" text="Выбрать монеты: {CASH_REWARD} денаров" />
+    <string id="dc_item_option_1" text="Взять редкое оружие" />
+    <string id="dc_item_option_2" text="Забрать оружие чемпиона" />
+    <string id="dc_item_option_3" text="Выбрать призовой клинок" />
+    <string id="dc_item_option_4" text="Потребовать оружие как трофей" />
+    <string id="dc_item_option_5" text="Взять сталь вместо серебра" />
+    <string id="dc_rumor_text_1" text="В {SETTLEMENT} появился слух о дуэли." />
+    <string id="dc_rumor_text_2" text="Путники говорят об опасном чемпионе, ожидающем в {SETTLEMENT}." />
+    <string id="dc_rumor_text_3" text="Ходят слухи, что дуэлянт принимает вызовы в {SETTLEMENT}." />
+    <string id="dc_rumor_text_4" text="В {SETTLEMENT} шепчутся о призовом бою." />
+    <string id="dc_rumor_text_5" text="Наемники говорят, что закаленный боец назначил условия дуэли в {SETTLEMENT}." />
+    <string id="dc_defeat_text_1" text="{DUELIST} теснит вас и занимает поле. Вызов пока остается." />
+    <string id="dc_defeat_text_2" text="{DUELIST} выигрывает этот бой. Вас оттаскивают, пока толпа ревет." />
+    <string id="dc_defeat_text_3" text="{DUELIST} оставляет вас лежать в пыли. Вы можете попробовать снова, пока слух жив." />
+    <string id="dc_defeat_text_4" text="Дуэль оборачивается против вас. {DUELIST} ждет, хватит ли у вас духу на новую попытку." />
+    <string id="dc_gauntlet_progress_1" text="Раунд {ROUND} завершен. {DUELIST} выходит вперед без церемоний." />
+    <string id="dc_gauntlet_progress_2" text="Вы пережили раунд. Теперь {DUELIST} входит в круг." />
+    <string id="dc_gauntlet_progress_3" text="Толпа едва успевает утихнуть, как {DUELIST} уже занимает позицию." />
+    <string id="dc_gauntlet_progress_4" text="Еще один противник пал. {DUELIST} уже ждет." />
+    <string id="dc_gauntlet_progress_5" text="Нет времени перевести дух. {DUELIST} наступает для следующего раунда." />
+    <string id="dc_ground_vlandia_old_tourney" text="старый турнирный двор {SETTLEMENT}" />
+    <string id="dc_ground_vlandia_tiltyard" text="ристалище у западной стены {SETTLEMENT}" />
+    <string id="dc_ground_vlandia_stables" text="огороженный двор у старых конюшен {SETTLEMENT}" />
+    <string id="dc_ground_vlandia_lists" text="рыцарские списки за пределами {SETTLEMENT}" />
+    <string id="dc_ground_vlandia_ring" text="истоптанный турнирный круг возле {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_marked" text="отмеченный круг за воротами {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_frost" text="промерзшая тренировочная площадка за пределами {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_timber" text="деревянный дуэльный круг возле {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_shieldyard" text="щитовой двор за казармами {SETTLEMENT}" />
+    <string id="dc_ground_sturgia_logs" text="круг из расколотых бревен за пределами {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_stones" text="дуэльные камни за пределами {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_wind" text="продуваемый ветром круг возле {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_camp" text="степной лагерь за дорогой {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_circle" text="круг конного вызова за пределами {SETTLEMENT}" />
+    <string id="dc_ground_khuzait_guardian" text="стражевые камни над {SETTLEMENT}" />
+    <string id="dc_ground_empire_drill" text="имперский строевой двор внутри стен {SETTLEMENT}" />
+    <string id="dc_ground_empire_marble" text="мраморный двор арены в {SETTLEMENT}" />
+    <string id="dc_ground_empire_sand" text="легионерская песчаная яма в {SETTLEMENT}" />
+    <string id="dc_ground_empire_old_legion" text="старый легионерский тренировочный круг возле {SETTLEMENT}" />
+    <string id="dc_ground_empire_guard" text="двор дворцовой стражи {SETTLEMENT}" />
+    <string id="dc_ground_aserai_square" text="залитая солнцем боевая площадь в {SETTLEMENT}" />
+    <string id="dc_ground_aserai_merchant" text="двор купеческой стражи {SETTLEMENT}" />
+    <string id="dc_ground_aserai_marked" text="отмеченный песчаный круг за пределами {SETTLEMENT}" />
+    <string id="dc_ground_aserai_dust" text="круг красной пыли за пределами {SETTLEMENT}" />
+    <string id="dc_ground_aserai_emir" text="старый тренировочный двор эмира в {SETTLEMENT}" />
+    <string id="dc_ground_battania_moss" text="мшистая поляна возле {SETTLEMENT}" />
+    <string id="dc_ground_battania_stones" text="стоячие камни за пределами {SETTLEMENT}" />
+    <string id="dc_ground_battania_woodland" text="лесная дуэльная ложбина за пределами {SETTLEMENT}" />
+    <string id="dc_ground_battania_clan" text="старый клановый круг над {SETTLEMENT}" />
+    <string id="dc_ground_battania_highland" text="горная площадка вызова возле {SETTLEMENT}" />
+  </strings>
+</base>

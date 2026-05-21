@@ -190,6 +190,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private bool _isGauntletActive;
     private int _gauntletRound;
     private string? _gauntletRoundOneTemplateId;
+    private List<string> _recruitedDuelCompanionHeroIds = new();
     private float _rumorNotificationDelaySeconds;
     private float _nextCompanionRepairTime;
 
@@ -221,6 +222,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         dataStore.SyncData("dc_pending_reward_allows_recruit_v2", ref _pendingRewardAllowsRecruit);
         dataStore.SyncData("dc_pending_reward_is_gauntlet_v2", ref _pendingRewardIsGauntlet);
         dataStore.SyncData("dc_gauntlet_round_one_template_id_v2", ref _gauntletRoundOneTemplateId);
+        dataStore.SyncData("dc_recruited_duel_companion_hero_ids_v2", ref _recruitedDuelCompanionHeroIds);
+        _recruitedDuelCompanionHeroIds ??= new List<string>();
     }
 
     private void OnSessionLaunched(CampaignGameStarter starter)
@@ -681,7 +684,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             hero.ChangeState(Hero.CharacterStates.Active);
         }
 
-        PrepareDuelCompanionHero(hero, Settlement.CurrentSettlement);
+        TrackRecruitedDuelCompanion(hero);
+        PrepareDuelCompanionHero(hero, Settlement.CurrentSettlement, isRecruited: true);
 
         if (hero.CompanionOf != Clan.PlayerClan)
         {
@@ -697,6 +701,9 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             MobileParty.MainParty.MemberRoster.AddToCounts(hero.CharacterObject, 1, false, 0, 0, true, -1);
         }
+
+        TrackRecruitedDuelCompanion(hero);
+        PrepareDuelCompanionHero(hero, Settlement.CurrentSettlement, isRecruited: true);
 
         if (hero.PartyBelongedTo == MobileParty.MainParty || MobileParty.MainParty.MemberRoster.Contains(hero.CharacterObject))
         {
@@ -759,7 +766,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
         HeroCreator.CreateBasicHero(duel.HeroId, template, out Hero hero);
         hero.SetName(new TextObject(duel.DisplayName), new TextObject(duel.DisplayName.Split(' ')[0]));
-        PrepareDuelCompanionHero(hero, ResolveDuelSettlement());
+        PrepareDuelCompanionHero(hero, ResolveDuelSettlement(), isRecruited: false);
         return hero;
     }
 
@@ -767,7 +774,13 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     {
         foreach (Hero hero in Hero.FindAll(IsDuelCompanionHero))
         {
-            PrepareDuelCompanionHero(hero, null);
+            bool isRecruited = IsRecruitedDuelCompanion(hero);
+            if (isRecruited)
+            {
+                TrackRecruitedDuelCompanion(hero);
+            }
+
+            PrepareDuelCompanionHero(hero, null, isRecruited);
         }
     }
 
@@ -777,7 +790,23 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
                hero.StringId.StartsWith("dc_gauntlet_", StringComparison.Ordinal);
     }
 
-    private void PrepareDuelCompanionHero(Hero hero, Settlement? preferredSettlement)
+    private static bool IsRecruitedDuelCompanion(Hero hero)
+    {
+        return hero.CompanionOf == Clan.PlayerClan ||
+               hero.PartyBelongedTo == MobileParty.MainParty ||
+               MobileParty.MainParty?.MemberRoster.Contains(hero.CharacterObject) == true;
+    }
+
+    private void TrackRecruitedDuelCompanion(Hero hero)
+    {
+        _recruitedDuelCompanionHeroIds ??= new List<string>();
+        if (!_recruitedDuelCompanionHeroIds.Contains(hero.StringId))
+        {
+            _recruitedDuelCompanionHeroIds.Add(hero.StringId);
+        }
+    }
+
+    private void PrepareDuelCompanionHero(Hero hero, Settlement? preferredSettlement, bool isRecruited)
     {
         if (!IsDuelCompanionHero(hero))
         {
@@ -806,9 +835,19 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         }
 
         hero.UpdateLastKnownClosestSettlement(settlement);
-        if (hero.PartyBelongedTo == null && hero.PartyBelongedToAsPrisoner == null && hero.StayingInSettlement == null)
+
+        bool wasRecruited = _recruitedDuelCompanionHeroIds?.Contains(hero.StringId) == true;
+        if (isRecruited)
+        {
+            hero.StayingInSettlement = null;
+        }
+        else if (wasRecruited && hero.PartyBelongedTo == null && hero.PartyBelongedToAsPrisoner == null && hero.CompanionOf == null && hero.StayingInSettlement == null)
         {
             hero.StayingInSettlement = settlement;
+        }
+        else if (!wasRecruited && hero.StayingInSettlement != null)
+        {
+            hero.StayingInSettlement = null;
         }
 
         hero.IsKnownToPlayer = true;

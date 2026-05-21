@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="简体中文" />
+  </tags>
+  <strings>
+    <string id="dc_visit_duel_ground" text="追踪决斗传闻" />
+    <string id="dc_continue_gauntlet" text="继续车轮战：第 {ROUND}/3 轮，对手 {DUELIST}" />
+    <string id="dc_leave_duel_ground" text="离开" />
+    <string id="dc_fight_unavailable" text="无法开始这场战斗，因为竞技场或对手不可用。" />
+    <string id="dc_companion_limit_reached" text="你的家族已达到同伴上限。" />
+    <string id="dc_companion_not_found" text="未能找到该同伴，因此招募失败。" />
+    <string id="dc_companion_limit_choose_reward" text="你的家族已达到同伴上限。请改选金币或物品。" />
+    <string id="dc_joined_party" text="{DUELIST} 已加入你的队伍。" />
+    <string id="dc_joined_clan_not_party" text="{DUELIST} 已加入你的家族，但无法移入主队伍。" />
+    <string id="dc_rare_weapon_unavailable" text="稀有武器不可用，因此你改为获得第纳尔。" />
+    <string id="dc_received_denars" text="你获得了 {CASH_REWARD} 第纳尔。" />
+    <string id="dc_received_item" text="你获得了 {ITEM}。" />
+    <string id="dc_the_gauntlet" text="车轮战" />
+    <string id="dc_the_duelist" text="决斗者" />
+    <string id="dc_duel_rumour_title" text="决斗传闻" />
+    <string id="dc_duel_rumour_body" text="你的队伍听到了一个决斗传闻。&#10;&#10;{DUELIST} 正在 {SETTLEMENT} 附近的 {DUEL_GROUND} 接受挑战。&#10;&#10;在传闻消散前前往 {SETTLEMENT}。" />
+    <string id="dc_acknowledge" text="确认" />
+    <string id="dc_continue" text="继续" />
+    <string id="dc_duel_defeat_title" text="决斗败北" />
+    <string id="dc_defeat_consequence" text="这场耻辱的失败让你的士气支离破碎。&#10;&#10;你失去 {GOLD_PENALTY} 第纳尔，队伍士气大幅崩溃。" />
+    <string id="dc_defeat_consequence_weapon" text="{CONSEQUENCE}&#10;&#10;你愤然将 {WEAPON} 留在了场中。" />
+    <string id="dc_duel_defeat_body" text="{DUELIST} 赢下了场地。&#10;&#10;{CONSEQUENCE}" />
+    <string id="dc_rumor_quest_title" text="决斗传闻：{SETTLEMENT}" />
+    <string id="dc_rumor_quest_start" text="一名名为 {DUELIST} 的危险冠军正在 {DUEL_GROUND} 接受挑战。在传闻消散前前往 {SETTLEMENT}。" />
+    <string id="dc_rumor_quest_success" text="{DUELIST} 已被击败。决斗传闻已经了结。" />
+    <string id="dc_rumor_quest_timeout" text="{SETTLEMENT} 的传闻已经消散。{DUELIST} 已经离开。" />
+    <string id="dc_rumor_quest_cancelled" text="{SETTLEMENT} 的决斗传闻已不再有效。" />
+    <string id="dc_duel_ground_text_1" text="你来到 {DUEL_GROUND}。{DUELIST} 沉默地打量着你，战具早已扣紧。这场挑战不会永远等待。" />
+    <string id="dc_duel_ground_text_2" text="{DUEL_GROUND} 聚起了一小群人。{DUELIST} 活动肩膀，向你简短点头。如果被忽视，这个传闻就会过去。" />
+    <string id="dc_duel_ground_text_3" text="{DUEL_GROUND} 一片安静，只剩钢铁刮过皮革的声音。{DUELIST} 已准备就绪，武装得像身经百战的老兵。" />
+    <string id="dc_duel_ground_text_4" text="你在 {DUEL_GROUND} 找到 {DUELIST}，周围满是下注的观众。他的装备昂贵、光亮，而且久经使用。" />
+    <string id="dc_duel_ground_text_5" text="道路通向 {DUEL_GROUND}。{DUELIST} 像冠军一样耐心等待，带来荣耀、金币，或一次痛苦的教训。" />
+    <string id="dc_duel_option_1" text="向 {DUELIST} 发起正式决斗" />
+    <string id="dc_duel_option_2" text="召 {DUELIST} 入场" />
+    <string id="dc_duel_option_3" text="用你的刀剑试探 {DUELIST}" />
+    <string id="dc_duel_option_4" text="要求 {DUELIST} 给出交代" />
+    <string id="dc_duel_option_5" text="在众人面前面对 {DUELIST}" />
+    <string id="dc_gauntlet_option_1" text="进入车轮战" />
+    <string id="dc_gauntlet_option_2" text="接受冠军的车轮战" />
+    <string id="dc_gauntlet_option_3" text="打完整场挑战" />
+    <string id="dc_gauntlet_option_4" text="接受三轮试炼" />
+    <string id="dc_gauntlet_option_5" text="踏入车轮战场地" />
+    <string id="dc_reward_text_1" text="{DUELIST} 放下武器。人群等着看你会索取什么代价。" />
+    <string id="dc_reward_text_2" text="{DUELIST} 让出场地。按惯例，你可以选择效力、银钱或钢铁。" />
+    <string id="dc_reward_text_3" text="胜利属于你。{DUELIST} 满身是血却仍然镇定，准备履行约定。" />
+    <string id="dc_reward_text_4" text="{DUELIST} 短短鞠了一躬。胜利让你有权说出自己的奖赏。" />
+    <string id="dc_reward_text_5" text="最后一击终结了此事。{DUELIST} 接受失败，等待你的决定。" />
+    <string id="dc_recruit_option_1" text="让 {DUELIST} 随你的家族同行" />
+    <string id="dc_recruit_option_2" text="给 {DUELIST} 一个队伍中的位置" />
+    <string id="dc_recruit_option_3" text="招募 {DUELIST} 为同伴" />
+    <string id="dc_recruit_option_4" text="邀请 {DUELIST} 加入你的随从" />
+    <string id="dc_recruit_option_5" text="要求 {DUELIST} 为你效力" />
+    <string id="dc_gold_option_1" text="拿走 {CASH_REWARD} 第纳尔" />
+    <string id="dc_gold_option_2" text="索要 {CASH_REWARD} 第纳尔作为血价" />
+    <string id="dc_gold_option_3" text="领取装有 {CASH_REWARD} 第纳尔的钱袋" />
+    <string id="dc_gold_option_4" text="接受 {CASH_REWARD} 第纳尔并离开" />
+    <string id="dc_gold_option_5" text="选择金币：{CASH_REWARD} 第纳尔" />
+    <string id="dc_item_option_1" text="拿走稀有武器" />
+    <string id="dc_item_option_2" text="索取冠军的武器" />
+    <string id="dc_item_option_3" text="选择奖品之刃" />
+    <string id="dc_item_option_4" text="要求将武器作为战利品" />
+    <string id="dc_item_option_5" text="选择钢铁而非银钱" />
+    <string id="dc_rumor_text_1" text="{SETTLEMENT} 出现了一个决斗传闻。" />
+    <string id="dc_rumor_text_2" text="旅人们谈到一名危险冠军正在 {SETTLEMENT} 等候。" />
+    <string id="dc_rumor_text_3" text="消息传开了：一名决斗者正在 {SETTLEMENT} 接受挑战。" />
+    <string id="dc_rumor_text_4" text="{SETTLEMENT} 有一场有奖决斗的传言。" />
+    <string id="dc_rumor_text_5" text="雇佣兵说，一名久经战阵的斗士在 {SETTLEMENT} 定下了决斗条件。" />
+    <string id="dc_defeat_text_1" text="{DUELIST} 将你击退并赢下场地。挑战暂时仍在继续。" />
+    <string id="dc_defeat_text_2" text="{DUELIST} 赢下了这一回合。你被拖离场地，四周人声鼎沸。" />
+    <string id="dc_defeat_text_3" text="{DUELIST} 让你倒在尘土中。只要传闻还在，你仍可再试。" />
+    <string id="dc_defeat_text_4" text="决斗对你不利。{DUELIST} 等着看你是否还有胆量再次尝试。" />
+    <string id="dc_gauntlet_progress_1" text="第 {ROUND} 轮结束。{DUELIST} 毫无仪式地走上前来。" />
+    <string id="dc_gauntlet_progress_2" text="你撑过了这一轮。现在 {DUELIST} 进入场地。" />
+    <string id="dc_gauntlet_progress_3" text="人群还未平静，{DUELIST} 已经站好位置。" />
+    <string id="dc_gauntlet_progress_4" text="又一个对手倒下。{DUELIST} 已在等待。" />
+    <string id="dc_gauntlet_progress_5" text="没有喘息的时间。{DUELIST} 为下一轮逼近。" />
+    <string id="dc_ground_vlandia_old_tourney" text="{SETTLEMENT} 的旧比武场" />
+    <string id="dc_ground_vlandia_tiltyard" text="{SETTLEMENT} 西墙下的枪术比武场" />
+    <string id="dc_ground_vlandia_stables" text="{SETTLEMENT} 旧马厩旁的围栏院子" />
+    <string id="dc_ground_vlandia_lists" text="{SETTLEMENT} 城外的骑士比武场" />
+    <string id="dc_ground_vlandia_ring" text="{SETTLEMENT} 附近被踩踏的比武圈" />
+    <string id="dc_ground_sturgia_marked" text="{SETTLEMENT} 城门外的标记战圈" />
+    <string id="dc_ground_sturgia_frost" text="{SETTLEMENT} 城外结霜的训练场" />
+    <string id="dc_ground_sturgia_timber" text="{SETTLEMENT} 附近的木制决斗圈" />
+    <string id="dc_ground_sturgia_shieldyard" text="{SETTLEMENT} 军营后的盾牌场" />
+    <string id="dc_ground_sturgia_logs" text="{SETTLEMENT} 外的劈木围圈" />
+    <string id="dc_ground_khuzait_stones" text="{SETTLEMENT} 城外的决斗石" />
+    <string id="dc_ground_khuzait_wind" text="{SETTLEMENT} 附近被风吹蚀的战圈" />
+    <string id="dc_ground_khuzait_camp" text="{SETTLEMENT} 道路外的草原营地" />
+    <string id="dc_ground_khuzait_circle" text="{SETTLEMENT} 城外的骑手挑战圈" />
+    <string id="dc_ground_khuzait_guardian" text="{SETTLEMENT} 上方的守护石" />
+    <string id="dc_ground_empire_drill" text="{SETTLEMENT} 城墙内的帝国操练场" />
+    <string id="dc_ground_empire_marble" text="{SETTLEMENT} 中由大理石环绕的竞技院" />
+    <string id="dc_ground_empire_sand" text="{SETTLEMENT} 的军团沙坑" />
+    <string id="dc_ground_empire_old_legion" text="{SETTLEMENT} 附近的旧军团训练圈" />
+    <string id="dc_ground_empire_guard" text="{SETTLEMENT} 的宫廷卫队院" />
+    <string id="dc_ground_aserai_square" text="{SETTLEMENT} 中烈日炙烤的格斗广场" />
+    <string id="dc_ground_aserai_merchant" text="{SETTLEMENT} 的商队卫士院" />
+    <string id="dc_ground_aserai_marked" text="{SETTLEMENT} 外的标记沙圈" />
+    <string id="dc_ground_aserai_dust" text="{SETTLEMENT} 城外的红尘圈" />
+    <string id="dc_ground_aserai_emir" text="{SETTLEMENT} 的埃米尔旧练习院" />
+    <string id="dc_ground_battania_moss" text="{SETTLEMENT} 附近被苔藓环绕的林间空地" />
+    <string id="dc_ground_battania_stones" text="{SETTLEMENT} 外的立石群" />
+    <string id="dc_ground_battania_woodland" text="{SETTLEMENT} 城外的林地决斗凹地" />
+    <string id="dc_ground_battania_clan" text="{SETTLEMENT} 上方的旧氏族圈" />
+    <string id="dc_ground_battania_highland" text="{SETTLEMENT} 附近的高地挑战场" />
+  </strings>
+</base>
