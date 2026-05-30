@@ -7,7 +7,7 @@ namespace StrategicCampaignAI;
 internal static class StrategicAiState
 {
     private static Dictionary<string, int> EnemyTerritoryDaysByArmy = new();
-    private static Dictionary<string, StrategicArmyRole> RolesByArmy = new();
+    private static Dictionary<string, int> RolesByArmy = new();
     private static Dictionary<string, string> TargetLocksByArmy = new();
     private static Dictionary<string, double> TargetLockDaysByArmy = new();
     private static Dictionary<string, double> RecentCaptureDaysBySettlement = new();
@@ -15,26 +15,26 @@ internal static class StrategicAiState
     private static Dictionary<string, string> RaidedVillageByFaction = new();
     private static Dictionary<string, double> FailedTargetCooldownDays = new();
     private static Dictionary<string, string> LostSettlementClaimByFaction = new();
-    private static Dictionary<string, StrategicWarGoal> WarGoalsByFaction = new();
+    private static Dictionary<string, int> WarGoalsByFaction = new();
     private static Dictionary<string, double> WarGoalUpdatedDaysByFaction = new();
     private static Dictionary<string, string> OperationTargetByFaction = new();
 
     public static void SyncData(IDataStore dataStore)
     {
         dataStore.SyncData("scai_enemy_territory_days_by_army", ref EnemyTerritoryDaysByArmy);
-        dataStore.SyncData("scai_roles_by_army", ref RolesByArmy);
+        dataStore.SyncData("scai_roles_by_army_v2", ref RolesByArmy);
         dataStore.SyncData("scai_target_locks_by_army", ref TargetLocksByArmy);
         dataStore.SyncData("scai_target_lock_days_by_army", ref TargetLockDaysByArmy);
         dataStore.SyncData("scai_recent_capture_days_by_settlement", ref RecentCaptureDaysBySettlement);
         dataStore.SyncData("scai_raided_village_by_faction", ref RaidedVillageByFaction);
         dataStore.SyncData("scai_failed_target_cooldown_days", ref FailedTargetCooldownDays);
         dataStore.SyncData("scai_lost_settlement_claim_by_faction", ref LostSettlementClaimByFaction);
-        dataStore.SyncData("scai_war_goals_by_faction", ref WarGoalsByFaction);
+        dataStore.SyncData("scai_war_goals_by_faction_v2", ref WarGoalsByFaction);
         dataStore.SyncData("scai_war_goal_updated_days_by_faction", ref WarGoalUpdatedDaysByFaction);
         dataStore.SyncData("scai_operation_target_by_faction", ref OperationTargetByFaction);
 
         EnemyTerritoryDaysByArmy ??= new Dictionary<string, int>();
-        RolesByArmy ??= new Dictionary<string, StrategicArmyRole>();
+        RolesByArmy ??= new Dictionary<string, int>();
         TargetLocksByArmy ??= new Dictionary<string, string>();
         TargetLockDaysByArmy ??= new Dictionary<string, double>();
         RecentCaptureDaysBySettlement ??= new Dictionary<string, double>();
@@ -42,7 +42,7 @@ internal static class StrategicAiState
         RaidedVillageByFaction ??= new Dictionary<string, string>();
         FailedTargetCooldownDays ??= new Dictionary<string, double>();
         LostSettlementClaimByFaction ??= new Dictionary<string, string>();
-        WarGoalsByFaction ??= new Dictionary<string, StrategicWarGoal>();
+        WarGoalsByFaction ??= new Dictionary<string, int>();
         WarGoalUpdatedDaysByFaction ??= new Dictionary<string, double>();
         OperationTargetByFaction ??= new Dictionary<string, string>();
     }
@@ -66,12 +66,16 @@ internal static class StrategicAiState
 
     public static StrategicArmyRole GetRole(Army army)
     {
-        return RolesByArmy.TryGetValue(GetArmyKey(army), out StrategicArmyRole role) ? role : StrategicArmyRole.Aggressor;
+        return RolesByArmy.TryGetValue(GetArmyKey(army), out int role) &&
+               role >= (int)StrategicArmyRole.Aggressor &&
+               role <= (int)StrategicArmyRole.Reserve
+            ? (StrategicArmyRole)role
+            : StrategicArmyRole.Aggressor;
     }
 
     public static void SetRole(Army army, StrategicArmyRole role)
     {
-        RolesByArmy[GetArmyKey(army)] = role;
+        RolesByArmy[GetArmyKey(army)] = (int)role;
     }
 
     public static void SetTargetLock(Army army, Settlement? settlement)
@@ -198,8 +202,10 @@ internal static class StrategicAiState
 
     public static StrategicWarGoal GetWarGoal(Kingdom kingdom)
     {
-        return WarGoalsByFaction.TryGetValue(kingdom.StringId, out StrategicWarGoal goal)
-            ? goal
+        return WarGoalsByFaction.TryGetValue(kingdom.StringId, out int goal) &&
+               goal >= (int)StrategicWarGoal.BorderWar &&
+               goal <= (int)StrategicWarGoal.ForcePeace
+            ? (StrategicWarGoal)goal
             : StrategicWarGoal.BorderWar;
     }
 
@@ -211,7 +217,7 @@ internal static class StrategicAiState
 
     public static void SetWarGoal(Kingdom kingdom, StrategicWarGoal goal)
     {
-        WarGoalsByFaction[kingdom.StringId] = goal;
+        WarGoalsByFaction[kingdom.StringId] = (int)goal;
         WarGoalUpdatedDaysByFaction[kingdom.StringId] = CampaignTime.Now.ToDays;
     }
 
