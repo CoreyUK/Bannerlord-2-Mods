@@ -21,30 +21,7 @@ internal static class StrategicAiState
 
     public static void SyncData(IDataStore dataStore)
     {
-        dataStore.SyncData("scai_enemy_territory_days_by_army", ref EnemyTerritoryDaysByArmy);
-        dataStore.SyncData("scai_roles_by_army_v2", ref RolesByArmy);
-        dataStore.SyncData("scai_target_locks_by_army", ref TargetLocksByArmy);
-        dataStore.SyncData("scai_target_lock_days_by_army", ref TargetLockDaysByArmy);
-        dataStore.SyncData("scai_recent_capture_days_by_settlement", ref RecentCaptureDaysBySettlement);
-        dataStore.SyncData("scai_raided_village_by_faction", ref RaidedVillageByFaction);
-        dataStore.SyncData("scai_failed_target_cooldown_days", ref FailedTargetCooldownDays);
-        dataStore.SyncData("scai_lost_settlement_claim_by_faction", ref LostSettlementClaimByFaction);
-        dataStore.SyncData("scai_war_goals_by_faction_v2", ref WarGoalsByFaction);
-        dataStore.SyncData("scai_war_goal_updated_days_by_faction", ref WarGoalUpdatedDaysByFaction);
-        dataStore.SyncData("scai_operation_target_by_faction", ref OperationTargetByFaction);
-
-        EnemyTerritoryDaysByArmy ??= new Dictionary<string, int>();
-        RolesByArmy ??= new Dictionary<string, int>();
-        TargetLocksByArmy ??= new Dictionary<string, string>();
-        TargetLockDaysByArmy ??= new Dictionary<string, double>();
-        RecentCaptureDaysBySettlement ??= new Dictionary<string, double>();
-        FactionStatuses ??= new Dictionary<string, StrategicFactionStatus>();
-        RaidedVillageByFaction ??= new Dictionary<string, string>();
-        FailedTargetCooldownDays ??= new Dictionary<string, double>();
-        LostSettlementClaimByFaction ??= new Dictionary<string, string>();
-        WarGoalsByFaction ??= new Dictionary<string, int>();
-        WarGoalUpdatedDaysByFaction ??= new Dictionary<string, double>();
-        OperationTargetByFaction ??= new Dictionary<string, string>();
+        // Runtime-only memory. Persisting these dictionaries can make Bannerlord fail save creation.
     }
 
     public static int GetEnemyTerritoryDays(Army army)
