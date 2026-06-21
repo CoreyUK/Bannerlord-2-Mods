@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ItemModifiers>
+  <!-- Weapon Durability condition modifiers. These are not loot/crafting drops; the mod applies them when a weapon is used. -->
+  <ItemModifier modifier_group="ItemModifierGroup.sword" id="wd_worn_sword" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.sword" id="wd_damaged_sword" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.sword" id="wd_cracked_sword" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.sword" id="wd_broken_sword" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.cheap_weapon" id="wd_worn_cheap_weapon" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.cheap_weapon" id="wd_damaged_cheap_weapon" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.cheap_weapon" id="wd_cracked_cheap_weapon" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.cheap_weapon" id="wd_broken_cheap_weapon" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.polearm" id="wd_worn_polearm" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.polearm" id="wd_damaged_polearm" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.polearm" id="wd_cracked_polearm" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.polearm" id="wd_broken_polearm" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.mace" id="wd_worn_mace" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.mace" id="wd_damaged_mace" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.mace" id="wd_cracked_mace" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.mace" id="wd_broken_mace" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.axe" id="wd_worn_axe" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe" id="wd_damaged_axe" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe" id="wd_cracked_axe" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe" id="wd_broken_axe" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.axe_throwing" id="wd_worn_axe_throwing" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" missile_speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe_throwing" id="wd_damaged_axe_throwing" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" missile_speed="-2" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe_throwing" id="wd_cracked_axe_throwing" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" missile_speed="-4" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.axe_throwing" id="wd_broken_axe_throwing" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" missile_speed="-6" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.knife_throwing" id="wd_worn_knife_throwing" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" missile_speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.knife_throwing" id="wd_damaged_knife_throwing" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" missile_speed="-2" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.knife_throwing" id="wd_cracked_knife_throwing" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" missile_speed="-4" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.knife_throwing" id="wd_broken_knife_throwing" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" missile_speed="-6" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.spear_dart_throwing" id="wd_worn_spear_dart_throwing" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" missile_speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.spear_dart_throwing" id="wd_damaged_spear_dart_throwing" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" missile_speed="-2" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.spear_dart_throwing" id="wd_cracked_spear_dart_throwing" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" missile_speed="-4" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.spear_dart_throwing" id="wd_broken_spear_dart_throwing" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" missile_speed="-6" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.bow" id="wd_worn_bow" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" missile_speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.bow" id="wd_damaged_bow" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" missile_speed="-2" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.bow" id="wd_cracked_bow" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" missile_speed="-4" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.bow" id="wd_broken_bow" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" missile_speed="-6" price_factor="0.10" quality="poor" />
+
+  <ItemModifier modifier_group="ItemModifierGroup.crossbow" id="wd_worn_crossbow" name="Worn {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-2" speed="-1" missile_speed="-1" price_factor="0.85" quality="inferior" />
+  <ItemModifier modifier_group="ItemModifierGroup.crossbow" id="wd_damaged_crossbow" name="Damaged {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-5" speed="-3" missile_speed="-2" price_factor="0.60" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.crossbow" id="wd_cracked_crossbow" name="Cracked {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-8" speed="-5" missile_speed="-4" price_factor="0.35" quality="poor" />
+  <ItemModifier modifier_group="ItemModifierGroup.crossbow" id="wd_broken_crossbow" name="Broken {ITEMNAME}" loot_drop_score="0" production_drop_score="0" damage="-12" speed="-8" missile_speed="-6" price_factor="0.10" quality="poor" />
+</ItemModifiers>
