@@ -20,6 +20,18 @@ public enum TroopHealthBarsColor
     Blue
 }
 
+public enum TroopHealthBarsAmmoDisplayMode
+{
+    Count,
+    Percentage
+}
+
+public enum TroopHealthBarsAmmoPosition
+{
+    OnRangedBar,
+    RightSide
+}
+
 public sealed class TroopHealthBarsSettings
 {
     public TroopHealthBarsLocation Location { get; set; } = TroopHealthBarsLocation.TopLeft;
@@ -33,6 +45,12 @@ public sealed class TroopHealthBarsSettings
     public bool ShowMounted { get; set; } = true;
 
     public bool ShowPercentages { get; set; } = true;
+
+    public bool ShowArmyAmmo { get; set; } = true;
+
+    public TroopHealthBarsAmmoDisplayMode ArmyAmmoDisplayMode { get; set; } = TroopHealthBarsAmmoDisplayMode.Count;
+
+    public TroopHealthBarsAmmoPosition ArmyAmmoPosition { get; set; } = TroopHealthBarsAmmoPosition.OnRangedBar;
 
     public float Opacity { get; set; } = 1f;
 
@@ -60,6 +78,9 @@ public sealed class TroopHealthBarsSettings
                 ShowArchers = (bool)GetPropertyValue(instance, nameof(ShowArchers), true),
                 ShowMounted = (bool)GetPropertyValue(instance, nameof(ShowMounted), true),
                 ShowPercentages = (bool)GetPropertyValue(instance, nameof(ShowPercentages), true),
+                ShowArmyAmmo = (bool)GetPropertyValue(instance, nameof(ShowArmyAmmo), true),
+                ArmyAmmoDisplayMode = ReadAmmoDisplayMode(GetPropertyValue(instance, nameof(ArmyAmmoDisplayMode), TroopHealthBarsAmmoDisplayMode.Count)),
+                ArmyAmmoPosition = ReadAmmoPosition(GetPropertyValue(instance, nameof(ArmyAmmoPosition), TroopHealthBarsAmmoPosition.OnRangedBar)),
                 Opacity = (float)GetPropertyValue(instance, nameof(Opacity), 1f)
             };
         }
@@ -106,6 +127,28 @@ public sealed class TroopHealthBarsSettings
             "Blue" => TroopHealthBarsColor.Blue,
             _ => TroopHealthBarsColor.BannerlordRed
         };
+    }
+
+    private static TroopHealthBarsAmmoDisplayMode ReadAmmoDisplayMode(object value)
+    {
+        if (value is TroopHealthBarsAmmoDisplayMode displayMode)
+        {
+            return displayMode;
+        }
+
+        string selected = ReadSelectedText(value);
+        return selected == "Percentage" ? TroopHealthBarsAmmoDisplayMode.Percentage : TroopHealthBarsAmmoDisplayMode.Count;
+    }
+
+    private static TroopHealthBarsAmmoPosition ReadAmmoPosition(object value)
+    {
+        if (value is TroopHealthBarsAmmoPosition position)
+        {
+            return position;
+        }
+
+        string selected = ReadSelectedText(value);
+        return selected == "Right Side" ? TroopHealthBarsAmmoPosition.RightSide : TroopHealthBarsAmmoPosition.OnRangedBar;
     }
 
     private static string ReadSelectedText(object value)

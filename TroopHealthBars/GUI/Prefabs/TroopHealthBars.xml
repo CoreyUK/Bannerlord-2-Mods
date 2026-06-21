@@ -3,7 +3,7 @@
     <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" IsVisible="@IsHudVisible">
       <Children>
         <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
-                   SuggestedWidth="340"
+                   SuggestedWidth="430"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
                    MarginLeft="22" MarginTop="72"
                    StackLayout.LayoutMethod="VerticalTopToBottom"
@@ -96,8 +96,34 @@
                                 SuggestedWidth="54" SuggestedHeight="16"
                                 HorizontalAlignment="Left" VerticalAlignment="Center"
                                 MarginLeft="246"
-                                Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right"
-                                IsVisible="@ShowPercentages" />
+                                Text="@DisplayText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right"
+                                IsVisible="@ShowText" />
+
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="22" SuggestedHeight="12"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="285"
+                            Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF"
+                            IsVisible="@ShowAmmoOnBar" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                SuggestedWidth="42" SuggestedHeight="16"
+                                HorizontalAlignment="Left" VerticalAlignment="Center"
+                                MarginLeft="301"
+                                Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left"
+                                IsVisible="@ShowAmmoOnBar" />
+
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                            SuggestedWidth="22" SuggestedHeight="12"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            MarginLeft="342"
+                            Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF"
+                            IsVisible="@ShowAmmoOnRight" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
+                                SuggestedWidth="54" SuggestedHeight="16"
+                                HorizontalAlignment="Left" VerticalAlignment="Center"
+                                MarginLeft="360"
+                                Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left"
+                                IsVisible="@ShowAmmoOnRight" />
 
                     <!-- Icon medallion -->
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed"
@@ -127,7 +153,7 @@
         </ListPanel>
 
         <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
-                   SuggestedWidth="340"
+                   SuggestedWidth="430"
                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
                    MarginRight="36" MarginBottom="168"
                    StackLayout.LayoutMethod="VerticalTopToBottom"
@@ -152,7 +178,11 @@
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Gold" IsVisible="@UseGold" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Green" IsVisible="@UseGreen" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Blue" IsVisible="@UseBlue" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
-                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowPercentages" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@DisplayText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowText" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="22" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="285" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF" IsVisible="@ShowAmmoOnBar" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="301" Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left" IsVisible="@ShowAmmoOnBar" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="22" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="342" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF" IsVisible="@ShowAmmoOnRight" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="360" Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left" IsVisible="@ShowAmmoOnRight" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="42" HorizontalAlignment="Left" VerticalAlignment="Center" Sprite="BlankWhiteCircle" Color="#090806F0" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="36" SuggestedHeight="36" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="3" Sprite="BlankWhiteCircle" Color="#6F5A34FF" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="30" SuggestedHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" Sprite="BlankWhiteCircle" Color="#2A281FFF" />
@@ -165,7 +195,7 @@
         </ListPanel>
 
         <ListPanel WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren"
-                   SuggestedWidth="340"
+                   SuggestedWidth="430"
                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
                    MarginLeft="22" MarginBottom="168"
                    StackLayout.LayoutMethod="VerticalTopToBottom"
@@ -190,7 +220,11 @@
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Gold" IsVisible="@UseGold" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Green" IsVisible="@UseGreen" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
                     <FillBar WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="270" SuggestedHeight="7" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="40" Brush="TroopHealthBars.HealthBar.Blue" IsVisible="@UseBlue" InitialAmountAsFloat="@Percentage" IsVertical="false" MaxAmount="1" />
-                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@PercentText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowPercentages" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="246" Text="@DisplayText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Right" IsVisible="@ShowText" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="22" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="285" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF" IsVisible="@ShowAmmoOnBar" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="301" Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left" IsVisible="@ShowAmmoOnBar" />
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="22" SuggestedHeight="12" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="342" Sprite="StdAssets\arrow_pointing_left" HorizontalFlip="true" Color="#C9B996FF" IsVisible="@ShowAmmoOnRight" />
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="16" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="360" Text="@AmmoText" Brush="LoadoutPresets.Status.Text" Brush.FontSize="12" Brush.TextHorizontalAlignment="Left" IsVisible="@ShowAmmoOnRight" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="42" SuggestedHeight="42" HorizontalAlignment="Left" VerticalAlignment="Center" Sprite="BlankWhiteCircle" Color="#090806F0" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="36" SuggestedHeight="36" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="3" Sprite="BlankWhiteCircle" Color="#6F5A34FF" />
                     <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="30" SuggestedHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" Sprite="BlankWhiteCircle" Color="#2A281FFF" />

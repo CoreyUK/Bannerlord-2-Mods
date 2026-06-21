@@ -10,8 +10,12 @@ public sealed class TroopHealthBarItemVM : ViewModel
     private string _label = string.Empty;
     private string _countText = string.Empty;
     private string _percentText = string.Empty;
+    private string _displayText = string.Empty;
+    private string _ammoText = string.Empty;
     private int _aliveCount;
     private int _initialCount;
+    private int _currentAmmo;
+    private int _initialAmmo;
     private float _percentage;
     private bool _isVisible;
     private bool _useBannerlordRed;
@@ -20,6 +24,9 @@ public sealed class TroopHealthBarItemVM : ViewModel
     private bool _useGreen;
     private bool _useBlue;
     private bool _showPercentages = true;
+    private bool _showText = true;
+    private bool _showAmmoOnBar;
+    private bool _showAmmoOnRight;
 
     internal TroopHealthBarItemVM(TroopCategory category)
     {
@@ -42,10 +49,22 @@ public sealed class TroopHealthBarItemVM : ViewModel
     public string PercentText { get => _percentText; set => SetField(ref _percentText, value, nameof(PercentText)); }
 
     [DataSourceProperty]
+    public string DisplayText { get => _displayText; set => SetField(ref _displayText, value, nameof(DisplayText)); }
+
+    [DataSourceProperty]
+    public string AmmoText { get => _ammoText; set => SetField(ref _ammoText, value, nameof(AmmoText)); }
+
+    [DataSourceProperty]
     public int AliveCount { get => _aliveCount; set => SetField(ref _aliveCount, value, nameof(AliveCount)); }
 
     [DataSourceProperty]
     public int InitialCount { get => _initialCount; set => SetField(ref _initialCount, value, nameof(InitialCount)); }
+
+    [DataSourceProperty]
+    public int CurrentAmmo { get => _currentAmmo; set => SetField(ref _currentAmmo, value, nameof(CurrentAmmo)); }
+
+    [DataSourceProperty]
+    public int InitialAmmo { get => _initialAmmo; set => SetField(ref _initialAmmo, value, nameof(InitialAmmo)); }
 
     [DataSourceProperty]
     public float Percentage { get => _percentage; set => SetField(ref _percentage, value, nameof(Percentage)); }
@@ -71,6 +90,15 @@ public sealed class TroopHealthBarItemVM : ViewModel
     [DataSourceProperty]
     public bool ShowPercentages { get => _showPercentages; set => SetField(ref _showPercentages, value, nameof(ShowPercentages)); }
 
+    [DataSourceProperty]
+    public bool ShowText { get => _showText; set => SetField(ref _showText, value, nameof(ShowText)); }
+
+    [DataSourceProperty]
+    public bool ShowAmmoOnBar { get => _showAmmoOnBar; set => SetField(ref _showAmmoOnBar, value, nameof(ShowAmmoOnBar)); }
+
+    [DataSourceProperty]
+    public bool ShowAmmoOnRight { get => _showAmmoOnRight; set => SetField(ref _showAmmoOnRight, value, nameof(ShowAmmoOnRight)); }
+
     internal void SetValues(int aliveCount, int initialCount)
     {
         AliveCount = aliveCount;
@@ -78,6 +106,14 @@ public sealed class TroopHealthBarItemVM : ViewModel
         Percentage = initialCount > 0 ? MBMath.ClampFloat((float)aliveCount / initialCount, 0f, 1f) : 0f;
         CountText = $"{aliveCount}/{initialCount}";
         PercentText = $"{MathF.Round(Percentage * 100f)}%";
+        DisplayText = PercentText;
+        RefreshSettings();
+    }
+
+    internal void SetAmmoValues(int currentAmmo, int initialAmmo)
+    {
+        CurrentAmmo = currentAmmo;
+        InitialAmmo = initialAmmo;
         RefreshSettings();
     }
 
@@ -90,7 +126,15 @@ public sealed class TroopHealthBarItemVM : ViewModel
         UseGold = settings.BarColor == TroopHealthBarsColor.Gold;
         UseGreen = settings.BarColor == TroopHealthBarsColor.Green;
         UseBlue = settings.BarColor == TroopHealthBarsColor.Blue;
+        DisplayText = PercentText;
+        AmmoText = settings.ArmyAmmoDisplayMode == TroopHealthBarsAmmoDisplayMode.Count
+            ? CurrentAmmo.ToString()
+            : $"{MathF.Round((InitialAmmo > 0 ? MBMath.ClampFloat((float)CurrentAmmo / InitialAmmo, 0f, 1f) : 0f) * 100f)}%";
         ShowPercentages = settings.ShowPercentages;
+        ShowText = settings.ShowPercentages;
+        bool showAmmo = _category == TroopCategory.Archer && settings.ShowArmyAmmo && InitialAmmo > 0;
+        ShowAmmoOnBar = showAmmo && settings.ArmyAmmoPosition == TroopHealthBarsAmmoPosition.OnRangedBar;
+        ShowAmmoOnRight = showAmmo && settings.ArmyAmmoPosition == TroopHealthBarsAmmoPosition.RightSide;
     }
 
     private bool IsCategoryEnabled(TroopHealthBarsSettings settings)
@@ -143,6 +187,11 @@ public sealed class TroopHealthBarsVM : ViewModel
     internal void SetValues(TroopCategory category, int aliveCount, int initialCount)
     {
         Bars[(int)category].SetValues(aliveCount, initialCount);
+    }
+
+    internal void SetArmyAmmoValues(int currentAmmo, int initialAmmo)
+    {
+        Bars[(int)TroopCategory.Archer].SetAmmoValues(currentAmmo, initialAmmo);
     }
 
     internal void RefreshSettings()

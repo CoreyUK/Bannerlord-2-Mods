@@ -12,6 +12,7 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
 {
     private readonly int[] _initialCounts = new int[3];
     private readonly int[] _aliveCounts = new int[3];
+    private int _initialArmyAmmo;
     private GauntletLayer? _layer;
     private GauntletMovieIdentifier? _movie;
     private TroopHealthBarsVM? _dataSource;
@@ -59,7 +60,7 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
             if (_layer == null && !_attachFailed)
             {
                 _attachTimer += dt;
-                if (_attachTimer >= 2f)
+                if (_attachTimer >= 2f && Mission.IsDeploymentFinished)
                 {
                     AttachLayer();
                 }
@@ -93,13 +94,23 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
     private void RefreshCountsWithoutUi()
     {
         Array.Clear(_aliveCounts, 0, _aliveCounts.Length);
+        int currentArmyAmmo = 0;
+        int currentArmyAmmoCapacity = 0;
 
         foreach (Agent agent in Mission.Agents)
         {
             if (agent != null && TryGetTrackedCategory(agent, out TroopCategory category) && IsAlive(agent))
             {
                 _aliveCounts[(int)category]++;
+                GetArmyAmmo(agent, out int agentAmmo, out int agentAmmoCapacity);
+                currentArmyAmmo += agentAmmo;
+                currentArmyAmmoCapacity += agentAmmoCapacity;
             }
+        }
+
+        if (currentArmyAmmoCapacity > _initialArmyAmmo)
+        {
+            _initialArmyAmmo = currentArmyAmmoCapacity;
         }
 
         if (_dataSource == null)
@@ -111,6 +122,8 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
         {
             _dataSource.SetValues((TroopCategory)i, _aliveCounts[i], _initialCounts[i]);
         }
+
+        _dataSource.SetArmyAmmoValues(currentArmyAmmo, _initialArmyAmmo);
     }
 
     private void AttachLayer()
@@ -204,6 +217,31 @@ internal sealed class TroopHealthBarsMissionView : MissionBehavior
         {
             return false;
         }
+    }
+
+    private static void GetArmyAmmo(Agent agent, out int currentAmmo, out int ammoCapacity)
+    {
+        currentAmmo = 0;
+        ammoCapacity = 0;
+
+        for (int slot = (int)EquipmentIndex.WeaponItemBeginSlot; slot < (int)EquipmentIndex.NumAllWeaponSlots; slot++)
+        {
+            MissionWeapon weapon = agent.Equipment[(EquipmentIndex)slot];
+            if (weapon.IsEmpty || weapon.Item == null || !IsCountedAmmoType(weapon.Item.ItemType))
+            {
+                continue;
+            }
+
+            int amount = Math.Max(0, (int)weapon.Amount);
+            int maxAmount = Math.Max(amount, (int)weapon.ModifiedMaxAmount);
+            currentAmmo += amount;
+            ammoCapacity += maxAmount;
+        }
+    }
+
+    private static bool IsCountedAmmoType(ItemObject.ItemTypeEnum itemType)
+    {
+        return itemType == ItemObject.ItemTypeEnum.Arrows || itemType == ItemObject.ItemTypeEnum.Bolts;
     }
 
     private bool TryGetTrackedCategory(Agent agent, out TroopCategory category)

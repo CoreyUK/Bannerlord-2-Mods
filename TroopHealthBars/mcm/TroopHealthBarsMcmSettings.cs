@@ -40,4 +40,16 @@ public sealed class TroopHealthBarsMcmSettings : AttributeGlobalSettings<TroopHe
     [SettingPropertyBool("Show Mounted", Order = 2, RequireRestart = false)]
     [SettingPropertyGroup("Troop Bars")]
     public bool ShowMounted { get; set; } = true;
+
+    [SettingPropertyBool("Show Army Ammo", Order = 0, RequireRestart = false, HintText = "Show an arrow ammo indicator on the ranged troop bar.")]
+    [SettingPropertyGroup("Army Ammo", GroupOrder = 2)]
+    public bool ShowArmyAmmo { get; set; } = true;
+
+    [SettingPropertyDropdown("Army Ammo Display", Order = 1, RequireRestart = false, HintText = "Choose whether army ammo is shown as a remaining count or a percentage.")]
+    [SettingPropertyGroup("Army Ammo")]
+    public Dropdown<string> ArmyAmmoDisplayMode { get; set; } = new(new[] { "Count", "Percentage" }, 0);
+
+    [SettingPropertyDropdown("Army Ammo Position", Order = 2, RequireRestart = false, HintText = "Choose whether the ammo indicator sits on the ranged bar or offset to its right.")]
+    [SettingPropertyGroup("Army Ammo")]
+    public Dropdown<string> ArmyAmmoPosition { get; set; } = new(new[] { "On Ranged Bar", "Right Side" }, 0);
 }
