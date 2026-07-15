@@ -12,7 +12,7 @@ Each folder is a separate Bannerlord module:
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.
 - `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
 - `StrategicCampaignAI` - improves kingdom army behavior with smarter frontline target selection, siege retreats, supply pressure, war goals, raid response, and persistent strategic memory.
-- `StrategicCampaignAI145` - Bannerlord v1.4.5 build of Strategic Campaign AI with anti-army-spam tuning, stuck-army recovery, safer order overrides, and save-safe runtime memory.
+- `StrategicCampaignAI145` - Bannerlord v1.4.7 build of Strategic Campaign AI with anti-army-spam tuning, stuck-army recovery, safer order overrides, and save-safe runtime memory.
 - `TroopHealthBars` - adds compact battle HUD bars showing surviving infantry, archers, and mounted troops as percentages, with optional MCM settings for position, colours, opacity, percentages, and category toggles.
 
 ## Layout

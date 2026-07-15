@@ -1,4 +1,5 @@
-﻿using TaleWorlds.CampaignSystem;
+﻿using System;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -9,10 +10,25 @@ public sealed class StrategicTargetScoreModel : DefaultTargetScoreCalculatingMod
 {
     public override float GetTargetScoreForFaction(Settlement targetSettlement, Army.ArmyTypes missionType, MobileParty mobileParty, float ourStrength)
     {
-        float score = base.GetTargetScoreForFaction(targetSettlement, missionType, mobileParty, ourStrength);
+        if (targetSettlement == null ||
+            mobileParty == null ||
+            mobileParty.MapFaction == null ||
+            targetSettlement.MapFaction == null)
+        {
+            return 0f;
+        }
+
+        float score;
+        try
+        {
+            score = base.GetTargetScoreForFaction(targetSettlement, missionType, mobileParty, ourStrength);
+        }
+        catch (NullReferenceException)
+        {
+            return 0f;
+        }
 
         if (score <= 0f ||
-            mobileParty.MapFaction == null ||
             !StrategicAiHelpers.IsFortification(targetSettlement) ||
             !StrategicAiHelpers.IsEnemy(mobileParty.MapFaction, targetSettlement.MapFaction))
         {
@@ -130,9 +146,25 @@ public sealed class StrategicTargetScoreModel : DefaultTargetScoreCalculatingMod
 
     public override float CalculateDefensivePatrollingScoreForSettlement(Settlement settlement, bool isTargetingPort, MobileParty mobileParty)
     {
-        float score = base.CalculateDefensivePatrollingScoreForSettlement(settlement, isTargetingPort, mobileParty);
+        if (settlement == null ||
+            mobileParty == null ||
+            mobileParty.MapFaction == null ||
+            settlement.MapFaction == null)
+        {
+            return 0f;
+        }
 
-        if (mobileParty.MapFaction == null || !StrategicAiHelpers.IsFriendly(mobileParty.MapFaction, settlement.MapFaction))
+        float score;
+        try
+        {
+            score = base.CalculateDefensivePatrollingScoreForSettlement(settlement, isTargetingPort, mobileParty);
+        }
+        catch (NullReferenceException)
+        {
+            return 0f;
+        }
+
+        if (!StrategicAiHelpers.IsFriendly(mobileParty.MapFaction, settlement.MapFaction))
         {
             return score;
         }
@@ -172,4 +204,3 @@ public sealed class StrategicTargetScoreModel : DefaultTargetScoreCalculatingMod
         return score;
     }
 }
-

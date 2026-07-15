@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Module>
-  <Name value="Strategic Campaign AI 1.4.5"/>
+  <Name value="Strategic Campaign AI 1.4.7"/>
   <Id value="StrategicCampaignAI145"/>
-  <Version value="v0.1.7"/>
+  <Version value="v0.1.8"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>
-    <DependedModule Id="Native" DependentVersion="v1.4.5" Optional="false"/>
-    <DependedModule Id="SandBoxCore" DependentVersion="v1.4.5" Optional="false"/>
-    <DependedModule Id="Sandbox" DependentVersion="v1.4.5" Optional="false"/>
-    <DependedModule Id="StoryMode" DependentVersion="v1.4.5" Optional="true"/>
+    <DependedModule Id="Native" DependentVersion="v1.4.7" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.4.7" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.4.7" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.4.7" Optional="true"/>
   </DependedModules>
   <SubModules>
     <SubModule>
@@ -23,6 +23,7 @@
     </SubModule>
   </SubModules>
 </Module>
+
 
 
 
