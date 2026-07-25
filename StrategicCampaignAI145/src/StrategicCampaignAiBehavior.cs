@@ -38,7 +38,7 @@ public sealed class StrategicCampaignAI145Behavior : CampaignBehaviorBase
             StrategicAiState.SetFactionStatus(kingdom, status);
             UpdateWarGoal(kingdom);
             StrategicAiState.SetFactionStatus(kingdom, status);
-            AssignArmyRoles(kingdom);
+
 
             foreach (Army army in kingdom.Armies)
             {
@@ -70,7 +70,6 @@ public sealed class StrategicCampaignAI145Behavior : CampaignBehaviorBase
 
             foreach (Army army in kingdom.Armies.ToList())
             {
-                TryRunAssignedArmyRole(kingdom, army);
                 TryRetreatFromBadSiege(army);
                 TryReinforceFragileGarrison(army);
             }
@@ -606,6 +605,8 @@ public sealed class StrategicCampaignAI145Behavior : CampaignBehaviorBase
         }
     }
 }
+
+
 
 
 

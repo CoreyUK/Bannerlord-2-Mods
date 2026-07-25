@@ -2,7 +2,7 @@
 <Module>
   <Name value="Strategic Campaign AI 1.4.7"/>
   <Id value="StrategicCampaignAI145"/>
-  <Version value="v0.1.8"/>
+  <Version value="v0.1.9"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>
@@ -23,6 +23,7 @@
     </SubModule>
   </SubModules>
 </Module>
+
 
 
 
