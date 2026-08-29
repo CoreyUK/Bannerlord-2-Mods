@@ -1,4 +1,4 @@
-namespace StrategicCampaignAI;
+﻿namespace StrategicCampaignAI;
 
 internal enum StrategicArmyRole
 {
@@ -7,3 +7,4 @@ internal enum StrategicArmyRole
     Interceptor,
     Reserve
 }
+

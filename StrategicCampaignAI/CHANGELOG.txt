@@ -1,0 +1,33 @@
+Strategic Campaign AI - v0.3.0
+==============================
+
+Requires Mount & Blade II: Bannerlord v1.4.8.
+
+
+Changes
+-------
+- Improved kingdom target selection so armies commit to reachable frontline
+  objectives instead of drifting between them.
+- Rebalanced war goals, war exhaustion and peace pressure, so kingdoms take up
+  distinct postures and contest border fiefs properly.
+- Armies disengage from sieges they cannot win.
+- Better garrison support for fiefs that are genuinely under threat.
+- Improved raid response and defence of newly captured fiefs.
+- Interception and avoidance behaviour reworked.
+- Significant performance improvements to campaign AI scoring.
+- Stability fixes.
+- Strategic memory now persists across save and load.
+
+
+Added
+-----
+- ModuleData/settings.txt - documented settings for tuning the AI, applied on
+  restart. No rebuild needed.
+- Optional diagnostic log for troubleshooting. Set VerboseLogging = true in
+  settings.txt to write to Documents\Mount and Blade II Bannerlord\StrategicCampaignAI.log.
+
+
+Notes
+-----
+Safe to add or remove mid-save.
+Delete any previous version of the module folder before installing.

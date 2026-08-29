@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TaleWorlds.SaveSystem;
 
-namespace StrategicCampaignAI145;
+namespace StrategicCampaignAI;
 
 /// <summary>
 /// Registers the container types the strategic layer persists.

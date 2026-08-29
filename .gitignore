@@ -15,3 +15,8 @@ project.nuget.cache
 *.FileListAbsolute.txt
 *.AssemblyInfo.cs
 *.AssemblyAttributes.cs
+
+# Secrets - never commit. This repo is public.
+.env
+*.env
+!.env.example

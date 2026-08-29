@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 
-namespace StrategicCampaignAI145;
+namespace StrategicCampaignAI;
 
 /// <summary>
 /// Memoises the expensive map-wide queries used while scoring targets.

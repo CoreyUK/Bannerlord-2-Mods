@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
 
-namespace StrategicCampaignAI145;
+namespace StrategicCampaignAI;
 
 /// <summary>
 /// Diagnostic log for the strategic layer.

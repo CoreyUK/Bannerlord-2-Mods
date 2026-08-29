@@ -6,6 +6,12 @@ namespace StrategicCampaignAI;
 
 public sealed class SubModule : MBSubModuleBase
 {
+    protected override void OnSubModuleLoad()
+    {
+        base.OnSubModuleLoad();
+        StrategicAiSettings.LoadOnce();
+    }
+
     protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
     {
         base.OnGameStart(game, gameStarterObject);
@@ -14,7 +20,9 @@ public sealed class SubModule : MBSubModuleBase
         {
             campaignStarter.AddModel(new StrategicTargetScoreModel());
             campaignStarter.AddModel(new StrategicArmyManagementModel());
-            campaignStarter.AddBehavior(new StrategicCampaignAiBehavior());
+            campaignStarter.AddModel(new StrategicGarrisonModel());
+            campaignStarter.AddModel(new StrategicPartyAIModel());
+            campaignStarter.AddBehavior(new StrategicCampaignAIBehavior());
         }
     }
 }

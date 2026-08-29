@@ -1,4 +1,4 @@
-namespace StrategicCampaignAI;
+﻿namespace StrategicCampaignAI;
 
 internal enum StrategicWarGoal
 {
@@ -8,3 +8,4 @@ internal enum StrategicWarGoal
     WeakenEconomy,
     ForcePeace
 }
+

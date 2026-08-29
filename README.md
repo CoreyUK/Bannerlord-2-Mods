@@ -11,8 +11,7 @@ Each folder is a separate Bannerlord module:
 - `MovingDismount` - lets the player attempt to dismount from a moving horse, with speed-scaled stumble and hard-fall damage.
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.
 - `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
-- `StrategicCampaignAI` - improves kingdom army behavior with smarter frontline target selection, siege retreats, supply pressure, war goals, raid response, and persistent strategic memory.
-- `StrategicCampaignAI145` - Bannerlord v1.4.8 build of Strategic Campaign AI. Clamped frontline target scoring, kingdom-only war accounting, war goals and exhaustion, army formation gating, and save-persistent strategic memory. Direct army orders, garrison reinforcement, siege retreat and live weather ship disabled by default.
+- `StrategicCampaignAI` - gives kingdom AI direction on the campaign map: frontline-aware objectives, war goals and exhaustion, army roles, siege judgement, raid response, garrison support, interception, and save-persistent strategic memory. Built on Bannerlord's own campaign AI models; no Harmony required.
 - `TroopHealthBars` - adds compact battle HUD bars showing surviving infantry, archers, and mounted troops as percentages, with optional MCM settings for position, colours, opacity, percentages, and category toggles.
 
 ## Layout

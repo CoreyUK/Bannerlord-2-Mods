@@ -3,11 +3,11 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 
-namespace StrategicCampaignAI145;
+namespace StrategicCampaignAI;
 
 /// <summary>
 /// Optional user overrides for <see cref="StrategicAiTuning"/>, read from
-/// <c>Modules/StrategicCampaignAI145/ModuleData/settings.txt</c>.
+/// <c>Modules/StrategicCampaignAI/ModuleData/settings.txt</c>.
 ///
 /// Format is one <c>Key = Value</c> per line; <c>#</c> and <c>//</c> start a comment.
 /// Keys are the field names on <see cref="StrategicAiTuning"/> and are matched

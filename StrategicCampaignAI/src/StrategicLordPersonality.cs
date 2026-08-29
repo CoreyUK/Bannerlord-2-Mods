@@ -1,4 +1,4 @@
-namespace StrategicCampaignAI;
+﻿namespace StrategicCampaignAI;
 
 internal enum StrategicLordPersonality
 {
@@ -8,3 +8,4 @@ internal enum StrategicLordPersonality
     Greedy,
     Honorable
 }
+

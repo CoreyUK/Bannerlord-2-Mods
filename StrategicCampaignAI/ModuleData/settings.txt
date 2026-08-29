@@ -18,19 +18,16 @@
 # directly and are willing to watch for armies that never reach their target.
 # EnableStrategicOrders = false
 
-# Army leaders topping up a dangerously weak friendly garrison they are standing in.
-#
-# OFF by default. There is no campaign-system action for transferring troops to
-# a garrison, so this mutates rosters directly. In testing every crash had this
-# enabled and the only clean run had it disabled. It is also the feature behind
-# the earlier "troops disappear when entering a city" report. Leave it off.
-# EnableGarrisonReinforcement = false
+# AI lords leaving extra troops to a garrison that is genuinely under threat.
+# Now answered through SettlementGarrisonModel.FindNumberOfTroopsToLeaveToGarrison,
+# so the engine performs the transfer. The old version mutated rosters directly
+# and was the cause of a hard crash; nothing touches a roster now.
+# EnableGarrisonReinforcement = true
 
 # Armies abandoning a siege they are clearly losing.
-# OFF by default: this is the only feature that reaches into a private engine
-# method by reflection, and it is the prime suspect for a hard crash seen in
-# testing. Enable only if you want it and are willing to watch for crashes.
-# EnableSiegeRetreat = false
+# Now done by scoring a hopeless siege near zero so the vanilla AI lifts it
+# itself, rather than forcing it through a private engine method.
+# EnableSiegeRetreat = true
 
 # Write decisions to the rgl log (Documents\Mount and Blade II Bannerlord\logs).
 # VerboseLogging = false
@@ -102,10 +99,6 @@
 # MaxArmiesPerKingdom = 99
 # MaxArmiesPerStrongKingdom = 99
 
-# Abandon a siege when local friendly power drops below this fraction of the
-# enemy relief force.
-# RetreatPowerRatio = 0.8
-
 # Troops an army leader will hand to a weak garrison, and the floor it keeps.
 # ReinforcementTroopDonation = 18
 # MinimumLeaderPartyTroopsAfterDonation = 65
@@ -155,3 +148,39 @@
 # EnableWeatherEffects = false
 # EnableStrategicOrders = false
 # EnableGarrisonReinforcement = false
+
+# --------------------------------------------------------------- army roles
+# Armies are nudged toward missions matching their assigned role by shaping the
+# score per mission type (Besieger / Raider / Defender / Patrolling), rather
+# than by issuing move orders. Kept mild so vanilla still makes the call.
+# RoleAlignedMultiplier = 1.25
+# RoleMismatchMultiplier = 0.8
+
+# ------------------------------------------------------- siege abandonment
+# A siege is judged hopeless when nearby enemy relief exceeds our strength by
+# this ratio, and is then scored down by the multiplier so the AI lifts it.
+# The multiplier deliberately sits below the offensive clamp floor.
+# SiegeAbandonReliefRatio = 1.6
+# SiegeAbandonMultiplier = 0.08
+
+# Extra troops an AI lord will leave to a threatened, weak garrison.
+# GarrisonReinforcementBonus = 18
+
+# ------------------------------------------------------ raid and consolidation
+# Defensive weight for a village being raided right now, and for a fief captured
+# in the last couple of days (which still has a token garrison).
+# RaidedVillageDefenseMultiplier = 1.6
+# RecentCaptureDefenseMultiplier = 1.35
+
+# ------------------------------------------------------------- initiative
+# Shapes whether parties engage or avoid each other, answering the engine's own
+# initiative questions instead of issuing move orders. Interception requires the
+# target to be at or below InterceptStrengthRatio of our strength; anything at or
+# above AvoidStrengthRatio is avoided regardless of role.
+# EnableInitiativeShaping = true
+# InterceptStrengthRatio = 0.8
+# AvoidStrengthRatio = 1.5
+
+# Relief sweep radius for judging a siege hopeless. Tighter than SiegeRadarRadius
+# and counts rival kingdoms only, so passing looters do not call off a siege.
+# SiegeReliefRadius = 55
