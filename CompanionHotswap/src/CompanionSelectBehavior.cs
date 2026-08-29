@@ -50,7 +50,7 @@ public sealed class CompanionSelectBehavior : MissionBehavior
                 return;
             }
 
-            bool isMenuKeyDown = Input.IsKeyDown((InputKey)29) || Input.IsKeyDown((InputKey)157);
+            bool isMenuKeyDown = Input.IsKeyDown(InputKey.LeftControl) || Input.IsKeyDown(InputKey.RightControl);
             if (isMenuKeyDown && !_isMenuOpen)
             {
                 OpenMenu();
@@ -66,7 +66,7 @@ public sealed class CompanionSelectBehavior : MissionBehavior
                 if (_menuOpenTicks > 1)
                 {
                     UpdateMarkers();
-                    if (Input.IsKeyPressed((InputKey)224))
+                    if (Input.IsKeyPressed(InputKey.LeftMouseButton))
                     {
                         HandleMarkerClick();
                     }

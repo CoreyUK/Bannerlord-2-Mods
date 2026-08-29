@@ -5,15 +5,20 @@
     <Nullable>enable</Nullable>
     <AssemblyName>CompanionHotswap</AssemblyName>
     <RootNamespace>CompanionHotswap</RootNamespace>
-    <Version>1.1.1</Version>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <Version>1.1.2</Version>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\bin\Win64_Shipping_Client\</OutputPath>
+    <!-- Keep line numbers in crash reports without baking this machine's folder layout into the shipped DLL. -->
+    <DebugType>portable</DebugType>
+    <PathMap>$(MSBuildProjectDirectory)=CompanionHotswap</PathMap>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup>
-    <BannerlordPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerlordPath>
+    <!-- Game root is three levels up from src\ (Modules\CompanionHotswap\src). Override with -p:BannerlordPath=... to build elsewhere. -->
+    <BannerlordPath Condition="'$(BannerlordPath)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..'))</BannerlordPath>
     <BannerlordBin>$(BannerlordPath)\bin\Win64_Shipping_Client</BannerlordBin>
   </PropertyGroup>
 
