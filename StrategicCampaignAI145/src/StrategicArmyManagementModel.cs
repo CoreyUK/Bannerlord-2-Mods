@@ -1,4 +1,5 @@
-﻿using TaleWorlds.CampaignSystem;
+using System;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Library;
@@ -8,58 +9,95 @@ namespace StrategicCampaignAI145;
 
 public sealed class StrategicArmyManagementModel : DefaultArmyManagementCalculationModel
 {
-    private static readonly TextObject CooldownText = new("{=AEF_COOLDOWN}Recovering from a recent defeat or army dispersal.");
-    private static readonly TextObject StrengthText = new("{=AEF_STRENGTH}Party must recover before joining another army.");
+    private static readonly TextObject CooldownText = new("{=SCAI_COOLDOWN}Recovering from a recent defeat or army dispersal.");
+    private static readonly TextObject StrengthText = new("{=SCAI_STRENGTH}Party must recover before joining another army.");
     private static readonly TextObject SupplyLineText = new("{=SCAI_SUPPLY_LINES}Overextended supply lines");
 
     public override bool CanLordCreateArmy(MobileParty mobileParty, out MBList<MobileParty> possibleArmyMembers)
     {
-        bool canCreate = base.CanLordCreateArmy(mobileParty, out possibleArmyMembers);
-        if (!canCreate)
+        if (!base.CanLordCreateArmy(mobileParty, out possibleArmyMembers))
         {
             return false;
         }
 
-        if (mobileParty.LeaderHero == null ||
-            StrategicAiState.IsArmyCreationOnCooldown(mobileParty.LeaderHero) ||
-            !StrategicAiHelpers.IsRecoveredEnoughToLeadArmy(mobileParty))
+        // The player decides for themselves whether to raise an army.
+        if (StrategicAiHelpers.IsPlayerControlled(mobileParty))
         {
-            return false;
+            return true;
         }
 
-        for (int i = possibleArmyMembers.Count - 1; i >= 0; i--)
+        try
         {
-            MobileParty member = possibleArmyMembers[i];
-            if (member.LeaderHero == null ||
-                StrategicAiState.IsArmyCreationOnCooldown(member.LeaderHero) ||
-                !StrategicAiHelpers.IsRecoveredEnoughToJoinArmy(member))
+            if (mobileParty.LeaderHero == null ||
+                StrategicAiState.IsArmyCreationOnCooldown(mobileParty.LeaderHero) ||
+                !StrategicAiHelpers.IsRecoveredEnoughToLeadArmy(mobileParty))
             {
-                possibleArmyMembers.RemoveAt(i);
+                return false;
             }
-        }
 
-        return possibleArmyMembers.Count >= StrategicAiTuning.MinimumArmyMemberParties &&
-               GetProspectiveArmyStrength(mobileParty, possibleArmyMembers) >= StrategicAiTuning.MinimumProspectiveArmyStrength;
+            if (mobileParty.MapFaction is Kingdom kingdom &&
+                kingdom.Armies != null &&
+                kingdom.Armies.Count >= StrategicAiHelpers.GetAllowedArmyCount(kingdom))
+            {
+                return false;
+            }
+
+            if (possibleArmyMembers == null)
+            {
+                return false;
+            }
+
+            for (int i = possibleArmyMembers.Count - 1; i >= 0; i--)
+            {
+                MobileParty member = possibleArmyMembers[i];
+                if (member == null ||
+                    member.LeaderHero == null ||
+                    StrategicAiState.IsArmyCreationOnCooldown(member.LeaderHero) ||
+                    !StrategicAiHelpers.IsRecoveredEnoughToJoinArmy(member))
+                {
+                    possibleArmyMembers.RemoveAt(i);
+                }
+            }
+
+            return possibleArmyMembers.Count >= StrategicAiTuning.MinimumArmyMemberParties &&
+                   GetProspectiveArmyStrength(mobileParty, possibleArmyMembers) >= StrategicAiTuning.MinimumProspectiveArmyStrength;
+        }
+        catch (Exception)
+        {
+            // If our gating throws, defer to vanilla rather than blocking armies.
+            return true;
+        }
     }
 
     public override bool CheckPartyEligibility(MobileParty party, out TextObject explanation)
     {
-        bool eligible = base.CheckPartyEligibility(party, out explanation);
-        if (!eligible)
+        if (!base.CheckPartyEligibility(party, out explanation))
         {
             return false;
         }
 
-        if (party.LeaderHero != null && StrategicAiState.IsArmyCreationOnCooldown(party.LeaderHero))
+        if (StrategicAiHelpers.IsPlayerControlled(party))
         {
-            explanation = CooldownText;
-            return false;
+            return true;
         }
 
-        if (!StrategicAiHelpers.IsRecoveredEnoughToJoinArmy(party))
+        try
         {
-            explanation = StrengthText;
-            return false;
+            if (party.LeaderHero != null && StrategicAiState.IsArmyCreationOnCooldown(party.LeaderHero))
+            {
+                explanation = CooldownText;
+                return false;
+            }
+
+            if (!StrategicAiHelpers.IsRecoveredEnoughToJoinArmy(party))
+            {
+                explanation = StrengthText;
+                return false;
+            }
+        }
+        catch (Exception)
+        {
+            return true;
         }
 
         return true;
@@ -80,12 +118,18 @@ public sealed class StrategicArmyManagementModel : DefaultArmyManagementCalculat
     {
         ExplainedNumber result = base.CalculateDailyCohesionChange(army, includeDescriptions);
 
-        if (StrategicAiState.GetEnemyTerritoryDays(army) > StrategicAiTuning.SupplyGraceDays)
+        try
         {
-            result.Add(StrategicAiTuning.DeepTerritoryCohesionPenalty, includeDescriptions ? SupplyLineText : null);
+            if (StrategicAiState.GetEnemyTerritoryDays(army) > StrategicAiTuning.SupplyGraceDays)
+            {
+                result.Add(StrategicAiTuning.DeepTerritoryCohesionPenalty, includeDescriptions ? SupplyLineText : null);
+            }
+        }
+        catch (Exception)
+        {
+            // Keep the vanilla cohesion result.
         }
 
         return result;
     }
 }
-

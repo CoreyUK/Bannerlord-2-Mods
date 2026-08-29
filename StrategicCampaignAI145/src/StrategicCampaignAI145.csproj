@@ -3,6 +3,9 @@
     <TargetFramework>net472</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
+    <Version>0.2.0</Version>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
     <AssemblyName>StrategicCampaignAI145</AssemblyName>
     <RootNamespace>StrategicCampaignAI145</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -33,6 +36,10 @@
     </Reference>
     <Reference Include="TaleWorlds.MountAndBlade">
       <HintPath>$(BannerlordBin)\TaleWorlds.MountAndBlade.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.SaveSystem">
+      <HintPath>$(BannerlordBin)\TaleWorlds.SaveSystem.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="TaleWorlds.ObjectSystem">

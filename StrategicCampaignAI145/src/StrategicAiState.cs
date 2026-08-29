@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -9,26 +9,226 @@ namespace StrategicCampaignAI145;
 
 internal static class StrategicAiState
 {
-    private static Dictionary<string, int> EnemyTerritoryDaysByArmy = new();
-    private static Dictionary<string, int> RolesByArmy = new();
-    private static Dictionary<string, string> TargetLocksByArmy = new();
-    private static Dictionary<string, double> TargetLockDaysByArmy = new();
-    private static Dictionary<string, double> RecentCaptureDaysBySettlement = new();
-    private static Dictionary<string, StrategicFactionStatus> FactionStatuses = new();
-    private static Dictionary<string, string> RaidedVillageByFaction = new();
-    private static Dictionary<string, double> FailedTargetCooldownDays = new();
-    private static Dictionary<string, string> LostSettlementClaimByFaction = new();
-    private static Dictionary<string, int> WarGoalsByFaction = new();
-    private static Dictionary<string, double> WarGoalUpdatedDaysByFaction = new();
-    private static Dictionary<string, string> OperationTargetByFaction = new();
-    private static Dictionary<string, double> ArmyCreationCooldownUntilDaysByHero = new();
-    private static Dictionary<string, double> WeakPartyCreatedDaysByHero = new();
-    private static Dictionary<string, ArmyProgress> ArmyProgressByArmy = new();
-    private static Dictionary<string, double> GarrisonReinforcedDaysBySettlement = new();
+    private static readonly Dictionary<string, int> EnemyTerritoryDaysByArmy = new();
+    private static readonly Dictionary<string, int> RolesByArmy = new();
+    private static readonly Dictionary<string, string> TargetLocksByArmy = new();
+    private static readonly Dictionary<string, double> TargetLockDaysByArmy = new();
+    private static readonly Dictionary<string, double> LastOrderDaysByArmy = new();
+    private static readonly Dictionary<string, string> LastOrderTargetByArmy = new();
+    private static readonly Dictionary<string, ArmyProgress> ArmyProgressByArmy = new();
+    private static readonly Dictionary<string, double> RecentCaptureDaysBySettlement = new();
+    private static readonly Dictionary<string, StrategicFactionStatus> FactionStatuses = new();
+    private static readonly Dictionary<string, string> RaidedVillageByFaction = new();
+    private static readonly Dictionary<string, double> FailedTargetCooldownDays = new();
+    private static readonly Dictionary<string, string> LostSettlementClaimByFaction = new();
+    private static readonly Dictionary<string, int> WarGoalsByFaction = new();
+    private static readonly Dictionary<string, double> WarGoalUpdatedDaysByFaction = new();
+    private static readonly Dictionary<string, string> OperationTargetByFaction = new();
+    private static readonly Dictionary<string, double> ArmyCreationCooldownUntilDaysByHero = new();
+    private static readonly Dictionary<string, double> WeakPartyCreatedDaysByHero = new();
+    private static readonly Dictionary<string, double> GarrisonReinforcedDaysBySettlement = new();
 
+    private static readonly Dictionary<string, Settlement> SettlementsById = new();
+
+    /// <summary>
+    /// Persists the parts of the strategic memory that a campaign cannot cheaply
+    /// rebuild: siege failures, lord recovery cooldowns, army objectives, war
+    /// goals and lost-fief claims.
+    ///
+    /// Only dictionaries of primitives cross the save boundary, and every
+    /// container type is registered in <see cref="StrategicAiSaveDefiner"/>.
+    /// Saving a container the definer does not declare is what made the game
+    /// fail to create a save in early versions.
+    ///
+    /// Anything recomputed within an hour (faction status, army roles, movement
+    /// progress) is deliberately left out.
+    /// </summary>
     public static void SyncData(IDataStore dataStore)
     {
-        // Runtime-only memory. Persisting these dictionaries can make Bannerlord fail save creation.
+        if (!StrategicAiTuning.EnablePersistentMemory)
+        {
+            return;
+        }
+
+        try
+        {
+            SyncStringMap(dataStore, "SCAI_TargetLocks", TargetLocksByArmy);
+            SyncStringMap(dataStore, "SCAI_LostClaims", LostSettlementClaimByFaction);
+            SyncStringMap(dataStore, "SCAI_OperationTargets", OperationTargetByFaction);
+            SyncStringMap(dataStore, "SCAI_RaidedVillages", RaidedVillageByFaction);
+
+            SyncIntMap(dataStore, "SCAI_WarGoals", WarGoalsByFaction);
+            SyncIntMap(dataStore, "SCAI_EnemyTerritoryDays", EnemyTerritoryDaysByArmy);
+
+            SyncDoubleMap(dataStore, "SCAI_TargetLockDays", TargetLockDaysByArmy);
+            SyncDoubleMap(dataStore, "SCAI_FailedTargets", FailedTargetCooldownDays);
+            SyncDoubleMap(dataStore, "SCAI_WarGoalUpdated", WarGoalUpdatedDaysByFaction);
+            SyncDoubleMap(dataStore, "SCAI_ArmyCreationCooldown", ArmyCreationCooldownUntilDaysByHero);
+            SyncDoubleMap(dataStore, "SCAI_RecentCaptures", RecentCaptureDaysBySettlement);
+            SyncDoubleMap(dataStore, "SCAI_GarrisonReinforced", GarrisonReinforcedDaysBySettlement);
+        }
+        catch (Exception exception)
+        {
+            // A save must never fail because of the strategic layer. Losing this
+            // memory only costs the AI some continuity.
+            StrategicAiLog.WriteError("SyncData failed: " + exception.Message);
+        }
+    }
+
+    private static void SyncStringMap(IDataStore dataStore, string key, Dictionary<string, string> target)
+    {
+        Dictionary<string, string>? buffer = dataStore.IsSaving ? new Dictionary<string, string>(target) : null;
+        dataStore.SyncData(key, ref buffer);
+        ReplaceOnLoad(dataStore, target, buffer);
+    }
+
+    private static void SyncIntMap(IDataStore dataStore, string key, Dictionary<string, int> target)
+    {
+        Dictionary<string, int>? buffer = dataStore.IsSaving ? new Dictionary<string, int>(target) : null;
+        dataStore.SyncData(key, ref buffer);
+        ReplaceOnLoad(dataStore, target, buffer);
+    }
+
+    private static void SyncDoubleMap(IDataStore dataStore, string key, Dictionary<string, double> target)
+    {
+        Dictionary<string, double>? buffer = dataStore.IsSaving ? new Dictionary<string, double>(target) : null;
+        dataStore.SyncData(key, ref buffer);
+        ReplaceOnLoad(dataStore, target, buffer);
+    }
+
+    /// <summary>
+    /// On load, the live dictionary is always cleared first. A save written
+    /// before this feature existed yields null, and the clear is what stops the
+    /// previously played campaign's memory leaking into this one.
+    /// </summary>
+    private static void ReplaceOnLoad<TValue>(IDataStore dataStore, Dictionary<string, TValue> target, Dictionary<string, TValue>? loaded)
+    {
+        if (!dataStore.IsLoading)
+        {
+            return;
+        }
+
+        target.Clear();
+        if (loaded == null)
+        {
+            return;
+        }
+
+        foreach (KeyValuePair<string, TValue> pair in loaded)
+        {
+            if (!string.IsNullOrEmpty(pair.Key))
+            {
+                target[pair.Key] = pair.Value;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Clears the derived state that must not survive a campaign switch but is
+    /// cheap to rebuild. Safe to call after a load, unlike <see cref="Reset"/>,
+    /// because it leaves the dictionaries that SyncData has just populated
+    /// alone -- behaviour SyncData runs during deserialisation, before
+    /// OnGameLoadedEvent fires.
+    /// </summary>
+    public static void ResetRuntimeOnly()
+    {
+        RolesByArmy.Clear();
+        LastOrderDaysByArmy.Clear();
+        LastOrderTargetByArmy.Clear();
+        ArmyProgressByArmy.Clear();
+        FactionStatuses.Clear();
+        WeakPartyCreatedDaysByHero.Clear();
+        SettlementsById.Clear();
+        StrategicAiCache.Reset();
+    }
+
+    /// <summary>
+    /// Clears every cached decision, persisted memory included. Only valid for a
+    /// brand new campaign -- calling this after a load would discard the state
+    /// SyncData just restored.
+    /// </summary>
+    public static void Reset()
+    {
+        EnemyTerritoryDaysByArmy.Clear();
+        RolesByArmy.Clear();
+        TargetLocksByArmy.Clear();
+        TargetLockDaysByArmy.Clear();
+        LastOrderDaysByArmy.Clear();
+        LastOrderTargetByArmy.Clear();
+        ArmyProgressByArmy.Clear();
+        RecentCaptureDaysBySettlement.Clear();
+        FactionStatuses.Clear();
+        RaidedVillageByFaction.Clear();
+        FailedTargetCooldownDays.Clear();
+        LostSettlementClaimByFaction.Clear();
+        WarGoalsByFaction.Clear();
+        WarGoalUpdatedDaysByFaction.Clear();
+        OperationTargetByFaction.Clear();
+        ArmyCreationCooldownUntilDaysByHero.Clear();
+        WeakPartyCreatedDaysByHero.Clear();
+        GarrisonReinforcedDaysBySettlement.Clear();
+        SettlementsById.Clear();
+        StrategicAiCache.Reset();
+    }
+
+    /// <summary>
+    /// Drops expired entries so the persisted dictionaries cannot grow without
+    /// bound over a long campaign. Cooldowns for heroes who died are otherwise
+    /// never queried again, so they would sit in every save forever.
+    /// </summary>
+    public static void PruneExpired()
+    {
+        double now = CampaignTime.Now.ToDays;
+
+        PruneOlderThan(FailedTargetCooldownDays, now, StrategicAiTuning.TargetFailureCooldownHours / 24f);
+        PruneOlderThan(RecentCaptureDaysBySettlement, now, StrategicAiTuning.RecentCaptureConsolidationHours / 24f);
+        PruneOlderThan(GarrisonReinforcedDaysBySettlement, now, StrategicAiTuning.GarrisonReinforcementCooldownDays);
+        PruneOlderThan(TargetLockDaysByArmy, now, StrategicAiTuning.ObjectiveCommitmentHours / 24f);
+
+        // Army creation cooldowns store an absolute expiry rather than a stamp.
+        var expiredHeroes = new List<string>();
+        foreach (KeyValuePair<string, double> entry in ArmyCreationCooldownUntilDaysByHero)
+        {
+            if (now > entry.Value)
+            {
+                expiredHeroes.Add(entry.Key);
+            }
+        }
+
+        foreach (string hero in expiredHeroes)
+        {
+            ArmyCreationCooldownUntilDaysByHero.Remove(hero);
+        }
+    }
+
+    private static void PruneOlderThan(Dictionary<string, double> map, double now, double maxAgeDays)
+    {
+        var expired = new List<string>();
+        foreach (KeyValuePair<string, double> entry in map)
+        {
+            if (now - entry.Value > maxAgeDays)
+            {
+                expired.Add(entry.Key);
+            }
+        }
+
+        foreach (string key in expired)
+        {
+            map.Remove(key);
+        }
+    }
+
+    /// <summary>Drops per-army bookkeeping when an army stops existing.</summary>
+    public static void ForgetArmy(Army army)
+    {
+        string key = GetArmyKey(army);
+        EnemyTerritoryDaysByArmy.Remove(key);
+        RolesByArmy.Remove(key);
+        TargetLocksByArmy.Remove(key);
+        TargetLockDaysByArmy.Remove(key);
+        LastOrderDaysByArmy.Remove(key);
+        LastOrderTargetByArmy.Remove(key);
+        ArmyProgressByArmy.Remove(key);
     }
 
     public static int GetEnemyTerritoryDays(Army army)
@@ -107,6 +307,50 @@ internal static class StrategicAiState
         return false;
     }
 
+    /// <summary>
+    /// Rate limit on strategic move orders. Without this the four-hourly planner
+    /// can re-order an army faster than it can act on the previous order, which
+    /// reads in game as an army jittering back and forth.
+    /// </summary>
+    public static bool CanIssueOrder(Army army)
+    {
+        return !LastOrderDaysByArmy.TryGetValue(GetArmyKey(army), out double lastOrderDays) ||
+               (CampaignTime.Now.ToDays - lastOrderDays) * 24d >= StrategicAiTuning.ArmyOrderMinIntervalHours;
+    }
+
+    public static void MarkOrderIssued(Army army, Settlement? target = null)
+    {
+        string key = GetArmyKey(army);
+        LastOrderDaysByArmy[key] = CampaignTime.Now.ToDays;
+
+        if (target == null)
+        {
+            LastOrderTargetByArmy.Remove(key);
+        }
+        else
+        {
+            LastOrderTargetByArmy[key] = target.StringId;
+        }
+    }
+
+    /// <summary>
+    /// True when we already sent this army to this destination recently.
+    ///
+    /// Checking only MobileParty.TargetSettlement is not enough: the vanilla AI
+    /// re-plans on its own schedule and clears the target, so an unconditional
+    /// re-issue turns into a tug of war that re-orders the same army to the same
+    /// place every ArmyOrderMinIntervalHours indefinitely, and it never arrives.
+    /// If our order did not stick the first time, repeating it will not help.
+    /// </summary>
+    public static bool WasRecentlyOrderedTo(Army army, Settlement target)
+    {
+        string key = GetArmyKey(army);
+        return LastOrderTargetByArmy.TryGetValue(key, out string lastTarget) &&
+               lastTarget == target.StringId &&
+               LastOrderDaysByArmy.TryGetValue(key, out double lastDays) &&
+               (CampaignTime.Now.ToDays - lastDays) * 24d < StrategicAiTuning.RepeatOrderSuppressionHours;
+    }
+
     public static void MarkRecentlyCaptured(Settlement settlement)
     {
         RecentCaptureDaysBySettlement[settlement.StringId] = CampaignTime.Now.ToDays;
@@ -125,7 +369,7 @@ internal static class StrategicAiState
         FactionStatuses[kingdom.StringId] = status;
     }
 
-    public static StrategicFactionStatus GetFactionStatus(IFaction faction)
+    public static StrategicFactionStatus GetFactionStatus(IFaction? faction)
     {
         if (faction is Kingdom kingdom && FactionStatuses.TryGetValue(kingdom.StringId, out StrategicFactionStatus status))
         {
@@ -142,20 +386,9 @@ internal static class StrategicAiState
 
     public static Settlement? GetRaidedVillageSettlement(Kingdom kingdom)
     {
-        if (!RaidedVillageByFaction.TryGetValue(kingdom.StringId, out string settlementId))
-        {
-            return null;
-        }
-
-        foreach (Settlement settlement in Settlement.All)
-        {
-            if (settlement.StringId == settlementId)
-            {
-                return settlement;
-            }
-        }
-
-        return null;
+        return RaidedVillageByFaction.TryGetValue(kingdom.StringId, out string settlementId)
+            ? FindSettlement(settlementId)
+            : null;
     }
 
     public static void MarkFailedTarget(Settlement settlement)
@@ -176,12 +409,9 @@ internal static class StrategicAiState
 
     public static Settlement? GetLostClaim(Kingdom kingdom)
     {
-        if (!LostSettlementClaimByFaction.TryGetValue(kingdom.StringId, out string settlementId))
-        {
-            return null;
-        }
-
-        return FindSettlement(settlementId);
+        return LostSettlementClaimByFaction.TryGetValue(kingdom.StringId, out string settlementId)
+            ? FindSettlement(settlementId)
+            : null;
     }
 
     public static StrategicWarGoal GetWarGoal(Kingdom kingdom)
@@ -266,13 +496,13 @@ internal static class StrategicAiState
                CampaignTime.Now.ToDays - createdDays <= StrategicAiTuning.NewWeakPartyGraceDays;
     }
 
-
     public static bool UpdateArmyProgressAndIsStuck(Army army, MobileParty leader)
     {
         string key = GetArmyKey(army);
         Vec2 position = leader.GetPosition2D;
 
-        if (leader.BesiegedSettlement != null)
+        // An army sitting in a siege camp is working, not stuck.
+        if (leader.BesiegedSettlement != null || leader.MapEvent != null || leader.SiegeEvent != null)
         {
             ArmyProgressByArmy.Remove(key);
             return false;
@@ -308,19 +538,25 @@ internal static class StrategicAiState
         GarrisonReinforcedDaysBySettlement[settlement.StringId] = CampaignTime.Now.ToDays;
     }
 
+    /// <summary>
+    /// O(1) settlement lookup. This used to be a linear scan of Settlement.All on
+    /// every call, and it is reached from the target scoring hot path.
+    /// </summary>
     private static Settlement? FindSettlement(string settlementId)
     {
-        foreach (Settlement settlement in Settlement.All)
+        if (SettlementsById.Count == 0)
         {
-            if (settlement.StringId == settlementId)
+            foreach (Settlement settlement in Settlement.All)
             {
-                return settlement;
+                if (settlement != null)
+                {
+                    SettlementsById[settlement.StringId] = settlement;
+                }
             }
         }
 
-        return null;
+        return SettlementsById.TryGetValue(settlementId, out Settlement result) ? result : null;
     }
-
 
     private sealed class ArmyProgress
     {
@@ -335,6 +571,7 @@ internal static class StrategicAiState
         public float Y { get; }
         public int StuckTicks { get; }
     }
+
     private static string GetArmyKey(Army army)
     {
         return army.LeaderParty?.Party?.Id ?? army.GetHashCode().ToString();
@@ -345,8 +582,3 @@ internal static class StrategicAiState
         return hero == null || string.IsNullOrEmpty(hero.StringId) ? null : hero.StringId;
     }
 }
-
-
-
-
-

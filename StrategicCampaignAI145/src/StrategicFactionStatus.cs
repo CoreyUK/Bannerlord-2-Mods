@@ -1,4 +1,6 @@
-﻿namespace StrategicCampaignAI145;
+using TaleWorlds.Library;
+
+namespace StrategicCampaignAI145;
 
 internal sealed class StrategicFactionStatus
 {
@@ -11,15 +13,35 @@ internal sealed class StrategicFactionStatus
     public StrategicWarGoal WarGoal { get; set; } = StrategicWarGoal.BorderWar;
     public bool WantsPeace { get; set; }
 
+    /// <summary>
+    /// A faction that should be suing for peace rather than pressing an attack.
+    ///
+    /// The fortification test previously read
+    /// <c>ThreatenedFortifications &gt;= OwnedFortifications / 3</c> using integer
+    /// division, so any kingdom holding fewer than three fortifications compared
+    /// against zero and was permanently exhausted -- which pinned it to the
+    /// ForcePeace war goal and suppressed all of its offensive scoring. Small and
+    /// newly formed kingdoms could therefore never go on the attack at all.
+    /// </summary>
     public bool IsExhausted
     {
         get
         {
-            return ActiveWars > 0 &&
-                   (EnemyStrength > OwnedStrength * 1.35f ||
-                    ThreatenedFortifications >= OwnedFortifications / 3 ||
-                    RaidedVillages >= 3);
+            if (ActiveWars <= 0)
+            {
+                return false;
+            }
+
+            bool outmatched = EnemyStrength > OwnedStrength * StrategicAiTuning.ExhaustionStrengthRatio;
+
+            bool overrun = ThreatenedFortifications > 0 &&
+                           ThreatenedFortifications >= MathF.Max(
+                               StrategicAiTuning.ExhaustionMinThreatenedFortifications,
+                               OwnedFortifications * StrategicAiTuning.ExhaustionThreatenedFraction);
+
+            bool raidedOut = RaidedVillages >= StrategicAiTuning.ExhaustionRaidedVillages;
+
+            return outmatched || overrun || raidedOut;
         }
     }
 }
-

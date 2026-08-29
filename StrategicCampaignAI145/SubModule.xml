@@ -1,16 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Module>
-  <Name value="Strategic Campaign AI 1.4.7"/>
+  <Name value="Strategic Campaign AI 1.4.8"/>
   <Id value="StrategicCampaignAI145"/>
-  <Version value="v0.1.9"/>
+  <Version value="v0.2.0"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>
-    <DependedModule Id="Native" DependentVersion="v1.4.7" Optional="false"/>
-    <DependedModule Id="SandBoxCore" DependentVersion="v1.4.7" Optional="false"/>
-    <DependedModule Id="Sandbox" DependentVersion="v1.4.7" Optional="false"/>
-    <DependedModule Id="StoryMode" DependentVersion="v1.4.7" Optional="true"/>
+    <DependedModule Id="Native" DependentVersion="v1.4.8" Optional="false"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="v1.4.8" Optional="false"/>
+    <DependedModule Id="Sandbox" DependentVersion="v1.4.8" Optional="false"/>
+    <DependedModule Id="StoryMode" DependentVersion="v1.4.8" Optional="true"/>
   </DependedModules>
+  <IncompatibleModules>
+    <!-- The 1.3.15 build registers the same campaign models; running both
+         double-applies every multiplier. -->
+    <Module Id="StrategicCampaignAI"/>
+  </IncompatibleModules>
   <SubModules>
     <SubModule>
       <Name value="StrategicCampaignAI145"/>
@@ -23,8 +28,3 @@
     </SubModule>
   </SubModules>
 </Module>
-
-
-
-
-

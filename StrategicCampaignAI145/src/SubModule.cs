@@ -1,4 +1,4 @@
-﻿using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
@@ -6,6 +6,12 @@ namespace StrategicCampaignAI145;
 
 public sealed class SubModule : MBSubModuleBase
 {
+    protected override void OnSubModuleLoad()
+    {
+        base.OnSubModuleLoad();
+        StrategicAiSettings.LoadOnce();
+    }
+
     protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
     {
         base.OnGameStart(game, gameStarterObject);
@@ -18,4 +24,3 @@ public sealed class SubModule : MBSubModuleBase
         }
     }
 }
-

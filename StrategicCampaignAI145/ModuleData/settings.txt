@@ -1,0 +1,157 @@
+# Strategic Campaign AI - user settings
+#
+# Every line is  Key = Value.  '#' and '//' start a comment.
+# Keys match the field names in StrategicAiTuning and are case-insensitive.
+# Unknown keys and bad values are ignored, so this file can never break startup.
+# Changes take effect when the game is restarted.
+#
+# Everything below is commented out and shows the built-in default.
+
+# ---------------------------------------------------------------- master switches
+
+# Direct move orders (army roles, staging, interception).
+#
+# OFF by default. The vanilla AI clears our move orders on its own schedule, so
+# this layer ends up in a tug of war with it, and in testing the corrected
+# scoring ALONE produced about three times as many successful sieges as it did
+# with this enabled. Turn it on only if you want the mod steering armies
+# directly and are willing to watch for armies that never reach their target.
+# EnableStrategicOrders = false
+
+# Army leaders topping up a dangerously weak friendly garrison they are standing in.
+#
+# OFF by default. There is no campaign-system action for transferring troops to
+# a garrison, so this mutates rosters directly. In testing every crash had this
+# enabled and the only clean run had it disabled. It is also the feature behind
+# the earlier "troops disappear when entering a city" report. Leave it off.
+# EnableGarrisonReinforcement = false
+
+# Armies abandoning a siege they are clearly losing.
+# OFF by default: this is the only feature that reaches into a private engine
+# method by reflection, and it is the prime suspect for a hard crash seen in
+# testing. Enable only if you want it and are willing to watch for crashes.
+# EnableSiegeRetreat = false
+
+# Write decisions to the rgl log (Documents\Mount and Blade II Bannerlord\logs).
+# VerboseLogging = false
+
+# ------------------------------------------------------------------ score bounds
+#
+# The most important settings in the file. All the individual multipliers below
+# are combined and then clamped into these bands. Without the clamp the penalties
+# compound until no enemy settlement looks worth attacking, which is what makes
+# armies sit in their own towns and patrol in circles.
+#
+# If armies still look too passive, raise MinOffenseMultiplier and lower
+# MaxDefenseMultiplier. Setting both offence bounds to 1.0 disables offensive
+# suppression outright and leaves vanilla siege scoring untouched.
+
+# MinOffenseMultiplier = 0.45
+# MaxOffenseMultiplier = 3.0
+# MinDefenseMultiplier = 0.65
+# MaxDefenseMultiplier = 1.85
+
+# ------------------------------------------------------------------ AI cadence
+
+# How often the strategic layer re-plans, in campaign hours.
+# StrategicUpdateIntervalHours = 4
+
+# Minimum hours between two strategic move orders for the same army.
+# Lower values make the AI more reactive but risk it jittering.
+# ArmyOrderMinIntervalHours = 12
+
+# How long an army sticks with an objective before reconsidering it.
+# ObjectiveCommitmentHours = 36
+
+# Bonus applied to the objective an army already holds. This hysteresis is what
+# stops two armies swapping targets forever. Raise it if armies still waver.
+# CurrentObjectiveStickinessMultiplier = 1.4
+
+# How long a failed target is avoided, in hours.
+# TargetFailureCooldownHours = 96
+
+# ------------------------------------------------------------- offensive shaping
+
+# FrontlineTargetMultiplier = 1.9
+# DeepTargetMultiplier = 0.55
+# OverextendedTargetMultiplier = 0.7
+# ChokepointTargetMultiplier = 1.55
+# ClaimTargetMultiplier = 1.4
+# EconomicTargetMultiplier = 1.3
+# DuplicateTargetPenalty = 0.7
+# WarExhaustionOffenseMultiplier = 0.75
+# PeacePressureOffenseMultiplier = 0.7
+# SiegeViabilityWeakReliefMultiplier = 0.6
+
+# ------------------------------------------------------------- defensive shaping
+
+# CapitalDefenseMultiplier = 1.5
+# HighProsperityDefenseMultiplier = 1.25
+# ThreatenedFortificationDefenseMultiplier = 1.6
+# WarExhaustionDefenseMultiplier = 1.3
+
+# ------------------------------------------------------------------ army gating
+
+# Raise these to make the AI form armies less readily; lower them for more armies.
+# MinimumProspectiveArmyStrength = 260
+# MinimumArmyMemberParties = 2
+# MinimumArmyLeaderHealthyTroops = 22
+# MinimumArmyMemberHealthyTroops = 10
+
+# Cap on simultaneous armies per kingdom. 99 means effectively uncapped.
+# MaxArmiesPerKingdom = 99
+# MaxArmiesPerStrongKingdom = 99
+
+# Abandon a siege when local friendly power drops below this fraction of the
+# enemy relief force.
+# RetreatPowerRatio = 0.8
+
+# Troops an army leader will hand to a weak garrison, and the floor it keeps.
+# ReinforcementTroopDonation = 18
+# MinimumLeaderPartyTroopsAfterDonation = 65
+
+# --------------------------------------------------------------- war exhaustion
+#
+# An exhausted faction switches to the ForcePeace goal, which damps its offence.
+# Raise ExhaustionStrengthRatio or ExhaustionMinThreatenedFortifications to make
+# factions keep fighting for longer.
+
+# ExhaustionStrengthRatio = 1.5
+# ExhaustionThreatenedFraction = 0.34
+# ExhaustionMinThreatenedFortifications = 2
+# ExhaustionRaidedVillages = 3
+
+# ------------------------------------------------------------ persistent memory
+#
+# Carry siege failures, lord recovery cooldowns, army objectives, war goals and
+# lost-fief claims across save/load. Only dictionaries of primitives are written,
+# through a registered save definer.
+#
+# The save definer is always registered regardless of this setting, so turning
+# persistence off can never make an existing save unloadable.
+
+# EnablePersistentMemory = true
+
+# Enemy strength near the capital that switches a kingdom to DefendCapitalRegion.
+# Only rival kingdoms count toward this; bandits and minor factions are ignored.
+# CapitalThreatStrength = 900
+
+# How a fief is judged to be "in danger" (feeds the war-exhaustion test).
+# Radius is deliberately tighter than HomelandDefenseThreatRadius, and enemy
+# strength must exceed the garrison by the ratio, so that merely sitting near a
+# border does not count as being threatened.
+# ThreatenedFortificationRadius = 45
+# ThreatenedGarrisonRatio = 1.5
+
+# Suppress re-issuing the same destination to the same army within this many
+# hours. The vanilla AI clears our move orders on its own schedule; without this
+# the mod re-imposes the same order every ArmyOrderMinIntervalHours and the army
+# never arrives anywhere.
+# RepeatOrderSuppressionHours = 48
+
+# Query live map weather when scoring targets.
+# OFF by default. Season effects (WinterCampaignMultiplier) still apply and are
+# always safe; only the live weather lookup is gated here.
+# EnableWeatherEffects = false
+# EnableStrategicOrders = false
+# EnableGarrisonReinforcement = false
