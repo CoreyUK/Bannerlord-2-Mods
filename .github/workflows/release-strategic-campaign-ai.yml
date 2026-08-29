@@ -1,0 +1,86 @@
+name: Release Strategic Campaign AI
+
+# Manual trigger only. Nothing uploads on a push.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version string for the new file version (e.g. 0.3.0)"
+        required: true
+        type: string
+      file_id:
+        description: "Nexus file ID to add this version to"
+        required: true
+        default: "7481150"
+        type: string
+      archive_existing_version:
+        description: "Archive the previous version so it stops being downloaded"
+        required: true
+        default: true
+        type: boolean
+      update_mod_version:
+        description: "Set the mod page version to match this file"
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Package the module
+        id: package
+        run: |
+          set -euo pipefail
+          NAME="StrategicCampaignAI-v${{ inputs.version }}.zip"
+
+          # Ship only what a user needs at runtime. No sources, no symbols.
+          STAGE="$(mktemp -d)/StrategicCampaignAI"
+          mkdir -p "$STAGE/bin/Win64_Shipping_Client" "$STAGE/ModuleData"
+          cp StrategicCampaignAI/SubModule.xml "$STAGE/"
+          cp StrategicCampaignAI/CHANGELOG.txt "$STAGE/"
+          cp StrategicCampaignAI/ModuleData/settings.txt "$STAGE/ModuleData/"
+          cp StrategicCampaignAI/bin/Win64_Shipping_Client/StrategicCampaignAI.dll \
+             "$STAGE/bin/Win64_Shipping_Client/"
+
+          ( cd "$(dirname "$STAGE")" && zip -r -9 -q "$GITHUB_WORKSPACE/$NAME" StrategicCampaignAI )
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "Packaged $NAME ($(stat -c%s "$GITHUB_WORKSPACE/$NAME") bytes)"
+          unzip -l "$GITHUB_WORKSPACE/$NAME"
+
+      - name: Guard against shipping a stale version
+        run: |
+          set -euo pipefail
+          DECLARED=$(grep -oP '(?<=<Version value=")[^"]+' StrategicCampaignAI/SubModule.xml)
+          if [ "$DECLARED" != "v${{ inputs.version }}" ]; then
+            echo "SubModule.xml declares $DECLARED but the release input is v${{ inputs.version }}."
+            echo "Bump SubModule.xml first, or correct the input."
+            exit 1
+          fi
+          echo "Version matches: $DECLARED"
+
+      - name: Read changelog
+        id: changelog
+        run: |
+          {
+            echo 'text<<CHANGELOG_EOF'
+            cat StrategicCampaignAI/CHANGELOG.txt
+            echo 'CHANGELOG_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload to Nexus Mods
+        uses: Nexus-Mods/upload-action@v1.0.0-beta.10
+        with:
+          api_key: ${{ secrets.NEXUS_API_KEY }}
+          mod_id: "11440"
+          file_id: ${{ inputs.file_id }}
+          filename: ${{ steps.package.outputs.name }}
+          version: ${{ inputs.version }}
+          display_name: Strategic Campaign AI ${{ inputs.version }}
+          changelog: ${{ steps.changelog.outputs.text }}
+          update_mod_version: ${{ inputs.update_mod_version }}
+          archive_existing_version: ${{ inputs.archive_existing_version }}
+          allow_mod_manager_download: true
