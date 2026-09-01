@@ -1,3 +1,54 @@
+Strategic Campaign AI - unreleased
+=================================
+
+Requires Mount & Blade II: Bannerlord v1.4.8.
+
+
+Fixed
+-----
+- Armies no longer bounce between two nearby castles, starting a siege, lifting
+  it, and starting the other. The "this siege is hopeless" verdict could only
+  ever apply to the siege actually in progress, so lifting one deleted the
+  penalty and the abandoned castle looked worth taking again straight away. The
+  verdict is now reached once an hour and has to hold for several hours before
+  an army acts on it.
+- Troops sheltering inside a besieged settlement no longer count as a force
+  coming to relieve it. Two or three lords holed up in a castle used to make a
+  siege look hopeless the moment it began.
+- Giving up a siege, or losing the besieging army, now records a failed target,
+  so the AI does not turn straight back around. That cooldown existed but was
+  unreachable unless direct move orders were enabled, and it is now recorded per
+  faction rather than globally.
+- Armies no longer flip between defending a fief and besieging one every few
+  hours. Roles are kept for a minimum time instead of being rebuilt from a
+  strength ranking on every planning tick, and the kingdom's defensive footing
+  now needs a quiet spell before it lifts rather than tracking a bare threat
+  count.
+- Defending an objective now carries the same commitment bonus as attacking one,
+  so an army stops abandoning a fief the instant its arrival ends the siege or
+  raid that drew it there.
+- Nearby-strength results are no longer shared between callers asking about
+  different radii. Six callers share these caches across sweeps of 45 to 95
+  units, and whichever asked first each hour decided the answer everyone got,
+  which made both siege and threat assessment change their minds hour to hour
+  with nothing having moved.
+- Low supplies no longer penalise a siege already under way, only the decision
+  to start a new one. A besieging army's food routinely dips below three days.
+- An army's objective is no longer forgotten when the game briefly clears its
+  destination, which used to drop the commitment bonus at the exact moment it
+  was needed.
+- Objectives belonging to armies that no longer exist are cleared from the save.
+  They were never pruned, and each one held a settlement under the duplicate-
+  target penalty for every army still in the field.
+
+
+Added
+-----
+- settings.txt: SiegeAbandonConfirmationHours, RoleMinimumHoldHours and
+  UrgentDefenseLatchHours, with a "steadying the AI" section describing what to
+  change when armies look indecisive.
+
+
 Strategic Campaign AI - v0.3.0
 ==============================
 
