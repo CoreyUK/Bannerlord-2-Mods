@@ -13,6 +13,7 @@ Each folder is a separate Bannerlord module:
 - `RoyalHeirStart` - lets a new Sandbox character claim a kingdom as a lost royal heir with faction-specific starting bonuses.
 - `StrategicCampaignAI` - gives kingdom AI direction on the campaign map: frontline-aware objectives, war goals and exhaustion, army roles, siege judgement, raid response, garrison support, interception, and save-persistent strategic memory. Built on Bannerlord's own campaign AI models; no Harmony required.
 - `TroopHealthBars` - adds compact battle HUD bars showing surviving infantry, archers, and mounted troops as percentages, with optional MCM settings for position, colours, opacity, percentages, and category toggles.
+- `VeteranTroops` - gives each troop stack in your party a memory of the battles it survived. Stacks climb from Green through Seasoned, Veteran and Hardened, gaining hit points and starting morale; losses, recruits and upgrades erode or carry that experience. Player party only for now, optional MCM settings, safe to add or remove mid-save.
 
 ## Layout
 
