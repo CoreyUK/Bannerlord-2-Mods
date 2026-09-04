@@ -12,11 +12,12 @@
   <PropertyGroup>
     <BannerlordPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerlordPath>
     <BannerlordBin>$(BannerlordPath)\bin\Win64_Shipping_Client</BannerlordBin>
+    <HarmonyPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\261550\2859188632\bin\Win64_Shipping_Client</HarmonyPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>C:\Users\corey\.nuget\packages\lib.harmony\2.2.2\lib\net472\0Harmony.dll</HintPath>
+      <HintPath>$(HarmonyPath)\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
