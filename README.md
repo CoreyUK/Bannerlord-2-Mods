@@ -25,6 +25,16 @@ Each module folder keeps the Bannerlord runtime layout:
 
 Intermediate build folders such as `src/obj` are intentionally excluded.
 
+## Game Version
+
+Every module currently targets **Bannerlord v1.4.8** (`DependentVersion="v1.4.8"` in each `SubModule.xml`). Modules that need Harmony, UIExtenderEx or MCM declare those dependencies in their own `SubModule.xml`.
+
 ## Build Notes
 
-Projects target `.NET Framework 4.7.2` and reference Bannerlord assemblies from a local Steam install. If your Bannerlord path differs, update the `BannerlordPath` property in the relevant `.csproj`.
+Projects target `.NET Framework 4.7.2` and reference Bannerlord assemblies from a local Steam install. If your Bannerlord path differs, update the `BannerlordPath` property in the relevant `.csproj`, or override the paths on the command line without editing anything:
+
+```
+dotnet build <Module>/src/<Module>.csproj -c Release -p:BannerlordPath="<game root>"
+```
+
+`HarmonyPath`, `McmPath` and `UIExtenderPath` can be overridden the same way for the modules that use them. The `bin/Win64_Shipping_Client` folders contain the compiled output; `WeaponDurability` and `TroopHealthBars` build their main project first, then the `mcm/` (and `uiextender/`) projects that reference it.
