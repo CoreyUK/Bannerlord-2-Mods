@@ -350,7 +350,11 @@ internal static class StrategicAiHelpers
 
         foreach (MobileParty party in StrategicAiCache.GetActiveLordParties())
         {
+            // Rival kingdoms only. Minor-faction lords wandering past are not a
+            // relief force; counting them was what made armies walk away from
+            // sieges they were winning.
             if (!IsEnemy(besiegerFaction, party.MapFaction) ||
+                !IsMajorWarFaction(party.MapFaction) ||
                 party.CurrentSettlement == besieged ||
                 party.BesiegedSettlement == besieged ||
                 party.MapEvent != null ||
