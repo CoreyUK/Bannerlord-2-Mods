@@ -1,0 +1,30 @@
+<Prefab>
+  <Constants>
+    <Constant Name="Card.Width" Value="64" />
+    <Constant Name="Card.Height" Value="76" />
+    <Constant Name="Icon.Size" Value="32" />
+  </Constants>
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true">
+      <Children>
+
+        <!-- Item cards in a row just above the hint line, clear of the order UI. -->
+        <ListPanel DataSource="{Cards}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="180" StackLayout.LayoutMethod="HorizontalLeftToRight">
+          <ItemTemplate>
+            <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Card.Width" SuggestedHeight="!Card.Height" MarginLeft="4" MarginRight="4" Brush="Order.Siege.Deployment.MachineItem" IsSelected="@IsSelected" Command.Click="ExecuteSelect" DoNotPassEventsToChildren="true" UpdateChildrenStates="true">
+              <Children>
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Icon.Size" SuggestedHeight="!Icon.Size" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="6" Sprite="@Icon" Color="#F4E1C4FF" />
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Bottom" MarginBottom="18" Brush="Order.Troop.CountText" Brush.FontSize="12" Brush.TextHorizontalAlignment="Center" Text="@Name" />
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Bottom" MarginBottom="4" Brush="Order.Item.ShortcutText" Brush.FontSize="11" Brush.TextHorizontalAlignment="Center" Text="@Status" />
+              </Children>
+            </ButtonWidget>
+          </ItemTemplate>
+        </ListPanel>
+
+        <!-- One-line instructions above the bottom bar. -->
+        <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="150" Brush="Order.Troop.CountText" Brush.FontSize="15" Text="@Hint" DoNotAcceptEvents="true" />
+
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

@@ -7,6 +7,7 @@ Each folder is a separate Bannerlord module:
 - `CompanionDefense` - lets you send companion-led clan parties to defend owned villages, castles, and towns under attack.
 - `CompanionHotswap` - companion swapping and selection UI support.
 - `DuelCompanions` - adds roaming duel rumors, elite duelists, gauntlets, rare weapon rewards, and recruitable duel companions.
+- `FieldFortifications` - buy barricades, a ballista and a catapult before a field battle and place them yourself during deployment; the AI paths around the barricades, horses impale themselves on them, and your archers crew the engines. Requires Bannerlord Harmony.
 - `LoadoutPresets` - player loadout preset support.
 - `MovingDismount` - lets the player attempt to dismount from a moving horse, with speed-scaled stumble and hard-fall damage.
 - `ReserveSliderLimit` - raises the settlement reserve slider from 10,000 to 100,000. Requires Bannerlord Harmony.

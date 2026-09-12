@@ -1,0 +1,15 @@
+# Field Fortifications settings. Prices are read when a campaign loads; the rest at the start of every battle.
+# Denars charged for each work.
+barricade_cost=6000
+ballista_cost=10000
+catapult_cost=15000
+# 1 = your archers crew the ballista and catapult, 0 = you man them yourself.
+crew_ai=1
+# Bolts or stones loaded on each engine at the start of the battle.
+engine_ammo=30
+# Placement keys during deployment (names from the game InputKey list).
+place_key=P
+confirm_key=Enter
+cancel_key=BackSpace
+rotate_left_key=Left
+rotate_right_key=Right

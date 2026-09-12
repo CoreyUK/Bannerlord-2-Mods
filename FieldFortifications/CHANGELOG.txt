@@ -1,0 +1,7 @@
+v1.0.0
+- Initial release.
+- Encounter menu options to buy barricades, a ballista and a catapult before a field battle (open-terrain battles only).
+- Ghost previews and cards during deployment: click a card or press P, move with the mouse, rotate with the arrow keys, Enter to place.
+- Barricades carry a blocker navmesh so the AI paths around them; horses that charge them are impaled.
+- Ballista and catapult are crewed by your archers and fire on their own; a catapult left without a crew reloads itself.
+- Prices, crew, ammo and keys are set in settings.txt.
