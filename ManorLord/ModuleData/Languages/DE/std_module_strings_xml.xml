@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Deutsch" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="Mühle" />
+    <string id="ml_b_orchard" text="Obstgarten" />
+    <string id="ml_b_palisade" text="Palisade" />
+    <string id="ml_b_quarters" text="Wachunterkunft" />
+    <string id="ml_b_storehouse" text="Lagerhaus" />
+    <string id="ml_b_training_field" text="Übungsplatz" />
+    <string id="ml_b_workshop" text="Werkstatt" />
+    <string id="ml_btn_accept" text="Übernehmen" />
+    <string id="ml_btn_cancel" text="Abbrechen" />
+    <string id="ml_btn_cancel_project" text="Bauvorhaben abbrechen" />
+    <string id="ml_btn_continue" text="Weiter" />
+    <string id="ml_btn_deposit" text="Einzahlen" />
+    <string id="ml_btn_keep_building" text="Weiterbauen" />
+    <string id="ml_btn_keep_it" text="Behalten" />
+    <string id="ml_btn_return" text="Zurück" />
+    <string id="ml_btn_sell" text="Verkaufen" />
+    <string id="ml_btn_understood" text="Verstanden" />
+    <string id="ml_btn_victory" text="Sieg" />
+    <string id="ml_btn_withdraw" text="Abheben" />
+    <string id="ml_captain_commanding" text="befehligt die Hauswache" />
+    <string id="ml_cond_damaged" text="BESCHÄDIGT" />
+    <string id="ml_cond_needs_repair" text="beschädigt und reparaturbedürftig" />
+    <string id="ml_cond_secure" text="Sicher" />
+    <string id="ml_cond_sound" text="intakt" />
+    <string id="ml_cond_threat" text="BEDROHT" />
+    <string id="ml_default_manor_name" text="Gut {SETTLEMENT}" />
+    <string id="ml_defended_body" text="Euer Widerstand brach die Plünderer, bevor sie das Gut niederbrennen oder ausrauben konnten." />
+    <string id="ml_defended_title" text="Gut verteidigt" />
+    <string id="ml_defense_lost_body" text="Die Verteidiger wurden überrannt. {GUARDS} Wachen fielen, {GOLD} Denare und {GOODS} eingelagerte Gegenstände gingen verloren, und das Gut wurde beschädigt." />
+    <string id="ml_defense_lost_title" text="Verteidigung des Guts gescheitert" />
+    <string id="ml_defense_won_calc" text="Unter Eurer Führung hält die Hauswache das Gut und vertreibt die Plünderer. Das Gut und seine Vorräte sind sicher." />
+    <string id="ml_defense_won_played" text="Ihr habt die Plünderer gemeinsam mit Eurer Hauswache vom Gut vertrieben. Das Gut und seine Vorräte sind sicher." />
+    <string id="ml_defense_won_title" text="Verteidigung des Guts gelungen" />
+    <string id="ml_entry_holdings" text="Gutsbesitz (bei {SETTLEMENT})" />
+    <string id="ml_entry_inquire" text="Nach dem Kauf eines Guts erkundigen" />
+    <string id="ml_entry_visit" text="Euer Gut besuchen" />
+    <string id="ml_focus_crops_name" text="Marktfrüchte" />
+    <string id="ml_focus_livestock_name" text="Viehzucht" />
+    <string id="ml_focus_mixed_name" text="Mischwirtschaft" />
+    <string id="ml_inq_cancel_body" text="Die Arbeiten an {PROJECT} einstellen? Die Hälfte der verbuchten Baukosten ({REFUND} Denare) wird zurückerstattet." />
+    <string id="ml_inq_cancel_title" text="Bau abbrechen?" />
+    <string id="ml_inq_deposit_title" text="Gutsmittel einzahlen" />
+    <string id="ml_inq_rename_body" text="Wählt einen Namen für Euer Gut." />
+    <string id="ml_inq_rename_invalid" text="Gebt einen Namen mit 1 bis 40 Zeichen ein." />
+    <string id="ml_inq_rename_title" text="Gut benennen" />
+    <string id="ml_inq_sell_body" text="Euer Gut bei {SETTLEMENT} für {VALUE} Denare verkaufen? Eingelagerte Mittel werden zurückgezahlt, doch die Hauswache und das Gutspersonal werden aufgelöst." />
+    <string id="ml_inq_sell_title" text="Gut verkaufen?" />
+    <string id="ml_inq_transfer_body" text="Gebt einen Betrag zwischen 1 und {MAX} Denaren ein." />
+    <string id="ml_inq_transfer_invalid" text="Gebt eine ganze Zahl zwischen 1 und {MAX} ein." />
+    <string id="ml_inq_withdraw_title" text="Gutsmittel abheben" />
+    <string id="ml_ledger_body" text="Bestehen des Guts: {DAYS_OWNED} erfasste Tage.&#xA;Rang: {ESTATE_RANK}.&#xA;Zustand: {CONDITION}. {THREAT}&#xA;&#xA;Letzter Tag&#xA;Einnahmen: {LAST_INCOME} Denare&#xA;Gesamtunterhalt: {LAST_UPKEEP} Denare&#xA;Vorratsänderung: {LAST_SUPPLY_CHANGE}&#xA;&#xA;Erwartet für morgen&#xA;Einnahmen: {NEXT_INCOME} Denare&#xA;Gesamtunterhalt: {NEXT_UPKEEP} Denare&#xA;Saldo: {NEXT_BALANCE} Denare&#xA;Erzeugte Vorräte: {NEXT_SUPPLIES}&#xA;Verbrauchte Vorräte: {SUPPLY_USE}&#xA;&#xA;Gesamtsummen seit Einrichtung&#xA;Einnahmen des Guts: {TOTAL_INCOME} Denare&#xA;Ausgaben des Guts: {TOTAL_EXPENSES} Denare" />
+    <string id="ml_ledger_no_threat" text="Keine akute Bedrohung." />
+    <string id="ml_ledger_threat" text="Plünderer sind aktiv; {DAYS} Tage bleiben zum Handeln." />
+    <string id="ml_ledger_title" text="Rechnungsbuch von {MANOR_NAME}" />
+    <string id="ml_loc_enter_grounds" text="Das Gutsgelände betreten" />
+    <string id="ml_loc_manor_grounds" text="Gutsgelände" />
+    <string id="ml_menu_elsewhere" text="Ihr besitzt ein Gut bei {SETTLEMENT}. Ihr könnt immer nur ein Gut besitzen; reist dorthin, um es zu verwalten oder zu verkaufen." />
+    <string id="ml_menu_household" text="{MANOR_NAME} – Hauswache&#xA;&#xA;Wachen: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Stehender Befehl: {ORDERS}.&#xA;Täglicher Wachsold: {WAGES} Denare.&#xA;Vorräte: {SUPPLIES} ({SUPPLY_STATUS}).&#xA;Hauptmann: {CAPTAIN}.&#xA;Übungsplatz: {TRAINING_FIELD}. Wachunterkunft: {QUARTERS}.&#xA;&#xA;Unbezahlte Wachen können desertieren, und Knappheit zehrt nach und nach an ihrer Ausbildung." />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} – Bauten und Reparaturen&#xA;&#xA;Rang des Guts: {ESTATE_RANK}.&#xA;Abgeschlossene Ausbauten: {BUILDINGS}.&#xA;Zustand des Guts: {CONDITION}.&#xA;{PROJECT}&#xA;&#xA;Höhere Gutsränge schalten weiteres Personal, Produktionsgebäude und Wachplätze frei." />
+    <string id="ml_menu_main" text="{MANOR_NAME} bei {SETTLEMENT}&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;Kasse: {TREASURY} Denare&#xA;Erwarteter Saldo: {BALANCE} Denare/Tag&#xA;Vorräte: {SUPPLIES} ({SUPPLY_CHANGE}/Tag)&#xA;Wachen: {GUARDS}/{GUARD_CAP} – {TRAINING}, {ORDERS}&#xA;Personal: {STAFF}&#xA;Bauten: {BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="Eine ortsansässige Familie bietet ein bescheidenes Bauernhaus samt umliegendem Land für {PRICE} Denare an. Der Besitz verleiht weder einen Titel über das Dorf noch Ansprüche auf seine Bewohner." />
+    <string id="ml_menu_production" text="{MANOR_NAME} – Produktion&#xA;&#xA;Rang des Guts: {ESTATE_RANK}.&#xA;Produktionsgebäude: {BUILDINGS}.&#xA;Ausrichtung: {FOCUS}.&#xA;Erwarteter Ertrag: {OUTPUT}.&#xA;&#xA;Landgüter schalten Mühlen und Obstgärten frei. Große Güter können eine Werkstatt tragen." />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} – Verwaltung&#xA;&#xA;Verwalter: {STEWARD} (20 Denare/Tag).&#xA;Hauptmann: {CAPTAIN} (20 Denare/Tag).&#xA;Arzt: {PHYSICIAN} (15 Denare/Tag).&#xA;Ausrichtung: {FOCUS}.&#xA;Erwartete Tagesproduktion: {OUTPUT}.&#xA;Gesamtunterhalt des Guts: {UPKEEP} Denare/Tag.&#xA;Feuerstellen des Dorfes: {HEARTHS}.&#xA;&#xA;Der Verwalter führt die Einnahmen des Guts unmittelbar an die Gutskasse ab." />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} – Kasse und Lagerhaus&#xA;&#xA;Kasse: {TREASURY} Denare.&#xA;Eingelagerte Waren: {STACKS} Stapel im Wert von {VALUE} Denaren.&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;Plünderer greifen an; {DAYS} Tage bleiben zum Handeln." />
+    <string id="ml_msg_already_rested" text="Ihr habt Euch heute hier bereits vollständig ausgeruht." />
+    <string id="ml_msg_captain_hired" text="Ein erfahrener Hauptmann übernimmt das Kommando über die Hauswache." />
+    <string id="ml_msg_captain_left" text="Der unbezahlte Hauptmann der Hauswache hat Euren Dienst verlassen." />
+    <string id="ml_msg_focus_crops" text="Das Gut setzt nun auf den Anbau von Marktfrüchten." />
+    <string id="ml_msg_focus_livestock" text="Das Gut setzt nun auf Viehzucht." />
+    <string id="ml_msg_focus_mixed" text="Das Gut setzt nun auf Mischwirtschaft." />
+    <string id="ml_msg_goods_remain" text="Im Gut lagern noch Waren. Leert das Lagerhaus vor dem Verkauf." />
+    <string id="ml_msg_guard_deserted" text="Eine unbezahlte Gutswache ist desertiert. Verbleibende Wachen: {GUARDS}." />
+    <string id="ml_msg_guard_joined_one" text="{AMOUNT} neue Wache tritt Eurer Hauswache bei. Wachstärke: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_guard_released" text="Eine Wache der Hauswache wurde aus dem Dienst entlassen. Verbleibende Wachen: {GUARDS}." />
+    <string id="ml_msg_guards_joined" text="{AMOUNT} neue Wachen treten Eurer Hauswache bei. Wachstärke: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_order_drill" text="Die Hauswache befolgt nun den Befehl zu harten Übungen." />
+    <string id="ml_msg_order_patrol" text="Die Hauswache befolgt nun den Befehl zu Dorfpatrouillen." />
+    <string id="ml_msg_order_watch" text="Die Hauswache befolgt nun den Befehl zu enger Wache." />
+    <string id="ml_msg_physician_hired" text="Ein Arzt richtet auf dem Gut eine kleine Krankenstube ein." />
+    <string id="ml_msg_physician_left" text="Der unbezahlte Gutsarzt hat Euren Dienst verlassen." />
+    <string id="ml_msg_purchased" text="Ihr habt ein Gut bei {SETTLEMENT} erworben." />
+    <string id="ml_msg_raid_warning" text="Euer Gut bei {SETTLEMENT} wird von Plünderern bedroht!" />
+    <string id="ml_msg_repairs_begun" text="Die Reparaturen haben begonnen und sollten zwei Tage dauern." />
+    <string id="ml_msg_rested" text="Ihr ruht sicher und stellt {AMOUNT} Trefferpunkte wieder her." />
+    <string id="ml_msg_sold" text="Das Anwesen wurde für {VALUE} Denare verkauft." />
+    <string id="ml_msg_steward_hired" text="Ein Verwalter übernimmt die Felder und die Buchführung des Guts." />
+    <string id="ml_msg_steward_left" text="Der unbezahlte Gutsverwalter hat Euren Dienst verlassen." />
+    <string id="ml_msg_supplies_delivered" text="{AMOUNT} Vorräte wurden zum Gut geliefert." />
+    <string id="ml_msg_work_begun" text="Die Arbeiten haben begonnen und sollten in {DAYS} Tagen abgeschlossen sein." />
+    <string id="ml_msg_work_complete" text="Die Arbeiten auf {MANOR_NAME} sind abgeschlossen: {PROJECT}." />
+    <string id="ml_opt_back" text="Zurück zur Gutsübersicht" />
+    <string id="ml_opt_build_storehouse" text="Lagerhaus bauen (5000{GOLD_ICON}, 3 Tage) – schaltet sichere Lagerung frei" />
+    <string id="ml_opt_buy" text="Dieses Gut kaufen ({PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_cancel_project" text="{PROJECT} abbrechen und {REFUND}{GOLD_ICON} zurückerhalten" />
+    <string id="ml_opt_captain" text="Hauptmann der Hauswache anwerben (4000{GOLD_ICON})" />
+    <string id="ml_opt_defend" text="Die Hauswache bei der Verteidigung des Guts anführen" />
+    <string id="ml_opt_deposit_1000" text="1000{GOLD_ICON} einzahlen" />
+    <string id="ml_opt_deposit_5000" text="5000{GOLD_ICON} einzahlen" />
+    <string id="ml_opt_deposit_custom" text="Beliebigen Betrag einzahlen" />
+    <string id="ml_opt_dismiss" text="Eine Wache der Hauswache entlassen" />
+    <string id="ml_opt_focus_crops" text="Marktfrüchte anbauen – 30 % mehr Einnahmen" />
+    <string id="ml_opt_focus_livestock" text="Vieh züchten – weniger Einnahmen, mehr Vorräte" />
+    <string id="ml_opt_focus_mixed" text="Mischwirtschaft betreiben – ausgewogene Einnahmen und Vorräte" />
+    <string id="ml_opt_hire_one" text="Eine Gutswache anwerben (750{GOLD_ICON})" />
+    <string id="ml_opt_hire_three" text="Drei Gutswachen anwerben (2250{GOLD_ICON})" />
+    <string id="ml_opt_household" text="Hauswache verwalten" />
+    <string id="ml_opt_improvements" text="Bauten und Reparaturen verwalten" />
+    <string id="ml_opt_leave" text="Zurück ins Dorf" />
+    <string id="ml_opt_ledger" text="Rechnungsbuch des Guts einsehen" />
+    <string id="ml_opt_mill" text="Mühle bauen (6500{GOLD_ICON}, 4 Tage) – erhöht die Einnahmen des Guts" />
+    <string id="ml_opt_open_stash" text="Warenlager des Guts öffnen" />
+    <string id="ml_opt_orchard" text="Obstgarten anlegen (5500{GOLD_ICON}, 3 Tage) – erzeugt Vorräte" />
+    <string id="ml_opt_order_drill" text="Befehl: harte Übungen – schnellere Ausbildung, höherer Unterhalt" />
+    <string id="ml_opt_order_patrol" text="Befehl: Dorfpatrouillen – stärkere Verteidigung, höherer Unterhalt" />
+    <string id="ml_opt_order_watch" text="Befehl: enge Wache – stärkste Verteidigung des Guts" />
+    <string id="ml_opt_palisade" text="Palisade bauen (6000{GOLD_ICON}, 4 Tage) – verringert Verluste bei Überfällen" />
+    <string id="ml_opt_physician" text="Gutsarzt verpflichten (3500{GOLD_ICON})" />
+    <string id="ml_opt_production" text="Produktionsgebäude des Guts verwalten" />
+    <string id="ml_opt_quarters" text="Wachunterkunft bauen (7000{GOLD_ICON}, 4 Tage) – schaltet die Anwerbung frei" />
+    <string id="ml_opt_rename" text="Gut benennen oder umbenennen" />
+    <string id="ml_opt_repair" text="Reparaturen beginnen ({ML_REPAIR_COST}{GOLD_ICON}, 2 Tage)" />
+    <string id="ml_opt_rest" text="Auf dem Gut rasten und genesen" />
+    <string id="ml_opt_sell" text="Gut verkaufen ({ML_SALE_PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_steward" text="Gutsverwalter anstellen (2500{GOLD_ICON})" />
+    <string id="ml_opt_stewardship" text="Personal und Ausrichtung des Guts verwalten" />
+    <string id="ml_opt_storehouse" text="Kasse und Lagerhaus verwalten" />
+    <string id="ml_opt_supplies_10" text="10 Vorräte für die Hauswache kaufen (500{GOLD_ICON})" />
+    <string id="ml_opt_supplies_50" text="50 Vorräte für die Hauswache kaufen (2250{GOLD_ICON})" />
+    <string id="ml_opt_tier_three" text="Zum großen Gut ausbauen (18000{GOLD_ICON}, 8 Tage)" />
+    <string id="ml_opt_tier_two" text="Zum Landgut ausbauen (10000{GOLD_ICON}, 6 Tage)" />
+    <string id="ml_opt_training" text="Übungsplatz bauen (8000{GOLD_ICON}, 5 Tage) – bildet Wachen täglich aus" />
+    <string id="ml_opt_walk" text="Über das Gutsgelände gehen" />
+    <string id="ml_opt_withdraw_1000" text="1000{GOLD_ICON} abheben" />
+    <string id="ml_opt_withdraw_all" text="Alle Gutsmittel abheben" />
+    <string id="ml_opt_withdraw_custom" text="Beliebigen Betrag abheben" />
+    <string id="ml_opt_workshop" text="Gutswerkstatt bauen (9000{GOLD_ICON}, 5 Tage) – erzeugt wertvolle Waren" />
+    <string id="ml_order_drill_name" text="Harte Übungen" />
+    <string id="ml_order_patrol_name" text="Dorfpatrouillen" />
+    <string id="ml_order_watch_name" text="Enge Wache" />
+    <string id="ml_output_daily" text="{INCOME} Denare und {SUPPLIES} Vorräte" />
+    <string id="ml_output_inactive" text="ruht, bis ein Verwalter angestellt und die Reparaturen abgeschlossen sind" />
+    <string id="ml_output_per_day" text="{INCOME} Denare und {SUPPLIES} Vorräte pro Tag" />
+    <string id="ml_p_mill" text="Gutsmühle" />
+    <string id="ml_p_orchard" text="Obstgarten" />
+    <string id="ml_p_palisade" text="Palisade" />
+    <string id="ml_p_quarters" text="Wachunterkunft" />
+    <string id="ml_p_repair" text="Gutsreparaturen" />
+    <string id="ml_p_storehouse" text="Lagerhaus" />
+    <string id="ml_p_tier2" text="Ausbau zum Landgut" />
+    <string id="ml_p_tier3" text="Ausbau zum großen Gut" />
+    <string id="ml_p_training" text="Übungsplatz" />
+    <string id="ml_p_workshop" text="Gutswerkstatt" />
+    <string id="ml_project_current" text="Laufendes Vorhaben: {PROJECT}. Fertigstellung in {DAYS} Tagen erwartet." />
+    <string id="ml_project_none" text="Es läuft kein Bauvorhaben." />
+    <string id="ml_project_summary" text="Vorhaben im Bau: {PROJECT}, fertig in {DAYS} Tagen." />
+    <string id="ml_quarters_required" text="vor der Anwerbung erforderlich" />
+    <string id="ml_raided_body" text="Das Gut wurde beschädigt. Die Plünderer raubten {GOLD} Denare, verschleppten {GOODS} eingelagerte Gegenstände, und {GUARDS} Wachen der Hauswache fielen." />
+    <string id="ml_raided_title" text="Euer Gut wurde überfallen" />
+    <string id="ml_scene_access_hint" text="F drücken, um das Gut zu verwalten." />
+    <string id="ml_scene_declined" text="Bannerlord hat die Szene „{SCENE}“ abgelehnt." />
+    <string id="ml_scene_error_title" text="Fehler in der Gutsszene" />
+    <string id="ml_scene_menu_body" text="Euer Verwalter erwartet Anweisungen." />
+    <string id="ml_scene_menu_title" text="Das Gut" />
+    <string id="ml_scene_no_center" text="Der Dorfmittelpunkt konnte nicht ermittelt werden." />
+    <string id="ml_scene_no_complex" text="Die Orte des Dorfes sind nicht verfügbar." />
+    <string id="ml_scene_store_hint" text="F drücken, um das Lagerhaus zu öffnen." />
+    <string id="ml_scene_tip_storehouse" text="Erfordert ein Lagerhaus." />
+    <string id="ml_scene_tip_storehouse_intact" text="Erfordert ein unbeschädigtes Lagerhaus." />
+    <string id="ml_scene_tip_withdraw" text="Erfordert ein Lagerhaus mit Mitteln darin." />
+    <string id="ml_scene_unavailable" text="Gutsszene nicht verfügbar" />
+    <string id="ml_staff_summary" text="Verwalter {STEWARD}, Hauptmann {CAPTAIN}, Arzt {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="Das beschädigte Lagerhaus kann erst nach Abschluss der Reparaturen geöffnet werden." />
+    <string id="ml_store_missing" text="Es muss erst ein Lagerhaus gebaut werden, bevor hier Mittel oder Waren verwahrt werden können." />
+    <string id="ml_store_ready" text="Das Lagerhaus ist sicher und zugänglich." />
+    <string id="ml_supply_days" text="reicht noch etwa {DAYS} Tage" />
+    <string id="ml_supply_unused" text="derzeit kein Verbrauch" />
+    <string id="ml_tier_grand" text="Großes Gut" />
+    <string id="ml_tier_landed" text="Landgut" />
+    <string id="ml_tier_manor" text="Kleines Gut" />
+    <string id="ml_tip_afford_building" text="Ihr könnt Euch dieses Gebäude nicht leisten." />
+    <string id="ml_tip_afford_expansion" text="Ihr könnt Euch diesen Ausbau nicht leisten." />
+    <string id="ml_tip_afford_improvement" text="Ihr könnt Euch diese Verbesserung nicht leisten." />
+    <string id="ml_tip_afford_property" text="Ihr könnt Euch dieses Anwesen nicht leisten." />
+    <string id="ml_tip_afford_supplies" text="Ihr könnt Euch diese Vorräte nicht leisten." />
+    <string id="ml_tip_need_denars" text="Ihr benötigt {AMOUNT} Denare." />
+    <string id="ml_tip_no_guard" text="Ihr habt keine Hauswache, mit der Ihr eine Verteidigung führen könntet." />
+    <string id="ml_tip_not_enough_gold" text="Ihr habt nicht genug Denare." />
+    <string id="ml_tip_project_underway" text="Es läuft bereits ein anderes Vorhaben." />
+    <string id="ml_tip_repair_before_plan" text="Repariert das Gut, bevor Ihr seine Ausrichtung ändert." />
+    <string id="ml_tip_repair_first" text="Repariert zuerst das Gut." />
+    <string id="ml_tip_requires_landed" text="Erfordert ein Landgut." />
+    <string id="ml_tip_requires_rank" text="Erfordert Gutsrang {RANK}." />
+    <string id="ml_tip_treasury_short" text="In der Gutskasse sind nicht genug Denare." />
+    <string id="ml_train_drilled" text="gedrillt" />
+    <string id="ml_train_green" text="grün" />
+    <string id="ml_train_trained" text="ausgebildet" />
+    <string id="ml_train_veteran" text="altgedient" />
+    <string id="ml_w_active" text="in Betrieb" />
+    <string id="ml_w_another_village" text="einem anderen Dorf" />
+    <string id="ml_w_built" text="gebaut" />
+    <string id="ml_w_damaged" text="beschädigt" />
+    <string id="ml_w_employed" text="angestellt" />
+    <string id="ml_w_inactive" text="ruht" />
+    <string id="ml_w_no" text="nein" />
+    <string id="ml_w_none" text="keiner" />
+    <string id="ml_w_not_built" text="nicht gebaut" />
+    <string id="ml_w_yes" text="ja" />
+    <string id="ml_w_your_manor" text="Euer Gut" />
+    <string id="ml_walk_body" text="Ihr durchstreift {ESTATE_RANK} und das umliegende Land. {STATUS}&#xA;&#xA;Ausbauten: {BUILDINGS}.&#xA;Wachen der Hauswache: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Personal: {STAFF}.&#xA;Vorräte: {SUPPLIES}.&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="An den Gebäuden sind noch die Spuren des jüngsten Überfalls zu sehen." />
+    <string id="ml_walk_no_project" text="Derzeit wird nicht gebaut." />
+    <string id="ml_walk_project" text="Die Arbeiter sind mit {PROJECT} beschäftigt." />
+    <string id="ml_walk_secure" text="Das Gut ist wohlgeordnet und sicher." />
+  </strings>
+</base>

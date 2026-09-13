@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Русский" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="мельница" />
+    <string id="ml_b_orchard" text="фруктовый сад" />
+    <string id="ml_b_palisade" text="частокол" />
+    <string id="ml_b_quarters" text="казарма стражи" />
+    <string id="ml_b_storehouse" text="склад" />
+    <string id="ml_b_training_field" text="тренировочная площадка" />
+    <string id="ml_b_workshop" text="мастерская" />
+    <string id="ml_btn_accept" text="Принять" />
+    <string id="ml_btn_cancel" text="Отмена" />
+    <string id="ml_btn_cancel_project" text="Отменить работы" />
+    <string id="ml_btn_continue" text="Продолжить" />
+    <string id="ml_btn_deposit" text="Внести" />
+    <string id="ml_btn_keep_building" text="Продолжить стройку" />
+    <string id="ml_btn_keep_it" text="Оставить" />
+    <string id="ml_btn_return" text="Назад" />
+    <string id="ml_btn_sell" text="Продать" />
+    <string id="ml_btn_understood" text="Понятно" />
+    <string id="ml_btn_victory" text="Победа" />
+    <string id="ml_btn_withdraw" text="Снять" />
+    <string id="ml_captain_commanding" text="командует дружиной" />
+    <string id="ml_cond_damaged" text="РАЗРУШЕНО" />
+    <string id="ml_cond_needs_repair" text="повреждено и нуждается в ремонте" />
+    <string id="ml_cond_secure" text="В безопасности" />
+    <string id="ml_cond_sound" text="в порядке" />
+    <string id="ml_cond_threat" text="ПОД УГРОЗОЙ" />
+    <string id="ml_default_manor_name" text="Поместье {SETTLEMENT}" />
+    <string id="ml_defended_body" text="Ваша оборона сломила разбойников прежде, чем они успели сжечь или разграбить поместье." />
+    <string id="ml_defended_title" text="Поместье защищено" />
+    <string id="ml_defense_lost_body" text="Защитники не устояли. Погибло стражников: {GUARDS}; потеряно {GOLD} денаров и {GOODS} хранимых предметов, поместье повреждено." />
+    <string id="ml_defense_lost_title" text="Оборона поместья провалена" />
+    <string id="ml_defense_won_calc" text="Под вашим началом дружина удержала поместье и прогнала разбойников. Поместье и его запасы в безопасности." />
+    <string id="ml_defense_won_played" text="Вы вместе с дружиной выбили разбойников из поместья. Поместье и его запасы в безопасности." />
+    <string id="ml_defense_won_title" text="Оборона поместья удалась" />
+    <string id="ml_entry_holdings" text="Владения поместья (рядом с {SETTLEMENT})" />
+    <string id="ml_entry_inquire" text="Расспросить о покупке поместья" />
+    <string id="ml_entry_visit" text="Посетить своё поместье" />
+    <string id="ml_focus_crops_name" text="Товарные культуры" />
+    <string id="ml_focus_livestock_name" text="Животноводство" />
+    <string id="ml_focus_mixed_name" text="Смешанное хозяйство" />
+    <string id="ml_inq_cancel_body" text="Прекратить работы над объектом «{PROJECT}»? Будет возвращена половина учтённой стоимости работ ({REFUND} денаров)." />
+    <string id="ml_inq_cancel_title" text="Отменить строительство?" />
+    <string id="ml_inq_deposit_title" text="Внести средства поместья" />
+    <string id="ml_inq_rename_body" text="Выберите название для своего поместья." />
+    <string id="ml_inq_rename_invalid" text="Введите название длиной от 1 до 40 символов." />
+    <string id="ml_inq_rename_title" text="Назвать поместье" />
+    <string id="ml_inq_sell_body" text="Продать ваше поместье рядом с {SETTLEMENT} за {VALUE} денаров? Хранимые средства вернутся к вам, но дружина и работники поместья будут распущены." />
+    <string id="ml_inq_sell_title" text="Продать поместье?" />
+    <string id="ml_inq_transfer_body" text="Введите сумму от 1 до {MAX} денаров." />
+    <string id="ml_inq_transfer_invalid" text="Введите целое число от 1 до {MAX}." />
+    <string id="ml_inq_withdraw_title" text="Снять средства поместья" />
+    <string id="ml_ledger_body" text="Возраст поместья: {DAYS_OWNED} учтённых дней.&#xA;Ранг: {ESTATE_RANK}.&#xA;Состояние: {CONDITION}. {THREAT}&#xA;&#xA;За прошлый день&#xA;Доход: {LAST_INCOME} денаров&#xA;Общее содержание: {LAST_UPKEEP} денаров&#xA;Изменение припасов: {LAST_SUPPLY_CHANGE}&#xA;&#xA;Прогноз на следующий день&#xA;Доход: {NEXT_INCOME} денаров&#xA;Общее содержание: {NEXT_UPKEEP} денаров&#xA;Чистый баланс: {NEXT_BALANCE} денаров&#xA;Произведено припасов: {NEXT_SUPPLIES}&#xA;Израсходовано припасов: {SUPPLY_USE}&#xA;&#xA;Общий учёт с момента установки&#xA;Доходы поместья: {TOTAL_INCOME} денаров&#xA;Расходы поместья: {TOTAL_EXPENSES} денаров" />
+    <string id="ml_ledger_no_threat" text="Угроз нет." />
+    <string id="ml_ledger_threat" text="Разбойники действуют; на ответ осталось дней: {DAYS}." />
+    <string id="ml_ledger_title" text="Книга учёта: {MANOR_NAME}" />
+    <string id="ml_loc_enter_grounds" text="Войти на территорию поместья" />
+    <string id="ml_loc_manor_grounds" text="Территория поместья" />
+    <string id="ml_menu_elsewhere" text="У вас есть поместье рядом с {SETTLEMENT}. Одновременно можно владеть только одним поместьем; отправляйтесь туда, чтобы управлять им или продать его." />
+    <string id="ml_menu_household" text="{MANOR_NAME} — Дружина&#xA;&#xA;Стражники: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Постоянный приказ: {ORDERS}.&#xA;Ежедневное жалованье стражи: {WAGES} денаров.&#xA;Припасы: {SUPPLIES} ({SUPPLY_STATUS}).&#xA;Капитан: {CAPTAIN}.&#xA;Тренировочная площадка: {TRAINING_FIELD}. Казарма стражи: {QUARTERS}.&#xA;&#xA;Без жалованья стражники могут дезертировать, а нехватка припасов постепенно снижает их выучку." />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} — Постройки и ремонт&#xA;&#xA;Ранг поместья: {ESTATE_RANK}.&#xA;Завершённые улучшения: {BUILDINGS}.&#xA;Состояние поместья: {CONDITION}.&#xA;{PROJECT}&#xA;&#xA;Более высокие ранги открывают новых работников, производственные постройки и место для стражи." />
+    <string id="ml_menu_main" text="{MANOR_NAME} рядом с {SETTLEMENT}&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;Казна: {TREASURY} денаров&#xA;Прогноз баланса: {BALANCE} денаров/день&#xA;Припасы: {SUPPLIES} ({SUPPLY_CHANGE}/день)&#xA;Стражники: {GUARDS}/{GUARD_CAP} — {TRAINING}, {ORDERS}&#xA;Работники: {STAFF}&#xA;Постройки: {BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="Местная семья предлагает скромный дом с прилегающей землёй за {PRICE} денаров. Владение не даёт ни титула на деревню, ни прав на её жителей." />
+    <string id="ml_menu_production" text="{MANOR_NAME} — Производство&#xA;&#xA;Ранг поместья: {ESTATE_RANK}.&#xA;Производственные постройки: {BUILDINGS}.&#xA;Направление: {FOCUS}.&#xA;Прогноз выработки: {OUTPUT}.&#xA;&#xA;Земельные поместья открывают мельницы и сады. Большое поместье может содержать мастерскую." />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} — Управление&#xA;&#xA;Управляющий: {STEWARD} (20 денаров/день).&#xA;Капитан: {CAPTAIN} (20 денаров/день).&#xA;Лекарь: {PHYSICIAN} (15 денаров/день).&#xA;Направление хозяйства: {FOCUS}.&#xA;Прогноз дневной выработки: {OUTPUT}.&#xA;Общее содержание поместья: {UPKEEP} денаров/день.&#xA;Очаги деревни: {HEARTHS}.&#xA;&#xA;Управляющий вносит доходы поместья прямо в его казну." />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} — Казна и склад&#xA;&#xA;Казна: {TREASURY} денаров.&#xA;Хранимые товары: {STACKS} стопок на сумму {VALUE} денаров.&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;Разбойники атакуют; на ответ осталось дней: {DAYS}." />
+    <string id="ml_msg_already_rested" text="Сегодня вы уже полноценно отдохнули здесь." />
+    <string id="ml_msg_captain_hired" text="Опытный капитан принял командование дружиной." />
+    <string id="ml_msg_captain_left" text="Капитан дружины, не получив жалованья, оставил вашу службу." />
+    <string id="ml_msg_focus_crops" text="Поместье переходит на выращивание товарных культур." />
+    <string id="ml_msg_focus_livestock" text="Поместье переходит на животноводство." />
+    <string id="ml_msg_focus_mixed" text="Поместье переходит на смешанное хозяйство." />
+    <string id="ml_msg_goods_remain" text="В поместье остались хранимые товары. Освободите склад перед продажей." />
+    <string id="ml_msg_guard_deserted" text="Не получив жалованья, стражник поместья дезертировал. Осталось стражников: {GUARDS}." />
+    <string id="ml_msg_guard_joined_one" text="Новых стражников в вашей дружине: {AMOUNT}. Численность стражи: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_guard_released" text="Стражник дружины уволен со службы. Осталось стражников: {GUARDS}." />
+    <string id="ml_msg_guards_joined" text="Новых стражников в вашей дружине: {AMOUNT}. Численность стражи: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_order_drill" text="Дружина переходит к усиленным учениям." />
+    <string id="ml_msg_order_patrol" text="Дружина переходит к патрулированию деревни." />
+    <string id="ml_msg_order_watch" text="Дружина переходит к плотной охране." />
+    <string id="ml_msg_physician_hired" text="Лекарь устроил при поместье небольшую лечебницу." />
+    <string id="ml_msg_physician_left" text="Лекарь поместья, не получив жалованья, оставил вашу службу." />
+    <string id="ml_msg_purchased" text="Вы купили поместье рядом с {SETTLEMENT}." />
+    <string id="ml_msg_raid_warning" text="Вашему поместью рядом с {SETTLEMENT} угрожают разбойники!" />
+    <string id="ml_msg_repairs_begun" text="Ремонт начат и должен занять два дня." />
+    <string id="ml_msg_rested" text="Вы спокойно отдыхаете и восстанавливаете {AMOUNT} единиц здоровья." />
+    <string id="ml_msg_sold" text="Владение продано за {VALUE} денаров." />
+    <string id="ml_msg_steward_hired" text="Управляющий взял на себя поля и счета поместья." />
+    <string id="ml_msg_steward_left" text="Управляющий поместья, не получив жалованья, оставил вашу службу." />
+    <string id="ml_msg_supplies_delivered" text="В поместье доставлено припасов: {AMOUNT}." />
+    <string id="ml_msg_work_begun" text="Работы начаты и должны завершиться через {DAYS} дн." />
+    <string id="ml_msg_work_complete" text="Работы в поместье {MANOR_NAME} завершены: {PROJECT}." />
+    <string id="ml_opt_back" text="Вернуться к обзору поместья" />
+    <string id="ml_opt_build_storehouse" text="Построить склад (5000{GOLD_ICON}, 3 дн.) — открывает надёжное хранение" />
+    <string id="ml_opt_buy" text="Купить это поместье ({PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_cancel_project" text="Отменить «{PROJECT}» и вернуть {REFUND}{GOLD_ICON}" />
+    <string id="ml_opt_captain" text="Нанять капитана дружины (4000{GOLD_ICON})" />
+    <string id="ml_opt_defend" text="Возглавить дружину в обороне поместья" />
+    <string id="ml_opt_deposit_1000" text="Внести 1000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_5000" text="Внести 5000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_custom" text="Внести произвольную сумму" />
+    <string id="ml_opt_dismiss" text="Уволить одного стражника дружины" />
+    <string id="ml_opt_focus_crops" text="Засеять товарные культуры — доход выше на 30%" />
+    <string id="ml_opt_focus_livestock" text="Разводить скот — меньше дохода, больше припасов" />
+    <string id="ml_opt_focus_mixed" text="Вести смешанное хозяйство — баланс дохода и припасов" />
+    <string id="ml_opt_hire_one" text="Нанять одного стражника поместья (750{GOLD_ICON})" />
+    <string id="ml_opt_hire_three" text="Нанять трёх стражников поместья (2250{GOLD_ICON})" />
+    <string id="ml_opt_household" text="Управлять дружиной" />
+    <string id="ml_opt_improvements" text="Управлять постройками и ремонтом" />
+    <string id="ml_opt_leave" text="Вернуться в деревню" />
+    <string id="ml_opt_ledger" text="Просмотреть книгу учёта поместья" />
+    <string id="ml_opt_mill" text="Построить мельницу (6500{GOLD_ICON}, 4 дн.) — повышает доход поместья" />
+    <string id="ml_opt_open_stash" text="Открыть склад поместья" />
+    <string id="ml_opt_orchard" text="Разбить фруктовый сад (5500{GOLD_ICON}, 3 дн.) — даёт припасы" />
+    <string id="ml_opt_order_drill" text="Приказ: усиленные учения — быстрее выучка, выше расходы" />
+    <string id="ml_opt_order_patrol" text="Приказ: патрули по деревне — крепче оборона, выше расходы" />
+    <string id="ml_opt_order_watch" text="Приказ: плотная охрана — сильнейшая оборона поместья" />
+    <string id="ml_opt_palisade" text="Построить частокол (6000{GOLD_ICON}, 4 дн.) — снижает потери при набегах" />
+    <string id="ml_opt_physician" text="Нанять лекаря поместья (3500{GOLD_ICON})" />
+    <string id="ml_opt_production" text="Управлять производственными постройками" />
+    <string id="ml_opt_quarters" text="Построить казарму стражи (7000{GOLD_ICON}, 4 дн.) — открывает наём дружины" />
+    <string id="ml_opt_rename" text="Дать или сменить название поместья" />
+    <string id="ml_opt_repair" text="Начать ремонт ({ML_REPAIR_COST}{GOLD_ICON}, 2 дн.)" />
+    <string id="ml_opt_rest" text="Отдохнуть и восстановиться в поместье" />
+    <string id="ml_opt_sell" text="Продать поместье ({ML_SALE_PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_steward" text="Нанять управляющего поместьем (2500{GOLD_ICON})" />
+    <string id="ml_opt_stewardship" text="Управлять работниками и политикой поместья" />
+    <string id="ml_opt_storehouse" text="Управлять казной и складом" />
+    <string id="ml_opt_supplies_10" text="Купить 10 припасов для дружины (500{GOLD_ICON})" />
+    <string id="ml_opt_supplies_50" text="Купить 50 припасов для дружины (2250{GOLD_ICON})" />
+    <string id="ml_opt_tier_three" text="Расширить до большого поместья (18000{GOLD_ICON}, 8 дн.)" />
+    <string id="ml_opt_tier_two" text="Расширить до земельного поместья (10000{GOLD_ICON}, 6 дн.)" />
+    <string id="ml_opt_training" text="Построить тренировочную площадку (8000{GOLD_ICON}, 5 дн.) — ежедневная выучка стражи" />
+    <string id="ml_opt_walk" text="Пройтись по территории поместья" />
+    <string id="ml_opt_withdraw_1000" text="Снять 1000{GOLD_ICON}" />
+    <string id="ml_opt_withdraw_all" text="Снять все средства поместья" />
+    <string id="ml_opt_withdraw_custom" text="Снять произвольную сумму" />
+    <string id="ml_opt_workshop" text="Построить мастерскую поместья (9000{GOLD_ICON}, 5 дн.) — производит ценные товары" />
+    <string id="ml_order_drill_name" text="Усиленные учения" />
+    <string id="ml_order_patrol_name" text="Патрули по деревне" />
+    <string id="ml_order_watch_name" text="Плотная охрана" />
+    <string id="ml_output_daily" text="{INCOME} денаров и {SUPPLIES} припасов" />
+    <string id="ml_output_inactive" text="не работает, пока не нанят управляющий и не завершён ремонт" />
+    <string id="ml_output_per_day" text="{INCOME} денаров и {SUPPLIES} припасов в день" />
+    <string id="ml_p_mill" text="мельница поместья" />
+    <string id="ml_p_orchard" text="фруктовый сад" />
+    <string id="ml_p_palisade" text="частокол" />
+    <string id="ml_p_quarters" text="казарма стражи" />
+    <string id="ml_p_repair" text="ремонт поместья" />
+    <string id="ml_p_storehouse" text="склад" />
+    <string id="ml_p_tier2" text="расширение до земельного поместья" />
+    <string id="ml_p_tier3" text="расширение до большого поместья" />
+    <string id="ml_p_training" text="тренировочная площадка" />
+    <string id="ml_p_workshop" text="мастерская поместья" />
+    <string id="ml_project_current" text="Текущие работы: {PROJECT}. Завершение ожидается через {DAYS} дн." />
+    <string id="ml_project_none" text="Строительные работы не ведутся." />
+    <string id="ml_project_summary" text="Ведутся работы: {PROJECT}, готовность через {DAYS} дн." />
+    <string id="ml_quarters_required" text="требуется до найма" />
+    <string id="ml_raided_body" text="Поместье повреждено. Разбойники похитили {GOLD} денаров, унесли {GOODS} хранимых предметов, погибло стражников дружины: {GUARDS}." />
+    <string id="ml_raided_title" text="Ваше поместье разграблено" />
+    <string id="ml_scene_access_hint" text="Нажмите F, чтобы управлять поместьем." />
+    <string id="ml_scene_declined" text="Bannerlord отклонил сцену «{SCENE}»." />
+    <string id="ml_scene_error_title" text="Ошибка сцены поместья" />
+    <string id="ml_scene_menu_body" text="Управляющий ждёт ваших указаний." />
+    <string id="ml_scene_menu_title" text="Поместье" />
+    <string id="ml_scene_no_center" text="Не удалось определить центр деревни." />
+    <string id="ml_scene_no_complex" text="Локации деревни недоступны." />
+    <string id="ml_scene_store_hint" text="Нажмите F, чтобы открыть склад." />
+    <string id="ml_scene_tip_storehouse" text="Требуется склад." />
+    <string id="ml_scene_tip_storehouse_intact" text="Требуется неповреждённый склад." />
+    <string id="ml_scene_tip_withdraw" text="Требуется склад с деньгами в казне." />
+    <string id="ml_scene_unavailable" text="Сцена поместья недоступна" />
+    <string id="ml_staff_summary" text="управляющий {STEWARD}, капитан {CAPTAIN}, лекарь {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="Повреждённый склад нельзя открыть до завершения ремонта." />
+    <string id="ml_store_missing" text="Прежде чем хранить здесь средства или товары, нужно построить склад." />
+    <string id="ml_store_ready" text="Склад надёжен и доступен." />
+    <string id="ml_supply_days" text="хватит примерно на {DAYS} дн." />
+    <string id="ml_supply_unused" text="сейчас не расходуются" />
+    <string id="ml_tier_grand" text="Большое поместье" />
+    <string id="ml_tier_landed" text="Земельное поместье" />
+    <string id="ml_tier_manor" text="Малое поместье" />
+    <string id="ml_tip_afford_building" text="Вам не хватает средств на эту постройку." />
+    <string id="ml_tip_afford_expansion" text="Вам не хватает средств на это расширение." />
+    <string id="ml_tip_afford_improvement" text="Вам не хватает средств на это улучшение." />
+    <string id="ml_tip_afford_property" text="Вам не хватает средств на это владение." />
+    <string id="ml_tip_afford_supplies" text="Вам не хватает средств на эти припасы." />
+    <string id="ml_tip_need_denars" text="Вам нужно {AMOUNT} денаров." />
+    <string id="ml_tip_no_guard" text="У вас нет дружины, с которой можно организовать оборону." />
+    <string id="ml_tip_not_enough_gold" text="У вас недостаточно денаров." />
+    <string id="ml_tip_project_underway" text="Уже ведутся другие работы." />
+    <string id="ml_tip_repair_before_plan" text="Отремонтируйте поместье, прежде чем менять план хозяйства." />
+    <string id="ml_tip_repair_first" text="Сначала отремонтируйте поместье." />
+    <string id="ml_tip_requires_landed" text="Требуется земельное поместье." />
+    <string id="ml_tip_requires_rank" text="Требуется ранг поместья {RANK}." />
+    <string id="ml_tip_treasury_short" text="В казне поместья недостаточно денаров." />
+    <string id="ml_train_drilled" text="обученные" />
+    <string id="ml_train_green" text="новобранцы" />
+    <string id="ml_train_trained" text="вышколенные" />
+    <string id="ml_train_veteran" text="ветераны" />
+    <string id="ml_w_active" text="действует" />
+    <string id="ml_w_another_village" text="другой деревни" />
+    <string id="ml_w_built" text="построена" />
+    <string id="ml_w_damaged" text="повреждено" />
+    <string id="ml_w_employed" text="нанят" />
+    <string id="ml_w_inactive" text="не работает" />
+    <string id="ml_w_no" text="нет" />
+    <string id="ml_w_none" text="нет" />
+    <string id="ml_w_not_built" text="не построена" />
+    <string id="ml_w_yes" text="да" />
+    <string id="ml_w_your_manor" text="Ваше поместье" />
+    <string id="ml_walk_body" text="Вы обходите {ESTATE_RANK} и окрестные земли. {STATUS}&#xA;&#xA;Улучшения: {BUILDINGS}.&#xA;Стражники дружины: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Работники: {STAFF}.&#xA;Припасы: {SUPPLIES}.&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="На постройках ещё видны следы недавнего нападения." />
+    <string id="ml_walk_no_project" text="Строительные работы сейчас не ведутся." />
+    <string id="ml_walk_project" text="Работники заняты объектом «{PROJECT}»." />
+    <string id="ml_walk_secure" text="В поместье порядок и покой." />
+  </strings>
+</base>

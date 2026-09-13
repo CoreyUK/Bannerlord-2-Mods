@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Manor Lord: estate scene layout.
+
+  Every <Prop> is a prefab placed in the manor scene when its "when" condition holds.
+  Every <Spawn> is where a group of people stands during a visit.
+
+  Coordinates are scene metres in manor_lord_estate_v1. The player arrives at about (465, 753)
+  facing east-south-east; the village proper lies east of x=520. Height is snapped to the
+  terrain at runtime, so only x and y matter (z_offset nudges a prop up or down if it sinks).
+  yaw is degrees about the vertical axis.
+
+  count / dx / dy repeat a prop along a line: the i-th copy sits at (x + dx*i, y + dy*i).
+
+  "when" values:
+    always  palisade  training  storehouse  quarters  mill  orchard  workshop
+    tier2 (landed estate or better)  tier3 (grand estate)  damaged
+    rank1 / rank2 / rank3 (exactly that estate rank - for props that are swapped out as the estate grows)
+
+  Optional placement attributes:
+    stack="N"      pile N copies vertically (uses the prefab's measured height)
+    align="slope"  tilt the prop so its long axis follows the ground between its two ends
+
+  <Access kind="estate|storehouse" x y radius/>  - where pressing F does something
+  <Clear prefab="..." x1 y1 x2 y2/>               - remove that prefab's scene entities inside the rectangle
+  Spawn roles: guards  captain  steward  physician
+
+  Edit and re-enter the manor to see changes; no rebuild needed. Prefab names come from
+  Modules/Native/Prefabs/*.xml.
+-->
+<ManorProps>
+
+  <!-- The manor house itself, at the north of the yard facing the well. It is replaced, not added to, as the estate grows. -->
+  <Prop when="rank1" prefab="european_village_house_b" x="468" y="771" yaw="180"/>
+  <Prop when="rank2" prefab="european_village_house_f" x="468" y="771" yaw="180"/>
+  <Prop when="rank3" prefab="european_village_house_d" x="468" y="772" yaw="180"/>
+  <!-- Navmesh blockers around the house footprint (measured 457..479 x 763..779): barricade pads laid along each wall,
+       the same way the fence is blocked. -->
+  <Prop when="always" prefab="_barrier_04x04m" x="459" y="763" yaw="0"  count="6" dx="4" dy="0"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="459" y="779" yaw="0"  count="6" dx="4" dy="0"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="457" y="765" yaw="90" count="4" dx="0" dy="4"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="479" y="765" yaw="90" count="4" dx="0" dy="4"/>
+
+  <!-- Interaction points. kind="estate" opens the management menu; kind="storehouse" opens the stash directly.
+       Each covers its whole building (the house is 21 x 15 m), so the prompt appears from any side. -->
+  <Access kind="estate"     x="468" y="771" radius="14"/>
+  <Access kind="storehouse" x="484" y="730" radius="6"/>
+
+  <!-- Leftover farm fences from the original village layout that would sit inside the ring. -->
+  <Clear prefab="fence_a" x1="440" y1="694" x2="496" y2="788"/>
+
+  <!-- The yard: a well by the road and a banner at the gate, always. -->
+  <Prop when="always" prefab="bd_waterwell_a" x="471" y="746" yaw="0"/>
+  <Prop when="always" prefab="banner_vlandia_village" x="489" y="748" yaw="0"/>
+
+  <!-- Storehouse, south-east corner of the yard (the house is 21 x 15 m, so it needs its own corner). -->
+  <Prop when="storehouse" prefab="european_village_storage_a" x="484" y="730" yaw="90"/>
+  <Prop when="storehouse" prefab="bd_barrel_heap_a" x="480" y="737" yaw="0"/>
+
+  <!-- Guard quarters, west side: two tents around a fire. -->
+  <Prop when="quarters" prefab="empire_street_tent_01" x="451" y="742" yaw="90"/>
+  <Prop when="quarters" prefab="empire_street_tent_02" x="451" y="733" yaw="90"/>
+  <Prop when="quarters" prefab="burning_campfire" x="459" y="738" yaw="0"/>
+  <Prop when="quarters" prefab="training_weapon_rack_a" x="457" y="748" yaw="0"/>
+
+  <!-- Training field, south end: archery butts and a stake cluster. -->
+  <Prop when="training" prefab="archery_practice_target" x="470" y="705" yaw="180" count="3" dx="5" dy="0"/>
+  <Prop when="training" prefab="training_weapon_rack_a" x="464" y="713" yaw="90"/>
+  <Prop when="training" prefab="sturgia_arena_stakes_a" x="486" y="712" yaw="0"/>
+
+  <!-- The yard fence: a ring of log walls, x 444..492, y 698..784, open on the east for the road.
+       battania_castle_keep_wood_stake_b is a 4.37 m log-wall segment, 1.08 m high, long axis along X at yaw 0;
+       align="slope" tilts each to follow the ground, and a 4.0 m step overlaps neighbours by ~0.4 m.
+       Agents are stopped only by the navmesh, which is baked in the editor and cannot be changed per upgrade, so the
+       ring always exists as a low fence (one log high) and the palisade upgrade raises it to three logs with posts. -->
+  <Prop when="no_palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="700" yaw="90" count="22" dx="0" dy="4" align="slope"/>
+  <Prop when="no_palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="698" yaw="0"  count="13" dx="4" dy="0" align="slope"/>
+  <Prop when="no_palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="784" yaw="0"  count="13" dx="4" dy="0" align="slope"/>
+  <Prop when="no_palisade" prefab="battania_castle_keep_wood_stake_b" x="492" y="700" yaw="90" count="12" dx="0" dy="4" align="slope"/>
+  <Prop when="no_palisade" prefab="battania_castle_keep_wood_stake_b" x="492" y="762" yaw="90" count="6"  dx="0" dy="4" align="slope"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="700" yaw="90" count="22" dx="0" dy="4" stack="3" align="slope"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="698" yaw="0"  count="13" dx="4" dy="0" stack="3" align="slope"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_b" x="444" y="784" yaw="0"  count="13" dx="4" dy="0" stack="3" align="slope"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_b" x="492" y="700" yaw="90" count="12" dx="0" dy="4" stack="3" align="slope"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_b" x="492" y="762" yaw="90" count="6"  dx="0" dy="4" stack="3" align="slope"/>
+  <!-- Invisible barrier planes along the fence. These do nothing at runtime; the mod exports their exact placement
+       to ModuleData/manor_lord_navmesh_obstacles.xml so they can be added to the scene for the navmesh bake. -->
+  <Prop when="always" prefab="_barrier_04x04m" x="444" y="700" yaw="90" count="22" dx="0" dy="4"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="444" y="698" yaw="0"  count="13" dx="4" dy="0"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="444" y="784" yaw="0"  count="13" dx="4" dy="0"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="492" y="700" yaw="90" count="12" dx="0" dy="4"/>
+  <Prop when="always" prefab="_barrier_04x04m" x="492" y="762" yaw="90" count="6"  dx="0" dy="4"/>
+  <!-- A post over every joint hides the seam where two tilted segments meet. The stake is 1.54 m tall with its
+       origin 0.35 m above its base, so stack="2" with z_offset="0.35" gives a 3.08 m post standing on the ground. -->
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_a" x="444" y="698" yaw="0" count="23" dx="0" dy="4" stack="2" z_offset="0.35"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_a" x="442" y="698" yaw="0" count="14" dx="4" dy="0" stack="2" z_offset="0.35"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_a" x="442" y="784" yaw="0" count="14" dx="4" dy="0" stack="2" z_offset="0.35"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_a" x="492" y="698" yaw="0" count="13" dx="0" dy="4" stack="2" z_offset="0.35"/>
+  <Prop when="palisade" prefab="battania_castle_keep_wood_stake_a" x="492" y="760" yaw="0" count="7"  dx="0" dy="4" stack="2" z_offset="0.35"/>
+
+  <!-- Mill, in the field south-west of the palisade. -->
+  <Prop when="mill" prefab="sturgia_windmill_a" x="452" y="686" yaw="45"/>
+  <Prop when="mill" prefab="bd_mill_flour_sack" x="459" y="690" yaw="0"/>
+
+  <!-- Orchard: three rows of olives south of the mill. -->
+  <Prop when="orchard" prefab="tree_olive_a" x="462" y="656" yaw="0"   count="4" dx="7" dy="0"/>
+  <Prop when="orchard" prefab="tree_olive_b" x="465" y="663" yaw="90"  count="4" dx="7" dy="0"/>
+  <Prop when="orchard" prefab="tree_olive_a" x="462" y="670" yaw="180" count="4" dx="7" dy="0"/>
+  <Prop when="orchard" prefab="foods_basket_apple" x="470" y="676" yaw="0"/>
+
+  <!-- Workshop, north-west corner: a hut with a forge outside. -->
+  <Prop when="workshop" prefab="hut_a" x="450" y="762" yaw="90"/>
+  <Prop when="workshop" prefab="bd_smithy_anvil" x="458" y="760" yaw="0"/>
+  <Prop when="workshop" prefab="blacksmith_props" x="459" y="766" yaw="0"/>
+
+  <!-- Estate rank: a barn from landed rank up (the house itself upgrades via rank1/2/3 above). -->
+  <Prop when="tier2" prefab="european_village_barn_a" x="452" y="716" yaw="90"/>
+
+  <!-- After a raid: wreckage in the yard until repairs finish. -->
+  <Prop when="damaged" prefab="bd_wood_heap_b" x="474" y="757" yaw="30"/>
+  <Prop when="damaged" prefab="bd_wood_heap_a" x="482" y="742" yaw="70"/>
+
+  <!-- People. Guards form ranks of four behind this point, facing yaw. -->
+  <Spawn role="guards"    x="470" y="728" yaw="90"/>
+  <Spawn role="captain"   x="470" y="734" yaw="90"/>
+  <Spawn role="steward"   x="474" y="750" yaw="270"/>
+  <Spawn role="physician" x="466" y="742" yaw="0"/>
+
+</ManorProps>

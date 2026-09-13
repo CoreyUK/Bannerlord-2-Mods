@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Türkçe" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="değirmen" />
+    <string id="ml_b_orchard" text="meyve bahçesi" />
+    <string id="ml_b_palisade" text="şarampol" />
+    <string id="ml_b_quarters" text="muhafız koğuşu" />
+    <string id="ml_b_storehouse" text="ambar" />
+    <string id="ml_b_training_field" text="talim alanı" />
+    <string id="ml_b_workshop" text="atölye" />
+    <string id="ml_btn_accept" text="Kabul et" />
+    <string id="ml_btn_cancel" text="İptal" />
+    <string id="ml_btn_cancel_project" text="İnşaatı iptal et" />
+    <string id="ml_btn_continue" text="Devam" />
+    <string id="ml_btn_deposit" text="Yatır" />
+    <string id="ml_btn_keep_building" text="İnşaata devam et" />
+    <string id="ml_btn_keep_it" text="Elimde tut" />
+    <string id="ml_btn_return" text="Geri dön" />
+    <string id="ml_btn_sell" text="Sat" />
+    <string id="ml_btn_understood" text="Anlaşıldı" />
+    <string id="ml_btn_victory" text="Zafer" />
+    <string id="ml_btn_withdraw" text="Çek" />
+    <string id="ml_captain_commanding" text="maiyete kumanda ediyor" />
+    <string id="ml_cond_damaged" text="HASARLI" />
+    <string id="ml_cond_needs_repair" text="hasarlı ve onarıma muhtaç" />
+    <string id="ml_cond_secure" text="Güvende" />
+    <string id="ml_cond_sound" text="sağlam" />
+    <string id="ml_cond_threat" text="TEHDİT ALTINDA" />
+    <string id="ml_default_manor_name" text="{SETTLEMENT} Malikânesi" />
+    <string id="ml_defended_body" text="Direnişiniz, akıncılar malikâneyi yakıp yağmalayamadan onları kırdı." />
+    <string id="ml_defended_title" text="Malikâne savunuldu" />
+    <string id="ml_defense_lost_body" text="Savunanlar ezildi. {GUARDS} muhafız düştü, {GOLD} dinar ve depodaki {GOODS} eşya kaybedildi, malikâne hasar gördü." />
+    <string id="ml_defense_lost_title" text="Malikâne savunması başarısız" />
+    <string id="ml_defense_won_calc" text="Sizin yönetiminizde maiyet muhafızları malikâneyi tuttu ve akıncıları püskürttü. Malikâne ve depoları güvende." />
+    <string id="ml_defense_won_played" text="Siz ve maiyet muhafızlarınız akıncıları malikâneden sürdünüz. Malikâneniz ve depoları güvende." />
+    <string id="ml_defense_won_title" text="Malikâne savunması başarılı" />
+    <string id="ml_entry_holdings" text="Malikâne mülkleri ({SETTLEMENT} yakınında)" />
+    <string id="ml_entry_inquire" text="Malikâne satın almayı sor" />
+    <string id="ml_entry_visit" text="Malikâneni ziyaret et" />
+    <string id="ml_focus_crops_name" text="Ticari ürünler" />
+    <string id="ml_focus_livestock_name" text="Hayvancılık" />
+    <string id="ml_focus_mixed_name" text="Karma tarım" />
+    <string id="ml_inq_cancel_body" text="{PROJECT} işi durdurulsun mu? Kayıtlı inşaat masrafının yarısı ({REFUND} dinar) geri alınacak." />
+    <string id="ml_inq_cancel_title" text="İnşaat iptal edilsin mi?" />
+    <string id="ml_inq_deposit_title" text="Malikâne kasasına para yatır" />
+    <string id="ml_inq_rename_body" text="Malikânen için bir ad seç." />
+    <string id="ml_inq_rename_invalid" text="1 ile 40 karakter arasında bir ad gir." />
+    <string id="ml_inq_rename_title" text="Malikâneye ad ver" />
+    <string id="ml_inq_sell_body" text="{SETTLEMENT} yakınındaki malikânen {VALUE} dinara satılsın mı? Kasadaki para sana iade edilecek, ancak maiyet muhafızları ve malikâne görevlileri dağıtılacak." />
+    <string id="ml_inq_sell_title" text="Malikâne satılsın mı?" />
+    <string id="ml_inq_transfer_body" text="1 ile {MAX} dinar arasında bir miktar gir." />
+    <string id="ml_inq_transfer_invalid" text="1 ile {MAX} arasında bir tam sayı gir." />
+    <string id="ml_inq_withdraw_title" text="Malikâne kasasından para çek" />
+    <string id="ml_ledger_body" text="Malikâne yaşı: {DAYS_OWNED} kayıtlı gün.&#xA;Derece: {ESTATE_RANK}.&#xA;Durum: {CONDITION}. {THREAT}&#xA;&#xA;Geçen gün&#xA;Gelir: {LAST_INCOME} dinar&#xA;Toplam gider: {LAST_UPKEEP} dinar&#xA;Erzak değişimi: {LAST_SUPPLY_CHANGE}&#xA;&#xA;Ertesi gün öngörüsü&#xA;Gelir: {NEXT_INCOME} dinar&#xA;Toplam gider: {NEXT_UPKEEP} dinar&#xA;Net bakiye: {NEXT_BALANCE} dinar&#xA;Üretilen erzak: {NEXT_SUPPLIES}&#xA;Tüketilen erzak: {SUPPLY_USE}&#xA;&#xA;Kurulumdan bu yana toplamlar&#xA;Malikâne geliri: {TOTAL_INCOME} dinar&#xA;Malikâne gideri: {TOTAL_EXPENSES} dinar" />
+    <string id="ml_ledger_no_threat" text="Etkin bir tehdit yok." />
+    <string id="ml_ledger_threat" text="Akıncılar faal; karşılık vermek için {DAYS} gün kaldı." />
+    <string id="ml_ledger_title" text="{MANOR_NAME} defteri" />
+    <string id="ml_loc_enter_grounds" text="Malikâne arazisine gir" />
+    <string id="ml_loc_manor_grounds" text="Malikâne arazisi" />
+    <string id="ml_menu_elsewhere" text="{SETTLEMENT} yakınında bir malikânen var. Aynı anda yalnızca bir malikâneye sahip olabilirsin; yönetmek ya da satmak için oraya git." />
+    <string id="ml_menu_household" text="{MANOR_NAME} – Maiyet&#xA;&#xA;Muhafızlar: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Daimî emir: {ORDERS}.&#xA;Günlük muhafız ücreti: {WAGES} dinar.&#xA;Erzak: {SUPPLIES} ({SUPPLY_STATUS}).&#xA;Yüzbaşı: {CAPTAIN}.&#xA;Talim alanı: {TRAINING_FIELD}. Muhafız koğuşu: {QUARTERS}.&#xA;&#xA;Ücreti ödenmeyen muhafızlar firar edebilir, kıtlık ise talimlerini yavaş yavaş aşındırır." />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} – Yapılar ve onarım&#xA;&#xA;Malikâne derecesi: {ESTATE_RANK}.&#xA;Tamamlanan geliştirmeler: {BUILDINGS}.&#xA;Malikânenin durumu: {CONDITION}.&#xA;{PROJECT}&#xA;&#xA;Daha yüksek dereceler ek görevli, üretim yapısı ve muhafız kapasitesi açar." />
+    <string id="ml_menu_main" text="{SETTLEMENT} yakınındaki {MANOR_NAME}&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;Kasa: {TREASURY} dinar&#xA;Öngörülen bakiye: günde {BALANCE} dinar&#xA;Erzak: {SUPPLIES} (günde {SUPPLY_CHANGE})&#xA;Muhafızlar: {GUARDS}/{GUARD_CAP} – {TRAINING}, {ORDERS}&#xA;Görevliler: {STAFF}&#xA;Yapılar: {BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="Yerli bir aile, mütevazı bir çiftlik evini ve çevresindeki toprağı {PRICE} dinara sunuyor. Bu mülkiyet sana köy üzerinde unvan ya da köylüler üzerinde hak vermez." />
+    <string id="ml_menu_production" text="{MANOR_NAME} – Üretim&#xA;&#xA;Malikâne derecesi: {ESTATE_RANK}.&#xA;Üretim yapıları: {BUILDINGS}.&#xA;Yönelim: {FOCUS}.&#xA;Öngörülen üretim: {OUTPUT}.&#xA;&#xA;Topraklı malikâneler değirmen ve meyve bahçesi açar. Büyük malikâneler bir atölyeyi taşıyabilir." />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} – Kâhyalık&#xA;&#xA;Kâhya: {STEWARD} (günde 20 dinar).&#xA;Yüzbaşı: {CAPTAIN} (günde 20 dinar).&#xA;Hekim: {PHYSICIAN} (günde 15 dinar).&#xA;Üretim yönelimi: {FOCUS}.&#xA;Öngörülen günlük üretim: {OUTPUT}.&#xA;Toplam malikâne gideri: günde {UPKEEP} dinar.&#xA;Köyün ocak sayısı: {HEARTHS}.&#xA;&#xA;Kâhya, malikâne gelirini doğrudan malikâne kasasına yatırır." />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} – Kasa ve ambar&#xA;&#xA;Kasa: {TREASURY} dinar.&#xA;Depolanan mallar: {VALUE} dinar değerinde {STACKS} yığın.&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;Akıncılar saldırıyor; karşılık vermek için {DAYS} gün kaldı." />
+    <string id="ml_msg_already_rested" text="Bugün burada zaten tam olarak dinlendin." />
+    <string id="ml_msg_captain_hired" text="Kıdemli bir yüzbaşı maiyet muhafızlarının komutasını aldı." />
+    <string id="ml_msg_captain_left" text="Ücreti ödenmeyen maiyet yüzbaşısı hizmetinden ayrıldı." />
+    <string id="ml_msg_focus_crops" text="Malikâne bundan böyle ticari ürün planını izleyecek." />
+    <string id="ml_msg_focus_livestock" text="Malikâne bundan böyle hayvancılık planını izleyecek." />
+    <string id="ml_msg_focus_mixed" text="Malikâne bundan böyle karma tarım planını izleyecek." />
+    <string id="ml_msg_goods_remain" text="Malikânede hâlâ depolanmış mal var. Satmadan önce eşya ambarını boşalt." />
+    <string id="ml_msg_guard_deserted" text="Ücreti ödenmeyen bir malikâne muhafızı firar etti. Geriye {GUARDS} muhafız kaldı." />
+    <string id="ml_msg_guard_joined_one" text="Maiyetine {AMOUNT} yeni muhafız katıldı. Muhafız gücü: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_guard_released" text="Bir maiyet muhafızı görevden salıverildi. Geriye {GUARDS} muhafız kaldı." />
+    <string id="ml_msg_guards_joined" text="Maiyetine {AMOUNT} yeni muhafız katıldı. Muhafız gücü: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_order_drill" text="Maiyet muhafızları artık yoğun talim emrini uyguluyor." />
+    <string id="ml_msg_order_patrol" text="Maiyet muhafızları artık köy devriyesi emrini uyguluyor." />
+    <string id="ml_msg_order_watch" text="Maiyet muhafızları artık sıkı nöbet emrini uyguluyor." />
+    <string id="ml_msg_physician_hired" text="Bir hekim malikânede küçük bir şifahane kurdu." />
+    <string id="ml_msg_physician_left" text="Ücreti ödenmeyen malikâne hekimi hizmetinden ayrıldı." />
+    <string id="ml_msg_purchased" text="{SETTLEMENT} yakınında bir malikâne satın aldın." />
+    <string id="ml_msg_raid_warning" text="{SETTLEMENT} yakınındaki malikânen akıncıların tehdidi altında!" />
+    <string id="ml_msg_repairs_begun" text="Onarım başladı, iki gün sürmesi bekleniyor." />
+    <string id="ml_msg_rested" text="Güvenle dinlenip {AMOUNT} can puanı geri kazandın." />
+    <string id="ml_msg_sold" text="Mülk {VALUE} dinara satıldı." />
+    <string id="ml_msg_steward_hired" text="Bir kâhya malikânenin tarlalarını ve hesaplarını devraldı." />
+    <string id="ml_msg_steward_left" text="Ücreti ödenmeyen malikâne kâhyası hizmetinden ayrıldı." />
+    <string id="ml_msg_supplies_delivered" text="Malikâneye {AMOUNT} erzak teslim edildi." />
+    <string id="ml_msg_work_begun" text="İnşaat başladı, {DAYS} gün içinde bitmesi bekleniyor." />
+    <string id="ml_msg_work_complete" text="{MANOR_NAME} malikânesindeki iş tamamlandı: {PROJECT}." />
+    <string id="ml_opt_back" text="Malikâne özetine dön" />
+    <string id="ml_opt_build_storehouse" text="Ambar inşa et (5000{GOLD_ICON}, 3 gün) – güvenli depolamayı açar" />
+    <string id="ml_opt_buy" text="Bu malikâneyi satın al ({PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_cancel_project" text="{PROJECT} işini iptal et ve {REFUND}{GOLD_ICON} geri al" />
+    <string id="ml_opt_captain" text="Maiyet yüzbaşısı tut (4000{GOLD_ICON})" />
+    <string id="ml_opt_defend" text="Malikânenin savunmasında maiyetine önderlik et" />
+    <string id="ml_opt_deposit_1000" text="1000{GOLD_ICON} yatır" />
+    <string id="ml_opt_deposit_5000" text="5000{GOLD_ICON} yatır" />
+    <string id="ml_opt_deposit_custom" text="İstediğin miktarı yatır" />
+    <string id="ml_opt_dismiss" text="Bir maiyet muhafızını salıver" />
+    <string id="ml_opt_focus_crops" text="Ticari ürün ek – %30 daha fazla gelir" />
+    <string id="ml_opt_focus_livestock" text="Hayvan yetiştir – daha az gelir, daha çok erzak" />
+    <string id="ml_opt_focus_mixed" text="Karma tarım uygula – dengeli gelir ve erzak" />
+    <string id="ml_opt_hire_one" text="Bir malikâne muhafızı tut (750{GOLD_ICON})" />
+    <string id="ml_opt_hire_three" text="Üç malikâne muhafızı tut (2250{GOLD_ICON})" />
+    <string id="ml_opt_household" text="Maiyet muhafızlarını yönet" />
+    <string id="ml_opt_improvements" text="Yapıları ve onarımı yönet" />
+    <string id="ml_opt_leave" text="Köye dön" />
+    <string id="ml_opt_ledger" text="Malikâne defterini incele" />
+    <string id="ml_opt_mill" text="Değirmen inşa et (6500{GOLD_ICON}, 4 gün) – malikâne gelirini artırır" />
+    <string id="ml_opt_open_stash" text="Malikâne eşya ambarını aç" />
+    <string id="ml_opt_orchard" text="Meyve bahçesi kur (5500{GOLD_ICON}, 3 gün) – erzak üretir" />
+    <string id="ml_opt_order_drill" text="Emir: yoğun talim – daha hızlı eğitim, daha yüksek gider" />
+    <string id="ml_opt_order_patrol" text="Emir: köy devriyesi – daha güçlü savunma, daha yüksek gider" />
+    <string id="ml_opt_order_watch" text="Emir: sıkı nöbet – en güçlü malikâne savunması" />
+    <string id="ml_opt_palisade" text="Şarampol inşa et (6000{GOLD_ICON}, 4 gün) – akın kayıplarını azaltır" />
+    <string id="ml_opt_physician" text="Malikâne hekimi tut (3500{GOLD_ICON})" />
+    <string id="ml_opt_production" text="Malikâne üretim yapılarını yönet" />
+    <string id="ml_opt_quarters" text="Muhafız koğuşu inşa et (7000{GOLD_ICON}, 4 gün) – maiyet devşirmeyi açar" />
+    <string id="ml_opt_rename" text="Malikâneye ad ver ya da adını değiştir" />
+    <string id="ml_opt_repair" text="Onarıma başla ({ML_REPAIR_COST}{GOLD_ICON}, 2 gün)" />
+    <string id="ml_opt_rest" text="Malikânede dinlen ve iyileş" />
+    <string id="ml_opt_sell" text="Malikâneyi sat ({ML_SALE_PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_steward" text="Malikâne kâhyası tut (2500{GOLD_ICON})" />
+    <string id="ml_opt_stewardship" text="Malikâne görevlilerini ve siyasetini yönet" />
+    <string id="ml_opt_storehouse" text="Kasayı ve ambarı yönet" />
+    <string id="ml_opt_supplies_10" text="10 maiyet erzağı satın al (500{GOLD_ICON})" />
+    <string id="ml_opt_supplies_50" text="50 maiyet erzağı satın al (2250{GOLD_ICON})" />
+    <string id="ml_opt_tier_three" text="Büyük malikâneye genişlet (18000{GOLD_ICON}, 8 gün)" />
+    <string id="ml_opt_tier_two" text="Topraklı malikâneye genişlet (10000{GOLD_ICON}, 6 gün)" />
+    <string id="ml_opt_training" text="Talim alanı inşa et (8000{GOLD_ICON}, 5 gün) – muhafızları her gün eğitir" />
+    <string id="ml_opt_walk" text="Malikâne arazisinde dolaş" />
+    <string id="ml_opt_withdraw_1000" text="1000{GOLD_ICON} çek" />
+    <string id="ml_opt_withdraw_all" text="Malikâne kasasındaki tüm parayı çek" />
+    <string id="ml_opt_withdraw_custom" text="İstediğin miktarı çek" />
+    <string id="ml_opt_workshop" text="Malikâne atölyesi inşa et (9000{GOLD_ICON}, 5 gün) – değerli mal üretir" />
+    <string id="ml_order_drill_name" text="Yoğun talim" />
+    <string id="ml_order_patrol_name" text="Köy devriyesi" />
+    <string id="ml_order_watch_name" text="Sıkı nöbet" />
+    <string id="ml_output_daily" text="{INCOME} dinar ve {SUPPLIES} erzak" />
+    <string id="ml_output_inactive" text="bir kâhya tutulup onarımlar bitene dek durgun" />
+    <string id="ml_output_per_day" text="günde {INCOME} dinar ve {SUPPLIES} erzak" />
+    <string id="ml_p_mill" text="malikâne değirmeni" />
+    <string id="ml_p_orchard" text="meyve bahçesi" />
+    <string id="ml_p_palisade" text="şarampol" />
+    <string id="ml_p_quarters" text="muhafız koğuşu" />
+    <string id="ml_p_repair" text="malikâne onarımı" />
+    <string id="ml_p_storehouse" text="ambar" />
+    <string id="ml_p_tier2" text="topraklı malikâneye genişletme" />
+    <string id="ml_p_tier3" text="büyük malikâneye genişletme" />
+    <string id="ml_p_training" text="talim alanı" />
+    <string id="ml_p_workshop" text="malikâne atölyesi" />
+    <string id="ml_project_current" text="Yürüyen iş: {PROJECT}. {DAYS} gün içinde bitmesi bekleniyor." />
+    <string id="ml_project_none" text="Yürüyen bir inşaat işi yok." />
+    <string id="ml_project_summary" text="Süren iş: {PROJECT}, {DAYS} gün içinde bitecek." />
+    <string id="ml_quarters_required" text="devşirmeden önce gerekli" />
+    <string id="ml_raided_body" text="Malikâne hasar gördü. Akıncılar {GOLD} dinar çaldı, depodaki {GOODS} eşyayı götürdü ve {GUARDS} maiyet muhafızı can verdi." />
+    <string id="ml_raided_title" text="Malikânen yağmalandı" />
+    <string id="ml_scene_access_hint" text="Malikâneyi yönetmek için F'ye bas." />
+    <string id="ml_scene_declined" text="Bannerlord '{SCENE}' sahnesini reddetti." />
+    <string id="ml_scene_error_title" text="Malikâne sahnesi hatası" />
+    <string id="ml_scene_menu_body" text="Kâhyan talimatlarını bekliyor." />
+    <string id="ml_scene_menu_title" text="Malikâne" />
+    <string id="ml_scene_no_center" text="Köy merkezi konumu çözümlenemedi." />
+    <string id="ml_scene_no_complex" text="Köy konumları kullanılamıyor." />
+    <string id="ml_scene_store_hint" text="Ambarı açmak için F'ye bas." />
+    <string id="ml_scene_tip_storehouse" text="Ambar gerekir." />
+    <string id="ml_scene_tip_storehouse_intact" text="Hasarsız bir ambar gerekir." />
+    <string id="ml_scene_tip_withdraw" text="İçinde para bulunan bir ambar gerekir." />
+    <string id="ml_scene_unavailable" text="Malikâne sahnesi kullanılamıyor" />
+    <string id="ml_staff_summary" text="kâhya {STEWARD}, yüzbaşı {CAPTAIN}, hekim {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="Hasarlı ambar, onarımlar tamamlanana dek açılamaz." />
+    <string id="ml_store_missing" text="Burada para ya da mal saklayabilmek için önce bir ambar inşa edilmeli." />
+    <string id="ml_store_ready" text="Ambar güvenli ve kullanıma hazır." />
+    <string id="ml_supply_days" text="yaklaşık {DAYS} gün yeter" />
+    <string id="ml_supply_unused" text="şu an tüketilmiyor" />
+    <string id="ml_tier_grand" text="Büyük malikâne" />
+    <string id="ml_tier_landed" text="Topraklı malikâne" />
+    <string id="ml_tier_manor" text="Küçük malikâne" />
+    <string id="ml_tip_afford_building" text="Bu yapıyı karşılayamazsın." />
+    <string id="ml_tip_afford_expansion" text="Bu genişletmeyi karşılayamazsın." />
+    <string id="ml_tip_afford_improvement" text="Bu geliştirmeyi karşılayamazsın." />
+    <string id="ml_tip_afford_property" text="Bu mülkü karşılayamazsın." />
+    <string id="ml_tip_afford_supplies" text="Bu erzağı karşılayamazsın." />
+    <string id="ml_tip_need_denars" text="{AMOUNT} dinara ihtiyacın var." />
+    <string id="ml_tip_no_guard" text="Savunma düzenleyebileceğin bir maiyet muhafızın yok." />
+    <string id="ml_tip_not_enough_gold" text="Yeterli dinarın yok." />
+    <string id="ml_tip_project_underway" text="Halihazırda başka bir iş sürüyor." />
+    <string id="ml_tip_repair_before_plan" text="Üretim planını değiştirmeden önce malikâneyi onar." />
+    <string id="ml_tip_repair_first" text="Önce malikâneyi onar." />
+    <string id="ml_tip_requires_landed" text="Topraklı malikâne gerekir." />
+    <string id="ml_tip_requires_rank" text="{RANK}. malikâne derecesi gerekir." />
+    <string id="ml_tip_treasury_short" text="Malikâne kasasında yeterli dinar yok." />
+    <string id="ml_train_drilled" text="talimli" />
+    <string id="ml_train_green" text="acemi" />
+    <string id="ml_train_trained" text="eğitimli" />
+    <string id="ml_train_veteran" text="kıdemli" />
+    <string id="ml_w_active" text="faal" />
+    <string id="ml_w_another_village" text="başka bir köy" />
+    <string id="ml_w_built" text="inşa edildi" />
+    <string id="ml_w_damaged" text="hasarlı" />
+    <string id="ml_w_employed" text="tutuldu" />
+    <string id="ml_w_inactive" text="durgun" />
+    <string id="ml_w_no" text="yok" />
+    <string id="ml_w_none" text="yok" />
+    <string id="ml_w_not_built" text="inşa edilmedi" />
+    <string id="ml_w_yes" text="var" />
+    <string id="ml_w_your_manor" text="Malikânen" />
+    <string id="ml_walk_body" text="{ESTATE_RANK} ve çevresindeki toprakları dolaşıyorsun. {STATUS}&#xA;&#xA;Geliştirmeler: {BUILDINGS}.&#xA;Maiyet muhafızları: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Görevliler: {STAFF}.&#xA;Erzak: {SUPPLIES}.&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="Yapılarda yakın zamandaki saldırının izleri hâlâ duruyor." />
+    <string id="ml_walk_no_project" text="Şu anda süren bir inşaat yok." />
+    <string id="ml_walk_project" text="İşçiler {PROJECT} ile meşgul." />
+    <string id="ml_walk_secure" text="Malikâne düzenli ve güvenli." />
+  </strings>
+</base>

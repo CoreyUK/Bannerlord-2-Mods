@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Français" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="moulin" />
+    <string id="ml_b_orchard" text="verger" />
+    <string id="ml_b_palisade" text="palissade" />
+    <string id="ml_b_quarters" text="corps de garde" />
+    <string id="ml_b_storehouse" text="entrepôt" />
+    <string id="ml_b_training_field" text="terrain d'entraînement" />
+    <string id="ml_b_workshop" text="atelier" />
+    <string id="ml_btn_accept" text="Accepter" />
+    <string id="ml_btn_cancel" text="Annuler" />
+    <string id="ml_btn_cancel_project" text="Annuler les travaux" />
+    <string id="ml_btn_continue" text="Continuer" />
+    <string id="ml_btn_deposit" text="Déposer" />
+    <string id="ml_btn_keep_building" text="Poursuivre les travaux" />
+    <string id="ml_btn_keep_it" text="Conserver" />
+    <string id="ml_btn_return" text="Retour" />
+    <string id="ml_btn_sell" text="Vendre" />
+    <string id="ml_btn_understood" text="Compris" />
+    <string id="ml_btn_victory" text="Victoire" />
+    <string id="ml_btn_withdraw" text="Retirer" />
+    <string id="ml_captain_commanding" text="commande la maisonnée" />
+    <string id="ml_cond_damaged" text="ENDOMMAGÉ" />
+    <string id="ml_cond_needs_repair" text="endommagé et nécessitant des réparations" />
+    <string id="ml_cond_secure" text="Sûr" />
+    <string id="ml_cond_sound" text="en bon état" />
+    <string id="ml_cond_threat" text="MENACÉ" />
+    <string id="ml_default_manor_name" text="Manoir de {SETTLEMENT}" />
+    <string id="ml_defended_body" text="Votre résistance a brisé les pillards avant qu'ils ne puissent brûler ou piller le manoir." />
+    <string id="ml_defended_title" text="Manoir défendu" />
+    <string id="ml_defense_lost_body" text="Les défenseurs ont été submergés. {GUARDS} gardes sont tombés, {GOLD} deniers et {GOODS} objets entreposés ont été perdus, et le domaine a été endommagé." />
+    <string id="ml_defense_lost_title" text="Défense du manoir échouée" />
+    <string id="ml_defense_won_calc" text="Sous votre commandement, la garde de la maisonnée tient le domaine et repousse les pillards. Le manoir et ses réserves sont saufs." />
+    <string id="ml_defense_won_played" text="Vous et votre garde avez chassé les pillards du domaine. Votre manoir et ses réserves sont saufs." />
+    <string id="ml_defense_won_title" text="Défense du manoir réussie" />
+    <string id="ml_entry_holdings" text="Possessions du manoir (près de {SETTLEMENT})" />
+    <string id="ml_entry_inquire" text="Se renseigner sur l'achat d'un manoir" />
+    <string id="ml_entry_visit" text="Visiter votre manoir" />
+    <string id="ml_focus_crops_name" text="Cultures de rapport" />
+    <string id="ml_focus_livestock_name" text="Élevage" />
+    <string id="ml_focus_mixed_name" text="Polyculture" />
+    <string id="ml_inq_cancel_body" text="Interrompre les travaux de {PROJECT} ? La moitié du coût enregistré ({REFUND} deniers) sera récupérée." />
+    <string id="ml_inq_cancel_title" text="Annuler la construction ?" />
+    <string id="ml_inq_deposit_title" text="Déposer des fonds du manoir" />
+    <string id="ml_inq_rename_body" text="Choisissez un nom pour votre manoir." />
+    <string id="ml_inq_rename_invalid" text="Saisissez un nom de 1 à 40 caractères." />
+    <string id="ml_inq_rename_title" text="Nommer le domaine" />
+    <string id="ml_inq_sell_body" text="Vendre votre manoir près de {SETTLEMENT} pour {VALUE} deniers ? Les fonds entreposés vous seront rendus, mais la garde et le personnel du domaine seront congédiés." />
+    <string id="ml_inq_sell_title" text="Vendre le manoir ?" />
+    <string id="ml_inq_transfer_body" text="Saisissez un montant compris entre 1 et {MAX} deniers." />
+    <string id="ml_inq_transfer_invalid" text="Saisissez un nombre entier compris entre 1 et {MAX}." />
+    <string id="ml_inq_withdraw_title" text="Retirer des fonds du manoir" />
+    <string id="ml_ledger_body" text="Ancienneté du domaine : {DAYS_OWNED} jours enregistrés.&#xA;Rang : {ESTATE_RANK}.&#xA;État : {CONDITION}. {THREAT}&#xA;&#xA;Journée écoulée&#xA;Revenus : {LAST_INCOME} deniers&#xA;Entretien total : {LAST_UPKEEP} deniers&#xA;Variation des vivres : {LAST_SUPPLY_CHANGE}&#xA;&#xA;Prévisions pour demain&#xA;Revenus : {NEXT_INCOME} deniers&#xA;Entretien total : {NEXT_UPKEEP} deniers&#xA;Solde net : {NEXT_BALANCE} deniers&#xA;Vivres produits : {NEXT_SUPPLIES}&#xA;Vivres consommés : {SUPPLY_USE}&#xA;&#xA;Totaux enregistrés depuis l'installation&#xA;Revenus du domaine : {TOTAL_INCOME} deniers&#xA;Dépenses du domaine : {TOTAL_EXPENSES} deniers" />
+    <string id="ml_ledger_no_threat" text="Aucune menace en cours." />
+    <string id="ml_ledger_threat" text="Des pillards sont actifs ; il reste {DAYS} jours pour réagir." />
+    <string id="ml_ledger_title" text="Registre de {MANOR_NAME}" />
+    <string id="ml_loc_enter_grounds" text="Entrer sur les terres du manoir" />
+    <string id="ml_loc_manor_grounds" text="Terres du manoir" />
+    <string id="ml_menu_elsewhere" text="Vous possédez un manoir près de {SETTLEMENT}. Vous ne pouvez posséder qu'un seul manoir à la fois ; rendez-vous sur place pour le gérer ou le vendre." />
+    <string id="ml_menu_household" text="{MANOR_NAME} – Maisonnée&#xA;&#xA;Gardes : {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Consigne permanente : {ORDERS}.&#xA;Solde quotidienne des gardes : {WAGES} deniers.&#xA;Vivres : {SUPPLIES} ({SUPPLY_STATUS}).&#xA;Capitaine : {CAPTAIN}.&#xA;Terrain d'entraînement : {TRAINING_FIELD}. Corps de garde : {QUARTERS}.&#xA;&#xA;Des gardes impayés peuvent déserter, et les pénuries érodent peu à peu leur entraînement." />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} – Bâtiments et réparations&#xA;&#xA;Rang du domaine : {ESTATE_RANK}.&#xA;Améliorations achevées : {BUILDINGS}.&#xA;État du domaine : {CONDITION}.&#xA;{PROJECT}&#xA;&#xA;Les rangs supérieurs débloquent du personnel, des bâtiments de production et une garde plus nombreuse." />
+    <string id="ml_menu_main" text="{MANOR_NAME}, près de {SETTLEMENT}&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;Trésor : {TREASURY} deniers&#xA;Solde prévu : {BALANCE} deniers/jour&#xA;Vivres : {SUPPLIES} ({SUPPLY_CHANGE}/jour)&#xA;Gardes : {GUARDS}/{GUARD_CAP} – {TRAINING}, {ORDERS}&#xA;Personnel : {STAFF}&#xA;Bâtiments : {BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="Une famille du lieu propose une modeste ferme et les terres qui l'entourent pour {PRICE} deniers. Cette propriété ne confère aucun titre sur le village ni aucun droit sur ses habitants." />
+    <string id="ml_menu_production" text="{MANOR_NAME} – Production&#xA;&#xA;Rang du domaine : {ESTATE_RANK}.&#xA;Bâtiments de production : {BUILDINGS}.&#xA;Orientation : {FOCUS}.&#xA;Production prévue : {OUTPUT}.&#xA;&#xA;Les domaines terriens débloquent moulins et vergers. Les grands domaines peuvent entretenir un atelier." />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} – Intendance&#xA;&#xA;Intendant : {STEWARD} (20 deniers/jour).&#xA;Capitaine : {CAPTAIN} (20 deniers/jour).&#xA;Médecin : {PHYSICIAN} (15 deniers/jour).&#xA;Orientation agricole : {FOCUS}.&#xA;Production quotidienne prévue : {OUTPUT}.&#xA;Entretien total du domaine : {UPKEEP} deniers/jour.&#xA;Foyers du village : {HEARTHS}.&#xA;&#xA;L'intendant verse les revenus du domaine directement au trésor du manoir." />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} – Trésor et entrepôt&#xA;&#xA;Trésor : {TREASURY} deniers.&#xA;Marchandises entreposées : {STACKS} lots d'une valeur de {VALUE} deniers.&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;Des pillards attaquent ; il reste {DAYS} jours pour réagir." />
+    <string id="ml_msg_already_rested" text="Vous vous êtes déjà pleinement reposé ici aujourd'hui." />
+    <string id="ml_msg_captain_hired" text="Un capitaine chevronné prend le commandement de la garde de la maisonnée." />
+    <string id="ml_msg_captain_left" text="Le capitaine impayé de la maisonnée a quitté votre service." />
+    <string id="ml_msg_focus_crops" text="Le domaine adoptera désormais des cultures de rapport." />
+    <string id="ml_msg_focus_livestock" text="Le domaine se consacrera désormais à l'élevage." />
+    <string id="ml_msg_focus_mixed" text="Le domaine adoptera désormais la polyculture." />
+    <string id="ml_msg_goods_remain" text="Des marchandises sont encore entreposées au manoir. Videz l'entrepôt avant de vendre." />
+    <string id="ml_msg_guard_deserted" text="Un garde impayé du manoir a déserté. Il reste {GUARDS} gardes." />
+    <string id="ml_msg_guard_joined_one" text="{AMOUNT} nouveau garde rejoint votre maisonnée. Effectif de la garde : {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_guard_released" text="Un garde de la maisonnée a été relevé de ses fonctions. Il reste {GUARDS} gardes." />
+    <string id="ml_msg_guards_joined" text="{AMOUNT} nouveaux gardes rejoignent votre maisonnée. Effectif de la garde : {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_order_drill" text="La garde de la maisonnée suit désormais la consigne d'exercices intensifs." />
+    <string id="ml_msg_order_patrol" text="La garde de la maisonnée suit désormais la consigne de patrouilles au village." />
+    <string id="ml_msg_order_watch" text="La garde de la maisonnée suit désormais la consigne de veille rapprochée." />
+    <string id="ml_msg_physician_hired" text="Un médecin installe une petite infirmerie au domaine." />
+    <string id="ml_msg_physician_left" text="Le médecin impayé du domaine a quitté votre service." />
+    <string id="ml_msg_purchased" text="Vous avez acheté un manoir près de {SETTLEMENT}." />
+    <string id="ml_msg_raid_warning" text="Votre manoir près de {SETTLEMENT} est menacé par des pillards !" />
+    <string id="ml_msg_repairs_begun" text="Les réparations ont commencé et devraient durer deux jours." />
+    <string id="ml_msg_rested" text="Vous vous reposez en sécurité et récupérez {AMOUNT} points de vie." />
+    <string id="ml_msg_sold" text="La propriété a été vendue pour {VALUE} deniers." />
+    <string id="ml_msg_steward_hired" text="Un intendant prend en charge les champs et les comptes du domaine." />
+    <string id="ml_msg_steward_left" text="L'intendant impayé du domaine a quitté votre service." />
+    <string id="ml_msg_supplies_delivered" text="{AMOUNT} vivres ont été livrés au manoir." />
+    <string id="ml_msg_work_begun" text="Les travaux ont commencé et devraient s'achever dans {DAYS} jours." />
+    <string id="ml_msg_work_complete" text="Les travaux à {MANOR_NAME} sont achevés : {PROJECT}." />
+    <string id="ml_opt_back" text="Revenir à la vue d'ensemble du domaine" />
+    <string id="ml_opt_build_storehouse" text="Construire un entrepôt (5000{GOLD_ICON}, 3 jours) – débloque un stockage sûr" />
+    <string id="ml_opt_buy" text="Acheter ce manoir ({PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_cancel_project" text="Annuler {PROJECT} et récupérer {REFUND}{GOLD_ICON}" />
+    <string id="ml_opt_captain" text="Engager un capitaine de maisonnée (4000{GOLD_ICON})" />
+    <string id="ml_opt_defend" text="Mener votre garde à la défense du manoir" />
+    <string id="ml_opt_deposit_1000" text="Déposer 1000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_5000" text="Déposer 5000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_custom" text="Déposer un montant personnalisé" />
+    <string id="ml_opt_dismiss" text="Congédier un garde de la maisonnée" />
+    <string id="ml_opt_focus_crops" text="Planter des cultures de rapport – 30 % de revenus en plus" />
+    <string id="ml_opt_focus_livestock" text="Élever du bétail – moins de revenus, plus de vivres" />
+    <string id="ml_opt_focus_mixed" text="Adopter la polyculture – revenus et vivres équilibrés" />
+    <string id="ml_opt_hire_one" text="Engager un garde du manoir (750{GOLD_ICON})" />
+    <string id="ml_opt_hire_three" text="Engager trois gardes du manoir (2250{GOLD_ICON})" />
+    <string id="ml_opt_household" text="Gérer la garde de la maisonnée" />
+    <string id="ml_opt_improvements" text="Gérer les bâtiments et les réparations" />
+    <string id="ml_opt_leave" text="Retourner au village" />
+    <string id="ml_opt_ledger" text="Consulter le registre du domaine" />
+    <string id="ml_opt_mill" text="Construire un moulin (6500{GOLD_ICON}, 4 jours) – augmente les revenus du domaine" />
+    <string id="ml_opt_open_stash" text="Ouvrir l'entrepôt d'objets du manoir" />
+    <string id="ml_opt_orchard" text="Planter un verger (5500{GOLD_ICON}, 3 jours) – produit des vivres" />
+    <string id="ml_opt_order_drill" text="Consigne : exercices intensifs – entraînement plus rapide, entretien plus élevé" />
+    <string id="ml_opt_order_patrol" text="Consigne : patrouilles au village – défense renforcée, entretien plus élevé" />
+    <string id="ml_opt_order_watch" text="Consigne : veille rapprochée – meilleure défense du manoir" />
+    <string id="ml_opt_palisade" text="Construire une palissade (6000{GOLD_ICON}, 4 jours) – réduit les pertes lors des raids" />
+    <string id="ml_opt_physician" text="Retenir un médecin de domaine (3500{GOLD_ICON})" />
+    <string id="ml_opt_production" text="Gérer les bâtiments de production du domaine" />
+    <string id="ml_opt_quarters" text="Construire un corps de garde (7000{GOLD_ICON}, 4 jours) – débloque le recrutement" />
+    <string id="ml_opt_rename" text="Nommer ou renommer le domaine" />
+    <string id="ml_opt_repair" text="Lancer les réparations ({ML_REPAIR_COST}{GOLD_ICON}, 2 jours)" />
+    <string id="ml_opt_rest" text="Se reposer et récupérer au manoir" />
+    <string id="ml_opt_sell" text="Vendre le manoir ({ML_SALE_PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_steward" text="Engager un intendant de domaine (2500{GOLD_ICON})" />
+    <string id="ml_opt_stewardship" text="Gérer le personnel et l'orientation du domaine" />
+    <string id="ml_opt_storehouse" text="Gérer le trésor et l'entrepôt" />
+    <string id="ml_opt_supplies_10" text="Acheter 10 vivres pour la maisonnée (500{GOLD_ICON})" />
+    <string id="ml_opt_supplies_50" text="Acheter 50 vivres pour la maisonnée (2250{GOLD_ICON})" />
+    <string id="ml_opt_tier_three" text="Agrandir en grand domaine (18000{GOLD_ICON}, 8 jours)" />
+    <string id="ml_opt_tier_two" text="Agrandir en domaine terrien (10000{GOLD_ICON}, 6 jours)" />
+    <string id="ml_opt_training" text="Construire un terrain d'entraînement (8000{GOLD_ICON}, 5 jours) – entraîne les gardes chaque jour" />
+    <string id="ml_opt_walk" text="Parcourir les terres du domaine" />
+    <string id="ml_opt_withdraw_1000" text="Retirer 1000{GOLD_ICON}" />
+    <string id="ml_opt_withdraw_all" text="Retirer tous les fonds du manoir" />
+    <string id="ml_opt_withdraw_custom" text="Retirer un montant personnalisé" />
+    <string id="ml_opt_workshop" text="Construire un atelier de domaine (9000{GOLD_ICON}, 5 jours) – produit des biens de valeur" />
+    <string id="ml_order_drill_name" text="Exercices intensifs" />
+    <string id="ml_order_patrol_name" text="Patrouilles au village" />
+    <string id="ml_order_watch_name" text="Veille rapprochée" />
+    <string id="ml_output_daily" text="{INCOME} deniers et {SUPPLIES} vivres" />
+    <string id="ml_output_inactive" text="à l'arrêt tant qu'un intendant n'est pas engagé et les réparations achevées" />
+    <string id="ml_output_per_day" text="{INCOME} deniers et {SUPPLIES} vivres par jour" />
+    <string id="ml_p_mill" text="moulin du domaine" />
+    <string id="ml_p_orchard" text="verger" />
+    <string id="ml_p_palisade" text="palissade" />
+    <string id="ml_p_quarters" text="corps de garde" />
+    <string id="ml_p_repair" text="réparations du domaine" />
+    <string id="ml_p_storehouse" text="entrepôt" />
+    <string id="ml_p_tier2" text="agrandissement en domaine terrien" />
+    <string id="ml_p_tier3" text="agrandissement en grand domaine" />
+    <string id="ml_p_training" text="terrain d'entraînement" />
+    <string id="ml_p_workshop" text="atelier du domaine" />
+    <string id="ml_project_current" text="Travaux en cours : {PROJECT}. Achèvement prévu dans {DAYS} jours." />
+    <string id="ml_project_none" text="Aucun chantier n'est en cours." />
+    <string id="ml_project_summary" text="Travaux en cours : {PROJECT}, achevés dans {DAYS} jours." />
+    <string id="ml_quarters_required" text="requis avant tout recrutement" />
+    <string id="ml_raided_body" text="Le domaine a été endommagé. Les pillards ont dérobé {GOLD} deniers, emporté {GOODS} objets entreposés, et {GUARDS} gardes de la maisonnée ont péri." />
+    <string id="ml_raided_title" text="Votre manoir a été pillé" />
+    <string id="ml_scene_access_hint" text="Appuyez sur F pour gérer le domaine." />
+    <string id="ml_scene_declined" text="Bannerlord a refusé la scène « {SCENE} »." />
+    <string id="ml_scene_error_title" text="Erreur de scène du manoir" />
+    <string id="ml_scene_menu_body" text="Votre intendant attend vos instructions." />
+    <string id="ml_scene_menu_title" text="Le domaine" />
+    <string id="ml_scene_no_center" text="Le centre du village n'a pas pu être déterminé." />
+    <string id="ml_scene_no_complex" text="Les lieux du village sont indisponibles." />
+    <string id="ml_scene_store_hint" text="Appuyez sur F pour ouvrir l'entrepôt." />
+    <string id="ml_scene_tip_storehouse" text="Nécessite un entrepôt." />
+    <string id="ml_scene_tip_storehouse_intact" text="Nécessite un entrepôt intact." />
+    <string id="ml_scene_tip_withdraw" text="Nécessite un entrepôt contenant des fonds." />
+    <string id="ml_scene_unavailable" text="Scène du manoir indisponible" />
+    <string id="ml_staff_summary" text="intendant {STEWARD}, capitaine {CAPTAIN}, médecin {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="L'entrepôt endommagé ne peut être ouvert avant la fin des réparations." />
+    <string id="ml_store_missing" text="Un entrepôt doit être construit avant de pouvoir garder ici des fonds ou des marchandises." />
+    <string id="ml_store_ready" text="L'entrepôt est sûr et accessible." />
+    <string id="ml_supply_days" text="environ {DAYS} jours restants" />
+    <string id="ml_supply_unused" text="aucune consommation actuelle" />
+    <string id="ml_tier_grand" text="Grand domaine" />
+    <string id="ml_tier_landed" text="Domaine terrien" />
+    <string id="ml_tier_manor" text="Petit manoir" />
+    <string id="ml_tip_afford_building" text="Vous ne pouvez pas vous offrir ce bâtiment." />
+    <string id="ml_tip_afford_expansion" text="Vous ne pouvez pas vous offrir cet agrandissement." />
+    <string id="ml_tip_afford_improvement" text="Vous ne pouvez pas vous offrir cette amélioration." />
+    <string id="ml_tip_afford_property" text="Vous ne pouvez pas vous offrir cette propriété." />
+    <string id="ml_tip_afford_supplies" text="Vous ne pouvez pas vous offrir ces vivres." />
+    <string id="ml_tip_need_denars" text="Il vous faut {AMOUNT} deniers." />
+    <string id="ml_tip_no_guard" text="Vous n'avez aucun garde de maisonnée pour organiser une défense." />
+    <string id="ml_tip_not_enough_gold" text="Vous n'avez pas assez de deniers." />
+    <string id="ml_tip_project_underway" text="D'autres travaux sont déjà en cours." />
+    <string id="ml_tip_repair_before_plan" text="Réparez le manoir avant de modifier son plan de production." />
+    <string id="ml_tip_repair_first" text="Réparez d'abord le manoir." />
+    <string id="ml_tip_requires_landed" text="Nécessite un domaine terrien." />
+    <string id="ml_tip_requires_rank" text="Nécessite le rang de domaine {RANK}." />
+    <string id="ml_tip_treasury_short" text="Le trésor du manoir ne contient pas assez de deniers." />
+    <string id="ml_train_drilled" text="exercés" />
+    <string id="ml_train_green" text="novices" />
+    <string id="ml_train_trained" text="entraînés" />
+    <string id="ml_train_veteran" text="vétérans" />
+    <string id="ml_w_active" text="en service" />
+    <string id="ml_w_another_village" text="un autre village" />
+    <string id="ml_w_built" text="construit" />
+    <string id="ml_w_damaged" text="endommagé" />
+    <string id="ml_w_employed" text="engagé" />
+    <string id="ml_w_inactive" text="à l'arrêt" />
+    <string id="ml_w_no" text="non" />
+    <string id="ml_w_none" text="aucun" />
+    <string id="ml_w_not_built" text="non construit" />
+    <string id="ml_w_yes" text="oui" />
+    <string id="ml_w_your_manor" text="Votre manoir" />
+    <string id="ml_walk_body" text="Vous parcourez {ESTATE_RANK} et les terres alentour. {STATUS}&#xA;&#xA;Améliorations : {BUILDINGS}.&#xA;Gardes de la maisonnée : {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Personnel : {STAFF}.&#xA;Vivres : {SUPPLIES}.&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="Les bâtiments portent encore les cicatrices d'une attaque récente." />
+    <string id="ml_walk_no_project" text="Aucun chantier n'est actuellement en cours." />
+    <string id="ml_walk_project" text="Les ouvriers s'affairent à {PROJECT}." />
+    <string id="ml_walk_secure" text="Le domaine est ordonné et sûr." />
+  </strings>
+</base>

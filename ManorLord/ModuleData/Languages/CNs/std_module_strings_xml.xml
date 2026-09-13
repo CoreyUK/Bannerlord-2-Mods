@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="简体中文" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="磨坊" />
+    <string id="ml_b_orchard" text="果园" />
+    <string id="ml_b_palisade" text="木栅栏" />
+    <string id="ml_b_quarters" text="卫兵营房" />
+    <string id="ml_b_storehouse" text="仓库" />
+    <string id="ml_b_training_field" text="训练场" />
+    <string id="ml_b_workshop" text="作坊" />
+    <string id="ml_btn_accept" text="确认" />
+    <string id="ml_btn_cancel" text="取消" />
+    <string id="ml_btn_cancel_project" text="取消工程" />
+    <string id="ml_btn_continue" text="继续" />
+    <string id="ml_btn_deposit" text="存入" />
+    <string id="ml_btn_keep_building" text="继续施工" />
+    <string id="ml_btn_keep_it" text="保留" />
+    <string id="ml_btn_return" text="返回" />
+    <string id="ml_btn_sell" text="出售" />
+    <string id="ml_btn_understood" text="知道了" />
+    <string id="ml_btn_victory" text="胜利" />
+    <string id="ml_btn_withdraw" text="取出" />
+    <string id="ml_captain_commanding" text="统领家兵" />
+    <string id="ml_cond_damaged" text="已受损" />
+    <string id="ml_cond_needs_repair" text="受损，亟待修缮" />
+    <string id="ml_cond_secure" text="安全" />
+    <string id="ml_cond_sound" text="完好" />
+    <string id="ml_cond_threat" text="受到威胁" />
+    <string id="ml_default_manor_name" text="{SETTLEMENT}庄园" />
+    <string id="ml_defended_body" text="你的坚守击溃了劫掠者，庄园未遭焚毁或洗劫。" />
+    <string id="ml_defended_title" text="庄园已守住" />
+    <string id="ml_defense_lost_body" text="守军寡不敌众。{GUARDS} 名卫兵阵亡，损失了 {GOLD} 第纳尔和 {GOODS} 件存放的物品，庄园也遭到破坏。" />
+    <string id="ml_defense_lost_title" text="庄园防守失败" />
+    <string id="ml_defense_won_calc" text="在你的指挥下，家兵守住了庄园，击退了劫掠者。庄园及其库存安然无恙。" />
+    <string id="ml_defense_won_played" text="你与家兵一同将劫掠者逐出庄园。庄园及其库存安然无恙。" />
+    <string id="ml_defense_won_title" text="庄园防守成功" />
+    <string id="ml_entry_holdings" text="庄园产业（位于 {SETTLEMENT} 附近）" />
+    <string id="ml_entry_inquire" text="打听购置庄园的事宜" />
+    <string id="ml_entry_visit" text="探访你的庄园" />
+    <string id="ml_focus_crops_name" text="经济作物" />
+    <string id="ml_focus_livestock_name" text="畜牧" />
+    <string id="ml_focus_mixed_name" text="混合农耕" />
+    <string id="ml_inq_cancel_body" text="停止{PROJECT}的施工吗？将退还已记录工程费用的一半（{REFUND} 第纳尔）。" />
+    <string id="ml_inq_cancel_title" text="取消施工？" />
+    <string id="ml_inq_deposit_title" text="存入庄园资金" />
+    <string id="ml_inq_rename_body" text="为你的庄园取一个名字。" />
+    <string id="ml_inq_rename_invalid" text="请输入 1 至 40 个字符的名称。" />
+    <string id="ml_inq_rename_title" text="为庄园命名" />
+    <string id="ml_inq_sell_body" text="要以 {VALUE} 第纳尔出售你在 {SETTLEMENT} 附近的庄园吗？库存资金将退还给你，但家兵和庄园雇员都会遣散。" />
+    <string id="ml_inq_sell_title" text="出售庄园？" />
+    <string id="ml_inq_transfer_body" text="请输入 1 至 {MAX} 第纳尔之间的金额。" />
+    <string id="ml_inq_transfer_invalid" text="请输入 1 至 {MAX} 之间的整数。" />
+    <string id="ml_inq_withdraw_title" text="取出庄园资金" />
+    <string id="ml_ledger_body" text="庄园存续：{DAYS_OWNED} 天记录。&#xA;等级：{ESTATE_RANK}。&#xA;状况：{CONDITION}。{THREAT}&#xA;&#xA;昨日&#xA;收入：{LAST_INCOME} 第纳尔&#xA;总开支：{LAST_UPKEEP} 第纳尔&#xA;补给变化：{LAST_SUPPLY_CHANGE}&#xA;&#xA;次日预计&#xA;收入：{NEXT_INCOME} 第纳尔&#xA;总开支：{NEXT_UPKEEP} 第纳尔&#xA;净收支：{NEXT_BALANCE} 第纳尔&#xA;补给产出：{NEXT_SUPPLIES}&#xA;补给消耗：{SUPPLY_USE}&#xA;&#xA;自启用本功能以来的累计&#xA;庄园收入：{TOTAL_INCOME} 第纳尔&#xA;庄园支出：{TOTAL_EXPENSES} 第纳尔" />
+    <string id="ml_ledger_no_threat" text="目前没有威胁。" />
+    <string id="ml_ledger_threat" text="劫掠者正在活动；还有 {DAYS} 天可以应对。" />
+    <string id="ml_ledger_title" text="{MANOR_NAME}账簿" />
+    <string id="ml_list_separator" text="、" />
+    <string id="ml_loc_enter_grounds" text="进入庄园领地" />
+    <string id="ml_loc_manor_grounds" text="庄园领地" />
+    <string id="ml_menu_elsewhere" text="你在 {SETTLEMENT} 附近拥有一座庄园。同一时间只能拥有一座庄园；前往该地进行管理或出售。" />
+    <string id="ml_menu_household" text="{MANOR_NAME} — 家兵&#xA;&#xA;卫兵：{GUARDS}/{GUARD_CAP}（{TRAINING}）。&#xA;常备命令：{ORDERS}。&#xA;每日卫兵薪饷：{WAGES} 第纳尔。&#xA;补给：{SUPPLIES}（{SUPPLY_STATUS}）。&#xA;队长：{CAPTAIN}。&#xA;训练场：{TRAINING_FIELD}。卫兵营房：{QUARTERS}。&#xA;&#xA;未获薪饷的卫兵可能逃亡，补给短缺则会逐渐削弱他们的训练水平。" />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} — 建筑与修缮&#xA;&#xA;庄园等级：{ESTATE_RANK}。&#xA;已完成的改良：{BUILDINGS}。&#xA;庄园状况：{CONDITION}。&#xA;{PROJECT}&#xA;&#xA;更高的庄园等级可解锁更多雇员、生产建筑与卫兵容量。" />
+    <string id="ml_menu_main" text="{MANOR_NAME}，位于 {SETTLEMENT} 附近&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;金库：{TREASURY} 第纳尔&#xA;预计收支：每天 {BALANCE} 第纳尔&#xA;补给：{SUPPLIES}（每天 {SUPPLY_CHANGE}）&#xA;卫兵：{GUARDS}/{GUARD_CAP} — {TRAINING}，{ORDERS}&#xA;雇员：{STAFF}&#xA;建筑：{BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="当地一户人家愿以 {PRICE} 第纳尔出让一座简朴的农舍及其周边土地。购置该产业并不授予你对村庄的头衔，也不赋予你对村民的任何权利。" />
+    <string id="ml_menu_production" text="{MANOR_NAME} — 生产&#xA;&#xA;庄园等级：{ESTATE_RANK}。&#xA;生产建筑：{BUILDINGS}。&#xA;经营重心：{FOCUS}。&#xA;预计产出：{OUTPUT}。&#xA;&#xA;田庄可解锁磨坊与果园。大庄园还能支持一座作坊。" />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} — 管理&#xA;&#xA;管家：{STEWARD}（每天 20 第纳尔）。&#xA;队长：{CAPTAIN}（每天 20 第纳尔）。&#xA;医师：{PHYSICIAN}（每天 15 第纳尔）。&#xA;经营重心：{FOCUS}。&#xA;预计每日产出：{OUTPUT}。&#xA;庄园总开支：每天 {UPKEEP} 第纳尔。&#xA;村庄炉灶数：{HEARTHS}。&#xA;&#xA;管家会将庄园收入直接存入庄园金库。" />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} — 金库与仓库&#xA;&#xA;金库：{TREASURY} 第纳尔。&#xA;存放货物：{STACKS} 组，价值 {VALUE} 第纳尔。&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;劫掠者正在进攻；还有 {DAYS} 天可以应对。" />
+    <string id="ml_msg_already_rested" text="你今天已经在此充分休息过了。" />
+    <string id="ml_msg_captain_hired" text="一位老练的队长接管了家兵的指挥。" />
+    <string id="ml_msg_captain_left" text="未获薪饷的家兵队长已离你而去。" />
+    <string id="ml_msg_focus_crops" text="庄园将转为经济作物经营方案。" />
+    <string id="ml_msg_focus_livestock" text="庄园将转为畜牧经营方案。" />
+    <string id="ml_msg_focus_mixed" text="庄园将转为混合农耕经营方案。" />
+    <string id="ml_msg_goods_remain" text="庄园中仍有存放的物品。出售前请清空物品仓库。" />
+    <string id="ml_msg_guard_deserted" text="一名未获薪饷的庄园卫兵逃亡了。还剩 {GUARDS} 名卫兵。" />
+    <string id="ml_msg_guard_joined_one" text="{AMOUNT} 名新卫兵加入了你的家兵。卫兵实力：{GUARDS}/{GUARD_CAP}。" />
+    <string id="ml_msg_guard_released" text="一名家兵被解除了职务。还剩 {GUARDS} 名卫兵。" />
+    <string id="ml_msg_guards_joined" text="{AMOUNT} 名新卫兵加入了你的家兵。卫兵实力：{GUARDS}/{GUARD_CAP}。" />
+    <string id="ml_msg_order_drill" text="家兵现在执行强化操练的命令。" />
+    <string id="ml_msg_order_patrol" text="家兵现在执行村庄巡逻的命令。" />
+    <string id="ml_msg_order_watch" text="家兵现在执行严密戒备的命令。" />
+    <string id="ml_msg_physician_hired" text="一位医师在庄园里开设了一间小诊所。" />
+    <string id="ml_msg_physician_left" text="未获薪饷的庄园医师已离你而去。" />
+    <string id="ml_msg_purchased" text="你购置了 {SETTLEMENT} 附近的一座庄园。" />
+    <string id="ml_msg_raid_warning" text="你在 {SETTLEMENT} 附近的庄园正受到劫掠者的威胁！" />
+    <string id="ml_msg_repairs_begun" text="修缮已经动工，预计需要两天。" />
+    <string id="ml_msg_rested" text="你安然休息，恢复了 {AMOUNT} 点生命值。" />
+    <string id="ml_msg_sold" text="该产业以 {VALUE} 第纳尔售出。" />
+    <string id="ml_msg_steward_hired" text="一位管家开始掌管庄园的田产与账目。" />
+    <string id="ml_msg_steward_left" text="未获薪饷的庄园管家已离你而去。" />
+    <string id="ml_msg_supplies_delivered" text="{AMOUNT} 份补给已运抵庄园。" />
+    <string id="ml_msg_work_begun" text="工程已经动工，预计 {DAYS} 天后完成。" />
+    <string id="ml_msg_work_complete" text="{MANOR_NAME}的工程已完成：{PROJECT}。" />
+    <string id="ml_opt_back" text="返回庄园总览" />
+    <string id="ml_opt_build_storehouse" text="建造仓库（5000{GOLD_ICON}，3 天）— 解锁安全储藏" />
+    <string id="ml_opt_buy" text="购置这座庄园（{PRICE}{GOLD_ICON}）" />
+    <string id="ml_opt_cancel_project" text="取消{PROJECT}并收回 {REFUND}{GOLD_ICON}" />
+    <string id="ml_opt_captain" text="雇佣一名家兵队长（4000{GOLD_ICON}）" />
+    <string id="ml_opt_defend" text="率领家兵保卫庄园" />
+    <string id="ml_opt_deposit_1000" text="存入 1000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_5000" text="存入 5000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_custom" text="存入自定义金额" />
+    <string id="ml_opt_dismiss" text="解除一名家兵的职务" />
+    <string id="ml_opt_focus_crops" text="种植经济作物 — 收入提高 30%" />
+    <string id="ml_opt_focus_livestock" text="饲养牲畜 — 收入较低，补给更多" />
+    <string id="ml_opt_focus_mixed" text="采用混合农耕 — 收入与补给均衡" />
+    <string id="ml_opt_hire_one" text="雇佣一名庄园卫兵（750{GOLD_ICON}）" />
+    <string id="ml_opt_hire_three" text="雇佣三名庄园卫兵（2250{GOLD_ICON}）" />
+    <string id="ml_opt_household" text="管理家兵" />
+    <string id="ml_opt_improvements" text="管理建筑与修缮" />
+    <string id="ml_opt_leave" text="返回村庄" />
+    <string id="ml_opt_ledger" text="查阅庄园账簿" />
+    <string id="ml_opt_mill" text="建造磨坊（6500{GOLD_ICON}，4 天）— 提高庄园收入" />
+    <string id="ml_opt_open_stash" text="打开庄园物品仓库" />
+    <string id="ml_opt_orchard" text="开辟果园（5500{GOLD_ICON}，3 天）— 产出补给" />
+    <string id="ml_opt_order_drill" text="命令：强化操练 — 训练更快，开支更高" />
+    <string id="ml_opt_order_patrol" text="命令：村庄巡逻 — 防御更强，开支更高" />
+    <string id="ml_opt_order_watch" text="命令：严密戒备 — 庄园防御最强" />
+    <string id="ml_opt_palisade" text="建造木栅栏（6000{GOLD_ICON}，4 天）— 减少劫掠损失" />
+    <string id="ml_opt_physician" text="聘请一名庄园医师（3500{GOLD_ICON}）" />
+    <string id="ml_opt_production" text="管理庄园生产建筑" />
+    <string id="ml_opt_quarters" text="建造卫兵营房（7000{GOLD_ICON}，4 天）— 解锁家兵招募" />
+    <string id="ml_opt_rename" text="为庄园命名或改名" />
+    <string id="ml_opt_repair" text="开始修缮（{ML_REPAIR_COST}{GOLD_ICON}，2 天）" />
+    <string id="ml_opt_rest" text="在庄园休息恢复" />
+    <string id="ml_opt_sell" text="出售庄园（{ML_SALE_PRICE}{GOLD_ICON}）" />
+    <string id="ml_opt_steward" text="雇佣一名庄园管家（2500{GOLD_ICON}）" />
+    <string id="ml_opt_stewardship" text="管理庄园雇员与方针" />
+    <string id="ml_opt_storehouse" text="管理金库与仓库" />
+    <string id="ml_opt_supplies_10" text="购买 10 份家用补给（500{GOLD_ICON}）" />
+    <string id="ml_opt_supplies_50" text="购买 50 份家用补给（2250{GOLD_ICON}）" />
+    <string id="ml_opt_tier_three" text="扩建为大庄园（18000{GOLD_ICON}，8 天）" />
+    <string id="ml_opt_tier_two" text="扩建为田庄（10000{GOLD_ICON}，6 天）" />
+    <string id="ml_opt_training" text="建造训练场（8000{GOLD_ICON}，5 天）— 每日训练卫兵" />
+    <string id="ml_opt_walk" text="在庄园中巡视" />
+    <string id="ml_opt_withdraw_1000" text="取出 1000{GOLD_ICON}" />
+    <string id="ml_opt_withdraw_all" text="取出庄园全部资金" />
+    <string id="ml_opt_withdraw_custom" text="取出自定义金额" />
+    <string id="ml_opt_workshop" text="建造庄园作坊（9000{GOLD_ICON}，5 天）— 产出贵重货物" />
+    <string id="ml_order_drill_name" text="强化操练" />
+    <string id="ml_order_patrol_name" text="村庄巡逻" />
+    <string id="ml_order_watch_name" text="严密戒备" />
+    <string id="ml_output_daily" text="{INCOME} 第纳尔与 {SUPPLIES} 份补给" />
+    <string id="ml_output_inactive" text="停滞，需先雇佣管家并完成修缮" />
+    <string id="ml_output_per_day" text="每天 {INCOME} 第纳尔与 {SUPPLIES} 份补给" />
+    <string id="ml_p_mill" text="庄园磨坊" />
+    <string id="ml_p_orchard" text="果园" />
+    <string id="ml_p_palisade" text="木栅栏" />
+    <string id="ml_p_quarters" text="卫兵营房" />
+    <string id="ml_p_repair" text="庄园修缮" />
+    <string id="ml_p_storehouse" text="仓库" />
+    <string id="ml_p_tier2" text="田庄扩建" />
+    <string id="ml_p_tier3" text="大庄园扩建" />
+    <string id="ml_p_training" text="训练场" />
+    <string id="ml_p_workshop" text="庄园作坊" />
+    <string id="ml_project_current" text="当前工程：{PROJECT}。预计 {DAYS} 天后完成。" />
+    <string id="ml_project_none" text="目前没有在建工程。" />
+    <string id="ml_project_summary" text="在建工程：{PROJECT}，{DAYS} 天后完成。" />
+    <string id="ml_quarters_required" text="招募前必须建造" />
+    <string id="ml_raided_body" text="庄园遭到破坏。劫掠者夺走了 {GOLD} 第纳尔，掳走了 {GOODS} 件存放的物品，{GUARDS} 名家兵阵亡。" />
+    <string id="ml_raided_title" text="你的庄园遭到劫掠" />
+    <string id="ml_scene_access_hint" text="按 F 管理庄园。" />
+    <string id="ml_scene_declined" text="Bannerlord 拒绝加载场景 '{SCENE}'。" />
+    <string id="ml_scene_error_title" text="庄园场景错误" />
+    <string id="ml_scene_menu_body" text="管家正等候你的指示。" />
+    <string id="ml_scene_menu_title" text="庄园" />
+    <string id="ml_scene_no_center" text="无法解析村庄中心位置。" />
+    <string id="ml_scene_no_complex" text="村庄位置组件不可用。" />
+    <string id="ml_scene_store_hint" text="按 F 打开仓库。" />
+    <string id="ml_scene_tip_storehouse" text="需要建造仓库。" />
+    <string id="ml_scene_tip_storehouse_intact" text="需要完好的仓库。" />
+    <string id="ml_scene_tip_withdraw" text="需要一座存有资金的仓库。" />
+    <string id="ml_scene_unavailable" text="庄园场景不可用" />
+    <string id="ml_staff_summary" text="管家 {STEWARD}、队长 {CAPTAIN}、医师 {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="受损的仓库在修缮完成前无法开启。" />
+    <string id="ml_store_missing" text="必须先建造仓库，才能在此存放资金或货物。" />
+    <string id="ml_store_ready" text="仓库安全可用。" />
+    <string id="ml_supply_days" text="约可维持 {DAYS} 天" />
+    <string id="ml_supply_unused" text="目前无消耗" />
+    <string id="ml_tier_grand" text="大庄园" />
+    <string id="ml_tier_landed" text="田庄" />
+    <string id="ml_tier_manor" text="小庄园" />
+    <string id="ml_tip_afford_building" text="你负担不起这座建筑。" />
+    <string id="ml_tip_afford_expansion" text="你负担不起这次扩建。" />
+    <string id="ml_tip_afford_improvement" text="你负担不起这项改良。" />
+    <string id="ml_tip_afford_property" text="你负担不起这处产业。" />
+    <string id="ml_tip_afford_supplies" text="你负担不起这些补给。" />
+    <string id="ml_tip_need_denars" text="你需要 {AMOUNT} 第纳尔。" />
+    <string id="ml_tip_no_guard" text="你没有可用于防守的家兵。" />
+    <string id="ml_tip_not_enough_gold" text="你的第纳尔不足。" />
+    <string id="ml_tip_project_underway" text="已有另一项工程正在进行。" />
+    <string id="ml_tip_repair_before_plan" text="请先修缮庄园，再更改生产方案。" />
+    <string id="ml_tip_repair_first" text="请先修缮庄园。" />
+    <string id="ml_tip_requires_landed" text="需要田庄等级。" />
+    <string id="ml_tip_requires_rank" text="需要庄园等级 {RANK}。" />
+    <string id="ml_tip_treasury_short" text="庄园金库中的第纳尔不足。" />
+    <string id="ml_train_drilled" text="受过操练" />
+    <string id="ml_train_green" text="新兵" />
+    <string id="ml_train_trained" text="训练有素" />
+    <string id="ml_train_veteran" text="老兵" />
+    <string id="ml_w_active" text="已启用" />
+    <string id="ml_w_another_village" text="另一座村庄" />
+    <string id="ml_w_built" text="已建造" />
+    <string id="ml_w_damaged" text="受损" />
+    <string id="ml_w_employed" text="已雇佣" />
+    <string id="ml_w_inactive" text="停滞" />
+    <string id="ml_w_no" text="无" />
+    <string id="ml_w_none" text="无" />
+    <string id="ml_w_not_built" text="未建造" />
+    <string id="ml_w_yes" text="有" />
+    <string id="ml_w_your_manor" text="你的庄园" />
+    <string id="ml_walk_body" text="你巡视了{ESTATE_RANK}及周边土地。{STATUS}&#xA;&#xA;改良：{BUILDINGS}。&#xA;家兵卫队：{GUARDS}/{GUARD_CAP}（{TRAINING}）。&#xA;雇员：{STAFF}。&#xA;补给：{SUPPLIES}。&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="建筑上仍留有近期袭击的伤痕。" />
+    <string id="ml_walk_no_project" text="目前没有在建工程。" />
+    <string id="ml_walk_project" text="工匠们正忙于{PROJECT}。" />
+    <string id="ml_walk_secure" text="庄园井然有序，安全无虞。" />
+  </strings>
+</base>

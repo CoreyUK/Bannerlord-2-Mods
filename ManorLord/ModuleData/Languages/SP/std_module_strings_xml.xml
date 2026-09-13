@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="Español (LA)" />
+  </tags>
+  <strings>
+    <string id="ml_b_mill" text="molino" />
+    <string id="ml_b_orchard" text="huerto" />
+    <string id="ml_b_palisade" text="empalizada" />
+    <string id="ml_b_quarters" text="cuartel de la guardia" />
+    <string id="ml_b_storehouse" text="almacén" />
+    <string id="ml_b_training_field" text="campo de entrenamiento" />
+    <string id="ml_b_workshop" text="taller" />
+    <string id="ml_btn_accept" text="Aceptar" />
+    <string id="ml_btn_cancel" text="Cancelar" />
+    <string id="ml_btn_cancel_project" text="Cancelar la obra" />
+    <string id="ml_btn_continue" text="Continuar" />
+    <string id="ml_btn_deposit" text="Depositar" />
+    <string id="ml_btn_keep_building" text="Seguir construyendo" />
+    <string id="ml_btn_keep_it" text="Conservarlo" />
+    <string id="ml_btn_return" text="Volver" />
+    <string id="ml_btn_sell" text="Vender" />
+    <string id="ml_btn_understood" text="Entendido" />
+    <string id="ml_btn_victory" text="Victoria" />
+    <string id="ml_btn_withdraw" text="Retirar" />
+    <string id="ml_captain_commanding" text="al mando de la casa" />
+    <string id="ml_cond_damaged" text="DAÑADA" />
+    <string id="ml_cond_needs_repair" text="dañada y necesitada de reparación" />
+    <string id="ml_cond_secure" text="Segura" />
+    <string id="ml_cond_sound" text="en buen estado" />
+    <string id="ml_cond_threat" text="AMENAZADA" />
+    <string id="ml_default_manor_name" text="Casa solariega de {SETTLEMENT}" />
+    <string id="ml_defended_body" text="Vuestra resistencia quebró a los saqueadores antes de que pudieran quemar o saquear la casa solariega." />
+    <string id="ml_defended_title" text="Casa solariega defendida" />
+    <string id="ml_defense_lost_body" text="Los defensores fueron superados. Cayeron {GUARDS} guardias, se perdieron {GOLD} denarios y {GOODS} objetos almacenados, y la hacienda quedó dañada." />
+    <string id="ml_defense_lost_title" text="Defensa de la casa solariega fallida" />
+    <string id="ml_defense_won_calc" text="Bajo vuestro mando, la guardia de la casa sostiene la hacienda y ahuyenta a los saqueadores. La casa solariega y sus reservas están a salvo." />
+    <string id="ml_defense_won_played" text="Vos y vuestra guardia expulsasteis a los saqueadores de la hacienda. Vuestra casa solariega y sus reservas están a salvo." />
+    <string id="ml_defense_won_title" text="Defensa de la casa solariega lograda" />
+    <string id="ml_entry_holdings" text="Propiedades solariegas (cerca de {SETTLEMENT})" />
+    <string id="ml_entry_inquire" text="Preguntar por la compra de una casa solariega" />
+    <string id="ml_entry_visit" text="Visitar vuestra casa solariega" />
+    <string id="ml_focus_crops_name" text="Cultivos comerciales" />
+    <string id="ml_focus_livestock_name" text="Ganadería" />
+    <string id="ml_focus_mixed_name" text="Cultivo mixto" />
+    <string id="ml_inq_cancel_body" text="¿Detener las obras de {PROJECT}? Se recuperará la mitad del coste registrado ({REFUND} denarios)." />
+    <string id="ml_inq_cancel_title" text="¿Cancelar la construcción?" />
+    <string id="ml_inq_deposit_title" text="Depositar fondos de la casa solariega" />
+    <string id="ml_inq_rename_body" text="Elegid un nombre para vuestra casa solariega." />
+    <string id="ml_inq_rename_invalid" text="Introducid un nombre de entre 1 y 40 caracteres." />
+    <string id="ml_inq_rename_title" text="Nombrar la hacienda" />
+    <string id="ml_inq_sell_body" text="¿Vender vuestra casa solariega cerca de {SETTLEMENT} por {VALUE} denarios? Los fondos guardados os serán devueltos, pero la guardia de la casa y el personal de la hacienda se disolverán." />
+    <string id="ml_inq_sell_title" text="¿Vender la casa solariega?" />
+    <string id="ml_inq_transfer_body" text="Introducid una cantidad entre 1 y {MAX} denarios." />
+    <string id="ml_inq_transfer_invalid" text="Introducid un número entero entre 1 y {MAX}." />
+    <string id="ml_inq_withdraw_title" text="Retirar fondos de la casa solariega" />
+    <string id="ml_ledger_body" text="Antigüedad de la hacienda: {DAYS_OWNED} días registrados.&#xA;Rango: {ESTATE_RANK}.&#xA;Estado: {CONDITION}. {THREAT}&#xA;&#xA;Último día&#xA;Ingresos: {LAST_INCOME} denarios&#xA;Mantenimiento total: {LAST_UPKEEP} denarios&#xA;Variación de suministros: {LAST_SUPPLY_CHANGE}&#xA;&#xA;Previsión para mañana&#xA;Ingresos: {NEXT_INCOME} denarios&#xA;Mantenimiento total: {NEXT_UPKEEP} denarios&#xA;Balance neto: {NEXT_BALANCE} denarios&#xA;Suministros producidos: {NEXT_SUPPLIES}&#xA;Suministros consumidos: {SUPPLY_USE}&#xA;&#xA;Totales registrados desde la instalación&#xA;Ingresos de la hacienda: {TOTAL_INCOME} denarios&#xA;Gastos de la hacienda: {TOTAL_EXPENSES} denarios" />
+    <string id="ml_ledger_no_threat" text="Sin amenazas activas." />
+    <string id="ml_ledger_threat" text="Hay saqueadores activos; quedan {DAYS} días para responder." />
+    <string id="ml_ledger_title" text="Libro de cuentas de {MANOR_NAME}" />
+    <string id="ml_loc_enter_grounds" text="Entrar en los terrenos de la casa solariega" />
+    <string id="ml_loc_manor_grounds" text="Terrenos de la casa solariega" />
+    <string id="ml_menu_elsewhere" text="Poseéis una casa solariega cerca de {SETTLEMENT}. Solo podéis poseer una a la vez; viajad hasta allí para administrarla o venderla." />
+    <string id="ml_menu_household" text="{MANOR_NAME} – Casa&#xA;&#xA;Guardias: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Órdenes permanentes: {ORDERS}.&#xA;Soldada diaria de la guardia: {WAGES} denarios.&#xA;Suministros: {SUPPLIES} ({SUPPLY_STATUS}).&#xA;Capitán: {CAPTAIN}.&#xA;Campo de entrenamiento: {TRAINING_FIELD}. Cuartel de la guardia: {QUARTERS}.&#xA;&#xA;Los guardias sin paga pueden desertar, y la escasez merma poco a poco su instrucción." />
+    <string id="ml_menu_improvements" text="{MANOR_NAME} – Edificios y reparaciones&#xA;&#xA;Rango de la hacienda: {ESTATE_RANK}.&#xA;Mejoras completadas: {BUILDINGS}.&#xA;Estado de la hacienda: {CONDITION}.&#xA;{PROJECT}&#xA;&#xA;Los rangos superiores desbloquean más personal, edificios de producción y plazas de guardia." />
+    <string id="ml_menu_main" text="{MANOR_NAME}, cerca de {SETTLEMENT}&#xA;{ESTATE_RANK} | {CONDITION}&#xA;&#xA;Tesoro: {TREASURY} denarios&#xA;Balance previsto: {BALANCE} denarios/día&#xA;Suministros: {SUPPLIES} ({SUPPLY_CHANGE}/día)&#xA;Guardias: {GUARDS}/{GUARD_CAP} – {TRAINING}, {ORDERS}&#xA;Personal: {STAFF}&#xA;Edificios: {BUILDINGS}&#xA;&#xA;{PROJECT}{THREAT}" />
+    <string id="ml_menu_offer" text="Una familia del lugar ofrece una modesta casa de labranza y las tierras que la rodean por {PRICE} denarios. La propiedad no otorga título alguno sobre la aldea ni derecho sobre sus gentes." />
+    <string id="ml_menu_production" text="{MANOR_NAME} – Producción&#xA;&#xA;Rango de la hacienda: {ESTATE_RANK}.&#xA;Edificios de producción: {BUILDINGS}.&#xA;Orientación: {FOCUS}.&#xA;Producción prevista: {OUTPUT}.&#xA;&#xA;Las haciendas con tierras desbloquean molinos y huertos. Las grandes haciendas pueden sostener un taller." />
+    <string id="ml_menu_stewardship" text="{MANOR_NAME} – Administración&#xA;&#xA;Administrador: {STEWARD} (20 denarios/día).&#xA;Capitán: {CAPTAIN} (20 denarios/día).&#xA;Médico: {PHYSICIAN} (15 denarios/día).&#xA;Orientación productiva: {FOCUS}.&#xA;Producción diaria prevista: {OUTPUT}.&#xA;Mantenimiento total de la hacienda: {UPKEEP} denarios/día.&#xA;Hogares de la aldea: {HEARTHS}.&#xA;&#xA;El administrador ingresa las rentas de la hacienda directamente en el tesoro." />
+    <string id="ml_menu_storehouse" text="{MANOR_NAME} – Tesoro y almacén&#xA;&#xA;Tesoro: {TREASURY} denarios.&#xA;Mercancías guardadas: {STACKS} lotes por valor de {VALUE} denarios.&#xA;&#xA;{ACCESS}" />
+    <string id="ml_menu_threat_line" text="&#xA;Los saqueadores atacan; quedan {DAYS} días para responder." />
+    <string id="ml_msg_already_rested" text="Ya habéis descansado por completo aquí hoy." />
+    <string id="ml_msg_captain_hired" text="Un capitán veterano toma el mando de la guardia de la casa." />
+    <string id="ml_msg_captain_left" text="El capitán de la casa, sin cobrar, ha dejado vuestro servicio." />
+    <string id="ml_msg_focus_crops" text="La hacienda seguirá ahora un plan de cultivos comerciales." />
+    <string id="ml_msg_focus_livestock" text="La hacienda seguirá ahora un plan ganadero." />
+    <string id="ml_msg_focus_mixed" text="La hacienda seguirá ahora un plan de cultivo mixto." />
+    <string id="ml_msg_goods_remain" text="Aún quedan mercancías guardadas en la casa solariega. Vaciad el almacén antes de vender." />
+    <string id="ml_msg_guard_deserted" text="Un guardia sin paga ha desertado. Quedan {GUARDS} guardias." />
+    <string id="ml_msg_guard_joined_one" text="{AMOUNT} guardia nuevo se une a vuestra casa. Fuerza de la guardia: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_guard_released" text="Un guardia de la casa fue relevado del servicio. Quedan {GUARDS} guardias." />
+    <string id="ml_msg_guards_joined" text="{AMOUNT} guardias nuevos se unen a vuestra casa. Fuerza de la guardia: {GUARDS}/{GUARD_CAP}." />
+    <string id="ml_msg_order_drill" text="La guardia de la casa sigue ahora órdenes de instrucción intensiva." />
+    <string id="ml_msg_order_patrol" text="La guardia de la casa sigue ahora órdenes de patrullar la aldea." />
+    <string id="ml_msg_order_watch" text="La guardia de la casa sigue ahora órdenes de vigilancia estrecha." />
+    <string id="ml_msg_physician_hired" text="Un médico establece una pequeña enfermería en la hacienda." />
+    <string id="ml_msg_physician_left" text="El médico de la hacienda, sin cobrar, ha dejado vuestro servicio." />
+    <string id="ml_msg_purchased" text="Habéis comprado una casa solariega cerca de {SETTLEMENT}." />
+    <string id="ml_msg_raid_warning" text="¡Vuestra casa solariega cerca de {SETTLEMENT} está amenazada por saqueadores!" />
+    <string id="ml_msg_repairs_begun" text="Las reparaciones han comenzado y deberían durar dos días." />
+    <string id="ml_msg_rested" text="Descansáis a salvo y recuperáis {AMOUNT} puntos de vida." />
+    <string id="ml_msg_sold" text="La propiedad se vendió por {VALUE} denarios." />
+    <string id="ml_msg_steward_hired" text="Un administrador se hace cargo de los campos y las cuentas de la hacienda." />
+    <string id="ml_msg_steward_left" text="El administrador de la hacienda, sin cobrar, ha dejado vuestro servicio." />
+    <string id="ml_msg_supplies_delivered" text="Se entregaron {AMOUNT} suministros a la casa solariega." />
+    <string id="ml_msg_work_begun" text="Las obras han comenzado y deberían concluir en {DAYS} días." />
+    <string id="ml_msg_work_complete" text="Las obras en {MANOR_NAME} han concluido: {PROJECT}." />
+    <string id="ml_opt_back" text="Volver al resumen de la hacienda" />
+    <string id="ml_opt_build_storehouse" text="Construir un almacén (5000{GOLD_ICON}, 3 días) – desbloquea el guardado seguro" />
+    <string id="ml_opt_buy" text="Comprar esta casa solariega ({PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_cancel_project" text="Cancelar {PROJECT} y recuperar {REFUND}{GOLD_ICON}" />
+    <string id="ml_opt_captain" text="Contratar a un capitán de la casa (4000{GOLD_ICON})" />
+    <string id="ml_opt_defend" text="Dirigir a vuestra guardia en la defensa de la casa solariega" />
+    <string id="ml_opt_deposit_1000" text="Depositar 1000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_5000" text="Depositar 5000{GOLD_ICON}" />
+    <string id="ml_opt_deposit_custom" text="Depositar una cantidad personalizada" />
+    <string id="ml_opt_dismiss" text="Licenciar a un guardia de la casa" />
+    <string id="ml_opt_focus_crops" text="Plantar cultivos comerciales – 30 % más de ingresos" />
+    <string id="ml_opt_focus_livestock" text="Criar ganado – menos ingresos, más suministros" />
+    <string id="ml_opt_focus_mixed" text="Adoptar el cultivo mixto – ingresos y suministros equilibrados" />
+    <string id="ml_opt_hire_one" text="Contratar a un guardia (750{GOLD_ICON})" />
+    <string id="ml_opt_hire_three" text="Contratar a tres guardias (2250{GOLD_ICON})" />
+    <string id="ml_opt_household" text="Administrar la guardia de la casa" />
+    <string id="ml_opt_improvements" text="Administrar edificios y reparaciones" />
+    <string id="ml_opt_leave" text="Volver a la aldea" />
+    <string id="ml_opt_ledger" text="Consultar el libro de cuentas" />
+    <string id="ml_opt_mill" text="Construir un molino (6500{GOLD_ICON}, 4 días) – aumenta las rentas" />
+    <string id="ml_opt_open_stash" text="Abrir el almacén de objetos" />
+    <string id="ml_opt_orchard" text="Plantar un huerto (5500{GOLD_ICON}, 3 días) – produce suministros" />
+    <string id="ml_opt_order_drill" text="Orden: instrucción intensiva – adiestramiento más rápido, mayor coste" />
+    <string id="ml_opt_order_patrol" text="Orden: patrullas por la aldea – mejor defensa, mayor coste" />
+    <string id="ml_opt_order_watch" text="Orden: vigilancia estrecha – la mejor defensa de la hacienda" />
+    <string id="ml_opt_palisade" text="Construir una empalizada (6000{GOLD_ICON}, 4 días) – reduce las pérdidas por saqueo" />
+    <string id="ml_opt_physician" text="Contratar a un médico de la hacienda (3500{GOLD_ICON})" />
+    <string id="ml_opt_production" text="Administrar los edificios de producción" />
+    <string id="ml_opt_quarters" text="Construir un cuartel de la guardia (7000{GOLD_ICON}, 4 días) – desbloquea el reclutamiento" />
+    <string id="ml_opt_rename" text="Nombrar o renombrar la hacienda" />
+    <string id="ml_opt_repair" text="Iniciar las reparaciones ({ML_REPAIR_COST}{GOLD_ICON}, 2 días)" />
+    <string id="ml_opt_rest" text="Descansar y recuperarse en la casa solariega" />
+    <string id="ml_opt_sell" text="Vender la casa solariega ({ML_SALE_PRICE}{GOLD_ICON})" />
+    <string id="ml_opt_steward" text="Contratar a un administrador (2500{GOLD_ICON})" />
+    <string id="ml_opt_stewardship" text="Administrar el personal y la política de la hacienda" />
+    <string id="ml_opt_storehouse" text="Administrar el tesoro y el almacén" />
+    <string id="ml_opt_supplies_10" text="Comprar 10 suministros para la casa (500{GOLD_ICON})" />
+    <string id="ml_opt_supplies_50" text="Comprar 50 suministros para la casa (2250{GOLD_ICON})" />
+    <string id="ml_opt_tier_three" text="Ampliar a gran hacienda (18000{GOLD_ICON}, 8 días)" />
+    <string id="ml_opt_tier_two" text="Ampliar a hacienda con tierras (10000{GOLD_ICON}, 6 días)" />
+    <string id="ml_opt_training" text="Construir un campo de entrenamiento (8000{GOLD_ICON}, 5 días) – adiestra a la guardia a diario" />
+    <string id="ml_opt_walk" text="Recorrer los terrenos de la hacienda" />
+    <string id="ml_opt_withdraw_1000" text="Retirar 1000{GOLD_ICON}" />
+    <string id="ml_opt_withdraw_all" text="Retirar todos los fondos" />
+    <string id="ml_opt_withdraw_custom" text="Retirar una cantidad personalizada" />
+    <string id="ml_opt_workshop" text="Construir un taller (9000{GOLD_ICON}, 5 días) – produce mercancías valiosas" />
+    <string id="ml_order_drill_name" text="Instrucción intensiva" />
+    <string id="ml_order_patrol_name" text="Patrullas por la aldea" />
+    <string id="ml_order_watch_name" text="Vigilancia estrecha" />
+    <string id="ml_output_daily" text="{INCOME} denarios y {SUPPLIES} suministros" />
+    <string id="ml_output_inactive" text="inactiva hasta que se contrate un administrador y concluyan las reparaciones" />
+    <string id="ml_output_per_day" text="{INCOME} denarios y {SUPPLIES} suministros al día" />
+    <string id="ml_p_mill" text="molino de la hacienda" />
+    <string id="ml_p_orchard" text="huerto" />
+    <string id="ml_p_palisade" text="empalizada" />
+    <string id="ml_p_quarters" text="cuartel de la guardia" />
+    <string id="ml_p_repair" text="reparaciones de la hacienda" />
+    <string id="ml_p_storehouse" text="almacén" />
+    <string id="ml_p_tier2" text="ampliación a hacienda con tierras" />
+    <string id="ml_p_tier3" text="ampliación a gran hacienda" />
+    <string id="ml_p_training" text="campo de entrenamiento" />
+    <string id="ml_p_workshop" text="taller de la hacienda" />
+    <string id="ml_project_current" text="Obra en curso: {PROJECT}. Se espera concluirla en {DAYS} días." />
+    <string id="ml_project_none" text="No hay ninguna obra en curso." />
+    <string id="ml_project_summary" text="Obra en curso: {PROJECT}, lista en {DAYS} días." />
+    <string id="ml_quarters_required" text="necesario antes de reclutar" />
+    <string id="ml_raided_body" text="La hacienda sufrió daños. Los saqueadores robaron {GOLD} denarios, se llevaron {GOODS} objetos almacenados y murieron {GUARDS} guardias de la casa." />
+    <string id="ml_raided_title" text="Vuestra casa solariega fue saqueada" />
+    <string id="ml_scene_access_hint" text="Pulsa F para administrar la hacienda." />
+    <string id="ml_scene_declined" text="Bannerlord rechazó la escena «{SCENE}»." />
+    <string id="ml_scene_error_title" text="Error en la escena de la casa solariega" />
+    <string id="ml_scene_menu_body" text="Vuestro administrador aguarda instrucciones." />
+    <string id="ml_scene_menu_title" text="La hacienda" />
+    <string id="ml_scene_no_center" text="No se pudo determinar el centro de la aldea." />
+    <string id="ml_scene_no_complex" text="Las ubicaciones de la aldea no están disponibles." />
+    <string id="ml_scene_store_hint" text="Pulsa F para abrir el almacén." />
+    <string id="ml_scene_tip_storehouse" text="Requiere un almacén." />
+    <string id="ml_scene_tip_storehouse_intact" text="Requiere un almacén intacto." />
+    <string id="ml_scene_tip_withdraw" text="Requiere un almacén con fondos." />
+    <string id="ml_scene_unavailable" text="Escena de la casa solariega no disponible" />
+    <string id="ml_staff_summary" text="administrador {STEWARD}, capitán {CAPTAIN}, médico {PHYSICIAN}" />
+    <string id="ml_store_damaged" text="El almacén dañado no puede abrirse hasta que concluyan las reparaciones." />
+    <string id="ml_store_missing" text="Hay que construir un almacén antes de poder guardar aquí fondos o mercancías." />
+    <string id="ml_store_ready" text="El almacén es seguro y está disponible." />
+    <string id="ml_supply_days" text="quedan unos {DAYS} días" />
+    <string id="ml_supply_unused" text="sin consumo actual" />
+    <string id="ml_tier_grand" text="Gran hacienda" />
+    <string id="ml_tier_landed" text="Hacienda con tierras" />
+    <string id="ml_tier_manor" text="Casa solariega menor" />
+    <string id="ml_tip_afford_building" text="No podéis permitiros este edificio." />
+    <string id="ml_tip_afford_expansion" text="No podéis permitiros esta ampliación." />
+    <string id="ml_tip_afford_improvement" text="No podéis permitiros esta mejora." />
+    <string id="ml_tip_afford_property" text="No podéis permitiros esta propiedad." />
+    <string id="ml_tip_afford_supplies" text="No podéis permitiros estos suministros." />
+    <string id="ml_tip_need_denars" text="Necesitáis {AMOUNT} denarios." />
+    <string id="ml_tip_no_guard" text="No tenéis guardia de la casa con la que montar una defensa." />
+    <string id="ml_tip_not_enough_gold" text="No tenéis suficientes denarios." />
+    <string id="ml_tip_project_underway" text="Ya hay otra obra en curso." />
+    <string id="ml_tip_repair_before_plan" text="Reparad la casa solariega antes de cambiar su plan de producción." />
+    <string id="ml_tip_repair_first" text="Reparad primero la casa solariega." />
+    <string id="ml_tip_requires_landed" text="Requiere una hacienda con tierras." />
+    <string id="ml_tip_requires_rank" text="Requiere el rango de hacienda {RANK}." />
+    <string id="ml_tip_treasury_short" text="El tesoro de la casa solariega no contiene suficientes denarios." />
+    <string id="ml_train_drilled" text="instruidos" />
+    <string id="ml_train_green" text="bisoños" />
+    <string id="ml_train_trained" text="adiestrados" />
+    <string id="ml_train_veteran" text="veteranos" />
+    <string id="ml_w_active" text="en funcionamiento" />
+    <string id="ml_w_another_village" text="otra aldea" />
+    <string id="ml_w_built" text="construido" />
+    <string id="ml_w_damaged" text="dañada" />
+    <string id="ml_w_employed" text="contratado" />
+    <string id="ml_w_inactive" text="inactiva" />
+    <string id="ml_w_no" text="no" />
+    <string id="ml_w_none" text="ninguno" />
+    <string id="ml_w_not_built" text="sin construir" />
+    <string id="ml_w_yes" text="sí" />
+    <string id="ml_w_your_manor" text="Vuestra casa solariega" />
+    <string id="ml_walk_body" text="Recorréis {ESTATE_RANK} y las tierras de alrededor. {STATUS}&#xA;&#xA;Mejoras: {BUILDINGS}.&#xA;Guardias de la casa: {GUARDS}/{GUARD_CAP} ({TRAINING}).&#xA;Personal: {STAFF}.&#xA;Suministros: {SUPPLIES}.&#xA;&#xA;{PROJECT}" />
+    <string id="ml_walk_damaged" text="Los edificios aún muestran las cicatrices de un ataque reciente." />
+    <string id="ml_walk_no_project" text="Por ahora no hay ninguna obra en marcha." />
+    <string id="ml_walk_project" text="Los obreros se afanan en {PROJECT}." />
+    <string id="ml_walk_secure" text="La hacienda está ordenada y segura." />
+  </strings>
+</base>
