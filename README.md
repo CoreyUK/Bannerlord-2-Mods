@@ -7,7 +7,7 @@ Each folder is a separate Bannerlord module:
 - `CompanionDefense` - lets you send companion-led clan parties to defend owned villages, castles, and towns under attack.
 - `CompanionHotswap` - companion swapping and selection UI support.
 - `DuelCompanions` - adds roaming duel rumors, elite duelists, gauntlets, rare weapon rewards, and recruitable duel companions.
-- `FieldFortifications` - buy barricades, a ballista and a catapult before a field battle and place them yourself during deployment; the AI paths around the barricades, horses impale themselves on them, and your archers crew the engines. Requires Bannerlord Harmony.
+- `FieldFortifications` - buy barricades, a ballista, a catapult, arrow barrels and a raised archer platform before a field battle and place them yourself during deployment; the AI paths around the barricades, horses impale themselves on them, your archers crew the engines and climb the platform. Requires Bannerlord Harmony.
 - `LoadoutPresets` - player loadout preset support.
 - `ManorLord` - buy a manor near a village and build it up: palisade, storehouse, guard quarters, mill, orchard, workshop and staff; walk a dressed estate scene that shows every upgrade you own, with guards on parade and an in-scene estate menu; defend it against raiders. Fully localized (EN, 简体中文, DE, FR, RU, ES, TR).
 - `MovingDismount` - lets the player attempt to dismount from a moving horse, with speed-scaled stumble and hard-fall damage.

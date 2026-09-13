@@ -7,14 +7,18 @@ public static class FortificationState
     public static bool Barricades;
     public static bool Ballista;
     public static bool Mangonel;
+    public static bool Arrows;
+    public static bool Tower;
 
-    public static bool AnyPending => Barricades || Ballista || Mangonel;
+    public static bool AnyPending => Barricades || Ballista || Mangonel || Arrows || Tower;
 
     public static void Clear()
     {
         Barricades = false;
         Ballista = false;
         Mangonel = false;
+        Arrows = false;
+        Tower = false;
     }
 
     /// <summary>Scene prefab spawned for each obstacle segment.</summary>
@@ -26,10 +30,20 @@ public static class FortificationState
     public const string BallistaPrefab = "ballista_a";
     public const string MangonelPrefab = "mangonel_a";
 
+    /// <summary>The game's arrow barrel: a usable machine archers refill their quivers from.</summary>
+    public const string ArrowBarrelPrefab = "arrow_barrel";
+
+    /// <summary>Barrels per stockpile and the spacing between them.</summary>
+    public const int ArrowBarrelCount = 2;
+    public const float ArrowBarrelPitch = 3f;
+
+
     /// <summary>Card icons, borrowed from the game's own UI.</summary>
     public const string BarricadeIcon = @"General\Icons\Walls";
     public const string BallistaIcon = @"Order\SiegeIcons\siege_ballista";
     public const string MangonelIcon = @"Order\SiegeIcons\siege_catapult";
+    public const string ArrowsIcon = @"General\EquipmentIcons\equipment_type_quiver";
+    public const string TowerIcon = @"Order\SiegeIcons\siege_tower";
 
     /// <summary>Alpha applied to placement ghosts.</summary>
     public const float GhostAlpha = 0.5f;
@@ -45,6 +59,10 @@ public static class FortificationState
 
     /// <summary>Metres beyond the outermost barricade where an engine sits by default.</summary>
     public const float EngineFlankOffset = 10f;
+
+    /// <summary>Default spots for the stockpile (behind the line, inside the deployment area) and the tower (behind the line, further out).</summary>
+    public const float ArrowsBehindLine = 12f;
+    public const float TowerFlankOffset = 24f;
 
     /// <summary>Number of segments in the line.</summary>
     public const int SegmentCount = 4;

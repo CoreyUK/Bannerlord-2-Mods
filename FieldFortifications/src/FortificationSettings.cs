@@ -16,9 +16,20 @@ public sealed class FortificationSettings
     public int BarricadeCost = 6000;
     public int BallistaCost = 10000;
     public int MangonelCost = 15000;
+    public int ArrowsCost = 2500;
+    public int TowerCost = 8000;
 
     /// <summary>Let the siege AI assign archers to crew the engines. Off means the player mans them.</summary>
     public bool CrewAi = true;
+
+    /// <summary>Write the stack of any null-reference thrown during a battle to debug.txt.</summary>
+    public bool Debug;
+
+    /// <summary>AI archers go to an arrow barrel only when their quiver is below this fraction of full.</summary>
+    public float RefillBelow = 0.3f;
+
+    /// <summary>The settings in force for the current battle.</summary>
+    public static FortificationSettings Current = new();
 
     /// <summary>Bolts or stones loaded on each engine at the start.</summary>
     public int EngineAmmo = 30;
@@ -59,7 +70,13 @@ public sealed class FortificationSettings
                     case "barricade_cost": settings.BarricadeCost = Int(settings.BarricadeCost); break;
                     case "ballista_cost": settings.BallistaCost = Int(settings.BallistaCost); break;
                     case "catapult_cost": settings.MangonelCost = Int(settings.MangonelCost); break;
+                    case "arrows_cost": settings.ArrowsCost = Int(settings.ArrowsCost); break;
+                    case "tower_cost": settings.TowerCost = Int(settings.TowerCost); break;
                     case "crew_ai": settings.CrewAi = Flag(); break;
+                    case "debug": settings.Debug = Flag(); break;
+                    case "refill_below":
+                        if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float f) && f >= 0f && f <= 1f) settings.RefillBelow = f;
+                        break;
                     case "engine_ammo": settings.EngineAmmo = Int(settings.EngineAmmo); break;
                     case "place_key": settings.PlaceKey = Key(settings.PlaceKey); break;
                     case "confirm_key": settings.ConfirmKey = Key(settings.ConfirmKey); break;

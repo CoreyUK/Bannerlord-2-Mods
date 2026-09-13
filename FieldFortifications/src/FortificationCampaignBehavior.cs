@@ -20,12 +20,17 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
     public override void SyncData(IDataStore store)
     {
         bool barricades = FortificationState.Barricades, ballista = FortificationState.Ballista, mangonel = FortificationState.Mangonel;
+        bool arrows = FortificationState.Arrows, tower = FortificationState.Tower;
         store.SyncData("ff_barricades", ref barricades);
         store.SyncData("ff_ballista", ref ballista);
         store.SyncData("ff_mangonel", ref mangonel);
+        store.SyncData("ff_arrows", ref arrows);
+        store.SyncData("ff_tower", ref tower);
         FortificationState.Barricades = barricades;
         FortificationState.Ballista = ballista;
         FortificationState.Mangonel = mangonel;
+        FortificationState.Arrows = arrows;
+        FortificationState.Tower = tower;
     }
 
     private void OnSessionLaunched(CampaignGameStarter starter)
@@ -43,6 +48,14 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
             "{=ff_opt_mangonel}Set up a catapult (" + settings.MangonelCost + "{GOLD_ICON})",
             "{=ff_tip_mangonel}A mangonel with " + settings.EngineAmmo + " stones, placed during deployment. Your archers crew it.",
             settings.MangonelCost, () => FortificationState.Mangonel, () => FortificationState.Mangonel = true);
+        AddOption(starter, "ff_arrows", 4,
+            "{=ff_opt_arrows}Stock arrows (" + settings.ArrowsCost + "{GOLD_ICON})",
+            "{=ff_tip_arrows}Two barrels of arrows placed during deployment. Archers running low walk over and refill; you can too.",
+            settings.ArrowsCost, () => FortificationState.Arrows, () => FortificationState.Arrows = true);
+        AddOption(starter, "ff_tower", 5,
+            "{=ff_opt_tower}Build an archer platform (" + settings.TowerCost + "{GOLD_ICON})",
+            "{=ff_tip_tower}A raised timber deck with a ramp at the back, placed during deployment. Order archers onto it once the battle starts.",
+            settings.TowerCost, () => FortificationState.Tower, () => FortificationState.Tower = true);
     }
 
     private static void AddOption(CampaignGameStarter starter, string id, int index, string text, string tooltip, int cost,

@@ -92,6 +92,8 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         _initialised = true;
 
         _settings = FortificationSettings.Load();
+        FortificationSettings.Current = _settings;
+        SiegeAiPatches.BarrelPoints.Clear();
         Vec2 forward = direction.Normalized();
         Vec2 lateral = forward.LeftVec();
         float halfSpan = (FortificationState.SegmentCount - 1) * FortificationState.SegmentPitch * 0.5f;
@@ -121,6 +123,16 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         {
             float offset = -(halfSpan + FortificationState.EngineFlankOffset);
             _placement.AddItem(PlacementController.Kind.Mangonel, "Catapult", FortificationState.MangonelIcon, spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
+        }
+        if (FortificationState.Arrows)
+        {
+            // Behind the infantry line, inside the deployment area, where the archers stand.
+            _placement.AddItem(PlacementController.Kind.ArrowBarrels, "Arrows", FortificationState.ArrowsIcon, spawn.AsVec2 - forward * FortificationState.ArrowsBehindLine, forward);
+        }
+        if (FortificationState.Tower)
+        {
+            float offset = halfSpan + FortificationState.TowerFlankOffset;
+            _placement.AddItem(PlacementController.Kind.ArcherTower, "Platform", FortificationState.TowerIcon, spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
         }
 
         // No deployment phase (a later round, or reinforcements): build straight away at the defaults.
@@ -160,6 +172,20 @@ public sealed class FortificationMissionBehavior : MissionBehavior
                     placement.Placement(item, 0, out Vec2 at, out Vec2 facing);
                     string prefab = item.Kind == PlacementController.Kind.Ballista ? FortificationState.BallistaPrefab : FortificationState.MangonelPrefab;
                     SpawnEngine(mission, player, prefab, at, facing);
+                    break;
+                }
+                case PlacementController.Kind.ArrowBarrels:
+                    for (int i = 0; i < FortificationState.ArrowBarrelCount; i++)
+                    {
+                        placement.Placement(item, i, out Vec2 at, out Vec2 facing);
+                        SpawnArrowBarrel(mission, player, at, facing);
+                    }
+                    break;
+                case PlacementController.Kind.ArcherTower:
+                {
+                    placement.Placement(item, 0, out Vec2 at, out Vec2 facing);
+                    MatrixFrame root = PlacementController.GroundFrame(mission.Scene, at, facing);
+                    PlatformBuilder.Build(mission, in root);
                     break;
                 }
             }
@@ -260,6 +286,51 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         {
             ErrorLog.Write(prefab + " spawn failed: " + ex);
         }
+    }
+
+    /// <summary>
+    /// An arrow barrel is a usable machine; registering it as a detachment of the archers' formation lets men who run
+    /// low walk over and refill, exactly as in a siege. The player can use it too.
+    /// </summary>
+    private static void SpawnArrowBarrel(Mission mission, Team owner, Vec2 at, Vec2 facing)
+    {
+        try
+        {
+            MatrixFrame frame = PlacementController.GroundFrame(mission.Scene, at, facing);
+            GameEntity? entity = GameEntity.Instantiate(mission.Scene, FortificationState.ArrowBarrelPrefab, frame, false);
+            if (entity == null)
+            {
+                ErrorLog.Write("Prefab " + FortificationState.ArrowBarrelPrefab + " not found.");
+                return;
+            }
+            entity.CallScriptCallbacks(true);
+            UsableMachine? barrel = entity.GetFirstScriptOfTypeRecursive<UsableMachine>();
+            if (barrel == null)
+            {
+                ErrorLog.Write("Arrow barrel has no UsableMachine script.");
+                return;
+            }
+            foreach (StandingPoint point in barrel.StandingPoints)
+            {
+                if (point is StandingPointWithWeaponRequirement withWeapon) withWeapon.SetUsingBattleSide(owner.Side);
+                SiegeAiPatches.BarrelPoints.Add(point);
+            }
+            // Barrels ship without an AI object (only players use them in sieges); the crew assignment code needs one.
+            if (barrel.Ai == null) barrel.SetAI(new BarrelAi(barrel));
+            DetachmentManager detachments = owner.DetachmentManager;
+            if (!detachments.ContainsDetachment(barrel)) detachments.MakeDetachment(barrel);
+            PickCrewFormation(owner)?.JoinDetachment(barrel);
+        }
+        catch (Exception ex)
+        {
+            ErrorLog.Write("Arrow barrel spawn failed: " + ex);
+        }
+    }
+
+    /// <summary>The stock machine AI with nothing added: it walks eligible agents to the standing points and back.</summary>
+    private sealed class BarrelAi : UsableMachineAIBase
+    {
+        public BarrelAi(UsableMachine machine) : base(machine) { }
     }
 
     private static Formation? PickCrewFormation(Team team)

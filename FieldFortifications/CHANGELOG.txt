@@ -1,3 +1,10 @@
+v1.1.0
+- New "Stock arrows" option: two arrow barrels. Archers whose quivers drop below a threshold (refill_below in settings.txt) walk over and refill.
+- New "Build an archer platform" option: a raised 12 x 8 m timber deck on posts with a full-width ramp, with its own walkable navmesh so formations can be ordered onto it.
+- The platform navmesh piece is copied into Native/NavMeshPrefabs the first time a platform is built; the engine only reads that folder.
+- Safety net around crew assignment so a machine without an AI object cannot end the battle.
+- Optional debug=1 setting records game error stacks during a battle to debug.txt.
+
 v1.0.0
 - Initial release.
 - Encounter menu options to buy barricades, a ballista and a catapult before a field battle (open-terrain battles only).

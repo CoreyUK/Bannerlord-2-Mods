@@ -3,8 +3,14 @@
 barricade_cost=6000
 ballista_cost=10000
 catapult_cost=15000
+arrows_cost=2500
+tower_cost=8000
 # 1 = your archers crew the ballista and catapult, 0 = you man them yourself.
 crew_ai=1
+# 1 = record the stack of any game error during a battle to debug.txt (for bug reports).
+debug=0
+# AI archers only walk to an arrow barrel when their quiver is below this fraction of full (0.3 = 30%).
+refill_below=0.3
 # Bolts or stones loaded on each engine at the start of the battle.
 engine_ammo=30
 # Placement keys during deployment (names from the game InputKey list).

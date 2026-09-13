@@ -5,6 +5,7 @@ using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
+using TaleWorlds.MountAndBlade.Objects.Usables;
 
 namespace FieldFortifications;
 
@@ -20,6 +21,9 @@ internal static class SiegeAiPatches
     private static readonly FieldInfo? WeaponField = ThreatSeekerType == null ? null : AccessTools.Field(ThreatSeekerType, "Weapon");
     private static readonly FieldInfo? SingleUnitField = ThreatSeekerType == null ? null : AccessTools.Field(ThreatSeekerType, "SingleUnitThreatValue");
     private static readonly HashSet<string> _logged = new();
+
+    /// <summary>Standing points of the arrow barrels this mod spawned in the current battle.</summary>
+    public static readonly HashSet<StandingPoint> BarrelPoints = new();
 
     public static void Apply(Harmony harmony)
     {
@@ -39,6 +43,44 @@ internal static class SiegeAiPatches
             MethodInfo? method = AccessTools.Method(typeof(RangedSiegeWeaponAi), name);
             if (method != null) harmony.Patch(method, finalizer: new HarmonyMethod(typeof(SiegeAiPatches), nameof(SwallowFinalizer)));
         }
+        // Crew assignment onto any of our machines: a failure here should cost one assignment, not the battle.
+        MethodInfo? addAgent = AccessTools.Method(typeof(UsableMachine), "TaleWorlds.MountAndBlade.IDetachment.AddAgent");
+        if (addAgent != null) harmony.Patch(addAgent, finalizer: new HarmonyMethod(typeof(SiegeAiPatches), nameof(SwallowFinalizer)));
+
+        // Our arrow barrels: AI archers are only eligible once their quiver is actually low.
+        MethodInfo? disabledFor = AccessTools.Method(typeof(StandingPointWithWeaponRequirement), "IsDisabledForAgent");
+        if (disabledFor != null) harmony.Patch(disabledFor, postfix: new HarmonyMethod(typeof(SiegeAiPatches), nameof(BarrelEligibilityPostfix)));
+    }
+
+    private static void BarrelEligibilityPostfix(StandingPointWithWeaponRequirement __instance, Agent agent, ref bool __result)
+    {
+        try
+        {
+            if (__result || agent == null || !agent.IsAIControlled || BarrelPoints.Count == 0 || !BarrelPoints.Contains(__instance)) return;
+            if (AmmoFraction(agent) > FortificationSettings.Current.RefillBelow) __result = true;
+        }
+        catch (Exception ex)
+        {
+            LogOnce("BarrelEligibility", ex);
+        }
+    }
+
+    /// <summary>Arrows and bolts carried, as a fraction of what the agent's quivers hold when full.</summary>
+    private static float AmmoFraction(Agent agent)
+    {
+        int amount = 0, max = 0;
+        MissionEquipment equipment = agent.Equipment;
+        for (EquipmentIndex slot = EquipmentIndex.WeaponItemBeginSlot; slot < EquipmentIndex.NumAllWeaponSlots; slot++)
+        {
+            MissionWeapon weapon = equipment[slot];
+            if (weapon.IsEmpty) continue;
+            WeaponComponentData? usage = weapon.CurrentUsageItem;
+            if (usage == null || !usage.IsConsumable) continue;
+            if (usage.WeaponClass != WeaponClass.Arrow && usage.WeaponClass != WeaponClass.Bolt) continue;
+            amount += weapon.Amount;
+            max += weapon.ModifiedMaxAmount;
+        }
+        return max > 0 ? (float)amount / max : 1f;
     }
 
     /// <summary>Field battles only: enemy formations are the threats, weighted by size and nearness.</summary>

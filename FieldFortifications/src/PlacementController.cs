@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TaleWorlds.Core;
 using TaleWorlds.Engine;
@@ -19,7 +19,7 @@ namespace FieldFortifications;
 /// </summary>
 public sealed class PlacementController
 {
-    public enum Kind { BarricadeLine, Ballista, Mangonel }
+    public enum Kind { BarricadeLine, Ballista, Mangonel, ArrowBarrels, ArcherTower }
 
     public sealed class Item
     {
@@ -120,8 +120,8 @@ public sealed class PlacementController
         {
             if (!_cursorValid)
             {
-                Say(item.Kind == Kind.BarricadeLine
-                    ? "Barricades must sit outside your deployment area, in front of your lines, and out of the enemy's."
+                Say(item.Kind == Kind.BarricadeLine || item.Kind == Kind.ArcherTower
+                    ? item.Name + " must sit outside your deployment area, in front of your lines, and out of the enemy's."
                     : "Cannot place there: too far from your line or inside the enemy's ground.");
                 return;
             }
@@ -242,10 +242,10 @@ public sealed class PlacementController
         IMissionDeploymentPlan plan = _mission.DeploymentPlan;
         Team? enemy = _mission.PlayerEnemyTeam;
         if (enemy != null && plan.HasDeploymentBoundaries(enemy) && plan.IsPositionInsideDeploymentBoundaries(enemy, in position)) return false;
-        if (item.Kind != Kind.BarricadeLine) return true;
+        if (item.Kind != Kind.BarricadeLine && item.Kind != Kind.ArcherTower) return true;
         Team? player = _mission.PlayerTeam;
         if (player == null || !plan.HasDeploymentBoundaries(player)) return true;
-        for (int i = 0; i < FortificationState.SegmentCount; i++)
+        for (int i = 0; i < GhostCount(item.Kind); i++)
         {
             Placement(item, i, out Vec2 at, out Vec2 _);
             Vec2 behind = at - item.Forward * FortificationState.BoundaryMargin;
@@ -257,11 +257,18 @@ public sealed class PlacementController
     private void CreateGhosts(Item item)
     {
         Scene scene = _mission.Scene;
-        int count = item.Kind == Kind.BarricadeLine ? FortificationState.SegmentCount : 1;
+        if (item.Kind == Kind.ArcherTower)
+        {
+            item.Ghosts.AddRange(PlatformBuilder.CreateGhostParts(scene));
+            return;
+        }
+        int count = GhostCount(item.Kind);
         string prefab = item.Kind switch
         {
             Kind.Ballista => FortificationState.BallistaPrefab,
             Kind.Mangonel => FortificationState.MangonelPrefab,
+            Kind.ArrowBarrels => FortificationState.ArrowBarrelPrefab,
+            Kind.ArcherTower => PlatformBuilder.PlankPrefab,
             _ => FortificationState.SegmentPrefab,
         };
         for (int i = 0; i < count; i++)
@@ -287,32 +294,62 @@ public sealed class PlacementController
     private void UpdateGhostFrames(Item item, bool valid)
     {
         uint colour = valid ? ColourValid : ColourInvalid;
+        Scene scene = _mission.Scene;
+        if (item.Kind == Kind.ArcherTower)
+        {
+            Placement(item, 0, out Vec2 centre, out Vec2 forward);
+            MatrixFrame root = GroundFrame(scene, centre, forward);
+            for (int i = 0; i < item.Ghosts.Count; i++)
+            {
+                MatrixFrame frame = PlatformBuilder.PartGlobalFrame(scene, i, in root);
+                item.Ghosts[i].SetGlobalFrame(in frame, true);
+                try { item.Ghosts[i].SetFactorColor(colour); } catch { /* cosmetic */ }
+            }
+            return;
+        }
         for (int i = 0; i < item.Ghosts.Count; i++)
         {
             Placement(item, i, out Vec2 at, out Vec2 facing);
-            MatrixFrame frame = GroundFrame(_mission.Scene, at, facing);
+            MatrixFrame frame = GroundFrame(scene, at, facing);
             item.Ghosts[i].SetGlobalFrame(in frame, true);
             try { item.Ghosts[i].SetFactorColor(colour); } catch { /* cosmetic */ }
         }
     }
 
+    public static int GhostCount(Kind kind) => kind switch
+    {
+        Kind.BarricadeLine => FortificationState.SegmentCount,
+        Kind.ArrowBarrels => FortificationState.ArrowBarrelCount,
+        _ => 1,
+    };
+
     /// <summary>
-    /// World position and facing for segment <paramref name="index"/> of an item. The prop meshes' own forward
-    /// points at their builders, so the frame faces back toward the player's line.
+    /// World position and facing for segment <paramref name="index"/> of an item. Most prop meshes' own forward
+    /// points at their builders, so the frame faces back toward the player's line; the siege tower drives forward
+    /// toward the enemy, so it keeps the item's forward.
     /// </summary>
     public void Placement(Item item, int index, out Vec2 at, out Vec2 facing)
     {
         Vec2 forward = item.Forward;
-        if (item.Kind == Kind.BarricadeLine)
+        switch (item.Kind)
         {
-            float halfSpan = (FortificationState.SegmentCount - 1) * FortificationState.SegmentPitch * 0.5f;
-            at = item.Position + forward.LeftVec() * (index * FortificationState.SegmentPitch - halfSpan);
+            case Kind.BarricadeLine:
+            {
+                float halfSpan = (FortificationState.SegmentCount - 1) * FortificationState.SegmentPitch * 0.5f;
+                at = item.Position + forward.LeftVec() * (index * FortificationState.SegmentPitch - halfSpan);
+                break;
+            }
+            case Kind.ArrowBarrels:
+            {
+                float halfSpan = (FortificationState.ArrowBarrelCount - 1) * FortificationState.ArrowBarrelPitch * 0.5f;
+                at = item.Position + forward.LeftVec() * (index * FortificationState.ArrowBarrelPitch - halfSpan);
+                break;
+            }
+            default:
+                at = item.Position;
+                break;
         }
-        else
-        {
-            at = item.Position;
-        }
-        facing = -forward;
+        facing = item.Kind == Kind.ArcherTower ? forward : -forward;
     }
 
     public static MatrixFrame GroundFrame(Scene scene, Vec2 at, Vec2 facing)
