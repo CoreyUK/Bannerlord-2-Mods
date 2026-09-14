@@ -106,33 +106,48 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         }
 
         _placement = new PlacementController(mission, _settings, spawn.AsVec2);
-        if (FortificationState.Barricades)
+        int lines = FortificationState.Count(FortificationState.Work.Barricades);
+        int ballistas = FortificationState.Count(FortificationState.Work.Ballista);
+        int mangonels = FortificationState.Count(FortificationState.Work.Mangonel);
+        int stockpiles = FortificationState.Count(FortificationState.Work.Arrows);
+        int platforms = FortificationState.Count(FortificationState.Work.Tower);
+
+        // Barricade lines sit side by side across the front; everything else hangs off the ends of that front.
+        float frontHalfWidth = halfSpan + Math.Max(0, lines - 1) * FortificationState.LinePitch * 0.5f;
+        for (int n = 0; n < lines; n++)
         {
+            float lineOffset = (n - (lines - 1) * 0.5f) * FortificationState.LinePitch;
             // The line is one straight piece, so use the furthest boundary distance of its segments: none may start inside.
             float lineDistance = 0f;
             for (int i = 0; i < FortificationState.SegmentCount; i++)
-                lineDistance = Math.Max(lineDistance, Distance(i * FortificationState.SegmentPitch - halfSpan));
-            _placement.AddItem(PlacementController.Kind.BarricadeLine, "Barricades", FortificationState.BarricadeIcon, spawn.AsVec2 + forward * lineDistance, forward);
+                lineDistance = Math.Max(lineDistance, Distance(lineOffset + i * FortificationState.SegmentPitch - halfSpan));
+            _placement.AddItem(PlacementController.Kind.BarricadeLine, Numbered("Barricades", n, lines), FortificationState.BarricadeIcon,
+                spawn.AsVec2 + lateral * lineOffset + forward * lineDistance, forward);
         }
-        if (FortificationState.Ballista)
+        for (int n = 0; n < ballistas; n++)
         {
-            float offset = halfSpan + FortificationState.EngineFlankOffset;
-            _placement.AddItem(PlacementController.Kind.Ballista, "Ballista", FortificationState.BallistaIcon, spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
+            float offset = frontHalfWidth + FortificationState.EngineFlankOffset + n * FortificationState.EnginePitch;
+            _placement.AddItem(PlacementController.Kind.Ballista, Numbered("Ballista", n, ballistas), FortificationState.BallistaIcon,
+                spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
         }
-        if (FortificationState.Mangonel)
+        for (int n = 0; n < mangonels; n++)
         {
-            float offset = -(halfSpan + FortificationState.EngineFlankOffset);
-            _placement.AddItem(PlacementController.Kind.Mangonel, "Catapult", FortificationState.MangonelIcon, spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
+            float offset = -(frontHalfWidth + FortificationState.EngineFlankOffset + n * FortificationState.EnginePitch);
+            _placement.AddItem(PlacementController.Kind.Mangonel, Numbered("Catapult", n, mangonels), FortificationState.MangonelIcon,
+                spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
         }
-        if (FortificationState.Arrows)
+        for (int n = 0; n < stockpiles; n++)
         {
             // Behind the infantry line, inside the deployment area, where the archers stand.
-            _placement.AddItem(PlacementController.Kind.ArrowBarrels, "Arrows", FortificationState.ArrowsIcon, spawn.AsVec2 - forward * FortificationState.ArrowsBehindLine, forward);
+            float offset = (n - (stockpiles - 1) * 0.5f) * FortificationState.ArrowsPitch;
+            _placement.AddItem(PlacementController.Kind.ArrowBarrels, Numbered("Arrows", n, stockpiles), FortificationState.ArrowsIcon,
+                spawn.AsVec2 + lateral * offset - forward * FortificationState.ArrowsBehindLine, forward);
         }
-        if (FortificationState.Tower)
+        for (int n = 0; n < platforms; n++)
         {
-            float offset = halfSpan + FortificationState.TowerFlankOffset;
-            _placement.AddItem(PlacementController.Kind.ArcherTower, "Platform", FortificationState.TowerIcon, spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
+            float offset = frontHalfWidth + FortificationState.TowerFlankOffset + ballistas * FortificationState.EnginePitch + n * (PlatformBuilder.DeckWidth + 4f);
+            _placement.AddItem(PlacementController.Kind.ArcherTower, Numbered("Platform", n, platforms), FortificationState.TowerIcon,
+                spawn.AsVec2 + lateral * offset + forward * Distance(offset), forward);
         }
 
         // No deployment phase (a later round, or reinforcements): build straight away at the defaults.
@@ -143,6 +158,8 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         }
         _placement.ShowPanel();
     }
+
+    private static string Numbered(string name, int index, int total) => total > 1 ? name + " " + (index + 1) : name;
 
     /// <summary>Turns every ghost into the real thing, wherever it ended up.</summary>
     private void SpawnAll()

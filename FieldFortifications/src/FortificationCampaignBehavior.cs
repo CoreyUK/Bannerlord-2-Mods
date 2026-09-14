@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Encounters;
@@ -5,12 +7,41 @@ using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.MapEvents;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Localization;
+using Work = FieldFortifications.FortificationState.Work;
 
 namespace FieldFortifications;
 
-/// <summary>Adds the priced fortification options to the pre-battle encounter menu, field battles only.</summary>
+/// <summary>
+/// Adds a "Fortify your position" entry to the pre-battle encounter menu (field battles only) that opens a submenu
+/// where each work can be bought several times at a rising price, with a running total and a full refund.
+/// </summary>
 public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
 {
+    private const string EncounterMenu = "encounter";
+    private const string FortifyMenu = "ff_fortify";
+
+    private sealed class WorkInfo
+    {
+        public Work Work;
+        public string Id = "", Name = "", Plural = "", Verb = "", Tooltip = "";
+    }
+
+    private static readonly WorkInfo[] Works =
+    {
+        new() { Work = Work.Barricades, Id = "barricades", Name = "barricade line", Plural = "barricade lines", Verb = "{=ff_opt_barricades}Raise barricades",
+                Tooltip = "{=ff_tip_barricades}A line of four spiked barricades you place during deployment. Foot soldiers must go around or hack through; horses that charge it are impaled." },
+        new() { Work = Work.Ballista, Id = "ballista", Name = "ballista", Plural = "ballistas", Verb = "{=ff_opt_ballista}Set up a ballista",
+                Tooltip = "{=ff_tip_ballista}A ballista with {AMMO} bolts, placed during deployment. Your archers crew it." },
+        new() { Work = Work.Mangonel, Id = "catapult", Name = "catapult", Plural = "catapults", Verb = "{=ff_opt_mangonel}Set up a catapult",
+                Tooltip = "{=ff_tip_mangonel}A mangonel with {AMMO} stones, placed during deployment. Your archers crew it." },
+        new() { Work = Work.Arrows, Id = "arrows", Name = "arrow stockpile", Plural = "arrow stockpiles", Verb = "{=ff_opt_arrows}Stock arrows",
+                Tooltip = "{=ff_tip_arrows}Two barrels of arrows placed during deployment. Archers running low walk over and refill; you can too." },
+        new() { Work = Work.Tower, Id = "platform", Name = "archer platform", Plural = "archer platforms", Verb = "{=ff_opt_tower}Build an archer platform",
+                Tooltip = "{=ff_tip_tower}A raised timber deck with a ramp at the back, placed during deployment. Order archers onto it once the battle starts." },
+    };
+
+    private FortificationSettings _settings = new();
+
     public override void RegisterEvents()
     {
         CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, OnSessionLaunched);
@@ -19,78 +50,141 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
 
     public override void SyncData(IDataStore store)
     {
-        bool barricades = FortificationState.Barricades, ballista = FortificationState.Ballista, mangonel = FortificationState.Mangonel;
-        bool arrows = FortificationState.Arrows, tower = FortificationState.Tower;
-        store.SyncData("ff_barricades", ref barricades);
-        store.SyncData("ff_ballista", ref ballista);
-        store.SyncData("ff_mangonel", ref mangonel);
-        store.SyncData("ff_arrows", ref arrows);
-        store.SyncData("ff_tower", ref tower);
-        FortificationState.Barricades = barricades;
-        FortificationState.Ballista = ballista;
-        FortificationState.Mangonel = mangonel;
-        FortificationState.Arrows = arrows;
-        FortificationState.Tower = tower;
+        int[] bought = (int[])FortificationState.Bought.Clone();
+        int spent = FortificationState.Spent;
+        for (int i = 0; i < bought.Length; i++) store.SyncData("ff_bought_" + i, ref bought[i]);
+        store.SyncData("ff_spent", ref spent);
+        for (int i = 0; i < bought.Length; i++) FortificationState.Bought[i] = bought[i];
+        FortificationState.Spent = spent;
     }
 
     private void OnSessionLaunched(CampaignGameStarter starter)
     {
-        FortificationSettings settings = FortificationSettings.Load();
-        AddOption(starter, "ff_barricades", 1,
-            "{=ff_opt_barricades}Raise barricades (" + settings.BarricadeCost + "{GOLD_ICON})",
-            "{=ff_tip_barricades}A line of spiked barricades in front of your infantry. You place it during deployment. Foot soldiers must go around or hack through; horses that charge it are impaled.",
-            settings.BarricadeCost, () => FortificationState.Barricades, () => FortificationState.Barricades = true);
-        AddOption(starter, "ff_ballista", 2,
-            "{=ff_opt_ballista}Set up a ballista (" + settings.BallistaCost + "{GOLD_ICON})",
-            "{=ff_tip_ballista}A ballista with " + settings.EngineAmmo + " bolts, placed during deployment. Your archers crew it.",
-            settings.BallistaCost, () => FortificationState.Ballista, () => FortificationState.Ballista = true);
-        AddOption(starter, "ff_mangonel", 3,
-            "{=ff_opt_mangonel}Set up a catapult (" + settings.MangonelCost + "{GOLD_ICON})",
-            "{=ff_tip_mangonel}A mangonel with " + settings.EngineAmmo + " stones, placed during deployment. Your archers crew it.",
-            settings.MangonelCost, () => FortificationState.Mangonel, () => FortificationState.Mangonel = true);
-        AddOption(starter, "ff_arrows", 4,
-            "{=ff_opt_arrows}Stock arrows (" + settings.ArrowsCost + "{GOLD_ICON})",
-            "{=ff_tip_arrows}Two barrels of arrows placed during deployment. Archers running low walk over and refill; you can too.",
-            settings.ArrowsCost, () => FortificationState.Arrows, () => FortificationState.Arrows = true);
-        AddOption(starter, "ff_tower", 5,
-            "{=ff_opt_tower}Build an archer platform (" + settings.TowerCost + "{GOLD_ICON})",
-            "{=ff_tip_tower}A raised timber deck with a ramp at the back, placed during deployment. Order archers onto it once the battle starts.",
-            settings.TowerCost, () => FortificationState.Tower, () => FortificationState.Tower = true);
-    }
+        _settings = FortificationSettings.Load();
 
-    private static void AddOption(CampaignGameStarter starter, string id, int index, string text, string tooltip, int cost,
-        System.Func<bool> isBought, System.Action buy)
-    {
-        starter.AddGameMenuOption("encounter", id, text,
+        starter.AddGameMenuOption(EncounterMenu, "ff_fortify_open", "{=ff_opt_open}Fortify your position",
             args =>
             {
                 if (CurrentFieldBattle() == null) return false;
-                args.optionLeaveType = GameMenuOption.LeaveType.DefendAction;
-                if (isBought())
+                args.optionLeaveType = GameMenuOption.LeaveType.Submenu;
+                args.Tooltip = new TextObject("{=ff_tip_open}Pay your men to raise barricades, set up engines, stock arrows and build a platform before the battle. {SUMMARY}")
+                    .SetTextVariable("SUMMARY", Summary());
+                return true;
+            },
+            args => GameMenu.SwitchToMenu(FortifyMenu),
+            false, 1, false, null);
+
+        starter.AddGameMenu(FortifyMenu,
+            "{=ff_menu_body}Your men can throw up works before the battle. Each one is placed by you during deployment, and every extra copy of a work costs more than the last.{newline} {newline}{FF_SUMMARY}",
+            args =>
+            {
+                if (CurrentFieldBattle() == null)
                 {
-                    args.IsEnabled = false;
-                    args.Tooltip = new TextObject("{=ff_tip_done}Your men have already seen to this.");
+                    GameMenu.SwitchToMenu(EncounterMenu);
+                    return;
                 }
-                else if (Hero.MainHero.Gold < cost)
-                {
-                    args.IsEnabled = false;
-                    args.Tooltip = new TextObject("{=ff_tip_gold}You need {AMOUNT} denars.").SetTextVariable("AMOUNT", cost);
-                }
-                else
-                {
-                    args.Tooltip = new TextObject(tooltip);
-                }
+                SetVariables();
+            },
+            GameMenu.MenuOverlayType.Encounter, GameMenu.MenuFlags.None, null);
+
+        int index = 0;
+        foreach (WorkInfo info in Works)
+        {
+            WorkInfo captured = info;
+            starter.AddGameMenuOption(FortifyMenu, "ff_buy_" + info.Id,
+                info.Verb + " ({FF_" + info.Id + "_HAVE}/{FF_" + info.Id + "_MAX}) {FF_" + info.Id + "_TAIL}",
+                args => BuyCondition(captured, args), args => Buy(captured), false, index++, true, null);
+        }
+        starter.AddGameMenuOption(FortifyMenu, "ff_refund", "{=ff_opt_refund}Take the works down ({FF_SPENT}{GOLD_ICON} back)",
+            args =>
+            {
+                if (FortificationState.Spent <= 0 && !FortificationState.AnyPending) return false;
+                args.optionLeaveType = GameMenuOption.LeaveType.Escape;
+                args.Tooltip = new TextObject("{=ff_tip_refund}Cancel everything bought for this battle and get the full price back.");
                 return true;
             },
             args =>
             {
-                if (isBought() || Hero.MainHero.Gold < cost) return;
-                GiveGoldAction.ApplyBetweenCharacters(Hero.MainHero, null, cost, false);
-                buy();
-                Campaign.Current.GameMenuManager.RefreshMenuOptions(Campaign.Current.CurrentMenuContext);
+                if (FortificationState.Spent > 0) GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, FortificationState.Spent, false);
+                FortificationState.Clear();
+                GameMenu.SwitchToMenu(FortifyMenu);
             },
-            false, index, false, null);
+            false, index++, false, null);
+        starter.AddGameMenuOption(FortifyMenu, "ff_back", "{=ff_opt_back}Back",
+            args => { args.optionLeaveType = GameMenuOption.LeaveType.Leave; return true; },
+            args => GameMenu.SwitchToMenu(EncounterMenu),
+            true, index, false, null);
     }
+
+    private bool BuyCondition(WorkInfo info, MenuCallbackArgs args)
+    {
+        SetVariables();
+        args.optionLeaveType = GameMenuOption.LeaveType.DefendAction;
+        int have = FortificationState.Count(info.Work), max = _settings.Max(info.Work);
+        int price = _settings.Price(info.Work, have);
+        if (have >= max)
+        {
+            args.IsEnabled = false;
+            args.Tooltip = new TextObject("{=ff_tip_full}Your men can build no more of these for one battle.");
+        }
+        else if (Hero.MainHero.Gold < price)
+        {
+            args.IsEnabled = false;
+            args.Tooltip = new TextObject("{=ff_tip_gold}You need {AMOUNT} denars.").SetTextVariable("AMOUNT", price);
+        }
+        else
+        {
+            args.Tooltip = new TextObject(info.Tooltip).SetTextVariable("AMMO", _settings.EngineAmmo);
+        }
+        return true;
+    }
+
+    private void Buy(WorkInfo info)
+    {
+        int have = FortificationState.Count(info.Work), max = _settings.Max(info.Work);
+        int price = _settings.Price(info.Work, have);
+        if (have >= max || Hero.MainHero.Gold < price) return;
+        GiveGoldAction.ApplyBetweenCharacters(Hero.MainHero, null, price, false);
+        FortificationState.Bought[(int)info.Work] = have + 1;
+        FortificationState.Spent += price;
+        GameMenu.SwitchToMenu(FortifyMenu);
+    }
+
+    /// <summary>Text variables for the menu body and every option: counts, next prices, and the running total.</summary>
+    private void SetVariables()
+    {
+        foreach (WorkInfo info in Works)
+        {
+            int have = FortificationState.Count(info.Work), max = _settings.Max(info.Work);
+            MBTextManager.SetTextVariable("FF_" + info.Id + "_HAVE", have);
+            MBTextManager.SetTextVariable("FF_" + info.Id + "_MAX", max);
+            TextObject tail = have >= max
+                ? new TextObject("{=ff_full}full")
+                : new TextObject("{AMOUNT}{GOLD_ICON}").SetTextVariable("AMOUNT", Denars(_settings.Price(info.Work, have)));
+            MBTextManager.SetTextVariable("FF_" + info.Id + "_TAIL", tail, false);
+        }
+        MBTextManager.SetTextVariable("FF_SPENT", Denars(FortificationState.Spent));
+        MBTextManager.SetTextVariable("FF_SUMMARY", Summary(), false);
+    }
+
+    private static TextObject Summary()
+    {
+        var parts = new List<string>();
+        foreach (WorkInfo info in Works)
+        {
+            int have = FortificationState.Count(info.Work);
+            if (have == 1) parts.Add("1 " + info.Name);
+            else if (have > 1) parts.Add(have + " " + info.Plural);
+        }
+        if (parts.Count == 0)
+            return new TextObject("{=ff_sum_none}Nothing bought yet. You have {GOLD}{GOLD_ICON}.").SetTextVariable("GOLD", Denars(Hero.MainHero.Gold));
+        return new TextObject("{=ff_sum_some}Bought for this battle: {LIST}. Paid {SPENT}{GOLD_ICON}, {GOLD}{GOLD_ICON} left.")
+            .SetTextVariable("LIST", string.Join(", ", parts))
+            .SetTextVariable("SPENT", Denars(FortificationState.Spent))
+            .SetTextVariable("GOLD", Denars(Hero.MainHero.Gold));
+    }
+
+    private static string Denars(int amount) => amount.ToString("N0", CultureInfo.InvariantCulture);
 
     private static MapEvent? CurrentFieldBattle()
     {

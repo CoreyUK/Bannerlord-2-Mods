@@ -1,25 +1,40 @@
+using System;
+
 namespace FieldFortifications;
 
 /// <summary>Campaign-to-mission handoff and the fixed tuning values.</summary>
 public static class FortificationState
 {
-    /// <summary>Works bought for the current encounter. Cleared when the player's map event ends.</summary>
-    public static bool Barricades;
-    public static bool Ballista;
-    public static bool Mangonel;
-    public static bool Arrows;
-    public static bool Tower;
+    public enum Work { Barricades, Ballista, Mangonel, Arrows, Tower }
+    public const int WorkCount = 5;
 
-    public static bool AnyPending => Barricades || Ballista || Mangonel || Arrows || Tower;
+    /// <summary>How many of each work were bought for the current encounter. Cleared when the player's map event ends.</summary>
+    public static readonly int[] Bought = new int[WorkCount];
+
+    /// <summary>Denars paid this encounter, for the summary and the refund.</summary>
+    public static int Spent;
+
+    public static int Count(Work work) => Bought[(int)work];
+
+    public static bool AnyPending
+    {
+        get
+        {
+            foreach (int n in Bought) if (n > 0) return true;
+            return false;
+        }
+    }
 
     public static void Clear()
     {
-        Barricades = false;
-        Ballista = false;
-        Mangonel = false;
-        Arrows = false;
-        Tower = false;
+        Array.Clear(Bought, 0, Bought.Length);
+        Spent = 0;
     }
+
+    /// <summary>Metres between the centres of neighbouring barricade lines and neighbouring engines by default.</summary>
+    public const float LinePitch = 34f;
+    public const float EnginePitch = 9f;
+    public const float ArrowsPitch = 10f;
 
     /// <summary>Scene prefab spawned for each obstacle segment.</summary>
     public const string SegmentPrefab = "siege_barricade_a";

@@ -1,3 +1,9 @@
+v1.2.0
+- New "Fortify your position" menu in the encounter screen: one line per work with the count you hold, the cap and the next price, a running total of what you paid and what you have left, and a "Take the works down" option that refunds everything.
+- Works can now be bought several times per battle: up to 3 barricade lines, 2 ballistas, 2 catapults, 4 arrow stockpiles and 1 platform (max_* in settings.txt).
+- Each further copy of a work costs more: 50% of the base price on top of the previous one by default (price_step in settings.txt).
+- Every copy gets its own placement card and ghost, numbered when there is more than one, with sensible default spots spread along the front and flanks.
+
 v1.1.0
 - New "Stock arrows" option: two arrow barrels. Archers whose quivers drop below a threshold (refill_below in settings.txt) walk over and refill.
 - New "Build an archer platform" option: a raised 12 x 8 m timber deck on posts with a full-width ramp, with its own walkable navmesh so formations can be ordered onto it.

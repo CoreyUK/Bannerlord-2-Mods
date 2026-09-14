@@ -12,12 +12,23 @@ namespace FieldFortifications;
 /// </summary>
 public sealed class FortificationSettings
 {
-    /// <summary>Denars charged for each work.</summary>
-    public int BarricadeCost = 6000;
-    public int BallistaCost = 10000;
-    public int MangonelCost = 15000;
-    public int ArrowsCost = 2500;
-    public int TowerCost = 8000;
+    /// <summary>Denars charged for the first copy of each work, indexed by FortificationState.Work.</summary>
+    public readonly int[] BaseCost = { 6000, 10000, 15000, 2500, 8000 };
+
+    /// <summary>How many of each work may be bought for one battle, indexed by FortificationState.Work.</summary>
+    public readonly int[] MaxCount = { 3, 2, 2, 4, 1 };
+
+    /// <summary>Each further copy of a work costs this fraction of the base price more than the one before.</summary>
+    public float PriceStep = 0.5f;
+
+    /// <summary>Price of the next copy of a work, given how many are already bought. Rounded to the nearest 100.</summary>
+    public int Price(FortificationState.Work work, int alreadyBought)
+    {
+        float raw = BaseCost[(int)work] * (1f + PriceStep * alreadyBought);
+        return Math.Max(0, (int)Math.Round(raw / 100f) * 100);
+    }
+
+    public int Max(FortificationState.Work work) => Math.Max(0, MaxCount[(int)work]);
 
     /// <summary>Let the siege AI assign archers to crew the engines. Off means the player mans them.</summary>
     public bool CrewAi = true;
@@ -67,11 +78,19 @@ public sealed class FortificationSettings
                 InputKey Key(InputKey fallback) => Enum.TryParse(value, true, out InputKey k) ? k : fallback;
                 switch (key)
                 {
-                    case "barricade_cost": settings.BarricadeCost = Int(settings.BarricadeCost); break;
-                    case "ballista_cost": settings.BallistaCost = Int(settings.BallistaCost); break;
-                    case "catapult_cost": settings.MangonelCost = Int(settings.MangonelCost); break;
-                    case "arrows_cost": settings.ArrowsCost = Int(settings.ArrowsCost); break;
-                    case "tower_cost": settings.TowerCost = Int(settings.TowerCost); break;
+                    case "barricade_cost": settings.BaseCost[0] = Int(settings.BaseCost[0]); break;
+                    case "ballista_cost": settings.BaseCost[1] = Int(settings.BaseCost[1]); break;
+                    case "catapult_cost": settings.BaseCost[2] = Int(settings.BaseCost[2]); break;
+                    case "arrows_cost": settings.BaseCost[3] = Int(settings.BaseCost[3]); break;
+                    case "tower_cost": settings.BaseCost[4] = Int(settings.BaseCost[4]); break;
+                    case "max_barricades": settings.MaxCount[0] = Int(settings.MaxCount[0]); break;
+                    case "max_ballistas": settings.MaxCount[1] = Int(settings.MaxCount[1]); break;
+                    case "max_catapults": settings.MaxCount[2] = Int(settings.MaxCount[2]); break;
+                    case "max_arrows": settings.MaxCount[3] = Int(settings.MaxCount[3]); break;
+                    case "max_platforms": settings.MaxCount[4] = Int(settings.MaxCount[4]); break;
+                    case "price_step":
+                        if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float step) && step >= 0f && step <= 10f) settings.PriceStep = step;
+                        break;
                     case "crew_ai": settings.CrewAi = Flag(); break;
                     case "debug": settings.Debug = Flag(); break;
                     case "refill_below":
