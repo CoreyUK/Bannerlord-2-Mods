@@ -30,6 +30,8 @@ public sealed class FortificationMissionBehavior : MissionBehavior
     private readonly List<Barricade> _barricades = new();
     private readonly Dictionary<int, float> _spikeCooldown = new();
     private readonly List<RangedSiegeWeapon> _engines = new();
+    private readonly List<(Agent horse, float damage, Vec2 velocity)> _spikeHits = new();
+    private int _tickFaults;
     private readonly Dictionary<RangedSiegeWeapon, float> _reloadStuckSince = new();
 
     // Protected on MissionObject / RangedSiegeWeapon; the engine sets them from prefab XML, we set them from code.
@@ -48,8 +50,15 @@ public sealed class FortificationMissionBehavior : MissionBehavior
         base.OnMissionTick(dt);
         if (_spawned)
         {
-            if (_barricades.Count > 0) TickSpikes();
-            if (_engines.Count > 0) TickAutoReload();
+            try
+            {
+                if (_barricades.Count > 0) TickSpikes();
+                if (_engines.Count > 0) TickAutoReload();
+            }
+            catch (Exception ex)
+            {
+                if (_tickFaults++ < 3) ErrorLog.Write("Battle tick failed: " + ex);
+            }
             return;
         }
         if (!_initialised)
@@ -365,6 +374,7 @@ public sealed class FortificationMissionBehavior : MissionBehavior
     private void TickSpikes()
     {
         float now = Mission.CurrentTime;
+        _spikeHits.Clear();
         foreach (Agent agent in Mission.Agents)
         {
             if (!agent.IsMount || !agent.IsActive()) continue;
@@ -382,11 +392,15 @@ public sealed class FortificationMissionBehavior : MissionBehavior
                 if (Math.Abs(along) > FortificationState.SegmentHalfDepth || Math.Abs(across) > FortificationState.SegmentHalfWidth) continue;
 
                 float damage = Math.Min(FortificationState.SpikeMaxDamage, FortificationState.SpikeBaseDamage + FortificationState.SpikeDamagePerSpeed * speed);
-                Impale(agent, damage, velocity);
+                _spikeHits.Add((agent, damage, velocity));
                 _spikeCooldown[agent.Index] = now + FortificationState.SpikeCooldown;
                 break;
             }
         }
+        // Applied after the walk: a fatal blow removes the horse from the agent list, which must not change mid-walk.
+        foreach ((Agent horse, float damage, Vec2 velocity) in _spikeHits)
+            if (horse.IsActive()) Impale(horse, damage, velocity);
+        _spikeHits.Clear();
     }
 
     private static void Impale(Agent horse, float damage, Vec2 velocity)

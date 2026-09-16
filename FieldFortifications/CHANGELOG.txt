@@ -1,3 +1,7 @@
+v1.2.1
+- Fixed a crash (Collection was modified) when a horse died on the barricade spikes: the spike check now applies its hits after walking the agent list.
+- Any fault in the mod's per-tick checks during a battle is now logged to errors.txt instead of ending the game.
+
 v1.2.0
 - New "Fortify your position" menu in the encounter screen: one line per work with the count you hold, the cap and the next price, a running total of what you paid and what you have left, and a "Take the works down" option that refunds everything.
 - Works can now be bought several times per battle: up to 3 barricade lines, 2 ballistas, 2 catapults, 4 arrow stockpiles and 1 platform (max_* in settings.txt).
