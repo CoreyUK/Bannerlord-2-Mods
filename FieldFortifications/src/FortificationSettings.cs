@@ -21,6 +21,19 @@ public sealed class FortificationSettings
     /// <summary>Each further copy of a work costs this fraction of the base price more than the one before.</summary>
     public float PriceStep = 0.5f;
 
+    /// <summary>Engineering skill the party's best engineer needs for the first copy of each work, indexed by FortificationState.Work.</summary>
+    public readonly int[] EngineeringRequired = { 20, 60, 90, 10, 40 };
+
+    /// <summary>Each further copy of a work needs this much more Engineering than the one before.</summary>
+    public int EngineeringStep = 15;
+
+    /// <summary>Engineering experience the engineer gains per 1,000 denars of works bought.</summary>
+    public float EngineeringXpPer1000 = 50f;
+
+    /// <summary>Engineering needed for the next copy of a work, given how many are already bought.</summary>
+    public int Required(FortificationState.Work work, int alreadyBought) =>
+        Math.Max(0, EngineeringRequired[(int)work] + EngineeringStep * alreadyBought);
+
     /// <summary>Price of the next copy of a work, given how many are already bought. Rounded to the nearest 100.</summary>
     public int Price(FortificationState.Work work, int alreadyBought)
     {
@@ -88,6 +101,15 @@ public sealed class FortificationSettings
                     case "max_catapults": settings.MaxCount[2] = Int(settings.MaxCount[2]); break;
                     case "max_arrows": settings.MaxCount[3] = Int(settings.MaxCount[3]); break;
                     case "max_platforms": settings.MaxCount[4] = Int(settings.MaxCount[4]); break;
+                    case "eng_barricades": settings.EngineeringRequired[0] = Int(settings.EngineeringRequired[0]); break;
+                    case "eng_ballista": settings.EngineeringRequired[1] = Int(settings.EngineeringRequired[1]); break;
+                    case "eng_catapult": settings.EngineeringRequired[2] = Int(settings.EngineeringRequired[2]); break;
+                    case "eng_arrows": settings.EngineeringRequired[3] = Int(settings.EngineeringRequired[3]); break;
+                    case "eng_platform": settings.EngineeringRequired[4] = Int(settings.EngineeringRequired[4]); break;
+                    case "eng_step": settings.EngineeringStep = Int(settings.EngineeringStep); break;
+                    case "eng_xp_per_1000":
+                        if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float xp) && xp >= 0f) settings.EngineeringXpPer1000 = xp;
+                        break;
                     case "price_step":
                         if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float step) && step >= 0f && step <= 10f) settings.PriceStep = step;
                         break;

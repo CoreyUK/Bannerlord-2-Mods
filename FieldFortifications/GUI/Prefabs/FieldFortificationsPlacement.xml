@@ -3,15 +3,17 @@
     <Constant Name="Card.Width" Value="64" />
     <Constant Name="Card.Height" Value="76" />
     <Constant Name="Icon.Size" Value="32" />
+    <Constant Name="Cell.Width" Value="72" />
+    <Constant Name="Cell.Height" Value="84" />
   </Constants>
   <Window>
     <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true">
       <Children>
 
-        <!-- Item cards in a row just above the hint line, clear of the order UI. -->
-        <ListPanel DataSource="{Cards}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="180" StackLayout.LayoutMethod="HorizontalLeftToRight">
+        <!-- Item cards in rows of eight just above the hint line, clear of the order UI. -->
+        <GridWidget DataSource="{Cards}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="180" DefaultCellWidth="!Cell.Width" DefaultCellHeight="!Cell.Height" ColumnCount="8" LayoutImp="GridLayout">
           <ItemTemplate>
-            <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Card.Width" SuggestedHeight="!Card.Height" MarginLeft="4" MarginRight="4" Brush="Order.Siege.Deployment.MachineItem" IsSelected="@IsSelected" Command.Click="ExecuteSelect" DoNotPassEventsToChildren="true" UpdateChildrenStates="true">
+            <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Card.Width" SuggestedHeight="!Card.Height" HorizontalAlignment="Center" VerticalAlignment="Center" Brush="Order.Siege.Deployment.MachineItem" IsSelected="@IsSelected" Command.Click="ExecuteSelect" DoNotPassEventsToChildren="true" UpdateChildrenStates="true">
               <Children>
                 <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Icon.Size" SuggestedHeight="!Icon.Size" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="6" Sprite="@Icon" Color="#F4E1C4FF" />
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Bottom" MarginBottom="18" Brush="Order.Troop.CountText" Brush.FontSize="12" Brush.TextHorizontalAlignment="Center" Text="@Name" />
@@ -19,7 +21,7 @@
               </Children>
             </ButtonWidget>
           </ItemTemplate>
-        </ListPanel>
+        </GridWidget>
 
         <!-- One-line instructions above the bottom bar. -->
         <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="150" Brush="Order.Troop.CountText" Brush.FontSize="15" Text="@Hint" DoNotAcceptEvents="true" />

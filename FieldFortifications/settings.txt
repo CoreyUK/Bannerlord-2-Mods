@@ -7,6 +7,16 @@ arrows_cost=2500
 tower_cost=8000
 # Each further copy costs this much more, as a fraction of the base price (0.5 = the second copy costs 50% more, the third 100% more).
 price_step=0.5
+# Engineering skill needed for the first copy of each work. The best engineer in your party counts, you or a companion.
+eng_barricades=20
+eng_ballista=60
+eng_catapult=90
+eng_arrows=10
+eng_platform=40
+# Each further copy of the same work needs this much more Engineering.
+eng_step=15
+# Engineering experience your engineer gains per 1,000 denars of works bought.
+eng_xp_per_1000=50
 # How many of each work can be bought for one battle.
 max_barricades=3
 max_ballistas=2

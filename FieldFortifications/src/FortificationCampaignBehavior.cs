@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.MapEvents;
@@ -75,7 +77,7 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
             false, 1, false, null);
 
         starter.AddGameMenu(FortifyMenu,
-            "{=ff_menu_body}Your men can throw up works before the battle. Each one is placed by you during deployment, and every extra copy of a work costs more than the last.{newline} {newline}{FF_SUMMARY}",
+            "{=ff_menu_body}Your men can throw up works before the battle. Each one is placed by you during deployment, and every extra copy of a work costs more and needs a better engineer than the last.{newline} {newline}{FF_ENGINEER}{newline}{FF_SUMMARY}",
             args =>
             {
                 if (CurrentFieldBattle() == null)
@@ -122,10 +124,18 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
         args.optionLeaveType = GameMenuOption.LeaveType.DefendAction;
         int have = FortificationState.Count(info.Work), max = _settings.Max(info.Work);
         int price = _settings.Price(info.Work, have);
+        int required = _settings.Required(info.Work, have);
+        (Hero engineer, int skill) = Engineer();
         if (have >= max)
         {
             args.IsEnabled = false;
             args.Tooltip = new TextObject("{=ff_tip_full}Your men can build no more of these for one battle.");
+        }
+        else if (skill < required)
+        {
+            args.IsEnabled = false;
+            args.Tooltip = new TextObject("{=ff_tip_skill}Needs an engineer with Engineering {REQ}. Your best is {NAME} with {SKILL}.")
+                .SetTextVariable("REQ", required).SetTextVariable("NAME", engineer.Name).SetTextVariable("SKILL", skill);
         }
         else if (Hero.MainHero.Gold < price)
         {
@@ -143,10 +153,14 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
     {
         int have = FortificationState.Count(info.Work), max = _settings.Max(info.Work);
         int price = _settings.Price(info.Work, have);
-        if (have >= max || Hero.MainHero.Gold < price) return;
+        (Hero engineer, int skill) = Engineer();
+        if (have >= max || Hero.MainHero.Gold < price || skill < _settings.Required(info.Work, have)) return;
         GiveGoldAction.ApplyBetweenCharacters(Hero.MainHero, null, price, false);
         FortificationState.Bought[(int)info.Work] = have + 1;
         FortificationState.Spent += price;
+        // The engineer learns from every work ordered.
+        float xp = price / 1000f * _settings.EngineeringXpPer1000;
+        if (xp > 0f) engineer.AddSkillXp(DefaultSkills.Engineering, xp);
         GameMenu.SwitchToMenu(FortifyMenu);
     }
 
@@ -160,9 +174,14 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
             MBTextManager.SetTextVariable("FF_" + info.Id + "_MAX", max);
             TextObject tail = have >= max
                 ? new TextObject("{=ff_full}full")
-                : new TextObject("{AMOUNT}{GOLD_ICON}").SetTextVariable("AMOUNT", Denars(_settings.Price(info.Work, have)));
+                : new TextObject("{=ff_tail}{AMOUNT}{GOLD_ICON}  Eng {REQ}")
+                    .SetTextVariable("AMOUNT", Denars(_settings.Price(info.Work, have)))
+                    .SetTextVariable("REQ", _settings.Required(info.Work, have));
             MBTextManager.SetTextVariable("FF_" + info.Id + "_TAIL", tail, false);
         }
+        (Hero best, int bestSkill) = Engineer();
+        MBTextManager.SetTextVariable("FF_ENGINEER", new TextObject("{=ff_engineer}Your engineer: {NAME}, Engineering {SKILL}.")
+            .SetTextVariable("NAME", best.Name).SetTextVariable("SKILL", bestSkill), false);
         MBTextManager.SetTextVariable("FF_SPENT", Denars(FortificationState.Spent));
         MBTextManager.SetTextVariable("FF_SUMMARY", Summary(), false);
     }
@@ -185,6 +204,25 @@ public sealed class FortificationCampaignBehavior : CampaignBehaviorBase
     }
 
     private static string Denars(int amount) => amount.ToString("N0", CultureInfo.InvariantCulture);
+
+    /// <summary>The hero in the player's party with the highest Engineering: you, or a companion who is better at it.</summary>
+    private static (Hero hero, int skill) Engineer()
+    {
+        Hero best = Hero.MainHero;
+        int bestSkill = best.GetSkillValue(DefaultSkills.Engineering);
+        MobileParty? party = MobileParty.MainParty;
+        if (party != null)
+        {
+            foreach (TroopRosterElement element in party.MemberRoster.GetTroopRoster())
+            {
+                Hero? hero = element.Character?.HeroObject;
+                if (hero == null || hero == best || element.Number <= 0) continue;
+                int skill = hero.GetSkillValue(DefaultSkills.Engineering);
+                if (skill > bestSkill) { best = hero; bestSkill = skill; }
+            }
+        }
+        return (best, bestSkill);
+    }
 
     private static MapEvent? CurrentFieldBattle()
     {

@@ -1,3 +1,9 @@
+v1.3.0
+- Engineering requirements: each work needs an engineer of a certain level, and every further copy needs more (eng_* and eng_step in settings.txt). The menu shows the level next to the price and says who your engineer is.
+- Companion engineers: the highest Engineering in your party counts, so a companion can do the engineering for you.
+- Your engineer gains Engineering experience for every work bought (eng_xp_per_1000 in settings.txt).
+- Placement cards now wrap into rows of eight instead of running off the screen.
+
 v1.2.1
 - Fixed a crash (Collection was modified) when a horse died on the barricade spikes: the spike check now applies its hits after walking the agent list.
 - Any fault in the mod's per-tick checks during a battle is now logged to errors.txt instead of ending the game.
