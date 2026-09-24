@@ -112,5 +112,8 @@
     <string id="dc_ground_battania_woodland" text="a woodland duelling hollow outside {SETTLEMENT}" />
     <string id="dc_ground_battania_clan" text="the old clan circle above {SETTLEMENT}" />
     <string id="dc_ground_battania_highland" text="a highland challenge ground near {SETTLEMENT}" />
+    <string id="dc_defeat_sting" text="The defeat stings." />
+    <string id="dc_defeat_gold_loss" text="You lose {GOLD_PENALTY} denars." />
+    <string id="dc_defeat_morale_loss" text="Your party's morale drops by {MORALE}." />
   </strings>
 </base>

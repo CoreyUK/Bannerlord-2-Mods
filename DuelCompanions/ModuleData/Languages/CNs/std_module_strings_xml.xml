@@ -110,5 +110,8 @@
     <string id="dc_ground_battania_woodland" text="{SETTLEMENT} 城外的林地决斗凹地" />
     <string id="dc_ground_battania_clan" text="{SETTLEMENT} 上方的旧氏族圈" />
     <string id="dc_ground_battania_highland" text="{SETTLEMENT} 附近的高地挑战场" />
+    <string id="dc_defeat_sting" text="这场败仗令人刺痛。" />
+    <string id="dc_defeat_gold_loss" text="你失去了 {GOLD_PENALTY} 第纳尔。" />
+    <string id="dc_defeat_morale_loss" text="你的部队士气下降了 {MORALE}。" />
   </strings>
 </base>

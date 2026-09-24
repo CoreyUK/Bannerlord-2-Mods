@@ -2,7 +2,7 @@
 <Module>
   <Name value="Duel Companions"/>
   <Id value="DuelCompanions"/>
-  <Version value="v1.0.1"/>
+  <Version value="v1.1.0"/>
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community"/>
   <DependedModules>

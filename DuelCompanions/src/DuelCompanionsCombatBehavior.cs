@@ -37,6 +37,17 @@ internal static class DuelCompanionsMissionState
         _gauntletPlayerHealthRatio = 1f;
     }
 
+    /// <summary>The carried-over health for saving: the ratio, or a negative value when there is none.</summary>
+    public static float SavedGauntletPlayerHealthRatio
+    {
+        get => _hasGauntletPlayerHealth ? _gauntletPlayerHealthRatio : -1f;
+        set
+        {
+            _hasGauntletPlayerHealth = value > 0f;
+            _gauntletPlayerHealthRatio = _hasGauntletPlayerHealth ? MBMath.ClampFloat(value, 0.05f, 1f) : 1f;
+        }
+    }
+
     public static void StoreGauntletPlayerHealth(Agent? player)
     {
         if (player == null || !player.IsHuman || player.HealthLimit <= 0f)
@@ -61,10 +72,17 @@ internal static class DuelCompanionsMissionState
 
 public sealed class DuelCompanionsCombatBehavior : MissionBehavior
 {
+    // The original tuning, now the Legendary end of the scale. Every boost below is interpolated from an ordinary
+    // fighter (power 0) to these values (power 1); see DuelSettings.ChampionPower.
     private const float ChampionDamageAgainstPlayerMultiplier = 4f;
     private const float MinimumChampionExtraDamage = 70f;
 
     private readonly bool _isGauntlet;
+    private readonly float _power;
+    private readonly float _damagePower; // power squared: damage is what made the champion unfair, so it falls off fastest
+    private readonly bool _smartAi;
+    private readonly bool _tactics;
+    private readonly float _feintFactor;
     private readonly Random _random = new();
     private Agent? _duelist;
     private float _nextRefreshTime;
@@ -81,11 +99,21 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
     private Agent.ActionCodeType _lastPlayerAction;
     private float _playerReleaseStartTime;
     private float _strafeSide = 1f;
+    private bool _gauntletHealthApplied;
 
     public DuelCompanionsCombatBehavior(bool isGauntlet)
     {
         _isGauntlet = isGauntlet;
+        DuelSettings settings = DuelSettings.Current;
+        _power = settings.ChampionPower(isGauntlet);
+        _damagePower = _power * _power;
+        _smartAi = settings.SmartAi;
+        _tactics = settings.DuelTactics;
+        _feintFactor = settings.FeintFactor;
     }
+
+    /// <summary>A multiplier whose ordinary value is 1, scaled toward its Legendary value by the champion's power.</summary>
+    private float Mul(float legendary) => 1f + (legendary - 1f) * _power;
 
     public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
@@ -97,10 +125,6 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         {
             _duelist = agent;
             ApplyChampionCombatProfile(agent);
-        }
-        else if (_isGauntlet)
-        {
-            DuelCompanionsMissionState.ApplyGauntletPlayerHealthIfNeeded(agent);
         }
     }
 
@@ -133,23 +157,37 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
 
         if (_isGauntlet)
         {
+            // Restore the previous round's wounds once the player's agent exists, before recording this round's health.
+            if (!_gauntletHealthApplied)
+            {
+                DuelCompanionsMissionState.ApplyGauntletPlayerHealthIfNeeded(player);
+                _gauntletHealthApplied = true;
+            }
+
             DuelCompanionsMissionState.StoreGauntletPlayerHealth(player);
         }
 
         float distance = _duelist.Position.Distance(player.Position);
-        RunDuelTacticalLayer(_duelist, player, now, distance);
-
-        if (distance < 1.45f)
+        if (_tactics)
         {
-            ApplyCloseRangePunishProfile(_duelist);
-            TryForceCloseRangePunish(_duelist, now);
-        }
-        else if (distance > 2.35f)
-        {
-            ApplyPressureProfile(_duelist);
+            RunDuelTacticalLayer(_duelist, player, now, distance);
+
+            if (distance < 1.45f)
+            {
+                ApplyCloseRangePunishProfile(_duelist);
+                TryForceCloseRangePunish(_duelist, now);
+            }
+            else if (distance > 2.35f)
+            {
+                ApplyPressureProfile(_duelist);
+            }
         }
 
-        TryForceFeint(_duelist, player, now, distance);
+        if (_feintFactor > 0f)
+        {
+            TryForceFeint(_duelist, player, now, distance);
+        }
+
         ApplyActiveActionSpeedBoost(_duelist);
     }
 
@@ -215,7 +253,14 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
             return;
         }
 
-        float extraDamage = Math.Max(inflictedDamage * (ChampionDamageAgainstPlayerMultiplier - 1f), MinimumChampionExtraDamage);
+        float extraDamage = Math.Max(
+            inflictedDamage * (ChampionDamageAgainstPlayerMultiplier - 1f) * _damagePower,
+            MinimumChampionExtraDamage * _damagePower);
+        if (extraDamage < 0.5f)
+        {
+            return;
+        }
+
         victim.Health = Math.Max(1f, victim.Health - extraDamage);
         _lastChampionExtraDamageTime = now;
     }
@@ -241,8 +286,17 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
 
     private void ApplyChampionCombatProfile(Agent agent)
     {
-        float intensity = _isGauntlet ? 1.2f : 1.45f;
+        // Easy leaves the champion's decision-making to the game's own AI; only its body is (slightly) boosted.
+        if (_smartAi)
+        {
+            ApplyChampionAi(agent);
+        }
 
+        ApplyDuelOnlyChampionStatBuffs(agent);
+    }
+
+    private static void ApplyChampionAi(Agent agent)
+    {
         ApplyLegendaryDifficultyOverride(agent);
 
         Set(agent, DrivenProperty.AIBlockOnDecideAbility, 1f);
@@ -275,13 +329,10 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Set(agent, DrivenProperty.AiMoveEnemySideTimeValue, 2.1f);
 
         Set(agent, DrivenProperty.AiKick, 1f);
-        Set(agent, DrivenProperty.KickStunDurationMultiplier, 2.15f);
-        Set(agent, DrivenProperty.ShieldBashStunDurationMultiplier, 2.15f);
         Set(agent, DrivenProperty.AiDefendWithShieldDecisionChanceValue, 0.55f);
         Set(agent, DrivenProperty.AiAttackingShieldDefenseChance, 0.42f);
         Set(agent, DrivenProperty.AiAttackingShieldDefenseTimer, 0.16f);
-
-        ApplyDuelOnlyChampionStatBuffs(agent, intensity);
+        ApplyMeleeBehaviorPressure(agent);
     }
 
     private static void ApplyLegendaryDifficultyOverride(Agent agent)
@@ -309,17 +360,22 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Set(agent, DrivenProperty.UseRealisticBlocking, 1f);
     }
 
-    private static void ApplyDuelOnlyChampionStatBuffs(Agent agent, float intensity)
+    // The Legendary figures are the original ones (with the original single-duel intensity of 1.45 folded in).
+    private void ApplyDuelOnlyChampionStatBuffs(Agent agent)
     {
-        Set(agent, DrivenProperty.SwingSpeedMultiplier, 4.1f * intensity);
-        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, 4.1f * intensity);
-        Set(agent, DrivenProperty.HandlingMultiplier, 5.4f);
-        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, 3f);
-        Set(agent, DrivenProperty.MaxSpeedMultiplier, 2.35f);
-        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 2.15f * intensity);
-        Set(agent, DrivenProperty.AiAttackCalculationMaxTimeFactor, 0.05f);
-        Set(agent, DrivenProperty.AIHoldingReadyMaxDuration, 0.35f);
-        ApplyMeleeBehaviorPressure(agent);
+        Set(agent, DrivenProperty.SwingSpeedMultiplier, Mul(5.95f));
+        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, Mul(5.95f));
+        Set(agent, DrivenProperty.HandlingMultiplier, Mul(5.4f));
+        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, Mul(3f));
+        Set(agent, DrivenProperty.MaxSpeedMultiplier, Mul(2.35f));
+        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 3.1f * _damagePower);
+        Set(agent, DrivenProperty.KickStunDurationMultiplier, Mul(2.15f));
+        Set(agent, DrivenProperty.ShieldBashStunDurationMultiplier, Mul(2.15f));
+        if (_smartAi)
+        {
+            Set(agent, DrivenProperty.AiAttackCalculationMaxTimeFactor, 0.05f);
+            Set(agent, DrivenProperty.AIHoldingReadyMaxDuration, 0.35f);
+        }
     }
 
     private static void ApplyMeleeBehaviorPressure(Agent agent)
@@ -328,7 +384,7 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         agent.HumanAIComponent?.OverrideBehaviorParams(HumanAIComponent.AISimpleBehaviorKind.Melee, 1000f, 1000f, 0f, 0f, 0f);
     }
 
-    private static void ApplyCloseRangePunishProfile(Agent agent)
+    private void ApplyCloseRangePunishProfile(Agent agent)
     {
         Set(agent, DrivenProperty.AiKick, 1f);
         Set(agent, DrivenProperty.AIAttackOnDecideChance, 1f);
@@ -340,18 +396,18 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Set(agent, DrivenProperty.AiDefendWithShieldDecisionChanceValue, 0.35f);
         Set(agent, DrivenProperty.AiAttackingShieldDefenseChance, 0.25f);
         Set(agent, DrivenProperty.AiAttackingShieldDefenseTimer, 0.08f);
-        Set(agent, DrivenProperty.KickStunDurationMultiplier, 2.4f);
-        Set(agent, DrivenProperty.ShieldBashStunDurationMultiplier, 2.4f);
+        Set(agent, DrivenProperty.KickStunDurationMultiplier, Mul(2.4f));
+        Set(agent, DrivenProperty.ShieldBashStunDurationMultiplier, Mul(2.4f));
         ApplyMeleeBehaviorPressure(agent);
-        Set(agent, DrivenProperty.SwingSpeedMultiplier, 5.4f);
-        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, 5.4f);
-        Set(agent, DrivenProperty.HandlingMultiplier, 5.8f);
-        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, 3.25f);
-        Set(agent, DrivenProperty.MaxSpeedMultiplier, 2.55f);
-        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 2.65f);
+        Set(agent, DrivenProperty.SwingSpeedMultiplier, Mul(5.4f));
+        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, Mul(5.4f));
+        Set(agent, DrivenProperty.HandlingMultiplier, Mul(5.8f));
+        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, Mul(3.25f));
+        Set(agent, DrivenProperty.MaxSpeedMultiplier, Mul(2.55f));
+        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 2.65f * _damagePower);
     }
 
-    private static void ApplyPressureProfile(Agent agent)
+    private void ApplyPressureProfile(Agent agent)
     {
         Set(agent, DrivenProperty.AIAttackOnDecideChance, 1f);
         Set(agent, DrivenProperty.AIDecideOnAttackChance, 1f);
@@ -362,12 +418,12 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Set(agent, DrivenProperty.AiDefendWithShieldDecisionChanceValue, 0.35f);
         Set(agent, DrivenProperty.AiAttackingShieldDefenseChance, 0.22f);
         ApplyMeleeBehaviorPressure(agent);
-        Set(agent, DrivenProperty.SwingSpeedMultiplier, 5f);
-        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, 5f);
-        Set(agent, DrivenProperty.HandlingMultiplier, 5.65f);
-        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, 3.15f);
-        Set(agent, DrivenProperty.MaxSpeedMultiplier, 2.5f);
-        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 2.35f);
+        Set(agent, DrivenProperty.SwingSpeedMultiplier, Mul(5f));
+        Set(agent, DrivenProperty.ThrustOrRangedReadySpeedMultiplier, Mul(5f));
+        Set(agent, DrivenProperty.HandlingMultiplier, Mul(5.65f));
+        Set(agent, DrivenProperty.CombatMaxSpeedMultiplier, Mul(3.15f));
+        Set(agent, DrivenProperty.MaxSpeedMultiplier, Mul(2.5f));
+        Set(agent, DrivenProperty.MeleeWeaponDamageMultiplierBonus, 2.35f * _damagePower);
     }
 
     private static void Set(Agent agent, DrivenProperty property, float value)
@@ -495,8 +551,8 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Agent.UsageDirection attack = PickAttackAroundGuard(player.GetCurrentActionDirection(1));
         agent.SetWeaponGuard(attack);
         agent.SetCurrentActionProgress(1, 0f);
-        agent.SetCurrentActionSpeed(0, 5.8f);
-        agent.SetCurrentActionSpeed(1, 5.8f);
+        agent.SetCurrentActionSpeed(0, Mul(5.8f));
+        agent.SetCurrentActionSpeed(1, Mul(5.8f));
         agent.ForceAiBehaviorSelection();
         agent.InvalidateAIWeaponSelections();
     }
@@ -547,7 +603,7 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         Agent.ActionStage actionStage = agent.GetCurrentActionStage(1);
         Agent.ActionCodeType playerAction = player.GetCurrentActionType(1);
 
-        if (IsPlayerDefending(playerAction))
+        if (_tactics && IsPlayerDefending(playerAction))
         {
             TryBaitBlockWithFeint(agent, player, now, actionType, actionStage);
         }
@@ -569,7 +625,7 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
             return;
         }
 
-        float chance = IsPlayerDefending(playerAction) ? 0.98f : (_isGauntlet ? 0.68f : 0.82f);
+        float chance = (IsPlayerDefending(playerAction) ? 0.98f : (_isGauntlet ? 0.68f : 0.82f)) * _feintFactor;
         if (_random.NextDouble() > chance)
         {
             _nextFeintTime = now + 0.08f;
@@ -582,7 +638,7 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
 
         agent.SetWeaponGuard(nextGuard);
         agent.SetCurrentActionProgress(1, 0f);
-        agent.SetCurrentActionSpeed(1, 5.2f);
+        agent.SetCurrentActionSpeed(1, Mul(5.2f));
         agent.ForceAiBehaviorSelection();
         agent.InvalidateAIWeaponSelections();
         _nextFeintTime = now + (_isGauntlet ? 0.18f : 0.12f);
@@ -610,7 +666,7 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
 
         agent.SetWeaponGuard(PickAttackAroundGuard(player.GetCurrentActionDirection(1)));
         agent.SetCurrentActionProgress(1, 0f);
-        agent.SetCurrentActionSpeed(1, 5.5f);
+        agent.SetCurrentActionSpeed(1, Mul(5.5f));
         agent.ForceAiBehaviorSelection();
         agent.InvalidateAIWeaponSelections();
         _nextBaitFeintTime = now + 0.09f;
@@ -629,8 +685,13 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
         _nextClosePunishTime = now + 0.45f;
     }
 
-    private static void ApplyActiveActionSpeedBoost(Agent agent)
+    private void ApplyActiveActionSpeedBoost(Agent agent)
     {
+        if (_power < 0.01f)
+        {
+            return;
+        }
+
         Agent.ActionCodeType actionType = agent.GetCurrentActionType(1);
         if (actionType == Agent.ActionCodeType.ReadyMelee ||
             actionType == Agent.ActionCodeType.ReleaseMelee ||
@@ -644,8 +705,8 @@ public sealed class DuelCompanionsCombatBehavior : MissionBehavior
             actionType == Agent.ActionCodeType.DefendRight2h ||
             actionType == Agent.ActionCodeType.DefendLeft2h)
         {
-            agent.SetCurrentActionSpeed(0, 5.2f);
-            agent.SetCurrentActionSpeed(1, 5.2f);
+            agent.SetCurrentActionSpeed(0, Mul(5.2f));
+            agent.SetCurrentActionSpeed(1, Mul(5.2f));
         }
     }
 

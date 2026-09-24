@@ -110,5 +110,8 @@
     <string id="dc_ground_battania_woodland" text="una hondonada boscosa de duelo fuera de {SETTLEMENT}" />
     <string id="dc_ground_battania_clan" text="el viejo círculo del clan sobre {SETTLEMENT}" />
     <string id="dc_ground_battania_highland" text="un campo de desafío de las tierras altas cerca de {SETTLEMENT}" />
+    <string id="dc_defeat_sting" text="La derrota escuece." />
+    <string id="dc_defeat_gold_loss" text="Pierdes {GOLD_PENALTY} denares." />
+    <string id="dc_defeat_morale_loss" text="La moral de tu grupo baja {MORALE} puntos." />
   </strings>
 </base>

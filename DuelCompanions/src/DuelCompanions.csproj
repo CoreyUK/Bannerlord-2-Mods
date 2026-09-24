@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BannerlordPath>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerlordPath>
+    <!-- Resolved relative to the module folder, so the project builds wherever the game is installed. -->
+    <BannerlordPath>$(MSBuildProjectDirectory)\..\..\..</BannerlordPath>
     <BannerlordBin>$(BannerlordPath)\bin\Win64_Shipping_Client</BannerlordBin>
   </PropertyGroup>
 

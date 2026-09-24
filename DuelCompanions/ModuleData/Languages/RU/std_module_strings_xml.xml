@@ -110,5 +110,8 @@
     <string id="dc_ground_battania_woodland" text="лесная дуэльная ложбина за пределами {SETTLEMENT}" />
     <string id="dc_ground_battania_clan" text="старый клановый круг над {SETTLEMENT}" />
     <string id="dc_ground_battania_highland" text="горная площадка вызова возле {SETTLEMENT}" />
+    <string id="dc_defeat_sting" text="Поражение больно бьёт по самолюбию." />
+    <string id="dc_defeat_gold_loss" text="Вы теряете {GOLD_PENALTY} денаров." />
+    <string id="dc_defeat_morale_loss" text="Боевой дух отряда падает на {MORALE}." />
   </strings>
 </base>

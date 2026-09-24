@@ -19,13 +19,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 {
     private const string DuelMenuId = "dc_duel_ground";
     private const string RewardMenuId = "dc_duel_reward";
-    private const int CashReward = 6000;
-    private const int GauntletCashReward = 15000;
     private const int GauntletRounds = 3;
-    private const int DefeatGoldPenalty = 20000;
-    private const float DefeatMoralePenalty = 70f;
-    private const float DefeatWeaponLossChance = 0.35f;
     private const int EventDurationDays = 10;
+
+    // Rewards and defeat penalties are player-tunable in settings.txt.
+    private static int CashReward => DuelSettings.Current.DuelReward;
+    private static int GauntletCashReward => DuelSettings.Current.GauntletReward;
     private const int FirstRumorMinDays = 7;
     private const int FirstRumorMaxDays = 12;
     private const int FollowupRumorMinDays = 8;
@@ -192,12 +191,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
     private string? _gauntletRoundOneTemplateId;
     private List<string> _recruitedDuelCompanionHeroIds = new();
     private float _rumorNotificationDelaySeconds;
-    private float _nextCompanionRepairTime;
 
     public override void RegisterEvents()
     {
         CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, OnSessionLaunched);
         CampaignEvents.TickEvent.AddNonSerializedListener(this, OnCampaignTick);
+        CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, RepairDuelCompanionHeroStates);
         CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, OnDailyTick);
     }
 
@@ -224,13 +223,25 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         dataStore.SyncData("dc_gauntlet_round_one_template_id_v2", ref _gauntletRoundOneTemplateId);
         dataStore.SyncData("dc_recruited_duel_companion_hero_ids_v2", ref _recruitedDuelCompanionHeroIds);
         _recruitedDuelCompanionHeroIds ??= new List<string>();
+
+        // The gauntlet spans several missions with a campaign menu between rounds, so a save can land mid-gauntlet.
+        dataStore.SyncData("dc_gauntlet_active_v3", ref _isGauntletActive);
+        dataStore.SyncData("dc_gauntlet_round_v3", ref _gauntletRound);
+        float playerHealth = DuelCompanionsMissionState.SavedGauntletPlayerHealthRatio;
+        dataStore.SyncData("dc_gauntlet_player_health_v3", ref playerHealth);
+        if (dataStore.IsLoading)
+        {
+            DuelCompanionsMissionState.SavedGauntletPlayerHealthRatio = playerHealth;
+        }
     }
 
     private void OnSessionLaunched(CampaignGameStarter starter)
     {
+        DuelSettings.Reload();
         AddMenus(starter);
         RepairDuelCompanionHeroStates();
         RecoverDetachedDuelCompanions();
+        RemoveUnusedDuelHeroes();
 
         if (ImmediateRumorForTesting && string.IsNullOrEmpty(_activeSettlementId))
         {
@@ -255,13 +266,6 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void OnCampaignTick(float dt)
     {
-        float now = (float)CampaignTime.Now.ToSeconds;
-        if (now >= _nextCompanionRepairTime)
-        {
-            RepairDuelCompanionHeroStates();
-            _nextCompanionRepairTime = now + 10f;
-        }
-
         if (!_pendingRumorNotification)
         {
             return;
@@ -290,6 +294,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             ClearActiveEvent(ActiveEventClearReason.Expired);
             ScheduleNextEvent(FollowupRumorMinDays, FollowupRumorMaxDays);
+            RemoveUnusedDuelHeroes();
         }
 
         if (string.IsNullOrEmpty(_activeSettlementId) && today >= _nextEventDay)
@@ -432,9 +437,14 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return;
         }
 
+        // Re-read settings so difficulty edits apply to the next duel without restarting the game.
+        DuelSettings.Reload();
+        // The Legendary health pools belong to Legendary champions; a weaker champion has proportionally less.
+        float scaledHealth = opponentHealth * (0.5f + 0.5f * DuelSettings.Current.ChampionPower(gauntlet: false));
+
         _isGauntletActive = isGauntlet;
         DuelCompanionsMissionState.ArmNextDuel(isGauntlet);
-        CampaignMission.OpenArenaDuelMission(arena.GetSceneName(0), arena, duelCharacter, false, false, OnDuelEnded, opponentHealth);
+        CampaignMission.OpenArenaDuelMission(arena.GetSceneName(0), arena, duelCharacter, false, false, OnDuelEnded, scaledHealth);
     }
 
     private void OnDuelEnded(CharacterObject winner)
@@ -460,7 +470,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             _pendingRewardDuelistName = activeEvent.DisplayName;
             _pendingRewardTemplateId = activeEvent.TemplateId;
             _pendingRewardRareItemId = activeEvent.RareItemId;
-            _pendingRewardAllowsRecruit = !_isGauntletActive;
+            // The gauntlet's reward hero is its headline champion from round one, recruitable like a single duel's.
+            _pendingRewardAllowsRecruit = true;
             _pendingRewardIsGauntlet = _isGauntletActive;
             _isGauntletActive = false;
             _gauntletRound = 0;
@@ -482,14 +493,27 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void ApplyDuelDefeatConsequences(string duelistName)
     {
-        MobileParty.MainParty.RecentEventsMorale -= DefeatMoralePenalty;
-        Hero.MainHero.ChangeHeroGold(-DefeatGoldPenalty);
+        DuelSettings settings = DuelSettings.Current;
+        int goldLoss = settings.DefeatGoldLoss(Hero.MainHero.Gold);
+        int moraleLoss = settings.DefeatMorale;
+        MobileParty.MainParty.RecentEventsMorale -= moraleLoss;
+        Hero.MainHero.ChangeHeroGold(-goldLoss);
 
-        TextObject consequence = Localize(
-            "{=dc_defeat_consequence}Your morale is in tatters after the humiliating defeat.\n\nYou lose {GOLD_PENALTY} denars and your party morale collapses.",
-            ("GOLD_PENALTY", DefeatGoldPenalty));
+        // Report only what was actually lost: a penalty set to zero, or an empty purse, says nothing about it.
+        var parts = new List<string> { Localize("{=dc_defeat_sting}The defeat stings.").ToString() };
+        if (goldLoss > 0)
+        {
+            parts.Add(Localize("{=dc_defeat_gold_loss}You lose {GOLD_PENALTY} denars.", ("GOLD_PENALTY", goldLoss)).ToString());
+        }
 
-        if (MBRandom.RandomFloat < DefeatWeaponLossChance && TryLoseEquippedWeapon(out string weaponName))
+        if (moraleLoss > 0)
+        {
+            parts.Add(Localize("{=dc_defeat_morale_loss}Your party's morale drops by {MORALE}.", ("MORALE", moraleLoss)).ToString());
+        }
+
+        TextObject consequence = new(string.Join("\n\n", parts));
+
+        if (MBRandom.RandomFloat * 100f < settings.DefeatWeaponChance && TryLoseEquippedWeapon(out string weaponName))
         {
             consequence = Localize(
                 "{=dc_defeat_consequence_weapon}{CONSEQUENCE}\n\nIn disgust, you leave {WEAPON} in the ring.",
@@ -540,14 +564,10 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
                 continue;
             }
 
+            // Only the equipped weapon is lost. Equipped items are not in the party roster, so a matching roster
+            // entry is a spare copy the player owns and must not be taken as well.
             weaponName = item.Name.ToString();
             battleEquipment[slot] = EquipmentElement.Invalid;
-
-            if (MobileParty.MainParty.ItemRoster.FindIndexOfElement(element) >= 0)
-            {
-                MobileParty.MainParty.ItemRoster.AddToCounts(element, -1);
-            }
-
             return true;
         }
 
@@ -602,7 +622,12 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             case RewardType.Recruit:
                 Hero? hero = GetOrCreatePendingRewardHero();
-                RecruitHeroToMainParty(hero, _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString());
+                if (!RecruitHeroToMainParty(hero, _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString()))
+                {
+                    // Keep the reward on offer so the player can take gold or the weapon instead.
+                    GameMenu.SwitchToMenu(RewardMenuId);
+                    return;
+                }
                 break;
             case RewardType.Gold:
                 int cashReward = _pendingRewardIsGauntlet ? GauntletCashReward : CashReward;
@@ -615,6 +640,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         }
 
         ClearPendingReward();
+        RemoveUnusedDuelHeroes();
         GameMenu.SwitchToMenu("town");
     }
 
@@ -665,18 +691,19 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         return "dc_heavy_vlandia_v2";
     }
 
-    private void RecruitHeroToMainParty(Hero? hero, string displayName)
+    /// <summary>Brings the hero into the player's clan and main party. Returns false if recruitment could not happen.</summary>
+    private bool RecruitHeroToMainParty(Hero? hero, string displayName)
     {
-        if (hero == null)
+        if (hero == null || hero.IsDead)
         {
             InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_companion_not_found}The companion could not be found, so recruitment failed.").ToString()));
-            return;
+            return false;
         }
 
         if (hero.CompanionOf != Clan.PlayerClan && IsCompanionLimitReached())
         {
             InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_companion_limit_choose_reward}Your clan is already at its companion limit. Choose gold or the item instead.").ToString()));
-            return;
+            return false;
         }
 
         if (!hero.IsActive)
@@ -713,6 +740,8 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             InformationManager.DisplayMessage(new InformationMessage(Localize("{=dc_joined_clan_not_party}{DUELIST} joined your clan, but could not be moved into the main party.", ("DUELIST", displayName)).ToString()));
         }
+
+        return true;
     }
 
     private static bool IsCompanionLimitReached()
@@ -720,14 +749,65 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         return Clan.PlayerClan.Companions.Count >= Clan.PlayerClan.CompanionLimit;
     }
 
+    /// <summary>
+    /// Puts a duel companion back in the main party only if they are stranded: active, in no party at all, and not
+    /// governing. Companions the player sent to lead a party, govern a town, or who are captive or dead are left alone.
+    /// </summary>
     private void RecoverDetachedDuelCompanions()
     {
         foreach (Hero hero in Hero.FindAll(hero =>
                      hero.StringId.StartsWith("dc_event_hero_", StringComparison.Ordinal) &&
                      hero.CompanionOf == Clan.PlayerClan &&
-                     hero.PartyBelongedTo != MobileParty.MainParty))
+                     hero.HeroState == Hero.CharacterStates.Active &&
+                     hero.PartyBelongedTo == null &&
+                     hero.GovernorOf == null).ToList())
         {
             RecruitHeroToMainParty(hero, hero.Name.ToString());
+        }
+    }
+
+    /// <summary>
+    /// Duel opponents are real heroes, so every duel and gauntlet round used to leave one behind for the rest of the
+    /// campaign. Removes those no longer needed: not recruited, not the current event's, and not an unclaimed reward.
+    /// </summary>
+    private void RemoveUnusedDuelHeroes()
+    {
+        bool eventActive = !string.IsNullOrEmpty(_activeSettlementId);
+        string currentEventHero = $"dc_event_hero_{_eventSerial}";
+        string currentGauntletPrefix = $"dc_gauntlet_{_eventSerial}_";
+        int removed = 0;
+
+        foreach (Hero hero in Hero.FindAll(IsDuelCompanionHero).ToList())
+        {
+            if (hero.IsDead ||
+                hero.StringId == _pendingRewardHeroId ||
+                _recruitedDuelCompanionHeroIds.Contains(hero.StringId) ||
+                IsRecruitedDuelCompanion(hero) ||
+                hero.IsPrisoner)
+            {
+                continue;
+            }
+
+            // The live event's opponents are looked up again on a rematch; keep them until the event ends.
+            if (eventActive && (hero.StringId == currentEventHero || hero.StringId.StartsWith(currentGauntletPrefix, StringComparison.Ordinal)))
+            {
+                continue;
+            }
+
+            try
+            {
+                KillCharacterAction.ApplyByRemove(hero, false, true);
+                removed++;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"[DuelCompanions] Could not remove unused duel hero {hero.StringId}: {ex.Message}");
+            }
+        }
+
+        if (removed > 0)
+        {
+            Debug.Print($"[DuelCompanions] Removed {removed} unused duel heroes.");
         }
     }
 
@@ -772,15 +852,23 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void RepairDuelCompanionHeroStates()
     {
-        foreach (Hero hero in Hero.FindAll(IsDuelCompanionHero))
+        // Hero.FindAll walks every character in the campaign, dead ones included.
+        foreach (Hero hero in Hero.FindAll(IsDuelCompanionHero).ToList())
         {
+            if (hero.IsDead || hero.IsPrisoner)
+            {
+                continue;
+            }
+
             bool isRecruited = IsRecruitedDuelCompanion(hero);
             if (isRecruited)
             {
+                // A companion is the game's to manage: their party, location and state all belong to it.
                 TrackRecruitedDuelCompanion(hero);
+                continue;
             }
 
-            PrepareDuelCompanionHero(hero, null, isRecruited);
+            PrepareDuelCompanionHero(hero, null, isRecruited: false);
         }
     }
 
@@ -808,7 +896,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void PrepareDuelCompanionHero(Hero hero, Settlement? preferredSettlement, bool isRecruited)
     {
-        if (!IsDuelCompanionHero(hero))
+        if (!IsDuelCompanionHero(hero) || hero.IsDead || hero.IsPrisoner)
         {
             return;
         }
@@ -819,7 +907,9 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
             return;
         }
 
-        if (!hero.IsActive)
+        // Only bring a freshly created hero into play. Forcing Active on any other state resurrected dead
+        // companions and broke captivity and escape for prisoners and fugitives.
+        if (hero.HeroState == Hero.CharacterStates.NotSpawned)
         {
             hero.ChangeState(Hero.CharacterStates.Active);
         }
@@ -999,9 +1089,7 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
 
     private void CreateRandomEvent(bool showMessage)
     {
-        List<Town> towns = Town.AllTowns
-            .Where(town => town.Settlement?.LocationComplex?.GetLocationWithId("arena") != null && !town.IsUnderSiege)
-            .ToList();
+        List<Town> towns = PickRumorTownCandidates();
 
         if (towns.Count == 0)
         {
@@ -1029,6 +1117,36 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         {
             QueueActiveRumorNotification();
         }
+    }
+
+    /// <summary>
+    /// Towns a rumour can appear in: those with an arena, not besieged, and not at war with the player (who could not
+    /// enter them), limited to the nearest few so the ten-day rumour is reachable. Falls back to hostile towns only
+    /// if the player is at war with everyone.
+    /// </summary>
+    private static List<Town> PickRumorTownCandidates()
+    {
+        List<Town> usable = Town.AllTowns
+            .Where(town => town.Settlement?.LocationComplex?.GetLocationWithId("arena") != null && !town.IsUnderSiege)
+            .ToList();
+
+        IFaction? playerFaction = Hero.MainHero?.MapFaction;
+        List<Town> peaceful = playerFaction == null
+            ? usable
+            : usable.Where(town => town.Settlement.MapFaction == null || !FactionManager.IsAtWarAgainstFaction(town.Settlement.MapFaction, playerFaction)).ToList();
+        List<Town> candidates = peaceful.Count > 0 ? peaceful : usable;
+
+        int nearest = DuelSettings.Current.RumorNearestTowns;
+        if (nearest > 0 && MobileParty.MainParty != null && candidates.Count > nearest)
+        {
+            Vec2 origin = MobileParty.MainParty.GetPosition2D;
+            candidates = candidates
+                .OrderBy(town => town.Settlement.GetPosition2D.DistanceSquared(origin))
+                .Take(nearest)
+                .ToList();
+        }
+
+        return candidates;
     }
 
     private void ShowDuelRumorInquiry(string settlementName)
@@ -1180,15 +1298,9 @@ public sealed class DuelCompanionsCampaignBehavior : CampaignBehaviorBase
         return variants[index];
     }
 
-    private string GetRewardDisplayName()
-    {
-        if (_pendingRewardIsGauntlet)
-        {
-            return Localize("{=dc_the_gauntlet}The gauntlet").ToString();
-        }
-
-        return _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString();
-    }
+    // For a gauntlet this is the round-one champion, who now offers their service like a single duel's opponent does.
+    private string GetRewardDisplayName() =>
+        _pendingRewardDuelistName ?? Localize("{=dc_the_duelist}The duelist").ToString();
 
     private static TextObject Localize(string text, params (string Key, object Value)[] variables)
     {

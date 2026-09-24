@@ -1,0 +1,30 @@
+# Duel Companions settings. Read when a campaign loads and again before every duel, so edits apply without restarting.
+# Delete a line (or the whole file) to use its default.
+
+# How strong the champions are: easy, normal, hard or legendary.
+#   easy      - the game's own AI with a small edge in speed and strength
+#   normal    - sharper defence and a clear edge; beatable by a decent fighter (default)
+#   hard      - adds scripted duel tactics: forced feints, footwork, counter-attacks
+#   legendary - the original tuning; near-unbeatable
+difficulty=normal
+
+# 1 = champions grow stronger as your best melee skill (one-handed, two-handed or polearm) rises, so a new character
+# faces a gentler champion than a veteran does. 0 = every champion is the full strength of the difficulty.
+scale_with_skill=1
+
+# On a defeat you lose this percentage of your denars, up to defeat_gold_max.
+defeat_gold_percent=10
+defeat_gold_max=20000
+
+# Party morale lost on a defeat.
+defeat_morale=25
+
+# Percentage chance of leaving your equipped weapon in the ring after a defeat.
+defeat_weapon_chance=20
+
+# Denars offered for beating a single duellist, and for winning the three-round gauntlet.
+duel_reward=6000
+gauntlet_reward=15000
+
+# Rumours appear only in the nearest this-many towns you are not at war with. 0 = any town on the map.
+rumor_nearest_towns=12
