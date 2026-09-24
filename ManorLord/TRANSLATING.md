@@ -25,8 +25,14 @@ ModuleData/Languages/
    that language's `Modules/Native/ModuleData/Languages/<CODE>/language_data.xml`, from
    the `id="..."` attribute — for example `id="Polski"` means `<tag language="Polski" />`.
    The id must match character for character, accents included, or the file is ignored.
-3. Translate the `text="..."` values. Leave `id="..."` untouched.
-4. Save as UTF-8.
+3. **Add a `language_data.xml` next to it.** The game only loads a translation folder that
+   declares its files this way; without it the strings file is silently ignored. Copy one
+   of the existing ones (`RU/language_data.xml`, say), then replace the `id`, `name`,
+   `subtitle_extension`, `supported_iso` and `text_processor` attributes with the values
+   from the Native `language_data.xml` for your language, and set `xml_path` to
+   `<CODE>/std_module_strings_xml.xml`.
+4. Translate the `text="..."` values. Leave `id="..."` untouched.
+5. Save both files as UTF-8.
 
 Any string you leave out simply falls back to the English text, so a partial translation
 is fine and will not break anything.

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1
+
+**Translations now actually load.** Each language folder was missing the `language_data.xml`
+the game requires before it will read a translation, so the mod showed English regardless
+of the game language. Reported, with the fix, by a Russian player — thank you.
+
 ## v1.4.0
 
 **The estate is now a place.** Walking the grounds shows what you have actually built:
